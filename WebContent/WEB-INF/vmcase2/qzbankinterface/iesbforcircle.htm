@@ -63,7 +63,7 @@
             </tr>
             <tr>
               <td><label>还款期限:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="term"/></td>
+              <td><input type="text" name="term" value="$!qzSdhjyd.jyqx"/></td>
 			  <td><label>期限类型:</label></td>
               <td><select name="termType">#dict("TERM_TYPE", "")</select></td>
             </tr>
@@ -71,7 +71,7 @@
 			  <td><label>业务类型:</label></td>
               <td><select id="bussType" name="bussType">#dict("BUSS_TYPE", "")</select></td>
               <td><label>合同金额(元):</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="contractAmt" name="contractAmt"/></td>
+              <td><input type="text" id="contractAmt" name="contractAmt" value="$!jyd.jyje" readonly/></td>
             </tr>
 			<tr>
               <td><label>登记人:</label><font color="#ff0000">*</font></td>
@@ -89,7 +89,7 @@
               <td><label>顺延标志:</label></td>
               <td><select name="deferFlag">#dict("IS_DELAY", "")</select></td>
 			  <td><label>年执行利率(%):</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="actIntRate"/></td>
+              <td><input type="text" name="actIntRate" value="$!jyd.jyll" readonly/></td>
             </tr>
 			<tr>
               <td><label>年逾期利率(%):</label><font color="#ff0000">*</font></td>
@@ -284,7 +284,7 @@
             </tr>
 			<tr>
               <td><label>开户日期:</label><font color="#ff0000">*</font></td>
-              <td colspan="3"><input type="text" id="openAcctDate" name="openAcctDate" onmouseover="_calendar()"/></td>
+              <td><input type="text" id="openAcctDate" name="openAcctDate" onmouseover="_calendar()"/></td>
             </tr>
 		  </table>
 		  <table class="rule myTable" bordercolor="#cccccc" border="1">
@@ -417,6 +417,7 @@
 							success : function(data) {
 								if (data.success) {
 									topWin.Dialog.message("保存成功！");
+									window.location.reload(true);
 								}
 								else{
 									topWin.Dialog.message("保存失败！");
@@ -568,7 +569,7 @@
 							if (data.success) {
 								topWin.Dialog.message("保存成功！");
 								var url = "${contextPath}/intopieces/intopiecesapprove/approve.page";
-				                parent.location.href = url;
+				                window.location.href = url;
 							}
 							else{
 								topWin.Dialog.message(data.message);

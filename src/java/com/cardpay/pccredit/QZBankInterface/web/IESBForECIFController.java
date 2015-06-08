@@ -34,6 +34,8 @@ import com.wicresoft.jrad.base.web.result.JRadPagedQueryResult;
 import com.wicresoft.jrad.base.web.result.JRadReturnMap;
 import com.wicresoft.jrad.base.web.security.LoginManager;
 import com.wicresoft.jrad.base.web.utility.WebRequestHelper;
+import com.wicresoft.jrad.modules.privilege.business.UserManager;
+import com.wicresoft.jrad.modules.privilege.filter.UserFilter;
 import com.wicresoft.jrad.modules.privilege.model.User;
 import com.wicresoft.util.spring.Beans;
 import com.wicresoft.util.spring.mvc.mv.AbstractModelAndView;
@@ -52,6 +54,7 @@ public class IESBForECIFController extends BaseController{
 	
 	@Autowired
 	private CustomerInforService customerInforservice;
+	
 	/**
 	 * 浏览页面
 	 * 
@@ -154,9 +157,17 @@ public class IESBForECIFController extends BaseController{
 				
 				ECIF ecif = iesbForECIFForm.createModel(ECIF.class);
 				
+				
+				
 				User user = (User) Beans.get(LoginManager.class).getLoggedInUser(request);
 				//写入数据到basic_customer_information表
 				CustomerInfor info = customerInforservice.findCustomerInforByCardId(ecif.getGlobalId());
+				//增加判断身份证号码是否存在
+				if(info != null){
+					returnMap.put(JRadConstants.MESSAGE, "身份证号码已存在");
+					returnMap.put(JRadConstants.SUCCESS, false);
+					return returnMap;
+				}
 				if(info == null){
 					info = new CustomerInfor();
 				}
@@ -174,9 +185,10 @@ public class IESBForECIFController extends BaseController{
 //				returnMap.put(RECORD_ID, id);
 				returnMap.addGlobalMessage(CREATE_SUCCESS);
 			}catch (Exception e) {
-				returnMap.put(JRadConstants.MESSAGE, DataPriConstants.SYS_EXCEPTION_MSG);
+				e.printStackTrace();
+				returnMap.put(JRadConstants.MESSAGE, "开户失败");
 				returnMap.put(JRadConstants.SUCCESS, false);
-				return WebRequestHelper.processException(e);
+				return returnMap;
 			}
 		}else{
 			returnMap.setSuccess(false);

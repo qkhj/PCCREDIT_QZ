@@ -38,7 +38,7 @@ public class Constant {
 	public static String NOPASS_INTOPICES = "nopass";
 	
 	/* 退件到申请状态*/
-	public static String RETURN_INTOPICES = "returnedToFist";
+	public static String RETURN_INTOPICES = "returnedToFirst";
 	
 	/* 申请已通过*/
 	public static String APPROVED_INTOPICES = "approved";

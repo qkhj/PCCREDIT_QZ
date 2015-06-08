@@ -54,12 +54,12 @@ public class ECIFService {
 	public void insertCustomerInfor(ECIF ecif,CustomerInfor info) {
 		
 		//组包
-		CompositeData req = iesbForECIF.createEcifRequest(ecif);
+//		CompositeData req = iesbForECIF.createEcifRequest(ecif);
 		//发送
-		CompositeData resp = client.sendMess(req);
+//		CompositeData resp = client.sendMess(req);
 		//解析，存db
-		String clientNo = iesbForECIF.parseEcifResponse(resp);
-		if(clientNo != null && !clientNo.equals("")){
+//		String clientNo = iesbForECIF.parseEcifResponse(resp);
+//		if(clientNo != null && !clientNo.equals("")){
 			if(info.getId() == null || info.getId().equals("")){
     			customerInforservice.insertCustomerInfor(info);
     		}
@@ -70,11 +70,11 @@ public class ECIFService {
     		
 			//将客户证件号码对应的客户号存入数据库中
 			ecif.setCreatedTime(new Date());
-            ecif.setClientNo(clientNo);
+//            ecif.setClientNo(clientNo);
             String id = IDGenerator.generateID();
             ecif.setId(id);
             commonDao.insertObject(ecif);
-		}
+//		}
 	}
 	
 	/**

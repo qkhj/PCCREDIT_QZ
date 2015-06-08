@@ -419,7 +419,7 @@
 					if ($($formName).valid()) {
 						var formjson = $($formName).serialize();
 			   	          
-			   	       	var url = "${modulePath}/update.json?id="+$("#circleId").val()+"&customerId=${customerId}";
+			   	       	var url = "${modulePath}/update.json?id=${circle.id}&customerId=${customerId}";
 			   	       	$.ajax({
 							url : url,
 							type : "get",

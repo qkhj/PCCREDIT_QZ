@@ -18,7 +18,7 @@
 	       end) value
 	
 	  from (select app_status.name, app_status.id, return_num.value
-	          from (select '新增' as name, 'succeed' as id
+	          from (select '新增' as name, 'success' as id
 	                  from dual
 	                union all
 	                select '审批中' as name, 'audit' as id
@@ -27,7 +27,7 @@
 	                select '已审批' as name, 'approved' as id
 	                  from dual
 	                union all
-	                select '退回' as name, 'return' as id
+	                select '退回' as name, 'returnedToFirst' as id
 	                  from dual
 	                union all
 	                select '拒绝' as name, 'refuse' as id from dual) app_status
@@ -44,10 +44,10 @@
 	</select>
 	
 	<select id="statisticalCreditStatus" resultMap="ResultMap" >
-		select '正常' name, nvl(sum(t.principal_overdraft), 0)/1000000 value
+		select '正常' name, nvl(sum(t.principal_overdraft), 0)/10000 value
 		  from AVERAGE_DAILY_OVERDRAFT t
 		union all
-		select '不良' name, nvl(sum(t.VERIFICATION_ACCOUNT), 0)/1000000 value
+		select '不良' name, nvl(sum(t.OVERDUE_BALANCE_IN), 0)/10000 value
 		  from npls_information t
 		union all
 		select '逾期' name,
@@ -56,7 +56,7 @@
 		              a.value
 		             else
 		              -a.value
-		           end)/1000000 value
+		           end)/10000 value
 		  from (select '逾期' name, nvl(sum(t.CURRENT_BALANCE), 0) value
 		          from customer_overdue t
 		        union all

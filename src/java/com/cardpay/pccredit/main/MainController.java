@@ -164,7 +164,7 @@ public class MainController {
 		 level = accountManagerParameter.getLevelInformation();
 		}
 		String pageurl ="";
-		if(level =="MANA005" || level =="MANA003" ){
+		if(level.equals("MANA005") || level.equals("MANA003") ){
 			
 			pageurl = "home/managerhome";
 		}
@@ -216,7 +216,7 @@ public class MainController {
 		mv.addObject("riskCustomer",rightHomeData.get("riskCustomer"));
 		mv.addObject("verificationCustomer",rightHomeData.get("verificationCustomer"));
 		
-		if(level =="MANA005" || level =="MANA003" ){
+		if(level.equals("MANA005") || level.equals("MANA003") ){
 			// 当前进件状况
 			mv.addObject("applicationStatusJson",statisticalCommonService.getApplicationStatusJson());
 			// 当前贷款状况

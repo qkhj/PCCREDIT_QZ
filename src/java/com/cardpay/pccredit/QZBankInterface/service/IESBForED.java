@@ -66,6 +66,12 @@ public class IESBForED {
         LOAN_CARD_NO.setValue("6214373100000000511");//todo:传入关联卡号
         body_struct.addField("LOAN_CARD_NO", LOAN_CARD_NO);
 
+        //新增字段
+        //业务类型
+        Field APPLY_TYPE=new Field(new FieldAttr(FieldType.FIELD_STRING, 3));
+        APPLY_TYPE.setValue("001");//个人资助
+        body_struct.addField("APPLY_TYPE", APPLY_TYPE);
+        
         cd.addStruct("BODY",body_struct);
         return cd;
     }

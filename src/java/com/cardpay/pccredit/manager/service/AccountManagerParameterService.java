@@ -49,7 +49,7 @@ public class AccountManagerParameterService {
 		accountManagerParameter.setCreatedTime(Calendar.getInstance().getTime());
 		if(accountManagerParameter != null){
 			String basePay = accountManagerParameter.getBasePay();
-			if(basePay !=null && basePay !=""){
+			if(basePay !=null && !basePay.equals("")){
 				Double basePayDouble = Double.parseDouble(basePay) * 100;
 				String basePayValue = basePayDouble.toString();
 				accountManagerParameter.setBasePay(basePayValue);
@@ -82,7 +82,7 @@ public class AccountManagerParameterService {
 		
 		accountManagerParameter.setModifiedBy(userId);
 		accountManagerParameter.setModifiedTime(calendar.getTime());
-		if(accountManagerParameterId == "" || accountManagerParameterId == null){
+		if(accountManagerParameterId == null || accountManagerParameterId.equals("")){
 		accountManagerParameter.setUserId(customerManagerId);
 		accountManagerParameter.setCreatedBy(userId);
 		accountManagerParameter.setCreatedTime(calendar.getTime());
@@ -172,7 +172,7 @@ public class AccountManagerParameterService {
 		
 		accountManagerParameter.setModifiedBy(userId);
 		accountManagerParameter.setModifiedTime(calendar.getTime());
-		if(accountManagerParameterId == "" || accountManagerParameterId == null){
+		if(accountManagerParameterId == null || accountManagerParameterId.equals("")){
 		accountManagerParameter.setUserId(customerManagerId);
 		accountManagerParameter.setCreatedBy(userId);
 		accountManagerParameter.setCreatedTime(calendar.getTime());
@@ -299,7 +299,7 @@ public class AccountManagerParameterService {
 			customerManagerTarget.setModifiedBy(userId);
 			customerManagerTarget.setModifiedTime(calendar.getTime());
 			customerManagerTarget.setTargetDate(ManagerTargetType.year.name());
-			if(idValue == "" || idValue == null){
+			if(idValue == null || idValue.equals("")){
 				customerManagerTarget.setCreatedBy(userId);
 				customerManagerTarget.setCreatedTime(calendar.getTime());
 				commonDao.insertObject(customerManagerTarget);	
@@ -363,7 +363,7 @@ public class AccountManagerParameterService {
 			customerManagerTarget.setModifiedBy(userId);
 			customerManagerTarget.setModifiedTime(calendar.getTime());
 			customerManagerTarget.setTargetDate(ManagerTargetType.month.name());
-			if(idValue == "" || idValue == null){
+			if(idValue == null || idValue.equals("")){
 				customerManagerTarget.setCreatedBy(userId);
 				customerManagerTarget.setCreatedTime(calendar.getTime());
 				commonDao.insertObject(customerManagerTarget);	
@@ -427,7 +427,7 @@ public class AccountManagerParameterService {
 			customerManagerTarget.setModifiedBy(userId);
 			customerManagerTarget.setModifiedTime(calendar.getTime());
 			customerManagerTarget.setTargetDate(ManagerTargetType.weekly.name());
-			if(idValue == "" || idValue == null){
+			if(idValue == null || idValue.equals("")){
 				customerManagerTarget.setCreatedBy(userId);
 				customerManagerTarget.setCreatedTime(calendar.getTime());
 				commonDao.insertObject(customerManagerTarget);	

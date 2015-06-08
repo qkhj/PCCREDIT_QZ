@@ -27,6 +27,7 @@ import com.cardpay.pccredit.customer.web.CustomerInforForm;
 import com.cardpay.pccredit.datapri.constant.DataPriConstants;
 import com.cardpay.pccredit.intopieces.constant.Constant;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationInfo;
+import com.cardpay.pccredit.intopieces.model.QzApplnJyd;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationInfoService;
 import com.cardpay.pccredit.intopieces.service.IntoPiecesService;
 import com.cardpay.pccredit.ipad.util.JsonDateValueProcessor;
@@ -138,8 +139,10 @@ public class IESBForCircleController extends BaseController{
 		IESBForECIFReturnMap ecif = eCIFService.findEcifByCustomerId(customerId);
 		JSONObject json = new JSONObject();
 		json = JSONObject.fromObject(ecif);
-		
+		//获取决议单信息
+		QzApplnJyd jyd = intoPiecesService.getJydByCustomerId(customerId, appId);
 		//Circle circle = circleService.findCircleByClientNo(ecif.getClientNo());
+		
 		Circle circle = null;
 		if(appId != null && !appId.equals("")){
 			circle = circleService.findCircleByAppId(appId);
@@ -159,7 +162,9 @@ public class IESBForCircleController extends BaseController{
 			mv.addObject("orgId",orgId);
 			mv.addObject("parentOrgId",parentOrgId);
 			mv.addObject("externalId",externalId);
-			
+
+			QzApplnJyd qzSdhjyd = intoPiecesService.getSdhjydForm(customerId);
+			mv.addObject("qzSdhjyd",qzSdhjyd);
 			
 		}
 		else{
@@ -171,6 +176,7 @@ public class IESBForCircleController extends BaseController{
 		mv.addObject("ecif",json);
 		mv.addObject("operate",operate);
 		mv.addObject("appId",appId);
+		mv.addObject("jyd",jyd);
 		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate));
 		
 		return mv;

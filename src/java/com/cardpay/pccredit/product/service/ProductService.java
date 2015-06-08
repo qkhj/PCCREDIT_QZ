@@ -201,7 +201,7 @@ public class ProductService {
 			String index = request.getParameter("totalnum");
 			String productId = request.getParameter("id");
 			int indexnum =0;
-			if(index != "")
+			if(index != null && !index.equals(""))
 			{
 				indexnum = Integer.parseInt(index)	;
 				
@@ -402,7 +402,7 @@ public class ProductService {
 		String index = request.getParameter("totalnum");
 		String productId = RequestHelper.getStringValue(request, "productId");
 		int indexnum =0;
-		if(index != "")
+		if(index != null && !index.equals(""))
 		{
 			indexnum = Integer.parseInt(index)	;
 			

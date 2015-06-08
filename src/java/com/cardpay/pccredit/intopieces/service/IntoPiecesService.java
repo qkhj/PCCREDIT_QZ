@@ -1788,4 +1788,21 @@ public class IntoPiecesService {
 		List<HashMap<String, Object>> list = commonDao.queryBySql(sql, null);
 		return list;
 	}
+	
+	public QzApplnJyd getJydByCustomerId(String customerId,String appId){
+		//查询决议单
+		String sql ="";
+		if(appId==null){
+			sql= "select * from qz_appln_jyd where customer_id='"+customerId+"' and application_id is null" ;
+		}else{
+			sql= "select * from qz_appln_jyd where customer_id='"+customerId+"' and application_id='"+appId+"'" ;
+		}
+		List<QzApplnJyd> jydList = commonDao.queryBySql(QzApplnJyd.class, sql, null);
+		if(jydList.size()>0){
+			return jydList.get(0);
+		}else{
+			return null;
+		}
+		
+	}
 }
