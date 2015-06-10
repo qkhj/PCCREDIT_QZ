@@ -28,6 +28,8 @@ public interface ECIFDao {
 
 	public int findCustomerInforWithEcifCountByFilter(CustomerInforFilter filter);
 
-	public IESBForECIFReturnMap findEcifByCustomerId(@Param("customerId") String customerId);
+	public IESBForECIFReturnMap findEcifMapByCustomerId(@Param("customerId") String customerId);
+	
+	public ECIF findEcifByCustomerId(@Param("customerId") String customerId);
 	
 }

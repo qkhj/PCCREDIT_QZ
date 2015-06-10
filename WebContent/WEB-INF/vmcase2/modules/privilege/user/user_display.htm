@@ -46,7 +46,6 @@
 								&nbsp;&nbsp;&nbsp;
 								<input type="radio" name="gender"
 									value="女">&nbsp;女 </td>
-							</td>
 						</tr>
 
 						<tr>
@@ -62,7 +61,10 @@
 							<td><label for="phone">#mi18n("phone"):</label></td>
 							<td><input type="text" id="phone" name="phone"
 								value="$!person.phone" disabled="disabled"/></td>
-							<td colspan="3""></td>
+							<td></td>
+							<td><label for="gender">业务机构编制:</label></td>
+							<td><input type="radio" name="businessType" value="1" #if($!person.businessType == '1') checked="checked" #end disabled>&nbsp;是&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="businessType" value="0" #if($!person.businessType == '0') checked="checked" #end disabled>&nbsp;否 </td>
 						</tr>
 						<tr>
 							<td>#mi18n("description"):</td>

@@ -41,7 +41,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>
 				<tr>
 					<td class="table-label">出生日期：<font color="#ff0000">*</font></td>
-					<td><input type="text" name="birthday" value="$date.format('yyyy-MM-dd', $!qzApplnDbrxx.birthday)" onmouseover="_calendar()"/></td>	
+					<td><input type="text" name="birthday" value="$date.format('yyyy-MM-dd', $!qzApplnDbrxx.birthday)" onmouseover="_calendar()" readonly/></td>	
 					<td class="table-label">居住年限：</td>
 					<td><input type="text" name="yeah" value="$!qzApplnDbrxx.yeah" />年</td>
 				</tr>				
@@ -194,7 +194,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td><input type="text" class="input" name="loanType_${obj.lsh}" value="$!obj.loanType"/></td>	
 					<td><input type="text" class="input" name="amount_${obj.lsh}" value="$!obj.amount"/></td>					
 					<td><input type="text" class="input" name="deadline_${obj.lsh}" value="$!obj.deadline"/></td>	
-					<td><input type="text" class="input" name="loanDate_${obj.lsh}" value="$date.format('yyyy-MM-dd', $!obj.loanDate)" onmouseover="_calendar()"/></td>	
+					<td><input type="text" class="input" name="loanDate_${obj.lsh}" value="$date.format('yyyy-MM-dd', $!obj.loanDate)" onmouseover="_calendar()" readonly/></td>	
 					<td><input type="text" class="input" name="purpose_${obj.lsh}" value="$!obj.purpose" /></td>					
 					<td><input type="text" class="input" name="remainAmount_${obj.lsh}" value="$!obj.remainAmount"/></td>	
 					<td><input type="text" class="input" name="guntForOther_${obj.lsh}" value="$!obj.guntForOther"/></td>	
@@ -270,7 +270,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				<tr>
 					<td><input type="text" class="input" name="cardNo_${obj.lsh}" value="$!obj.cardNo"/></td>	
 					<td><input type="text" class="input" name="price_${obj.lsh}" value="$!obj.price"/></td>	
-					<td><input type="text" class="input" name="buyDate_${obj.lsh}" value="$date.format('yyyy-MM-dd', $!obj.buyDate)" onmouseover="_calendar()"/></td>				
+					<td><input type="text" class="input" name="buyDate_${obj.lsh}" value="$date.format('yyyy-MM-dd', $!obj.buyDate)" onmouseover="_calendar()" readonly/></td>				
 					<td>
 						<select name="haveCopy_1_${obj.lsh}">
 							<option value="1" #if($!obj.haveCopy_1=='1') selected #end>有</option>

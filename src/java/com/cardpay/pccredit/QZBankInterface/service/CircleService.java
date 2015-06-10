@@ -65,6 +65,12 @@ public class CircleService {
     
     //对接并存db
     public boolean updateCustomerInforCircle_ESB(Circle circle) {
+    	//先开户
+    	boolean rtn = ecifService.updateCustomerInfor(circle,ecifService.findEcifByCustomerId(circle.getCustomerId()));
+    	if(rtn == false){
+    		return false;
+    	}
+    	
 		//先查询核心
 		List<Circle_ACCT_INFO> acct_info_ls = new ArrayList<Circle_ACCT_INFO>();
 		//收息收款账号

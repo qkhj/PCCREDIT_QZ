@@ -41,18 +41,20 @@
 					<td colspan="3"><input type="text" name="zjhm" value="$!result.zjhm" readonly/></td>		
 				</tr>			
 				<tr>
-					<td class="table-label">建议金额</td>
+					<td class="table-label">建议金额(元)</td>
 					<td colspan="2"><input type="text" name="jyje" value="$!result.jyje" readonly/></td>
-					<td class="table-label">建议期限</td>
+					<td class="table-label">建议期限(月)</td>
 					<td><input type="text" name="jyqx" value="$!result.jyqx" readonly/></td>	
-					<td class="table-label" colspan="2">建议利率（年）</td>
+					<td class="table-label" colspan="2">建议利率（年%）</td>
 					<td colspan="2"><input type="text" name="jyll" value="$!result.jyll" readonly/></td>		
 				</tr>			
 				<tr>
 					<td class="table-label">授信用途</td>
 					<td colspan="4"><input type="text" name="sxyt" value="$!result.sxyt" readonly/></td>
 					<td class="table-label" colspan="2">还款方式</td>
-					<td colspan="2"><input type="text" name="hkfs" value="$!result.hkfs" readonly/></td>		
+					<td colspan="2">
+						<select name="hkfs" readonly >#dict("REPAY_TYPE", $!result.hkfs)</select>
+					</td>		
 				</tr>		
 				<tr>
 					<td class="table-label" rowspan="3">建议担保方式</td>					

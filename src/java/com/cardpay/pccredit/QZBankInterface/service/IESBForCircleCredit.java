@@ -691,6 +691,9 @@ public class IESBForCircleCredit {
 		</service>
      */
 	public boolean parseEcifResponse(CompositeData resp) {
+		if(resp == null){
+			return false;
+		}
 		CompositeData SYS_HEAD = resp.getStruct("SYS_HEAD");
 
         //根据数组名称去获取数组

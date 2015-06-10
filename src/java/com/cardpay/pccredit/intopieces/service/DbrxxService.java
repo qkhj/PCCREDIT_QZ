@@ -251,6 +251,14 @@ public class DbrxxService {
 		return dbrxxDao.findDbrxxJdc(dbrxxId);
 	}
 
+	//删除page4 信息
+	public void deleteDbrxx(String dbrxxId){
+		dbrxxDao.deleteDbrxxDkjl(dbrxxId);
+		dbrxxDao.deleteDbrxxFc(dbrxxId);
+		dbrxxDao.deleteDbrxxJdc(dbrxxId);
+		dbrxxDao.deleteDbrxx(dbrxxId);
+	}
+	
 	//删除page4 dkjl信息
 	public void deleteDbrxxDkjl(String dbrxxId){
 		dbrxxDao.deleteDbrxxDkjl(dbrxxId);

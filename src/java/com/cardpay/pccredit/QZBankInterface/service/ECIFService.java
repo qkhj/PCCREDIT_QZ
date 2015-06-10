@@ -78,6 +78,39 @@ public class ECIFService {
 	}
 	
 	/**
+	 * 更新数据
+	 * @param customerinfo
+	 * @return
+	 */
+	public boolean updateCustomerInfor(Circle circle,ECIF ecif) {
+		if(ecif.getClientNo() == null || ecif.getClientNo().equals("")){
+			//组包
+			CompositeData req = iesbForECIF.createEcifRequest(ecif);
+			//发送
+			CompositeData resp = client.sendMess(req);
+			//解析，存db
+			String clientNo = iesbForECIF.parseEcifResponse(resp);
+			if(clientNo != null && !clientNo.equals("")){
+				ecif.setClientNo(clientNo);
+	            commonDao.updateObject(ecif);
+	            
+	            circle.setClientNo(clientNo);
+	            circle.setaClientNo(clientNo);
+	            commonDao.updateObject(circle);
+	            return true;
+			}
+			else{
+				return false;
+			}
+		}else{
+			circle.setClientNo(ecif.getClientNo());
+            circle.setaClientNo(ecif.getClientNo());
+            commonDao.updateObject(circle);
+		}
+		return true;
+	}
+	
+	/**
 	 * 按clientNo查找ecif
 	 */
 	public ECIF findEcifByClientNo(String clientNo){
@@ -119,7 +152,15 @@ public class ECIFService {
 	/**
 	 * 按customerId查找ecif
 	 */
-	public IESBForECIFReturnMap findEcifByCustomerId(String customerId) {
+	public IESBForECIFReturnMap findEcifMapByCustomerId(String customerId) {
+		return ecifDao.findEcifMapByCustomerId(customerId);
+	}
+	
+	/**
+	 * 按customerId查找ecif
+	 */
+	public ECIF findEcifByCustomerId(String customerId) {
 		return ecifDao.findEcifByCustomerId(customerId);
 	}
+	
 }

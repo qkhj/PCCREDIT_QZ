@@ -432,7 +432,9 @@ public class IESBForECIF {
      * @param cd
      */
     public String parseEcifResponse(CompositeData cd){
-
+    	if(cd == null){
+    		return null;
+    	}
         CompositeData body = cd.getStruct("BODY");
 
         //根据数组名称去获取数组

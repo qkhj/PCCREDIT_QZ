@@ -21,7 +21,7 @@ var validator = $($formName).validate({
 		penaltyIntRate:{required:true},
 		repayDate:{required:true},
 		
-		aClientNo:{required:true},
+		//aClientNo:{required:true},
 		clientName:{required:true},
 		globalId:{required:true},
 		issDate:{required:true},
@@ -61,7 +61,7 @@ messages:
 		penaltyIntRate:{required:"违约利率不能为空"},
 		repayDate:{required:"还款日期不能为空"},
 		
-		aClientNo:{required:"客户号不能为空"},
+		//aClientNo:{required:"客户号不能为空"},
 		clientName:{required:"客户名称不能为空"},
 		globalId:{required:"证件号码不能为空"},
 		issDate:{required:"签发日期不能为空"},

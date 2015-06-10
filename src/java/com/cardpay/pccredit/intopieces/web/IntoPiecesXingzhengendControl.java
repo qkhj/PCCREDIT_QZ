@@ -33,8 +33,10 @@ import com.cardpay.pccredit.intopieces.constant.Constant;
 import com.cardpay.pccredit.intopieces.filter.CustomerApplicationProcessFilter;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationInfo;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationProcess;
+import com.cardpay.pccredit.intopieces.model.QzApplnAttachmentList;
 import com.cardpay.pccredit.intopieces.model.QzApplnHtqdtz;
 import com.cardpay.pccredit.intopieces.model.QzApplnNbscyjb;
+import com.cardpay.pccredit.intopieces.service.AttachmentListService;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationIntopieceWaitService;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationProcessService;
 import com.cardpay.pccredit.intopieces.service.IntoPiecesService;
@@ -77,6 +79,8 @@ public class IntoPiecesXingzhengendControl extends BaseController {
 	@Autowired
 	private ECIFService eCIFService;
 	
+	@Autowired
+	private AttachmentListService attachmentListService;
 	/**
 	 * 行政岗终进件页面
 	 * 
@@ -184,7 +188,7 @@ public class IntoPiecesXingzhengendControl extends BaseController {
 			
 			request.setAttribute("examineAmount", circle.getContractAmt());
 			
-			//通过applicationId查找circle并放款 
+			//先开户 后通过applicationId查找circle并放款 
 			boolean rtn = circleService.updateCustomerInforCircle_ESB(circle);
 			if(rtn){
 				customerApplicationIntopieceWaitService.updateCustomerApplicationProcessBySerialNumberApplicationInfo1(request);
@@ -266,6 +270,27 @@ public class IntoPiecesXingzhengendControl extends BaseController {
 			mv.addObject("appId", appId);
 			mv.addObject("operate", Constant.status_xingzheng2);
 		}
+		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
+		String loginId = user.getLogin();
+		String displayName = user.getDisplayName();
+		String orgId = user.getOrganization().getId();
+		String orgName = user.getOrganization().getName();
+		StringBuilder url = new StringBuilder(Constant.SunIASUrl);
+		url.append("UserID="+loginId+"&");
+		url.append("UserName="+displayName+"&");
+		url.append("OrgID="+orgId+"&");
+		url.append("OrgName="+orgName+"&");
+		url.append("right=1111&");
+		QzApplnAttachmentList qzApplnAttachmentList = attachmentListService.findAttachmentListByAppId(appId);
+		if(qzApplnAttachmentList.getBussType().equals("1"))//工薪类
+		{
+			url.append("info1=QKJY:"+appId);
+		}
+		else//经营类
+		{
+			url.append("info1=QKJY:"+appId);
+		}
+		mv.addObject("url", url);
 		return mv;
 	}
 	

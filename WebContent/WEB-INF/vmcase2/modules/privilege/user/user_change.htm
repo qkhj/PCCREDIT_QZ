@@ -47,7 +47,6 @@
 								&nbsp;&nbsp;&nbsp;
 								<input type="radio" name="gender"
 									value="女">&nbsp;女 </td>
-							</td>
 						</tr>
 
 						<tr>
@@ -64,10 +63,9 @@
 							<td><input type="text" id="phone" name="phone"
 								value="$!person.phone" /></td>
 							<td></td>
-							<td colspan="2">
-							<input type="checkBox" id="businessType" name="businessType"
-								#if($!person.businessType=="on") checked #end/>
-							业务机构编制</td>
+							<td><label for="gender">业务机构编制:</label></td>
+							<td><input type="radio" name="businessType" value="1" #if($!person.businessType == '1') checked="checked" #end>&nbsp;是&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="businessType" value="0" #if($!person.businessType == '0') checked="checked" #end>&nbsp;否 </td>
 						</tr>
 						<tr>
 							<td>#mi18n("description"):</td>

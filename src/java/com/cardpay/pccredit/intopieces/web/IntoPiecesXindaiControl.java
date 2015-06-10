@@ -31,7 +31,9 @@ import com.cardpay.pccredit.intopieces.constant.Constant;
 import com.cardpay.pccredit.intopieces.filter.CustomerApplicationProcessFilter;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationInfo;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationProcess;
+import com.cardpay.pccredit.intopieces.model.QzApplnAttachmentList;
 import com.cardpay.pccredit.intopieces.model.VideoAccessories;
+import com.cardpay.pccredit.intopieces.service.AttachmentListService;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationIntopieceWaitService;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationProcessService;
 import com.cardpay.pccredit.intopieces.service.IntoPiecesService;
@@ -72,6 +74,9 @@ public class IntoPiecesXindaiControl extends BaseController {
 	private CircleService circleService;
 	@Autowired
 	private ECIFService eCIFService;
+	
+	@Autowired
+	private AttachmentListService attachmentListService;
 	/**
 	 * 行政岗终进件页面
 	 * 
@@ -159,12 +164,12 @@ public class IntoPiecesXindaiControl extends BaseController {
 		try {
 			String appId = request.getParameter("id");
 			//是否上传合同单
-			Boolean ifAddHt = intoPiecesService.getDcnrList(appId);
+			/*Boolean ifAddHt = intoPiecesService.getDcnrList(appId);
 			if(!ifAddHt){
 				returnMap.put(JRadConstants.MESSAGE, "请先上传\"合同扫描件\"");
 				returnMap.put(JRadConstants.SUCCESS, false);
 				return returnMap;
-			}
+			}*/
 			CustomerApplicationProcess process =  customerApplicationProcessService.findByAppId(appId);
 			request.setAttribute("serialNumber", process.getSerialNumber());
 			request.setAttribute("applicationId", process.getApplicationId());
@@ -197,6 +202,27 @@ public class IntoPiecesXindaiControl extends BaseController {
 			mv.addObject("appId", appId);
 			mv.addObject("operate", Constant.status_xinshen);
 		}
+		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
+		String loginId = user.getLogin();
+		String displayName = user.getDisplayName();
+		String orgId = user.getOrganization().getId();
+		String orgName = user.getOrganization().getName();
+		StringBuilder url = new StringBuilder(Constant.SunIASUrl);
+		url.append("UserID="+loginId+"&");
+		url.append("UserName="+displayName+"&");
+		url.append("OrgID="+orgId+"&");
+		url.append("OrgName="+orgName+"&");
+		url.append("right=1111&");
+		QzApplnAttachmentList qzApplnAttachmentList = attachmentListService.findAttachmentListByAppId(appId);
+		if(qzApplnAttachmentList.getBussType().equals("1"))//工薪类
+		{
+			url.append("info1=NEW_TEST:"+appId);
+		}
+		else//经营类
+		{
+			url.append("info1=NEW_TEST:"+appId);
+		}
+		mv.addObject("url", url);
 		return mv;
 	}
 }

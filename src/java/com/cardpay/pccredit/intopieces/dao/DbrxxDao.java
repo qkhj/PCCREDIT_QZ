@@ -18,6 +18,7 @@ public interface DbrxxDao {
 	public List<QzApplnDbrxxDkjl> findDbrxxDkjl(@Param("dbrxxId")String dbrxxId);
 	public List<QzApplnDbrxxFc> findDbrxxFc(@Param("dbrxxId")String dbrxxId);
 	public List<QzApplnDbrxxJdc> findDbrxxJdc(@Param("dbrxxId")String dbrxxId);
+	public void deleteDbrxx(@Param("dbrxxId")String dbrxxId);
 	public void deleteDbrxxDkjl(@Param("dbrxxId")String dbrxxId);
 	public void deleteDbrxxFc(@Param("dbrxxId")String dbrxxId);
 	public void deleteDbrxxJdc(@Param("dbrxxId")String dbrxxId);

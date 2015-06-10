@@ -41,7 +41,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>
 				<tr>
 					<td class="table-label">出生日期：<font color="#ff0000">*</font></td>
-					<td><input type="text" name="birthday" onmouseover="_calendar()"/></td>	
+					<td><input type="text" name="birthday" onmouseover="_calendar()" readonly/></td>	
 					<td class="table-label">居住年限：</td>
 					<td><input type="text" name="yeah"/>年</td>
 				</tr>				
@@ -195,7 +195,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td><input type="text" class="input" name="deadline_1" /></td>	
 					
 					<script>
-						document.write('<td><input type="text" class="input" value="'+timestr+'"name="loanDate_1" onmouseover="_calendar()"/></td>');
+						document.write('<td><input type="text" class="input" value="'+timestr+'"name="loanDate_1" onmouseover="_calendar()" readonly/></td>');
 					</script>
 					<td><input type="text" class="input" name="purpose_1" /></td>					
 					<td><input type="text" class="input" name="remainAmount_1" /></td>	
@@ -269,7 +269,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td><input type="text" class="input" name="cardNo_1" /></td>	
 					<td><input type="text" class="input" name="price_1" /></td>	
 					<script>
-						document.write('<td><input type="text" class="input" value="'+timestr+'"name="buyDate_1" onmouseover="_calendar()"/></td>');
+						document.write('<td><input type="text" class="input" value="'+timestr+'"name="buyDate_1" onmouseover="_calendar()" readonly/></td>');
 					</script>
 					<td>
 						<select name="haveCopy_1_1">

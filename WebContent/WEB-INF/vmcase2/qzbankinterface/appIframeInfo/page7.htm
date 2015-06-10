@@ -18,7 +18,7 @@
 				</colgroup>
 				<tr>
 					<td class="table-label">内部审查日期：<font color="#ff0000">*</font></td>
-					<td colspan="3"><input type="text" name="checkDate" onmouseover="_calendar()"/></td>			
+					<td colspan="3"><input type="text" name="checkDate" onmouseover="_calendar()" readonly/></td>			
 				</tr>
 				<tr>
 					<td class="table-label">客户名称：<font color="#ff0000">*</font></td>
@@ -29,10 +29,14 @@
 						<input type="hidden" name="shopName" value="$!qzApplnJyxx.bussName"/></td>			
 				</tr>
 				<tr>
-					<td class="table-label">申请金额：<font color="#ff0000">*</font></td>
+					<td class="table-label">申请金额(元)：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="applyAmount"/></td>
 					<td class="table-label">申请期限：<font color="#ff0000">*</font></td>
-					<td><input type="text" name="applyDeadline"/></td>			
+					<td>
+						<select name="applyDeadline">
+	                    	#dict("APPLY_DEADLINE", '')
+	                  	</select>
+	                </td>			
 				</tr>
 				<tr>
 					<td class="tableTitle" colspan="4">客户经理建议</td>				
@@ -42,13 +46,17 @@
 					<td colspan="3"><textarea name="sugContent"></textarea></td>			
 				</tr>
 				<tr>
-					<td class="table-label">建议金额：<font color="#ff0000">*</font></td>
+					<td class="table-label">建议金额(元)：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="sugAmount"/></td>
 					<td class="table-label">建议期限：<font color="#ff0000">*</font></td>
-					<td><input type="text" name="sugDeadline"/></td>			
+					<td>
+						<select name="sugDeadline">
+	                    	#dict("APPLY_DEADLINE", '')
+	                  	</select>
+					</td>			
 				</tr>
 				<tr>
-					<td class="table-label">建议利率：<font color="#ff0000">*</font></td>
+					<td class="table-label">建议利率(%)：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="sugRates"/></td>
 					<td class="table-label">担保方式：<font color="#ff0000">*</font></td>
 					<td><select name="sugGuntType"/>#dict("ASSURE_MAIN", "")</select></td>			

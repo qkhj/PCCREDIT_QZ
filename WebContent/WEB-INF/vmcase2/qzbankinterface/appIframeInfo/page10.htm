@@ -172,13 +172,13 @@
 			}
 			submitFlag = 1;
 			if ($($formName).valid()) {
-			var formjson = $($formName).serialize();
-   	          $.post("${contextPath}/intopieces/intopiecesshouxin/syjy_save.json?id=${customerId}&appId=${appId}", formjson, function(data, textStatus, jqXhr) {
-   	            if (data.success) {
-   	            	Dialog.message("保存成功!");
-   	            }
-   	         	submitFlag = 0;
-	          });
+				var formjson = $($formName).serialize();
+	   	          $.post("${contextPath}/intopieces/intopiecesshouxin/syjy_save.json?id=${customerId}&appId=${appId}", formjson, function(data, textStatus, jqXhr) {
+	   	            if (data.success) {
+	   	            	Dialog.message("保存成功!");
+	   	            }
+	   	         	submitFlag = 0;
+		          });
 			}else{
 				submitFlag = 0;
 			}

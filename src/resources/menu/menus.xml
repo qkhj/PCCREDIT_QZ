@@ -34,7 +34,7 @@
 			<menu id="040019" name="customermaintenancelog" title="客户维护信息日志列表" url="/customer/customermaintenancelog/browse.page" img="" operations="display|browse|change"/>
 			<menu id="040020" name="adjustmentquota" title="客户调额生成" url="/customer/adjustmentquota/browse.page" img="" operations="amountadjustment|browse"/>
 			<menu id="040021" name="amountadjustment" title="客户调额待审核" url="/customer/amountadjustment/browse.page" img="" operations="approve|applyapprove|browse"/>
-			<menu id="040022" name="amountadjustmentview" title="客户调额查看" url="/customer/amountadjustmentview/browse.page" img="" operations="browse"/>-->
+			<menu id="040022" name="amountadjustmentview" title="客户调额查看" url="/customer/amountadjustmentview/browse.page" img="" operations="browse"/> -->
 		</menu>
 		<menu id="050000" name="divisional" title="分案管理" operations=""> 
 			<menu id="050010" name="customerallot" title="客户主管分配" url="/divisional/customerallot/browse.page" img="" operations="distribution|browse"/>

@@ -62,7 +62,7 @@
 	</resultMap>
 	
 	<!-- 时间格式不好处理  增加一个查询 -->
-	<select id="findEcifByCustomerId" resultType="com.cardpay.pccredit.QZBankInterface.web.IESBForECIFReturnMap">
+	<select id="findEcifMapByCustomerId" resultType="com.cardpay.pccredit.QZBankInterface.web.IESBForECIFReturnMap">
 		select 
 		id ,
 		client_Name as clientName,
@@ -218,4 +218,10 @@
 			</if>
 	</select>
 	
+	<select id="findEcifByCustomerId" resultMap="ResultMap">
+		select 
+		*
+		from QZ_IESB_FOR_ECIF
+		where CUSTOMER_ID  = #{customerId}
+	</select>
 </mapper> 

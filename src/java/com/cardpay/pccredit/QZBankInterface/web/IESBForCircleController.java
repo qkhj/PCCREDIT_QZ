@@ -106,7 +106,7 @@ public class IESBForCircleController extends BaseController{
 		String customerId = request.getParameter(ID);
 		String appId = request.getParameter("appId");
 		String operate = request.getParameter("operate");
-		IESBForECIFReturnMap ecif = eCIFService.findEcifByCustomerId(customerId);
+		IESBForECIFReturnMap ecif = eCIFService.findEcifMapByCustomerId(customerId);
 		mv.addObject("ecif",ecif);
 				
 		Circle circle = null;
@@ -136,7 +136,7 @@ public class IESBForCircleController extends BaseController{
 		String customerId = request.getParameter(ID);
 		String appId = request.getParameter("appId");
 		String operate = request.getParameter("operate");
-		IESBForECIFReturnMap ecif = eCIFService.findEcifByCustomerId(customerId);
+		IESBForECIFReturnMap ecif = eCIFService.findEcifMapByCustomerId(customerId);
 		JSONObject json = new JSONObject();
 		json = JSONObject.fromObject(ecif);
 		//获取决议单信息

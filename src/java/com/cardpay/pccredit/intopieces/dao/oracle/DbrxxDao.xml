@@ -109,6 +109,10 @@
 			AND DBRXX_ID=#{dbrxxId}
 		</if>
 	</select>
+	<delete id="deleteDbrxx" parameterType="String" >
+		delete from qz_appln_dbrxx
+		where ID = #{dbrxxId}
+	</delete>
 	<delete id="deleteDbrxxDkjl" parameterType="String" >
 		delete from qz_appln_dbrxx_dkjl
 		where DBRXX_ID = #{dbrxxId}

@@ -47,7 +47,7 @@
 				</colgroup>
 				<tr>
 					<td class="table-label">审议日期:<font color="#ff0000">*</font></td>
-					<td colspan="8"><input type="text" name="syrq" onmouseover="_calendar()" value="$!date.format("yyyy-MM-dd", $!result.syrq)"/></td>			
+					<td colspan="8"><input type="text" name="syrq" onmouseover="_calendar()" value="$!date.format("yyyy-MM-dd", $!result.syrq)" readonly/></td>			
 				</tr>
 				<tr>
 					<td class="table-label">办理机构:<font color="#ff0000">*</font></td>
@@ -66,18 +66,20 @@
 					<td colspan="3"><input type="text" name="zjhm" value="$!ecif.globalId" readonly/></td>		
 				</tr>			
 				<tr>
-					<td class="table-label">建议金额:<font color="#ff0000">*</font></td>
+					<td class="table-label">建议金额(元):<font color="#ff0000">*</font></td>
 					<td colspan="2"><input type="text" name="jyje" value="$!qzApplnNbscyjb.sugAmount" readonly/></td>
-					<td class="table-label">建议期限:<font color="#ff0000">*</font></td>
+					<td class="table-label">建议期限(月):<font color="#ff0000">*</font></td>
 					<td><input type="text" name="jyqx" value="$!qzApplnNbscyjb.sugDeadline" readonly/></td>	
-					<td class="table-label" colspan="2">建议利率（年）:<font color="#ff0000">*</font></td>
+					<td class="table-label">建议利率（年%）:<font color="#ff0000">*</font></td>
 					<td colspan="2"><input type="text" name="jyll" value="$!qzApplnNbscyjb.sugRates" readonly/></td>		
 				</tr>			
 				<tr>
 					<td class="table-label">授信用途:<font color="#ff0000">*</font></td>
 					<td colspan="4"><input type="text" name="sxyt" value="$!result.sxyt"/></td>
-					<td class="table-label" colspan="2">还款方式:<font color="#ff0000">*</font></td>
-					<td colspan="2"><input type="text" name="hkfs" value="$!result.hkfs"/></td>		
+					<td class="table-label">还款方式:<font color="#ff0000">*</font></td>
+					<td colspan="2">
+						<select name="hkfs"  >#dict("REPAY_TYPE", $!result.hkfs)</select>
+					</td>		
 				</tr>		
 				<tr>
 					<td class="table-label" rowspan="3">建议担保方式</td>					

@@ -432,7 +432,7 @@ public class IntoPiecesApproveControl extends BaseController {
 				mv.addObject("customerId", customerInfor.getId());
 			}
 			//查找开户信息 自动填充
-			ECIF ecif = eCIFService.findEcifByClientNo(eCIFService.findEcifByCustomerId(customerInforId).getClientNo());
+			ECIF ecif = eCIFService.findEcifByCustomerId(customerInforId);
 			mv.addObject("ecif", ecif);
 			mv.addObject("type", type);
 			mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate) );
@@ -622,6 +622,27 @@ public class IntoPiecesApproveControl extends BaseController {
 		return returnMap;
 	}
 	
+	//del_page4
+	@ResponseBody
+	@RequestMapping(value = "del_page4.json")
+	public JRadReturnMap del_page4(HttpServletRequest request) {
+		JRadReturnMap returnMap = new JRadReturnMap();
+		if (returnMap.isSuccess()) {
+			try {
+				String dbrxxId = request.getParameter("id");
+				dbrxxService.deleteDbrxx(dbrxxId);
+				returnMap.addGlobalMessage(CREATE_SUCCESS);
+				returnMap.setSuccess(true);
+			}catch (Exception e) {
+				return WebRequestHelper.processException(e);
+			}
+		}else{
+			returnMap.setSuccess(false);
+			returnMap.addGlobalError(CustomerInforConstant.CREATEERROR);
+		}
+		return returnMap;
+	}
+		
 	//page5
 	@ResponseBody
 	@RequestMapping(value = "page5.page")
@@ -869,7 +890,7 @@ public class IntoPiecesApproveControl extends BaseController {
 		mv.addObject("result", qzSdhjyd);
 		mv.addObject("qzApplnNbscyjb", qzApplnNbscyjb);
 		//查找开户信息 自动填充
-		ECIF ecif = eCIFService.findEcifByClientNo(eCIFService.findEcifByCustomerId(customerId).getClientNo());
+		ECIF ecif = eCIFService.findEcifByCustomerId(customerId);
 		mv.addObject("ecif", ecif);
 		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
 		mv.addObject("orgName",user.getOrganization().getName());
@@ -980,6 +1001,27 @@ public class IntoPiecesApproveControl extends BaseController {
 			mv.addObject("appId", appId);
 			mv.addObject("operate", Constant.status_buchong);
 		}
+		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
+		String loginId = user.getLogin();
+		String displayName = user.getDisplayName();
+		String orgId = user.getOrganization().getId();
+		String orgName = user.getOrganization().getName();
+		StringBuilder url = new StringBuilder(Constant.SunIASUrl);
+		url.append("UserID="+loginId+"&");
+		url.append("UserName="+displayName+"&");
+		url.append("OrgID="+orgId+"&");
+		url.append("OrgName="+orgName+"&");
+		url.append("right=1111&");
+		QzApplnAttachmentList qzApplnAttachmentList = attachmentListService.findAttachmentListByAppId(appId);
+		if(qzApplnAttachmentList.getBussType().equals("1"))//工薪类
+		{
+			url.append("info1=NEW_TEST:"+appId);
+		}
+		else//经营类
+		{
+			url.append("info1=NEW_TEST:"+appId);
+		}
+		mv.addObject("url", url);
 		return mv;
 	}
 	

@@ -18,7 +18,7 @@
 				</colgroup>
 				<tr>
 					<td class="table-label">内部审查日期：<font color="#ff0000">*</font></td>
-					<td colspan="3"><input type="text" name="checkDate" value="$date.format('yyyy-MM-dd', $!qzApplnNbscyjb.checkDate)" onmouseover="_calendar()"/></td>			
+					<td colspan="3"><input type="text" name="checkDate" value="$date.format('yyyy-MM-dd', $!qzApplnNbscyjb.checkDate)" onmouseover="_calendar()" readonly/></td>			
 				</tr>
 				<tr>
 					<td class="table-label">客户名称：<font color="#ff0000">*</font></td>
@@ -32,7 +32,11 @@
 					<td class="table-label">申请金额：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="applyAmount" value="$!qzApplnNbscyjb.applyAmount"/></td>
 					<td class="table-label">申请期限：<font color="#ff0000">*</font></td>
-					<td><input type="text" name="applyDeadline" value="$!qzApplnNbscyjb.applyDeadline"/></td>			
+					<td>
+						<select name="applyDeadline">
+	                    	#dict("APPLY_DEADLINE", $!qzApplnNbscyjb.applyDeadline)
+	                  	</select>
+					</td>			
 				</tr>
 				<tr>
 					<td class="tableTitle" colspan="4">客户经理建议</td>				
@@ -45,7 +49,11 @@
 					<td class="table-label">建议金额：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="sugAmount" value="$!qzApplnNbscyjb.sugAmount"/></td>
 					<td class="table-label">建议期限：<font color="#ff0000">*</font></td>
-					<td><input type="text" name="sugDeadline" value="$!qzApplnNbscyjb.sugDeadline"/></td>			
+					<td>
+						<select name="sugDeadline">
+	                    	#dict("APPLY_DEADLINE", $!qzApplnNbscyjb.sugDeadline)
+	                  	</select>
+					</td>			
 				</tr>
 				<tr>
 					<td class="table-label">建议利率：<font color="#ff0000">*</font></td>
