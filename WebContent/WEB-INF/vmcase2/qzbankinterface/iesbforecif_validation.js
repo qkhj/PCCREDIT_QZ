@@ -25,7 +25,7 @@ var validator = $($formName).validate({
      },
 messages:
     {
-		globalId:{required:"证件类型不能为空"},
+		globalId:{required:"证件号码不能为空"},
 		globalDesc:{required:"证件描述不能为空"},
 		issDate:{required:"签发日期不能为空"},
 		effectDate:{required:"生效日期不能为空"},

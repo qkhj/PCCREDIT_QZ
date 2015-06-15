@@ -290,7 +290,7 @@ public class IESBForCircleCredit {
         //贷款投向
         Field LOAN_DIRECTION=new Field(new FieldAttr(FieldType.FIELD_STRING, 20));
         //LOAN_DIRECTION.setValue("01");//todo:传入贷款投向
-        LOAN_DIRECTION.setValue(circle.getLoanDirection());//todo:传入贷款投向
+        LOAN_DIRECTION.setValue(circle.getLoanDirection().substring(1, circle.getLoanDirection().length()));//todo:传入贷款投向
         body_struct.addField("LOAN_DIRECTION", LOAN_DIRECTION);
 
         //贷款归属1

@@ -145,6 +145,8 @@ public class IntoPiecesService {
 				} else {
 					pieces.setNodeName("不在审批中");
 				}
+			} else if(pieces.getStatus().equals(Constant.RETURN_INTOPICES)){
+				pieces.setNodeName("退回");
 			} else {
 				pieces.setNodeName("审批结束");
 			}
@@ -1200,6 +1202,7 @@ public class IntoPiecesService {
 		WfStatusQueueRecord wfStatusQueueRecord = commonDao.findObjectById(WfStatusQueueRecord.class,wfProcessRecord.getWfStatusQueueRecord());
 		//查找上一节点
 		String beforeStatus = wfStatusQueueRecord.getBeforeStatus();
+		
 		//通过上一节点获取上一流程
 		WfStatusQueueRecord befoRecord = wfStatusResultDao.getLastStatus(beforeStatus);
 		

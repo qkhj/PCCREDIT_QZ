@@ -4,7 +4,6 @@
 		$.ajax({
 			url : "${contextPath}/system/user/checkOnwerOldPassword.json?oldPassword=" + $("#form_diaog input[name='oldPassword']").val(),
 			type : "post",
-			dataType : "json",
 			success : function(data) {
 				if (data.success) {
 					$("#oldPasswordDiv > span").text(data.message);
@@ -62,15 +61,12 @@
 				$.ajax({
 					url : "${contextPath}/system/user/modifyOnwerPasswordSubmit.json?password2=" + password2,
 					type : "post",
-					dataType : "json",
 					success : function(data) {
 						if (data.success) {
-							Dialog.message(data.message, function() {
-								window.location.href = "${contextPath}/logout.page";
-							});
-							$("#form_diaog").dialog("close");
+							topWin.Dialog.message(data.message);
+							window.location.href = "${contextPath}/logout.page";
 						} else {
-							Dialog.message(data.message);
+							topWin.Dialog.message(data.message);
 							return false;
 						}
 					},
@@ -120,7 +116,7 @@
           </colgroup>
           <tr>
             <td>&nbsp;</td>
-            <td>原密码:</td>
+            <td>原密码222:</td>
             <td><input type="password" name="oldPassword" id="oldPassword" onblur="oldPasswordCheck()" /></td>
             <td><div id="oldPasswordDiv" style="color: #F00;">
                 <span></span>

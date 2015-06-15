@@ -155,9 +155,9 @@ public class IESBForCircleController extends BaseController{
 			IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
 			String orgId = user.getOrganization().getId();//机构ID
 			String parentOrgId = user.getOrganization().getParentId();//机构ID
-//			if(parentOrgId.equals("000000")){//替换为泉州总行id
+			if(parentOrgId.equals("000000")){//替换为泉州总行id
 				parentOrgId = Constant.QZ_ORG_ROOT_ID;
-//			}
+			}
 			String externalId = user.getLogin();//工号
 			mv.addObject("orgId",orgId);
 			mv.addObject("parentOrgId",parentOrgId);

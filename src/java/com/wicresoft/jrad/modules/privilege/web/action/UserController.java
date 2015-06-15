@@ -321,25 +321,20 @@ public class UserController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "modifyOnwerPasswordSubmit.json", method = { RequestMethod.POST })
-	@JRadOperation(JRadOperation.CHANGE)
-	public ModelAndView modifyOnwerPasswordSubmit(HttpServletRequest request,
+	//@JRadOperation(JRadOperation.CHANGE)
+	public JRadReturnMap modifyOnwerPasswordSubmit(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		JRadReturnMap returnMap = new JRadReturnMap();
 		try {
 			User user = (User) Beans.get(LoginManager.class).getLoggedInUser(request);
 			userManager.setUserPwd(user.getId(), request.getParameter("password2"));
-			result.put(MESSAGE, ModulesConstants.USER_PWD_RESET_SUCCESS_LOGIN);
-			result.put(SUCCESS, true);
-			JSONObject obj = JSONObject.fromObject(result);
-			response.getWriter().print(obj.toString());
-			return null;
+			returnMap.addGlobalMessage(CREATE_SUCCESS);
+			returnMap.setSuccess(true);
+			return returnMap;
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.put(MESSAGE, ModulesConstants.USER_PWD_RESET_FAILED);
-			result.put(SUCCESS, false);
-			JSONObject obj = JSONObject.fromObject(result);
-			response.getWriter().print(obj.toString());
-			return null;
+			returnMap.setSuccess(false);
+			return returnMap;
 		}
 	}
 	
@@ -352,32 +347,26 @@ public class UserController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "checkOnwerOldPassword.json", method = { RequestMethod.POST })
-	@JRadOperation(JRadOperation.CHANGE)
-	public ModelAndView checkOnwerOldPassword(HttpServletRequest request,
+	//@JRadOperation(JRadOperation.CHANGE)
+	public JRadReturnMap checkOnwerOldPassword(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		JRadReturnMap returnMap = new JRadReturnMap();
 		try {
 			User user = (User) Beans.get(LoginManager.class).getLoggedInUser(request);
 			String oldPassword = EncryptHelper.md5(StringUtils.trim(request.getParameter("oldPassword")));
 			if(oldPassword.equals(user.getPassword()))
 			{
-				result.put(SUCCESS, true);
-				result.put(MESSAGE, ModulesConstants.USER_PWD_RESET_OLD_ERROR);
+				returnMap.addGlobalMessage(CREATE_SUCCESS);
+				returnMap.setSuccess(true);
 			}else
 			{
-				result.put(SUCCESS, false);
-				result.put(MESSAGE, ModulesConstants.USER_PWD_RESET_OLD_ERROR_1);
+				returnMap.setSuccess(false);
 			}
-			JSONObject obj = JSONObject.fromObject(result);
-			response.getWriter().print(obj.toString());
-			return null;
+			return returnMap;
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.put(MESSAGE, ModulesConstants.USER_PWD_RESET_OLD_ERROR_1);
-			result.put(SUCCESS, false); 
-			JSONObject obj = JSONObject.fromObject(result);
-			response.getWriter().print(obj.toString());
-			return null;
+			returnMap.setSuccess(false);
+			return returnMap;
 		}
 	}
 

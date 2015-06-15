@@ -30,6 +30,7 @@
 <body>
 <!--*************************************************************审贷会审议纪要*************************************************************-->
 <form id="id_module_form">
+<div class="forms" id="formsId">
 	<div class="box">
 		<div name="content">
 			<table class="myTable">
@@ -56,7 +57,10 @@
 					<td class="table-label">申请利率</td>
 					<td><input type="text" name="sqll" value="$!result.sqll" readonly/></td>
 					<td class="table-label">担保方式</td>
-					<td><input type="text" name="dbfs" value="$!result.dbfs" readonly/></td>
+					<td>
+						<input type="text" value="#dictVal('ASSURE_MAIN',$!result.dbfs)" readonly/>
+						<input type="hidden" name="dbfs" value="$!result.dbfs" readonly/>
+					</td>
 				</tr>			
 				<tr>
 					<td class="table-label">借款人优势<font color="#ff0000">*</font></td>
@@ -108,6 +112,7 @@
 			</table>			
 		</div>
 	</div>
+	</div>
 </form>
 	 <div class="dialog2">
 			<form id="checkForm1" class="dialog-box" style="height:200px;" action="${contextPath}/intopieces/intopiecesshouxin/returnAppln.json">
@@ -154,6 +159,9 @@
 	<script type="text/javascript" src="jquery-1.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 	<script type="text/javascript">		
+	var layout=new FormsLayout("formsId");	
+	window.top.currentWindow.setLayout(layout);
+	
 	#set ($formName = "'#id_module_form'")
 	#parse ("qzbankinterface/appIframeInfo/page10_validation.js")
 	$(document).ready(function() {
@@ -173,12 +181,22 @@
 			submitFlag = 1;
 			if ($($formName).valid()) {
 				var formjson = $($formName).serialize();
-	   	          $.post("${contextPath}/intopieces/intopiecesshouxin/syjy_save.json?id=${customerId}&appId=${appId}", formjson, function(data, textStatus, jqXhr) {
-	   	            if (data.success) {
-	   	            	Dialog.message("保存成功!");
-	   	            }
-	   	         	submitFlag = 0;
-		          });
+				var url = "${contextPath}/intopieces/intopiecesshouxin/syjy_save.json?id=${customerId}&appId=${appId}";
+				$.ajax({
+					url : url,
+					type : "get",
+					data : formjson,
+					success : function(data) {
+						if (data.success) {
+							topWin.Dialog.message("保存成功！");
+							window.location.reload(true);
+						}
+						else{
+							topWin.Dialog.message("保存失败！");
+					    }
+						submitFlag = 0;
+					}
+				});
 			}else{
 				submitFlag = 0;
 			}

@@ -285,6 +285,7 @@ public class IntoPiecesZhongxinControl extends BaseController {
 			mv.addObject("appId", appId);
 			mv.addObject("operate", Constant.status_zhongxin);
 		}
+		
 		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
 		String loginId = user.getLogin();
 		String displayName = user.getDisplayName();
@@ -295,15 +296,16 @@ public class IntoPiecesZhongxinControl extends BaseController {
 		url.append("UserName="+displayName+"&");
 		url.append("OrgID="+orgId+"&");
 		url.append("OrgName="+orgName+"&");
-		url.append("right=1111&");
+		url.append("right=0101&");
 		QzApplnAttachmentList qzApplnAttachmentList = attachmentListService.findAttachmentListByAppId(appId);
+		
 		if(qzApplnAttachmentList.getBussType().equals("1"))//工薪类
 		{
-			url.append("info1=QKJY:"+appId);
+			url.append("info1=QKXFDW:"+appId.toUpperCase());
 		}
 		else//经营类
 		{
-			url.append("info1=QKJY:"+appId);
+			url.append("info1=QKJYDW:"+appId.toUpperCase());
 		}
 		mv.addObject("url", url);
 		return mv;

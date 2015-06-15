@@ -162,9 +162,15 @@
 				</tr>	
 				<tr>				
 					<td class="table-label">还款期限（月）</td>					
-					<td colspan="3"><input type="text" name="qx" value="$!result.qx"/></td>					
+					<td colspan="3">
+						<select name="qx">
+                    		#dict("APPLY_DEADLINE", $!result.qx)
+                  		</select>
+					</td>					
 					<td class="table-label">还款方式</td>	
-					<td colspan="3"><input type="text" name="hkfs1" value="$!result.hkfs1"/></td>	
+					<td colspan="3">
+						<select name="hkfs1" >#dict("REPAY_TYPE", $!result.hkfs1)</select>
+					</td>	
 				</tr>	
 				<tr>				
 					<td class="table-label" rowspan="2">抵押担保</td>					

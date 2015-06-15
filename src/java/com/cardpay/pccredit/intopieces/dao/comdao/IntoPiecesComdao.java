@@ -307,12 +307,19 @@ public class IntoPiecesComdao {
 	 * @return
 	 */
 	public String findAprroveProgress(String id){
-		String sql = " select status_name from (select s.status_name from wf_status_queue_record t "+
+		/*String sql = " select status_name from (select s.status_name from wf_status_queue_record t "+
 				" left join wf_status_info s on t.current_status = s.id "+
 				" left join wf_process_record pr on t.current_process = pr.id "+
 				" left join customer_application_process aa on pr.id = aa.serial_number "+
 				" where aa.application_id=#{id} " +
-				" order by t.start_examine_time desc) where rownum=1";
+				" order by t.start_examine_time desc) where rownum=1";*/
+		String sql = "select wsi.STATUS_NAME from "
+				+ "customer_application_process cap,wf_process_record wpr,wf_status_queue_record wsqr,wf_status_info wsi "
+				+ "where "
+				+ "cap.application_id = #{id} "
+				+ "and cap.SERIAL_NUMBER = wsqr.CURRENT_PROCESS "
+				+ "and wpr.wf_status_queue_record = wsqr.id "
+				+ "and wsqr.current_status = wsi.id ";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		List<HashMap<String, Object>> list = commonDao.queryBySql(sql, params);
@@ -351,8 +358,8 @@ public class IntoPiecesComdao {
 		StringBuffer sql = new StringBuffer("SELECT cai. ID,cai.customer_id,cai.chinese_name,cai.product_id,cai.card_id,cai.apply_quota,cai.status ");
 		sql.append("FROM ");
 		sql.append("(SELECT * FROM WF_STATUS_QUEUE_RECORD WHERE EXAMINE_USER = #{userId}) wsqr ");
-		sql.append("LEFT JOIN ( SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, T.apply_quota, T.status, T.SERIAL_NUMBER ");
-		sql.append("FROM customer_application_info T inner JOIN basic_customer_information b ON T .customer_id = b. ID ");
+		sql.append("LEFT JOIN ( SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status, T.SERIAL_NUMBER ");
+		sql.append("FROM customer_application_info T LEFT JOIN basic_customer_information b ON T .customer_id = b. ID ");
 		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
 			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
 			    sql.append(" and (b.card_id like '%"+cardId+"%' or b.chinese_name like '%"+chineseName+"%' )");
@@ -364,11 +371,12 @@ public class IntoPiecesComdao {
 				sql.append(" and b.chinese_name like '%'||#{chineseName}||'%' ");
 			}
 		}
+		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
 		sql.append(") cai ");
 		sql.append("ON wsqr.CURRENT_PROCESS = CAI.SERIAL_NUMBER ");
 		sql.append("union ");
-		sql.append("SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, T.apply_quota, T.status ");
-		sql.append("FROM customer_application_info T inner JOIN basic_customer_information b ON T .customer_id = b. ID ");
+		sql.append("SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status ");
+		sql.append("FROM customer_application_info T LEFT JOIN basic_customer_information b ON T .customer_id = b. ID ");
 		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
 			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
 			    sql.append(" and (b.card_id like '%"+cardId+"%' or b.chinese_name like '%"+chineseName+"%' )");
@@ -380,6 +388,7 @@ public class IntoPiecesComdao {
 				sql.append(" and b.chinese_name like '%'||#{chineseName}||'%' ");
 			}
 		}
+		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
 		sql.append("where b.user_id = #{userId}");
 		return commonDao.queryBySqlInPagination(IntoPieces.class, sql.toString(), params,
 				filter.getStart(), filter.getLimit());
