@@ -1,0 +1,78 @@
+
+<HTML><HEAD><TITLE>采集影像管理</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script src='${contextPath}/common/js/common/jquery.min.js'></script>
+<script src="${contextPath}/common/js/common/common.js"></script>
+<script language="javascript">
+	var docID = "";
+	var submitFlag = 0;
+	function connectScan(){
+		var InitScanWndResult = SunScan.TestInitScanWnd("168.168.241.75", "8023");//测试环境 
+		//var InitScanWndResult = SunScan.TestInitScanWnd("168.168.214.15", "8023");//生产环境
+	    
+	    if (InitScanWndResult != "0")
+	    {
+	        alert("影像控件初始化失败！");
+	    }
+	    
+	    if(parent.docID != ""){
+	    	docID = parent.docID;
+	        document.getElementById("docid").value=docID;
+	        //SunScan.CreateTask(docID);
+	        SunScan.SetModifyMode("1");
+	        var result = SunScan.ViewImageByCaseIDEx("WD_CASES",docID);
+	        //alert(result);
+	    }
+	}
+    
+    function submitBT(){
+    	if(submitFlag == 1){
+			alert("请勿重复提交!")
+			return;
+		}
+		submitFlag = 1;
+    	if(confirm("确认提交吗?提交后暂不支持修改!")){
+    		//SunScan.SetFormNoEx("0-0021000001001000|1-0|2-0021000004001000|3-0","");
+            //var result = SunScan.TestSubmitImageEx("WD_CASES", "WD_IMAGES",docID);
+            var result = SunScan.UpdateImageToEcmEx(docID,"WD_CASES");
+            if (result == 200)
+            {
+                //var url = "${contextPath}/intopieces/intopiecesapprove/insert_sunds.json?appId=${appId}&docID="+docID;
+				//$.ajax({
+				//	url : url,
+				//	type : "get",
+				//	success : function(data) {
+				//		if (data.success) {
+							//topWin.Dialog.message("影像提交成功！");
+				//			window.location.href = "${contextPath}/intopieces/intopiecesapprove/WDModify.page?appId=${appId}";
+				//		}
+				//		else{
+				//			topWin.Dialog.message("影像提交失败!");
+				//	    }
+				//		submitFlag = 0;
+				//	}
+				//});
+				//系统不做修改
+            	//topWin.Dialog.message("影像提交成功！");
+            	submitFlag = 0;
+            }
+            else {
+            	topWin.Dialog.message("影像提交失败！");
+            	submitFlag = 0;
+            }
+    	}else{
+    		submitFlag = 0;
+    	}
+    }
+</script>
+</HEAD>
+<body class="classEditBody" scroll="no">
+<div style="border:1px solid #CCCCCC;margin-bottom:10px;">
+    <OBJECT ID="SunScan" CLASSID="CLSID:CB127588-6BA2-4336-82F6-83DD6947FB4C" CODEBASE="TerminalScan.ocx" width="100%" height="90%" border=0 >
+        </OBJECT>
+    <script>setTimeout(connectScan,500);</script>
+</div>
+<input type="button" name="submitBT" value="提交" onclick="submitBT()">
+<input type="text" id="docid" name="docid" value="" size="50" disabled>
+</body>
+</html>

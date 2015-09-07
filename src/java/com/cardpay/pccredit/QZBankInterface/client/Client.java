@@ -51,7 +51,7 @@ public class Client implements InitializingBean{
 		//生产环境
 		//System.setProperty(ClientConfig.FILEPATH,"/home/pccredit/pccredit_esb/");
         //设置log4j配置文件路径
-        //PropertyConfigurator.configure(new File("").getAbsolutePath()+"/src/java/log4j.properties");
+        PropertyConfigurator.configure("/home/pccredit/pccredit_log/log4j.properties");
 	}
 
     /**

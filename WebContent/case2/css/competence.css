@@ -8,7 +8,7 @@ body{ font-size:12px; color:#333; }
 .competence_user_content input{ vertical-align:-2px; margin-right:5px;}
 .competence_user_content label{margin-right:40px;}
 .competence_content{ clear:both;margin:20px;}
-.competence_PowerTree{ height:500px; border:1px solid #b4b4b4; width:46%; float:left;margin-right:20px;}
+.competence_PowerTree{ height:500px; border:1px solid #b4b4b4; width:44%; float:left;margin-right:20px;}
 .competence_PowerTree_title{background:url(../images/cp_title_bg.png) repeat-x ; height:30px; line-height:30px; padding-left:15px;  font-size:13px; }
 .competence_function{ float:left; width:85px; height:500px; padding-top:100px;}
 .competence_function_left_sg{background:url(../images/cp_icon_left_single_normal.png) no-repeat; width:33px; height:32px; margin:20px auto; cursor:pointer;}

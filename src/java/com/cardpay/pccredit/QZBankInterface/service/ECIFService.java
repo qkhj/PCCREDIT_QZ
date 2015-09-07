@@ -2,7 +2,9 @@ package com.cardpay.pccredit.QZBankInterface.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.cardpay.pccredit.QZBankInterface.dao.ECIFDao;
 import com.cardpay.pccredit.QZBankInterface.filter.EcifFilter;
 import com.cardpay.pccredit.QZBankInterface.model.Circle;
 import com.cardpay.pccredit.QZBankInterface.model.ECIF;
+import com.cardpay.pccredit.QZBankInterface.web.IESBForECIFForm;
 import com.cardpay.pccredit.QZBankInterface.web.IESBForECIFReturnMap;
 import com.cardpay.pccredit.customer.filter.AmountAdjustmentFilter;
 import com.cardpay.pccredit.customer.filter.CustomerInforFilter;
@@ -38,7 +41,13 @@ public class ECIFService {
 	private IESBForECIF iesbForECIF;
 	
 	@Autowired
+	private UpdateIESBFForECIF updateiesbForECIF;
+	
+	@Autowired
 	private ECIFDao ecifDao;
+	
+	@Autowired
+	private IESBForECIFQuery ecifForECIFQuery;
 	
 	@Autowired
 	private Client client;
@@ -46,6 +55,7 @@ public class ECIFService {
 	@Autowired
 	private CustomerInforService customerInforservice;
 	
+	public static final Logger logger = Logger.getLogger(ECIFService.class);
 	/**
 	 * 插入数据
 	 * @param customerinfo
@@ -66,7 +76,7 @@ public class ECIFService {
     		else{
     			customerInforservice.updateCustomerInfor(info);
     		}
-    		ecif.setCustomerId(info.getId());;//设置关联basic_customer_information
+    		ecif.setCustomerId(info.getId());//设置关联basic_customer_information
     		
 			//将客户证件号码对应的客户号存入数据库中
 			ecif.setCreatedTime(new Date());
@@ -83,31 +93,79 @@ public class ECIFService {
 	 * @return
 	 */
 	public boolean updateCustomerInfor(Circle circle,ECIF ecif) {
-		if(ecif.getClientNo() == null || ecif.getClientNo().equals("")){
+		//if(ecif.getClientNo() == null || ecif.getClientNo().equals("")){
 			//组包
 			CompositeData req = iesbForECIF.createEcifRequest(ecif);
 			//发送
 			CompositeData resp = client.sendMess(req);
 			//解析，存db
 			String clientNo = iesbForECIF.parseEcifResponse(resp);
-			if(clientNo != null && !clientNo.equals("")){
-				ecif.setClientNo(clientNo);
-	            commonDao.updateObject(ecif);
+			
+			logger.info("clientNo=" + clientNo);
+			if(ecif.getClientNo() == null || ecif.getClientNo().equals("")){
+				if(clientNo != null && !clientNo.equals("")){
+					ecif.setClientNo(clientNo);
+					commonDao.updateObject(ecif);
 	            
-	            circle.setClientNo(clientNo);
-	            circle.setaClientNo(clientNo);
-	            commonDao.updateObject(circle);
-	            return true;
+					circle.setClientNo(clientNo);
+					circle.setaClientNo(clientNo);
+					commonDao.updateObject(circle);
+					return true;
+				}
+				else{
+					return false;
+				}
+			}else{
+		//	circle.setClientNo(ecif.getClientNo());
+          //  circle.setaClientNo(ecif.getClientNo());
+         //   commonDao.updateObject(circle);
+				if(!(clientNo.equals(ecif.getClientNo()))){
+					return false;
+				}
 			}
-			else{
-				return false;
-			}
-		}else{
-			circle.setClientNo(ecif.getClientNo());
-            circle.setaClientNo(ecif.getClientNo());
-            commonDao.updateObject(circle);
-		}
 		return true;
+	}
+	
+	/**
+	 * 更新核心数据
+	 * @param customerinfo
+	 * @return
+	 */
+	public boolean updateBasicCustomerInfo(IESBForECIFForm iesbForECIFForm, String clientNo){
+		//组包
+		CompositeData req = updateiesbForECIF.createEcifRequestForUpdate(iesbForECIFForm, clientNo);
+		//发送
+		CompositeData resp = client.sendMess(req);
+		//解析
+		String retcode = updateiesbForECIF.parseEcifResponse(resp);
+		
+		logger.info("retcode=" + retcode);
+		
+		if("000000".equals(retcode)){
+		
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * 检测核心数据
+	 * @param customerinfo
+	 * @return
+	 */
+	public Map detectECIF(String cardId, String clientType, String certType){
+		//组包
+	    CompositeData req = ecifForECIFQuery.createEcifRequest(cardId, clientType, certType);
+	    //发送
+	    CompositeData resp = client.sendMess(req);
+	    //解析
+	    Map ECIFResp = ecifForECIFQuery.parseEcifResponse(resp);
+	    
+	    logger.info("RET_MSG=" + ECIFResp.get("RET_MSG") + "RET_CODE=" + ECIFResp.get("RET_CODE") 
+        		+ "CLIENT_NAME=" + ECIFResp.get("CLIENT_NAME") + "GLOBAL_TYPE=" + ECIFResp.get("GLOBAL_TYPE")
+        		+ "GLOBAL_ID=" + ECIFResp.get("GLOBAL_ID") + "CLIENT_NO=" + ECIFResp.get("CLIENT_NO"));
+	    return ECIFResp;
 	}
 	
 	/**
@@ -162,5 +220,15 @@ public class ECIFService {
 	public ECIF findEcifByCustomerId(String customerId) {
 		return ecifDao.findEcifByCustomerId(customerId);
 	}
-	
+	/**
+	 * 更新数据
+	 * @param customerinfo
+	 * @return
+	 */
+	public void updateCustomerInfor(ECIF ecif,CustomerInfor info) {
+		commonDao.updateObject(ecif);
+	            
+		commonDao.updateObject(info);
+		
+	}
 }

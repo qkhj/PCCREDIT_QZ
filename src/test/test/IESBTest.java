@@ -13,6 +13,7 @@ import com.cardpay.pccredit.QZBankInterface.client.Client;
 import com.cardpay.pccredit.QZBankInterface.service.IESBForCircleCredit;
 import com.cardpay.pccredit.QZBankInterface.service.IESBForCredit;
 import com.cardpay.pccredit.QZBankInterface.service.IESBForECIF;
+import com.cardpay.pccredit.QZBankInterface.service.IESBForED;
 import com.cardpay.pccredit.riskControl.service.AccountabilityService;
 import com.dc.eai.data.CompositeData;
 import com.dcfs.esb.client.ESBClient;
@@ -43,44 +44,48 @@ public class IESBTest {
          */
         //*********************  请求报文格式是ESB自定义的CompositeData   ********************
         //组装一个CompositeData 报文
-        CompositeData req = IESBForECIF.createEcifRequest();
+        //CompositeData req = IESBForECIF.createEcifRequest();
+        CompositeData req = IESBForED.createEDRequest();
         //发送请求报文并获得相应报文
         CompositeData resp = client.sendMess(req);
         // 解析ESB响应的cd报文获得需要的信息
-        IESBForECIF.parseEcifResponse(resp);
+        //IESBForECIF.parseEcifResponse(resp);
+        String retCode = IESBForED.parseCoreResponse(req);
+        System.out.println("返回码：" + retCode);
+        
         
         /*
          * 2、IESBForCredit 
          */
         //*********************  请求报文格式是ESB自定义的CompositeData   ********************
         //组装一个CompositeData 报文
-        CompositeData req = IESBForCredit.createCommonCreditRequest();
+        //CompositeData req = IESBForCredit.createCommonCreditRequest();
         //发送请求报文并获得相应报文
-        CompositeData resp = client.sendMess(req);
+        //CompositeData resp = client.sendMess(req);
         // 解析ESB响应的cd报文获得需要的信息
-        IESBForCredit.parseCreditResponse(resp);
+        //IESBForCredit.parseCreditResponse(resp);
         
         /*
          * 3、IESBForCircleCredit
          */
         //*********************  请求报文格式是ESB自定义的CompositeData   ********************
         //组装一个CompositeData 报文
-        CompositeData req = IESBForCircleCredit.createCircleCreditRequest();
+        //CompositeData req = IESBForCircleCredit.createCircleCreditRequest();
         //发送请求报文并获得相应报文
-        CompositeData resp = client.sendMess(req);
+        //CompositeData resp = client.sendMess(req);
         // 解析ESB响应的cd报文获得需要的信息
-        IESBForCircleCredit.parseCircleCreditResponse(resp);
+        //IESBForCircleCredit.parseCircleCreditResponse(resp);
         
         /*
          * 4、IESBForCore
          */
         //*********************  请求报文格式是ESB自定义的CompositeData   ********************
         //组装一个CompositeData 报文
-        CompositeData req = IESBForCore.createCircleCreditRequest();
+       // CompositeData req = IESBForCore.createCircleCreditRequest();
         //发送请求报文并获得相应报文
-        CompositeData resp = client.sendMess(req);
+       // CompositeData resp = client.sendMess(req);
         // 解析ESB响应的cd报文获得需要的信息
-        IESBForCore.parseCoreResponse(resp);
+       // IESBForCore.parseCoreResponse(resp);
 	}
 
 }

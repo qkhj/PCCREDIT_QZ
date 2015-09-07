@@ -7,279 +7,289 @@ import com.wicresoft.jrad.base.database.model.ModelParam;
 import java.util.Date;
 import java.util.List;
 
-@ModelParam(table="sys_user")
-public class User extends BaseModel implements IUser
-{
-  private static final long serialVersionUID = 1L;
-  private Integer seqNo;
-  private Integer userType;
-  private String login;
-  private String email;
-  private String password;
-  private String lastName;
-  private String firstName;
-  private String displayName;
-  private Integer age;
-  private String gender;
-  private String idCard;
-  private String mobile;
-  private String phone;
-  private String homeAddress;
-  private String unitAddress;
-  private String description;
-  private Date createdTime;
-  private String createdBy;
-  private Date modifiedTime;
-  private String modifiedBy;
-  private Boolean isDeleted;
-  private String remarks;
-  private Integer userLevel;
-  private String externalId;
-  private String managerId;
-  private Organization organization;
-  private String groupId;
-  private Department department;
-  private List<Role> roles;
-  private String businessType;
+@ModelParam(table = "sys_user")
+public class User extends BaseModel implements IUser {
+	private static final long serialVersionUID = 1L;
+	private Integer seqNo;
+	private Integer userType;
+	private String login;
+	private String email;
+	private String password;
+	private String lastName;
+	private String firstName;
+	private String displayName;
+	private Integer age;
+	private String gender;
+	private String idCard;
+	private String mobile;
+	private String phone;
+	private String homeAddress;
+	private String unitAddress;
+	private String description;
+	private Date createdTime;
+	private String createdBy;
+	private Date modifiedTime;
+	private String modifiedBy;
+	private Boolean isDeleted;
+	private String remarks;
+	private Integer userLevel;
+	private String externalId;
+	private String managerId;
+	private Organization organization;
+	private String groupId;
+	private Department department;
+	private List<Role> roles;
+	private String businessType;
 
-  public IOrganization getOrganization()
-  {
-    return (IOrganization)IOrganization.class.cast(this.organization);
-  }
+	private String writtenOff;
 
-  public void setOrganization(Organization organization) {
-    this.organization = organization;
-  }
+	public IOrganization getOrganization() {
+		return (IOrganization) IOrganization.class.cast(this.organization);
+	}
 
-  public Integer getSeqNo() {
-    return this.seqNo;
-  }
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
 
-  public void setSeqNo(Integer seqNo) {
-    this.seqNo = seqNo;
-  }
+	public Integer getSeqNo() {
+		return this.seqNo;
+	}
 
-  public Integer getUserType() {
-    return this.userType;
-  }
+	public void setSeqNo(Integer seqNo) {
+		this.seqNo = seqNo;
+	}
 
-  public void setUserType(Integer userType) {
-    this.userType = userType;
-  }
+	public Integer getUserType() {
+		return this.userType;
+	}
 
-  public String getLogin() {
-    return this.login;
-  }
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
 
-  public void setLogin(String login) {
-    this.login = login;
-  }
+	public String getLogin() {
+		return this.login;
+	}
 
-  public String getEmail() {
-    return this.email;
-  }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	public String getEmail() {
+		return this.email;
+	}
 
-  public String getPassword() {
-    return this.password;
-  }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	public String getPassword() {
+		return this.password;
+	}
 
-  public String getLastName() {
-    return this.lastName;
-  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+	public String getLastName() {
+		return this.lastName;
+	}
 
-  public String getFirstName() {
-    return this.firstName;
-  }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+	public String getFirstName() {
+		return this.firstName;
+	}
 
-  public String getDisplayName() {
-    return this.displayName;
-  }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-  public void setDisplayName(String displayName) {
-    this.displayName = displayName;
-  }
+	public String getDisplayName() {
+		return this.displayName;
+	}
 
-  public Integer getAge() {
-    return this.age;
-  }
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
-  public void setAge(Integer age) {
-    this.age = age;
-  }
+	public Integer getAge() {
+		return this.age;
+	}
 
-  public String getGender() {
-    return this.gender;
-  }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
+	public String getGender() {
+		return this.gender;
+	}
 
-  public String getIdCard() {
-    return this.idCard;
-  }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-  public void setIdCard(String idCard) {
-    this.idCard = idCard;
-  }
+	public String getIdCard() {
+		return this.idCard;
+	}
 
-  public String getMobile() {
-    return this.mobile;
-  }
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
 
-  public void setMobile(String mobile) {
-    this.mobile = mobile;
-  }
+	public String getMobile() {
+		return this.mobile;
+	}
 
-  public String getPhone() {
-    return this.phone;
-  }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
+	public String getPhone() {
+		return this.phone;
+	}
 
-  public String getHomeAddress() {
-    return this.homeAddress;
-  }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-  public void setHomeAddress(String homeAddress) {
-    this.homeAddress = homeAddress;
-  }
+	public String getHomeAddress() {
+		return this.homeAddress;
+	}
 
-  public String getUnitAddress() {
-    return this.unitAddress;
-  }
+	public void setHomeAddress(String homeAddress) {
+		this.homeAddress = homeAddress;
+	}
 
-  public void setUnitAddress(String unitAddress) {
-    this.unitAddress = unitAddress;
-  }
+	public String getUnitAddress() {
+		return this.unitAddress;
+	}
 
-  public String getDescription() {
-    return this.description;
-  }
+	public void setUnitAddress(String unitAddress) {
+		this.unitAddress = unitAddress;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public String getDescription() {
+		return this.description;
+	}
 
-  public Date getCreatedTime() {
-    return this.createdTime;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public void setCreatedTime(Date createdTime) {
-    this.createdTime = createdTime;
-  }
+	public Date getCreatedTime() {
+		return this.createdTime;
+	}
 
-  public String getCreatedBy() {
-    return this.createdBy;
-  }
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
 
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
 
-  public Date getModifiedTime() {
-    return this.modifiedTime;
-  }
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
-  public void setModifiedTime(Date modifiedTime) {
-    this.modifiedTime = modifiedTime;
-  }
+	public Date getModifiedTime() {
+		return this.modifiedTime;
+	}
 
-  public String getModifiedBy() {
-    return this.modifiedBy;
-  }
+	public void setModifiedTime(Date modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
 
-  public void setModifiedBy(String modifiedBy) {
-    this.modifiedBy = modifiedBy;
-  }
+	public String getModifiedBy() {
+		return this.modifiedBy;
+	}
 
-  public Boolean getIsDeleted() {
-    return this.isDeleted;
-  }
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
 
-  public void setIsDeleted(Boolean isDeleted) {
-    this.isDeleted = isDeleted;
-  }
+	public Boolean getIsDeleted() {
+		return this.isDeleted;
+	}
 
-  public String getRemarks() {
-    return this.remarks;
-  }
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
-  public void setRemarks(String remarks) {
-    this.remarks = remarks;
-  }
+	public String getRemarks() {
+		return this.remarks;
+	}
 
-  public String getExternalId() {
-    return this.externalId;
-  }
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 
-  public void setExternalId(String externalId) {
-    this.externalId = externalId;
-  }
+	public String getExternalId() {
+		return this.externalId;
+	}
 
-  public String getManagerId() {
-    return this.managerId;
-  }
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
 
-  public void setManagerId(String managerId) {
-    this.managerId = managerId;
-  }
+	public String getManagerId() {
+		return this.managerId;
+	}
 
-  public Integer getUserLevel() {
-    return this.userLevel;
-  }
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
 
-  public void setUserLevel(Integer userLevel) {
-    this.userLevel = userLevel;
-  }
+	public Integer getUserLevel() {
+		return this.userLevel;
+	}
 
-  public String getGroupId() {
-    return this.groupId;
-  }
+	public void setUserLevel(Integer userLevel) {
+		this.userLevel = userLevel;
+	}
 
-  public void setGroupId(String groupId) {
-    this.groupId = groupId;
-  }
+	public String getGroupId() {
+		return this.groupId;
+	}
 
-  public Department getDepartment() {
-    return this.department;
-  }
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
 
-  public void setDepartment(Department department) {
-    this.department = department;
-  }
+	public Department getDepartment() {
+		return this.department;
+	}
 
-  public List<Role> getRoles() {
-    return this.roles;
-  }
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
-  public void setRoles(List<Role> roles) {
-    this.roles = roles;
-  }
+	public List<Role> getRoles() {
+		return this.roles;
+	}
 
-  public String getBusinessType() {
-    return this.businessType;
-  }
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
-  public void setBusinessType(String businessType) {
-    this.businessType = businessType;
-  }
+	public String getBusinessType() {
+		return this.businessType;
+	}
+
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
+	}
+
+	public String getWrittenOff() {
+		return writtenOff;
+	}
+
+	public void setWrittenOff(String writtenOff) {
+		this.writtenOff = writtenOff;
+	}
+
+	
 }

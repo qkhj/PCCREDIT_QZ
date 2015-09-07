@@ -1,0 +1,368 @@
+#parse ("common/iframe_page_header.htm")
+#parse ("common/macro.htm")
+<script src="${contextPath}/js/qzbankinterface/disableForm.js" charset="utf-8"></script>
+<body>
+  <div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">客户基本信息资料(ECIF)</div>
+      </div>
+      <form id="id_module_form">
+        <div class="forms" id="formsId">
+          <table class="rule" bordercolor="#CCCCCC" border="1">
+          <input type="hidden" name="customerId" value="$!ecif.customerId "/>
+          <caption>客户证件信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+            <tr>
+              <td><label>证件类型:</label><font color="#ff0000">*</font></td>
+              <td><select  name="globalType">#dict("CERT_TYPE", $!ecif.globalType)</select></td>
+              <td><label>证件号码:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="globalId" value="$!ecif.globalId" /></td>
+            </tr>
+            <tr>
+              <td><label>证件描述:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="globalDesc" value="身份证" value="$!ecif.globalDesc" /></td>
+              <td><label>证件签发地地区编码:</label></td>
+              <td><input  type="text" name="certAreaCode" value="$!ecif.certAreaCode" /></td>
+            </tr>
+            <tr>
+              <td><label>发证机关:</label></td>
+              <td><input  type="text" name="certOrg" value="$!ecif.certOrg" /></td>
+			  <td><label>签发日期:</label></td>
+              <td><input  type="text" name="issDate" value="$date.format('yyyy-MM-dd', $!ecif.issDate)" onmouseover="_calendar()" /></td>
+            </tr>
+			<tr>
+              <td><label>生效日期:</label></td>
+              <td><input  type="text" name="effectDate" value="$date.format('yyyy-MM-dd', $!ecif.effectDate)" onmouseover="_calendar()"/></td>
+			  <td><label>到期日期:</label></td>
+              <td><input  type="text" name="expiryDate" value="$date.format('yyyy-MM-dd', $!ecif.expiryDate)" onmouseover="_calendar()"/></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>个人客户名称信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>客户名称:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="clientName" value="$!ecif.clientName" /></td>
+              <td><label>客户名称类型:</label></td>
+              <td><select  name="clientNameType">#dict("CLIENT_NAME_TYPE", $!ecif.clientNameType )</select></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>个人客户基本信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>客户类型:</label></td>
+              <td><select  name="clientType">#dict("CLIENT_TYPE", $!ecif.clientType )</select></td>
+              <td><label>客户状态:</label></td>
+              <td><select  name="clientStatus">#dict("CLIENT_STATUS", $!ecif.clientStatus )</select></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>个人客户信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>出生日期:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="birthDate" value="$date.format('yyyy-MM-dd', $!ecif.birthDate)" onmouseover="_calendar()"/></td>
+			  <td><label>性别:</label></td>
+              <td><select  name="sex">#dict("INDIV_SEX", $!ecif.sex )</select></td>
+            </tr>
+            <!-- <tr>
+              <td><label>客户类型:</label></td>
+              <td colspan="3"><select name="clientType">#dict("CLIENT_TYPE", "")</select></td>
+			</tr> -->
+			
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>客户所属信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>客户经理代码:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="custManagerId" value="$!ecif.custManagerId"  /></td>
+              <td><label>录入柜员:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="recordTellerNo" value="$!ecif.recordTellerNo"  /></td>
+            </tr>
+			<tr>
+              <td><label>登记日期:</label><font color="#ff0000">*</font></td>
+              <td colspan="3"><input  type="text" name="registeredDate" value="$date.format('yyyy-MM-dd', $!ecif.registeredDate)" onmouseover="_calendar()"/></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>客户所属机构信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>客户所属机构:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="clientBelongOrg" value="$!ecif.clientBelongOrg" /></td>
+              <td><label>登记柜员号:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="registeredTellerNo" value="$!ecif.registeredTellerNo" /></td>
+            </tr>
+			<tr>
+              <td><label>登记机构:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="registOrgNo"  value="$!ecif.registOrgNo"  /></td>
+              <td><label>登记日期:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="orgRegisteredDate" value="$date.format('yyyy-MM-dd', $!ecif.orgRegisteredDate)" onmouseover="_calendar()"/></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>个人客户扩展信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>国籍/注册地:</label><font color="#ff0000">*</font></td>
+              <td><select  name="countryCitizen">#dict("CUS_COUNTRY", $!ecif.countryCitizen )</select></td>
+              <td><label>民族代码:</label><font color="#ff0000">*</font></td>
+              <td><select  name="nationalityCode">#dict("INDIV_NTN", $!ecif.nationalityCode )</select></td>
+            </tr>
+			<tr>
+              <td><label>户籍所在地:</label><font color="#ff0000">*</font></td>
+              <td>
+				1:<select  id="regPermResidence_1" name="regPermResidence_1" style="width:29%;margin:2px;" onchange="change_regPermResidence_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!ecif.regPermResidence_1 )</select>
+            	2:<select  id="regPermResidence_2" name="regPermResidence_2" style="width:29%;margin:2px;" onchange="change_regPermResidence_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!ecif.regPermResidence_2 )</select>
+            	3:<select  id="regPermResidence_3" name="regPermResidence_3" style="width:29%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!ecif.regPermResidence_3 )</select>
+			  </td>
+              <td><label>开户机构:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="openAcctBranchId" value="$!ecif.openAcctBranchId" /></td>
+            </tr>
+			<tr>
+              <td><label>开户柜员:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="openTellerNo" value="$!ecif.openTellerNo" /></td>
+              <td><label>开户日期:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="openAcctDate" value="$date.format('yyyy-MM-dd', $!ecif.openAcctDate)" onmouseover="_calendar()"/></td>
+            </tr>
+			<tr>
+              <td><label>婚姻状况:</label><font color="#ff0000">*</font></td>
+              <td><select  name="maritalStatus">#dict("MARITAL_STATUS", $!ecif.maritalStatus )</select></td>
+              <td><label>教育水平:</label><font color="#ff0000">*</font></td>
+              <td><select  name="educationLevel">#dict("EDUCATION_LEVEL", $!ecif.educationLevel )</select></td>
+            </tr>
+			<tr>
+              <td><label>城市:</label><font color="#ff0000">*</font></td>
+              <td>
+              	1:<select  id="city_1" name="city_1" style="width:29%;margin:2px;" onchange="change_city_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!ecif.city_1 )</select>
+            	2:<select  id="city_2" name="city_2" style="width:29%;margin:2px;" onchange="change_city_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!ecif.city_2 )</select>
+            	3:<select  id="city_3" name="city_3" style="width:29%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!ecif.city_3 )</select>
+              </td>
+              <td><label>地区代码:</label></td>
+              <td><input  type="text" name="areaCode" value="$!ecif.areaCode" /></td>
+            </tr>
+			<tr>
+              <td><label>关联关系:</label><font color="#ff0000">*</font></td>
+              <td><select  name="incidenceRelation">#dict("CUS_BANK_REL", $!ecif.incidenceRelation )</select></td>
+              <td><label>身份类别:</label><font color="#ff0000">*</font></td>
+              <td><select  name="identityType">#dict("IDENTITY_TYPE", $!ecif.identityType )</select></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>客户地址信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>地址:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="address" value="$!ecif.address" /></td>
+              <td><label>地址类型:</label><font color="#ff0000">*</font></td>
+              <td><select  name="addressType">#dict("ADDRESS_TYPE", $!ecif.addressType )</select></td>
+            </tr>
+			<tr>
+              <td><label>邮编:</label><font color="#ff0000">*</font></td>
+              <td colspan="3"><input  type="text" name="postalCode" value="$!ecif.postalCode" /></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>客户联系信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>联系方式类型:</label><font color="#ff0000">*</font></td>
+              <td><select  name="contactModeType">#dict("CONTACT_MODE_TYPE", $!ecif.contactModeType )</select></td>
+              <td><label>联系方式:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="contactMode" value="$!ecif.contactMode" /></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <caption>个人客户职业信息</caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>职业名称:</label><font color="#ff0000">*</font></td>
+              <td><select  name="occupation">#dict("OCCUPATION", $!ecif.occupation )</select></select></td>
+              <td><label>单位名称:</label><font color="#ff0000">*</font></td>
+              <td><input  type="text" name="companyName" value="$!ecif.companyName" /></td>
+            </tr>
+          </table>
+
+        </div>
+      <div class="submit">
+      	<input id="id_save_button" type="button" value="#i18n("button.save")" class="current" />
+        <input type="button" value="返回" class="current" onclick="javascript:history.back();"/>
+      </div>
+      
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+  	//级联
+  	//户籍所在地
+	var indiv_brt_place_array2 = new Array();//用来保存为显示的select元素
+	var indiv_brt_place_array3 = new Array();//用来保存为显示的select元素
+	//城市
+	var city_array2 = new Array();//用来保存为显示的select元素
+	var city_array3 = new Array();//用来保存为显示的select元素
+	
+	var layout=new FormsLayout("formsId");	
+	window.top.currentWindow.setLayout(layout);
+	#set ($formName = "'#id_module_form'")
+	#parse ("qzbankinterface/iesbforecif_validation.js")
+	$(document).ready(function() {	
+		//禁用页面组件
+		//disableForm();
+		
+		#parse("common/part_create.js")
+		
+		$("#id_save_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+			if ($($formName).valid()) {
+				var formjson = $($formName).serialize();
+	   	       var url = "${modulePath}/update.json";
+				$.ajax({
+					url : url,
+					type : "get",
+					data : formjson,
+					success : function(data) {
+						if (data.success) {
+							topWin.Dialog.message("保存成功！");
+							window.location.href= contextPath+"/customer/ecif/browse.page" ;
+						}
+						else{
+							topWin.Dialog.message(data.message);
+					    }
+						submitFlag = 0;
+					}
+				});
+					
+			}else{
+				submitFlag = 0;
+			}
+			      
+		})
+		
+		//级联菜单
+		//户籍所在地
+		$("#regPermResidence_2 option").each(function(){ //遍历全部option
+			indiv_brt_place_array2.push($(this));
+	    });
+		$("#regPermResidence_3 option").each(function(){ //遍历全部option
+			indiv_brt_place_array3.push($(this));
+	    });
+		//城市
+		$("#city_2 option").each(function(){ //遍历全部option
+			city_array2.push($(this));
+	    });
+		$("#city_3 option").each(function(){ //遍历全部option
+			city_array3.push($(this));
+	    });
+	});
+	
+	//级联
+	//户籍所在地
+	function change_regPermResidence_1(objval){
+		$("#regPermResidence_2").empty();
+		$("#regPermResidence_2").css('visibility','hidden');//IE7
+		$.each(indiv_brt_place_array2,function(n,opt) { 
+			if(opt.val().split("_")[0] == objval.split("_")[1]){
+				$("#regPermResidence_2").append(opt);
+			}
+		});
+		$("#regPermResidence_2").css('visibility','visible');//IE7
+		
+		//var tmp = $("#regPermResidence_2").find("option:selected");//IE8
+		var tmp = $("#regPermResidence_2 option:first");//IE7
+		change_regPermResidence_2(tmp.val());
+	}
+	function change_regPermResidence_2(objval){
+		$("#regPermResidence_3").empty();
+		$("#regPermResidence_3").css('visibility','hidden');//IE7
+		$.each(indiv_brt_place_array3,function(n,opt) {  
+			if(opt.val().split("_")[0] == objval.split("_")[1]){
+				$("#regPermResidence_3").append(opt);
+			}
+		});
+		$("#regPermResidence_3").css('visibility','visible');//IE7
+	}
+	//城市
+	function change_city_1(objval){
+		$("#city_2").empty();
+		$("#city_2").css('visibility','hidden');//IE7
+		$.each(city_array2,function(n,opt) { 
+			if(opt.val().split("_")[0] == objval.split("_")[1]){
+				$("#city_2").append(opt);
+			}
+		});
+		$("#city_2").css('visibility','visible');//IE7
+		
+		//var tmp = $("#city_2").find("option:selected");//IE8
+		var tmp = $("#city_2 option:first");//IE7
+		change_city_2(tmp.val());
+	}
+	function change_city_2(objval){
+		$("#city_3").empty();
+		$("#city_3").css('visibility','hidden');//IE7
+		$.each(city_array3,function(n,opt) {  
+			if(opt.val().split("_")[0] == objval.split("_")[1]){
+				$("#city_3").append(opt);
+			}
+		});
+		$("#city_3").css('visibility','visible');//IE7
+	}
+	</script>
+</body>
+#parse ("common/iframe_page_footer.htm")

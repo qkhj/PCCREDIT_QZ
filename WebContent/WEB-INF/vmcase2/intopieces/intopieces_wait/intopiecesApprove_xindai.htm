@@ -31,15 +31,15 @@
           <table>
             <colgroup>
              <col width="5%" />
-             <col width="10%" />
+             <col width="8%" />
+              <col width="8%" />
               <col width="10%" />
-              <col width="10%" />
               <col width="10%"/>
-              <col width="15%"/>
-              <col width="17%"/>
+              <col width="12%"/>
               <col width="10%"/>
               <col width="10%"/>
-              <col width="13%"/>
+              <col width="10%"/>
+              <col width="20%"/>
             </colgroup>
             <tr class="title">
               <th nowrap="nowrap"></th>
@@ -51,21 +51,23 @@
               <th nowrap="nowrap">审核状态</th>
               <th nowrap="nowrap">申请时间</th>
               <th nowrap="nowrap">节点名称</th>
+              <th nowrap="nowrap">退件原因</th>
             </tr>
           </table>
         </div>
         <div id="downDiv" class="inquiry_list inquiry_down">
           <table>
             <colgroup>
-              <col width="5%" />
-              <col width="10%" />
-              <col width="10%" />
+             <col width="5%" />
+             <col width="8%" />
+              <col width="8%" />
               <col width="10%" />
               <col width="10%"/>
-              <col width="15%"/>
+              <col width="12%"/>
               <col width="10%"/>
               <col width="10%"/>
-              <col width="13%"/>
+              <col width="10%"/>
+              <col width="20%"/>
             </colgroup>
            #foreach ($wait in $result.items)
             <tr>
@@ -79,6 +81,11 @@
               <td nowrap="nowrap">#dictVal("applicationStatus",$!wait.status) </td>
               <td nowrap="nowrap">$!date.format("yyyy-MM-dd HH:mm:ss",$!wait.auditTime)</td>
               <td nowrap="nowrap">$!wait.nodeName</td>
+              #if($!wait.status=='RETURNAPPROVE')
+              <td nowrap="nowrap">$!wait.fallbackReason</td>
+              #else
+              <td nowrap="nowrap"></td>
+              #end
             </tr>
             #end
 

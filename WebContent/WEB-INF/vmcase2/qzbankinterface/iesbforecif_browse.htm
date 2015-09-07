@@ -73,6 +73,7 @@
         <div class="controlbtn">
         	<a class="btn_g" id="id_kaihu_button" href="javascript:void(0);" title="新增客户">新增客户</a>
             <a class="btn_g" id="id_displaykaihu_button" href="javascript:void(0);" title="查看客户信息">查看客户信息</a>
+            <a class="btn_g" id="id_updatekaihu_button" href="javascript:void(0);" title="修改客户信息">修改客户信息</a>
         </div>
         #parse ("common/pagination.htm")
         <div class="clear"></div>
@@ -97,6 +98,18 @@
 				var rowId = getCurrentRowId().split("@")[0];
 				if(rowId!=null){
 					var url="${contextPath}/customer/ecif/display.page?id="+rowId;
+					window.location.href = url;
+				}
+			}else{
+				Dialog.message("请选择一条记录!");
+			}
+	    });
+		//修改开户信息
+		$("#id_updatekaihu_button").click(function() {
+			if ($(".checkbox :checked").length == 1) {
+				var rowId = getCurrentRowId().split("@")[0];
+				if(rowId!=null){
+					var url="${contextPath}/customer/ecif/update.page?id="+rowId;
 					window.location.href = url;
 				}
 			}else{

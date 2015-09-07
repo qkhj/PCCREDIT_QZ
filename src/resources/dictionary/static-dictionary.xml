@@ -1702,7 +1702,7 @@
 		<item name="1" title="宣传单" />
 		<item name="2" title="电话" />
 		<item name="3" title="朋友/家人" />
-		<item name="4" title="农商行客户" />
+		<item name="4" title="泉州银行客户" />
 		<item name="5" title="报纸/杂志" />
 		<item name="6" title="广播/电视" />
 		<item name="7" title="流动广告" />
@@ -1714,4 +1714,39 @@
 		<item name="2" title="净利润" />
 	</dictionary>
 	
+	<dictionary name="PRODUCT_TYPE" title="产品类型">
+		<item name="1" title="贷成长" />
+		<item name="2" title="贷生活" />
+	</dictionary>
+	
+	<dictionary name="REPAYMENT_TERM" title="还款期限">
+	    <item name="3" title="3" />
+	    <item name="6" title="6" />
+	    <item name="9" title="9" />
+	    <item name="12" title="12" />
+	    <item name="15" title="15" />
+
+	</dictionary>
+	
+	<dictionary name="NODE_LIST" title="进件流程节点">
+	    <item name="1" title="客户经理" />
+	    <item name="2" title="初审" />
+	    <item name="3" title="内部审查" />
+	    <item name="4" title="授信审批" />
+	    <item name="5" title="中心复核" />
+	    <item name="6" title="填写合同信息" />
+
+	</dictionary>
+	
+	<dictionary name="UNIT_TYPE" title="公司类型">
+	    <item name="1" title="国有" />
+	    <item name="2" title="外商独资" />
+	    <item name="3" title="中外合资" />
+	    <item name="4" title="民营" />
+	    <item name="5" title="公务员" />
+	    <item name="6" title="事业单位" />
+		<item name="7" title="个人工商" />
+		<item name="8" title="国内上市公司" />
+		<item name="9" title="其他" />
+	</dictionary>
 </dictionaries>

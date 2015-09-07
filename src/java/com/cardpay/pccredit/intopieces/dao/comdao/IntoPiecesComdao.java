@@ -355,11 +355,11 @@ public class IntoPiecesComdao {
 		String cardId = filter.getCardId();
 		params.put("userId", userId);
 		
-		StringBuffer sql = new StringBuffer("SELECT cai. ID,cai.customer_id,cai.chinese_name,cai.product_id,cai.card_id,cai.apply_quota,cai.status ");
+		StringBuffer sql = new StringBuffer("SELECT cai. ID,cai.customer_id,cai.chinese_name,cai.product_id,cai.card_id,cai.apply_quota,cai.status,cai.Created_Time ");
 		sql.append("FROM ");
 		sql.append("(SELECT * FROM WF_STATUS_QUEUE_RECORD WHERE EXAMINE_USER = #{userId}) wsqr ");
-		sql.append("LEFT JOIN ( SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status, T.SERIAL_NUMBER ");
-		sql.append("FROM customer_application_info T LEFT JOIN basic_customer_information b ON T .customer_id = b. ID ");
+		sql.append("LEFT JOIN ( SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status, T.SERIAL_NUMBER ,T.Created_Time ");
+		sql.append("FROM customer_application_info T inner JOIN basic_customer_information b ON T .customer_id = b. ID ");
 		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
 			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
 			    sql.append(" and (b.card_id like '%"+cardId+"%' or b.chinese_name like '%"+chineseName+"%' )");
@@ -375,7 +375,7 @@ public class IntoPiecesComdao {
 		sql.append(") cai ");
 		sql.append("ON wsqr.CURRENT_PROCESS = CAI.SERIAL_NUMBER ");
 		sql.append("union ");
-		sql.append("SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status ");
+		sql.append("SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status, T.Created_Time ");
 		sql.append("FROM customer_application_info T LEFT JOIN basic_customer_information b ON T .customer_id = b. ID ");
 		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
 			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
@@ -389,8 +389,38 @@ public class IntoPiecesComdao {
 			}
 		}
 		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
-		sql.append("where b.user_id = #{userId}");
+		sql.append("where b.user_id = #{userId} ");
+		//sql.append("order by created_time desc");
 		return commonDao.queryBySqlInPagination(IntoPieces.class, sql.toString(), params,
 				filter.getStart(), filter.getLimit());
 	}
+	
+	//查询进件信息
+	/* 查询进价信息 */
+	public QueryResult<IntoPieces> findintoPiecesAllByFilter(IntoPiecesFilter filter) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		String id = filter.getId();
+		String chineseName = filter.getChineseName();
+		String userId = filter.getUserId();
+		String cardId = filter.getCardId();
+		
+		StringBuffer sql = new StringBuffer("SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status ");
+		sql.append("FROM customer_application_info T inner JOIN basic_customer_information b ON T .customer_id = b. ID ");
+		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
+			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
+			    sql.append(" and (b.card_id like '%"+cardId+"%' or b.chinese_name like '%"+chineseName+"%' )");
+			}else if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)==null){
+				params.put("cardId", cardId);
+				sql.append(" and b.card_id like '%'||#{cardId}||'%' ");
+			}else if(StringUtils.trimToNull(cardId)==null&&StringUtils.trimToNull(chineseName)!=null){
+				params.put("chineseName", chineseName);
+				sql.append(" and b.chinese_name like '%'||#{chineseName}||'%' ");
+			}
+		}
+		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
+		sql.append(" order by T.created_time desc");
+		return commonDao.queryBySqlInPagination(IntoPieces.class, sql.toString(), params,
+				filter.getStart(), filter.getLimit());
+	}
+		
 }

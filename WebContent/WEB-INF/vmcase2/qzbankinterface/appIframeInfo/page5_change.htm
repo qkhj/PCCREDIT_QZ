@@ -70,26 +70,22 @@
 					<td><b></b></td>					
 				</tr>
 				<tr>
-					<td class="tableTitle" colspan="6">第一部分  业务信息</td>				
+					<td class="tableTitle" colspan="6">第一部分  合同扫描件</td>				
+				</tr>
+				<tr>
+					<td>1</td>	
+					<td>合同扫描件</td>	
+					<td><input type="checkbox" name="checkbox1" onclick="return false" value="1" checked/></td>						
+					<td></td>	
+					<td></td>	
+					<td></td>			
+				</tr>
+				<tr>
+					<td class="tableTitle" colspan="6">第二部分  业务信息</td>				
 				</tr>						
 				<tr>
 					<td>1</td>	
 					<td>贷款申请表</td>	
-					<td>
-						#if($!qzApplnAttachmentList.bussType=='1')
-							<script>
-								if(parseInt(chkValue&1) != 0){
-									document.write('<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="1" checked/>');
-								}else{
-									document.write('<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="1"/>');
-								}
-							</script>
-						#else
-							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="1"/>
-						#end
-						</td>						
-					<td>2</td>	
-					<td>调查报告</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -102,11 +98,9 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="2"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>3</td>	
-					<td>征信查询授权书</td>	
+						</td>						
+					<td>2</td>	
+					<td>调查报告</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -119,9 +113,11 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="4"/>
 						#end
-						</td>						
-					<td>4</td>	
-					<td>工作底稿</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>3</td>	
+					<td>征信查询授权书</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -134,11 +130,9 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="8"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>5</td>	
-					<td>信用报告及联网核查</td>	
+						</td>						
+					<td>4</td>	
+					<td>工作底稿</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -151,9 +145,11 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="16"/>
 						#end
-						</td>						
-					<td>6</td>	
-					<td>贷审小组决议表</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>5</td>	
+					<td>信用报告及联网核查</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -166,11 +162,9 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="32"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>7</td>	
-					<td>规范操作承诺书</td>	
+						</td>						
+					<td>6</td>	
+					<td>贷审小组决议表</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -183,18 +177,11 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="64"/>
 						#end
-						</td>						
-					<td></td>	
-					<td></td>	
-					<td></td>				
-				</tr>
+						</td>				
+				</tr>				
 				<tr>
-					<td class="tableTitle" colspan="6">第二部分  客户资料</td>				
-				</tr>					
-								
-				<tr>
-					<td>1</td>	
-					<td>收入证明文件</td>	
+					<td>7</td>	
+					<td>规范操作承诺书</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -208,8 +195,17 @@
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="128"/>
 						#end
 						</td>						
-					<td>2</td>	
-					<td>借款人资产文件、住址证明</td>	
+					<td></td>	
+					<td></td>	
+					<td></td>				
+				</tr>
+				<tr>
+					<td class="tableTitle" colspan="6">第三部分  客户资料</td>				
+				</tr>					
+								
+				<tr>
+					<td>1</td>	
+					<td>收入证明文件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -222,11 +218,9 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="256"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>3</td>	
-					<td>借款人及共同借款人身份证复印件</td>	
+						</td>						
+					<td>2</td>	
+					<td>借款人资产文件、住址证明</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -239,9 +233,11 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="512"/>
 						#end
-						</td>						
-					<td>4</td>	
-					<td>借款人及共同借款人婚姻状况证明</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>3</td>	
+					<td>借款人及共同借款人身份证复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -254,11 +250,9 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="1024"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>5</td>	
-					<td>担保人及配偶身份证明复印件</td>	
+						</td>						
+					<td>4</td>	
+					<td>借款人及共同借款人婚姻状况证明</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -271,9 +265,11 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="2048"/>
 						#end
-						</td>						
-					<td>6</td>	
-					<td>担保人及配偶婚姻状况说明</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>5</td>	
+					<td>担保人及配偶身份证明复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -286,11 +282,9 @@
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="4096"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>7</td>	
-					<td>担保人收入证明</td>	
+						</td>						
+					<td>6</td>	
+					<td>担保人及配偶婚姻状况说明</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='1')
 							<script>
@@ -302,6 +296,23 @@
 							</script>
 						#else
 							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="8192"/>
+						#end
+						</td>				
+				</tr>				
+				<tr>
+					<td>7</td>	
+					<td>担保人收入证明</td>	
+					<td>
+						#if($!qzApplnAttachmentList.bussType=='1')
+							<script>
+								if(parseInt(chkValue&16384) != 0){
+									document.write('<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="16384" checked/>');
+								}else{
+									document.write('<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="16384"/>');
+								}
+							</script>
+						#else
+							<input type="checkbox" name="checkbox1" onclick="getSum(1);" value="16384"/>
 						#end
 						</td>						
 					<td></td>	
@@ -351,26 +362,22 @@
 					<td><b></b></td>					
 				</tr>
 				<tr>
-					<td class="tableTitle" colspan="6">第一部分  业务资料</td>				
+					<td class="tableTitle" colspan="6">第一部分  合同扫描件</td>				
+				</tr>
+				<tr>
+					<td>1</td>	
+					<td>合同扫描件</td>	
+					<td><input type="checkbox" name="checkbox2" onclick="return false" value="1" checked/></td>						
+					<td></td>	
+					<td></td>	
+					<td></td>			
+				</tr>
+				<tr>
+					<td class="tableTitle" colspan="6">第二部分  业务资料</td>				
 				</tr>						
 				<tr>
 					<td>1</td>	
 					<td>申请表</td>	
-					<td>
-						#if($!qzApplnAttachmentList.bussType=='2')
-							<script>
-								if(parseInt(chkValue&1) != 0){
-									document.write('<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="1" checked/>');
-								}else{
-									document.write('<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="1"/>');
-								}
-							</script>
-						#else
-							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="1"/>
-						#end
-						</td>						
-					<td>2</td>	
-					<td>调查报告</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -383,11 +390,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="2"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>3</td>	
-					<td>征信查询授权书</td>	
+						</td>						
+					<td>2</td>	
+					<td>调查报告</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -400,9 +405,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="4"/>
 						#end
-						</td>						
-					<td>4</td>	
-					<td>工作底稿</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>3</td>	
+					<td>征信查询授权书</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -415,11 +422,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="8"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>5</td>	
-					<td>信用报告及联网核查</td>	
+						</td>						
+					<td>4</td>	
+					<td>工作底稿</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -432,9 +437,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="16"/>
 						#end
-						</td>						
-					<td>6</td>	
-					<td>贷审小组决议表</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>5</td>	
+					<td>信用报告及联网核查</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -447,11 +454,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="32"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>7</td>	
-					<td>规范操作承诺书</td>	
+						</td>						
+					<td>6</td>	
+					<td>贷审小组决议表</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -464,17 +469,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="64"/>
 						#end
-						</td>						
-					<td></td>	
-					<td></td>	
-					<td></td>				
-				</tr>
+						</td>				
+				</tr>				
 				<tr>
-					<td class="tableTitle" colspan="6">第二部分  客户资料</td>				
-				</tr>			
-				<tr>
-					<td>1</td>	
-					<td>营业执照（副本）复印件</td>	
+					<td>7</td>	
+					<td>规范操作承诺书</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -488,8 +487,16 @@
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="128"/>
 						#end
 						</td>						
-					<td>2</td>	
-					<td>税务登记证（副本）复印件</td>	
+					<td></td>	
+					<td></td>	
+					<td></td>				
+				</tr>
+				<tr>
+					<td class="tableTitle" colspan="6">第三部分  客户资料</td>				
+				</tr>			
+				<tr>
+					<td>1</td>	
+					<td>营业执照（副本）复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -502,11 +509,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="256"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>3</td>	
-					<td>组织机构代码证（副本）复印件</td>	
+						</td>						
+					<td>2</td>	
+					<td>税务登记证（副本）复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -519,9 +524,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="512"/>
 						#end
-						</td>						
-					<td>4</td>	
-					<td>贷款卡及年检报告复印件</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>3</td>	
+					<td>组织机构代码证（副本）复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -533,11 +540,10 @@
 							</script>
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="1024"/>
-						#end</td>				
-				</tr>				
-				<tr>
-					<td>5</td>	
-					<td>公司章程（包括验资报告复印件）</td>	
+						#end
+						</td>						
+					<td>4</td>	
+					<td>贷款卡及年检报告复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -549,10 +555,11 @@
 							</script>
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="2048"/>
-						#end
-						</td>						
-					<td>6</td>	
-					<td>股东会或董事会决议原件</td>	
+						#end</td>				
+				</tr>				
+				<tr>
+					<td>5</td>	
+					<td>公司章程（包括验资报告复印件）</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -565,11 +572,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="4096"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>7</td>	
-					<td>法定代表人身份证明文件复印件</td>	
+						</td>						
+					<td>6</td>	
+					<td>股东会或董事会决议原件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -582,9 +587,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="8192"/>
 						#end
-						</td>						
-					<td>8</td>	
-					<td>股东身份证明复印件</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>7</td>	
+					<td>法定代表人身份证明文件复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -597,11 +604,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="16384"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>9</td>	
-					<td>担保人身份证明复印件</td>	
+						</td>						
+					<td>8</td>	
+					<td>股东身份证明复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -614,9 +619,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="32768"/>
 						#end
-						</td>						
-					<td>10</td>	
-					<td>担保人贷款卡复印件</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>9</td>	
+					<td>担保人身份证明复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -629,11 +636,9 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="65536"/>
 						#end
-						</td>				
-				</tr>				
-				<tr>
-					<td>11</td>	
-					<td>担保人收入证明</td>	
+						</td>						
+					<td>10</td>	
+					<td>担保人贷款卡复印件</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -646,9 +651,11 @@
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="131072"/>
 						#end
-						</td>						
-					<td>12</td>	
-					<td>信用等级证复印件（如有）</td>	
+						</td>				
+				</tr>				
+				<tr>
+					<td>11</td>	
+					<td>担保人收入证明</td>	
 					<td>
 						#if($!qzApplnAttachmentList.bussType=='2')
 							<script>
@@ -660,6 +667,21 @@
 							</script>
 						#else
 							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="262144"/>
+						#end
+						</td>						
+					<td>12</td>	
+					<td>信用等级证复印件（如有）</td>	
+					<td>
+						#if($!qzApplnAttachmentList.bussType=='2')
+							<script>
+								if(parseInt(chkValue&524288) != 0){
+									document.write('<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="524288" checked/>');
+								}else{
+									document.write('<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="524288"/>');
+								}
+							</script>
+						#else
+							<input type="checkbox" name="checkbox2" onclick="getSum(2);" value="524288"/>
 						#end
 						</td>				
 				</tr>

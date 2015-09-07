@@ -1,0 +1,95 @@
+#parse ("common/iframe_page_header.htm")
+<body>
+<div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">专案信息</div>
+      </div>
+		<form id="id_module_form">
+			<div class="forms" id="formsId">
+			<!--*************************************************************专案信息*************************************************************-->
+				<table class="rule" bordercolor="#CCCCCC" border="1">
+					<caption>专案信息</caption>
+					<colgroup>
+						<col width="15%">
+						<col width="35%">
+						<col width="15%">
+						<col width="35%">
+					</colgroup>
+					<tr>
+						<td class="table-label">发起方：<font color="#ff0000">*</font></td>
+						<td><input type="text" name="originator" value="$!qzApplnZa.originator"/></td>
+						<td class="table-label">发起人：<font color="#ff0000">*</font></td>
+						<td><input type="text" name="initiator" value="$!qzApplnZa.initiator"/></td>			
+					</tr>
+					<tr>
+						<td class="table-label">发起时间：<font color="#ff0000">*</font></td>
+						<td><input type="text" name="initDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!qzApplnZa.initDate)" readonly/></td>	
+						<td class="table-label">专案名称：<font color="#ff0000">*</font></td>
+						<td><input type="text" name="name" value="$!qzApplnZa.name"/></td>		
+					</tr>
+					<td class="table-label">专案地址：<font color="#ff0000">*</font></td>
+						<td><input type="text" name="address" value="$!qzApplnZa.address"/></td>
+						<td class="table-label">专案编号：<font color="#ff0000">*</font></td>
+						<td><input type="text" name="code" value="$!qzApplnZa.code"/></td>
+					<tr>
+						<td class="table-label">评审意见：<font color="#ff0000">*</font></td>
+						<td colspan="3"><textarea name="sug">$!qzApplnZa.sug</textarea></td>			
+					</tr>
+				</table>	
+			</div>
+			<div class="submit">
+		      	<input id="id_save_button" type="button" value="#i18n("button.save")" class="current" />
+		        <input type="button" value="返回" class="current" onclick="javascript:history.back();"/>
+	      	</div>
+		</form>	
+	</div>
+  </div>
+	<script type="text/javascript">			
+	var layout=new FormsLayout("formsId");	
+	window.top.currentWindow.setLayout(layout);
+	
+	#set ($formName = "'#id_module_form'")
+	#parse ("qzbankinterface/appIframeInfo/za_validation.js")
+	
+	$(document).ready(function() {	
+		//保存
+		$("#id_save_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+			if ($($formName).valid()) {
+				var formjson = $($formName).serialize();
+				var url = "${contextPath}/product/zainformation/update.json?id=$!qzApplnZa.id";
+				$.ajax({
+					url : url,
+					type : "get",
+					data : formjson,
+					success : function(data) {
+						if (data.success) {
+							topWin.Dialog.message("保存成功！");
+							window.location.href = "${contextPath}/product/zainformation/browse.page";
+						}
+						else{
+							topWin.Dialog.message("保存失败！");
+					    }
+						submitFlag = 0;
+					}
+				});
+			}else{
+				submitFlag = 0;
+			}
+		});
+		
+		$("#id_back_button").click(function() {
+			var url = "${contextPath}/intopieces/intopiecesapprove/approve.page";
+            parent.location.href = url;
+		})
+		
+	});
+	</script>	
+</body>
+</html>
+

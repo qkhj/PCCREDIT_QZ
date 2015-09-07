@@ -15,6 +15,7 @@ public class IntoPieces  extends BusinessModel {
     private String applyQuota;//申请额度
     private String status;//申请额度
     private String statusName;
+    private String createTime;//创建时间
     
     private String nodeName;
     //进度
@@ -77,6 +78,12 @@ public class IntoPieces  extends BusinessModel {
 	}
 	public void setNodeName(String nodeName) {
 		this.nodeName = nodeName;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 }

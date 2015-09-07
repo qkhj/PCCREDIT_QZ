@@ -29,6 +29,14 @@ public class CustomerInforCommDao {
 		return null;
 	}
 	
+	public CustomerInfor findCustomerInforByCustomerId(String customerId){
+		List<CustomerInfor> list = commonDao.queryBySql(CustomerInfor.class, "select * from basic_customer_information where id='"+customerId+"'", null);
+		if(list!=null&&!list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
+	}
+	
 	public List<Dict> findOaccountMybankList(){
 		List<Dict> list = commonDao.queryBySql(Dict.class, "select * from DICT t where 1=2", null);
 		return list;

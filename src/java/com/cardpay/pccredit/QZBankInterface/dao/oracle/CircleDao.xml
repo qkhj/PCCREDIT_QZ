@@ -117,6 +117,7 @@
 		<result property="acctNo2" column="ACCT_NO2" />
 		
 		<result property="customerId" column="CUSTOMER_ID" />
+		<result property="applicationId" column="APPLICATION_ID" />
 	</resultMap>
 	
 	<resultMap id="ResultMap2"
@@ -203,4 +204,13 @@
 		</if>
 	</select>
 	
+	<select id="findCircleByCardNo" resultMap="ResultMap">
+		select 
+		*
+		from QZ_IESB_FOR_CIRCLE
+		where 1=1
+		<if test="globalId != null and globalId != '' ">
+			AND GLOBAL_ID=#{globalId}
+		</if>
+	</select>
 </mapper> 

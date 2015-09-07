@@ -83,6 +83,7 @@ import com.wicresoft.jrad.base.database.id.IDGenerator;
 import com.wicresoft.jrad.base.database.model.BusinessModel;
 import com.wicresoft.jrad.base.database.model.QueryResult;
 import com.wicresoft.jrad.base.web.security.LoginManager;
+import com.wicresoft.jrad.modules.privilege.model.TreeNode;
 import com.wicresoft.util.spring.Beans;
 
 @Service
@@ -135,6 +136,138 @@ public class AttachmentListService {
 
 	public QzApplnAttachmentList findAttachmentListByAppId(String applicationId) {
 		return attachmentListDao.findAttachmentListByAppId(applicationId);
+	}
+	
+	public TreeNode findAttachmentListJsonByAppId(String applicationId) {
+		QzApplnAttachmentList qzApplnAttachmentList = attachmentListDao.findAttachmentListByAppId(applicationId);
+		TreeNode rootNode = new TreeNode("root", null,"资料清单", "", "", "", "folderopen.gif",false, true, true, true, false);
+		TreeNode rootNodeGx = new TreeNode("gx", null,"工薪类", "", "", "", "folderopen.gif",false, true, true, true, false);
+		TreeNode rootNodeJy = new TreeNode("jy", null,"经营类", "", "", "", "folderopen.gif",false, true, true, true, false);
+		TreeNode rootNodeHt = new TreeNode("ht", null,"合同扫描件", "", "", "", "folderopen.gif",false, true, true, true, false);
+		TreeNode rootNodeYw = new TreeNode("yw", null,"业务信息", "", "", "", "folderopen.gif",false, true, true, true, false);
+		TreeNode rootNodeKh = new TreeNode("kh", null,"客户信息", "", "", "", "folderopen.gif",false, true, true, true, false);
+		if(qzApplnAttachmentList != null && qzApplnAttachmentList.getChkValue() != null && !qzApplnAttachmentList.getChkValue().equals("0")){
+			String chkValue = qzApplnAttachmentList.getChkValue();
+			String uploadValue = qzApplnAttachmentList.getUploadValue();
+			if(qzApplnAttachmentList.getBussType().equals("1")){//工薪类
+				if((Integer.parseInt(chkValue)&1) != 0){
+					rootNodeHt.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"1", null,Constant.ATTACH_LIST0, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&2) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"2", null,Constant.ATTACH_LIST1, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&4) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"4", null,Constant.ATTACH_LIST2, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&8) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"8", null,Constant.ATTACH_LIST3, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&16) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"16", null,Constant.ATTACH_LIST4, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&32) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"32", null,Constant.ATTACH_LIST5, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&64) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"64", null,Constant.ATTACH_LIST6, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&128) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"128", null,Constant.ATTACH_LIST7, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&256) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"256", null,Constant.ATTACH_LIST8, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&512) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"512", null,Constant.ATTACH_LIST9, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&1024) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"1024", null,Constant.ATTACH_LIST10, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&2048) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"2048", null,Constant.ATTACH_LIST11, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&4096) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"4096", null,Constant.ATTACH_LIST12, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&8192) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"8192", null,Constant.ATTACH_LIST13, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&16384) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"16384", null,Constant.ATTACH_LIST14, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				rootNodeGx.addChildren(rootNodeHt);
+				rootNodeGx.addChildren(rootNodeYw);
+				rootNodeGx.addChildren(rootNodeKh);
+				rootNode.addChildren(rootNodeGx);
+			}
+			if(qzApplnAttachmentList.getBussType().equals("2")){
+				if((Integer.parseInt(chkValue)&1) != 0){
+					rootNodeHt.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"1", null,Constant.ATTACH_LIST0, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&2) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"2", null,Constant.ATTACH_LIST15, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&4) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"4", null,Constant.ATTACH_LIST2, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&8) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"8", null,Constant.ATTACH_LIST3, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&16) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"16", null,Constant.ATTACH_LIST4, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&32) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"32", null,Constant.ATTACH_LIST5, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&64) != 0){
+					rootNodeYw.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"64", null,Constant.ATTACH_LIST6, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&128) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"128", null,Constant.ATTACH_LIST7, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&256) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"256", null,Constant.ATTACH_LIST16, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&512) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"512", null,Constant.ATTACH_LIST17, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&1024) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"1024", null,Constant.ATTACH_LIST18, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&2048) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"2048", null,Constant.ATTACH_LIST19, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&4096) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"4096", null,Constant.ATTACH_LIST20, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&8192) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"8192", null,Constant.ATTACH_LIST21, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&16384) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"16384", null,Constant.ATTACH_LIST22, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&32768) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"32768", null,Constant.ATTACH_LIST23, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&65536) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"65536", null,Constant.ATTACH_LIST24, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&131072) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"131072", null,Constant.ATTACH_LIST25, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&262144) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"262144", null,Constant.ATTACH_LIST26, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				if((Integer.parseInt(chkValue)&524288) != 0){
+					rootNodeKh.addChildren(new TreeNode("id_"+qzApplnAttachmentList.getDocid()+"524288", null,Constant.ATTACH_LIST27, "", "", "", "page.gif",false, true, false, true, false));
+				}
+				rootNodeJy.addChildren(rootNodeHt);
+				rootNodeJy.addChildren(rootNodeYw);
+				rootNodeJy.addChildren(rootNodeKh);
+				rootNode.addChildren(rootNodeJy);
+			}
+		}
+		return rootNode;
 	}
 	
 	public void insert_page5(QzApplnAttachmentList QzApplnAttachmentList,HttpServletRequest request){

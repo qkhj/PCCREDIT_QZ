@@ -9,6 +9,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -104,8 +105,12 @@ public class IESBForCircleController extends BaseController{
 		JRadModelAndView mv = new JRadModelAndView("/qzbankinterface/iesbforcircle_display", request);
 		
 		String customerId = request.getParameter(ID);
+		//区分影像补扫入口和内部审核入口的跳转标志（1:影像补扫，默认是内部审核）
+		String flag = request.getParameter("flag");
+		
 		String appId = request.getParameter("appId");
 		String operate = request.getParameter("operate");
+		String ifHideUser = request.getParameter("ifHideUser");
 		IESBForECIFReturnMap ecif = eCIFService.findEcifMapByCustomerId(customerId);
 		mv.addObject("ecif",ecif);
 				
@@ -115,10 +120,14 @@ public class IESBForCircleController extends BaseController{
 		}else{
 			circle = circleService.findCircle(customerId,null);
 		}
+		if(circle != null && circle.getHigherOrgNo().equals("000000")){//替换为泉州总行id
+			circle.setHigherOrgNo(Constant.QZ_ORG_ROOT_ID);
+		}
 		mv.addObject("circle",circle);
 		mv.addObject("operate",operate);
 		mv.addObject("appId",appId);
 		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate));
+		mv.addObject("ifHideUser", ifHideUser);
 		return mv;
 	}
 	
@@ -162,13 +171,13 @@ public class IESBForCircleController extends BaseController{
 			mv.addObject("orgId",orgId);
 			mv.addObject("parentOrgId",parentOrgId);
 			mv.addObject("externalId",externalId);
-
-			QzApplnJyd qzSdhjyd = intoPiecesService.getSdhjydForm(customerId);
-			mv.addObject("qzSdhjyd",qzSdhjyd);
 			
 		}
 		else{
 			mv = new JRadModelAndView("/qzbankinterface/iesbforcircle_change", request);
+			if(circle.getHigherOrgNo().equals("000000")){//替换为泉州总行id
+				circle.setHigherOrgNo(Constant.QZ_ORG_ROOT_ID);
+			}
 			mv.addObject("circle",circle);
 		}
 		
@@ -198,49 +207,96 @@ public class IESBForCircleController extends BaseController{
 				//设置级联选项 级联未考虑空情况，已注释
 				if(iesbForCircleForm.getLoanKind_1() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_1().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_1("");
 				}
+				
 				if(iesbForCircleForm.getLoanKind_2() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_2().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_2("");
 				}
+				
 				if(iesbForCircleForm.getLoanKind_3() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_3().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_3("");
 				}
+				
 				if(iesbForCircleForm.getLoanKind_4() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_4().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_4("");
 				}
 				
 				if(iesbForCircleForm.getAgriLoanKind_1() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_1().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_1("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_2() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_2().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_2("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_3() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_3().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_3("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_4() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_4().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_4("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_5() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_5().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_5("");
 				}
 				
 				iesbForCircleForm.setLoanDirection(iesbForCircleForm.getLoanDirection_4().split("_")[1]);
 				
 				if(iesbForCircleForm.getLoanBelong1_1() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_1().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_1("");
 				}
+				
 				if(iesbForCircleForm.getLoanBelong1_2() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_2().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_2("");
 				}
+				
 				if(iesbForCircleForm.getLoanBelong1_3() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_3().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_3("");
 				}
+				
 				if(iesbForCircleForm.getLoanBelong1_4() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_4().split("_")[1]);
 				}
+				else{
+					iesbForCircleForm.setLoanBelong1_4("");
+				}
+				
 				if(iesbForCircleForm.getLoanBelong1_5() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_5().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_5("");
+				}
+				
+				if(StringUtils.isEmpty(iesbForCircleForm.getFeeAmount())){
+					iesbForCircleForm.setFeeAmount("0");
+				}
+				if(StringUtils.isEmpty(iesbForCircleForm.getFeeCcy())){
+					iesbForCircleForm.setFeeCcy("CNY");
 				}
 				
 				iesbForCircleForm.setRegPermResidence(iesbForCircleForm.getRegPermResidence_3().split("_")[1]);
@@ -288,49 +344,97 @@ public class IESBForCircleController extends BaseController{
 				//设置级联选项 级联未考虑空情况，已注释
 				if(iesbForCircleForm.getLoanKind_1() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_1().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_1("");
 				}
+				
 				if(iesbForCircleForm.getLoanKind_2() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_2().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_2("");
 				}
+				
 				if(iesbForCircleForm.getLoanKind_3() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_3().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_3("");
 				}
+				
 				if(iesbForCircleForm.getLoanKind_4() != null){
 					iesbForCircleForm.setLoanKind(iesbForCircleForm.getLoanKind_4().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanKind_4("");
 				}
 				
+				//
 				if(iesbForCircleForm.getAgriLoanKind_1() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_1().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_1("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_2() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_2().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_2("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_3() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_3().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_3("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_4() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_4().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_4("");
 				}
+				
 				if(iesbForCircleForm.getAgriLoanKind_5() != null){
 					iesbForCircleForm.setAgriLoanKind(iesbForCircleForm.getAgriLoanKind_5().split("_")[1]);
+				}else{
+					iesbForCircleForm.setAgriLoanKind_5("");
 				}
 				
+				//
 				iesbForCircleForm.setLoanDirection(iesbForCircleForm.getLoanDirection_4().split("_")[1]);
 				
+				//
 				if(iesbForCircleForm.getLoanBelong1_1() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_1().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_1("");
 				}
 				if(iesbForCircleForm.getLoanBelong1_2() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_2().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_2("");
 				}
+				
 				if(iesbForCircleForm.getLoanBelong1_3() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_3().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_3("");
 				}
+				
 				if(iesbForCircleForm.getLoanBelong1_4() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_4().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_4("");
 				}
+				
 				if(iesbForCircleForm.getLoanBelong1_5() != null){
 					iesbForCircleForm.setLoanBelong1(iesbForCircleForm.getLoanBelong1_5().split("_")[1]);
+				}else{
+					iesbForCircleForm.setLoanBelong1_5("");
+				}
+				
+				if(StringUtils.isEmpty(iesbForCircleForm.getFeeAmount())){
+					iesbForCircleForm.setFeeAmount("0");
+				}
+				if(StringUtils.isEmpty(iesbForCircleForm.getFeeCcy())){
+					iesbForCircleForm.setFeeCcy("CNY");
 				}
 				
 				iesbForCircleForm.setRegPermResidence(iesbForCircleForm.getRegPermResidence_3().split("_")[1]);
@@ -360,6 +464,5 @@ public class IESBForCircleController extends BaseController{
 		}
 		return returnMap;
 	}
-	
 }
 

@@ -11,7 +11,7 @@
       <div class="inquiry">
        <div class="search_tag">进件查询</div>
         <div class="search">
-          <form id="queryForm" action="${contextPath}/intopieces/intopiecesquery/queryResult.page">
+          <form id="queryForm" action="${contextPath}/intopieces/intopiecesquery/browse.page">
           <ul>
               <li>
                 <span>客户名称：<input type="text" id="chineseName" name="chineseName" value="$!result.filter.chineseName" /></span>
@@ -83,6 +83,7 @@
 	              #elseif($!intoPieces.status=='save')暂存 
 	              #elseif($!intoPieces.status=='nopass')申请未通过 
 	              #elseif($!intoPieces.status=='refuse')被拒绝
+	              #elseif($!intoPieces.status=='RETURNAPPROVE')审核退回
 	              #elseif($!intoPieces.status=='approved')审批结束  
 	              #elseif($!intoPieces.status=='succeed')申请成功 
 	              #end
@@ -103,6 +104,8 @@
           #btnpriv("approveloguser")<a class="btn_g" href="javascript:void(0);" title="查看审批记录(显示用户)" onclick="viewIntoPicesApproveHistory('YES')">查看审批记录(显示用户)</a>#end
            -->
           #btnpriv("approvelog")<a class="btn_g" href="javascript:void(0);" title="查看审批记录" onclick="viewIntoPicesApproveHistory('NO')">查看审批记录</a>#end
+          #btnpriv("scan")<a class="btn_g" href="javascript:void(0);" title="影像补扫" onclick="scan('NO')">影像补扫</a>#end
+          #btnpriv("approvelog")<a class="btn_g" href="javascript:void(0);" title="查看申请信息" onclick="viewIntoPicesApproveDisplay('YES')">查看申请信息</a>#end
         </div>
         #parse ("common/pagination.htm")
         <div class="clear"></div>
@@ -135,6 +138,37 @@
 		if(id!=null){
 			var url = contextPath+"/intopieces/intopiecesquery/findApproveHistoryById.page?id="+id+"&ifHideUser="+ifHideUser+"&dataType=application";
 			Dialog.table(url, "查看审批历史", "get", null, 800, 400);
+		}else{
+			Dialog.message("请选择要被查看的进件!");
+		}
+	}
+	//flag: 1:为影像补扫入口。null：内部审核
+	function scan(flag){
+		var id = null;
+		var appId = null;
+		$("input[name='checkbox']:checked").each(function() {
+			appId = $(this).val().split("_")[0];
+			id = $(this).val().split("_")[1];
+		});
+		if(id!=null){
+			var url="${contextPath}/intopieces/intopiecesapprove/sunds_ocx.page?appId=" + appId;
+			window.location.href = url;
+		
+		}else{
+			Dialog.message("请选择一条记录!");
+		}
+	}
+	function viewIntoPicesApproveDisplay(ifHideUser){
+		var rowId = null;
+		var appId = null;
+		$("input[name='checkbox']:checked").each(function() {
+			appId = $(this).val().split("_")[0];
+			rowId = $(this).val().split("_")[1];
+		});
+		if(rowId!=null){
+			var url="${contextPath}/intopieces/intopiecesxingzheng2/iframe_cardapprove.page?id="+rowId+"&appId="+appId+"&ifHideUser="+ifHideUser;
+			window.location.href = url;
+		
 		}else{
 			Dialog.message("请选择要被查看的进件!");
 		}

@@ -15,6 +15,8 @@
 		<result property="user_2" column="USER_2" />
 		<result property="user_3" column="USER_3" />
 		<result property="user_4" column="USER_4" />
+		<result property="docid" column="DOCID" />
+		<result property="uploadValue" column="UPLOAD_VALUE" />
 		<result property="createdBy" column="CREATED_BY" />
 		<result property="createdTime" column="CREATED_TIME" />
 	</resultMap>

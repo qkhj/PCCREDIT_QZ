@@ -21,7 +21,9 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td class="table-label">机构名称：</td>
 					<td><input type="text" value="$!qzApplnYwsqb.orgName" name="orgName" disabled><input type="hidden" name="orgId" value="$!qzApplnYwsqb.orgId"></select></td>
 					<td class="table-label">申请日期：</td>
-					<td><input type="text" name="applyTime" value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.applyTime)" onmouseover="_calendar()" readonly/></td>					
+					<td><input type="text" name="applyTime" 
+					#if($!qzApplnYwsqb.applyTime != $null) value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.applyTime)" #end 
+					onmouseover="_calendar()" readonly/></td>					
 				</tr>
 			</table>
 		</div>
@@ -230,7 +232,9 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td class="table-label">贷款用途：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="applyUse" value="$!qzApplnYwsqb.applyUse" /></td>	
 					<td class="table-label">申请到期日：<font color="#ff0000">*</font></td>					
-					<td><input type="text" name="applyEndTime" value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.applyEndTime)" onmouseover="_calendar()" readonly/></td>		
+					<td><input type="text" name="applyEndTime" 
+					#if($!qzApplnYwsqb.applyEndTime != $null) value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.applyEndTime)" #end 
+					onmouseover="_calendar()" readonly/></td>		
 				</tr>	
 				<tr>
 					<td class="table-label">月还款能力(万)：<font color="#ff0000">*</font></td>
@@ -507,7 +511,9 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td class="table-label">客户签名：<font color="#ff0000">*</font></td>
 					<td><input type="text" value="$!qzApplnYwsqb.sign" disabled/><input type="hidden" name="sign" value="$!qzApplnYwsqb.sign"/></td>	
 					<td class="table-label">签名日期：<font color="#ff0000">*</font></td>	
-					<td><input type="text" name="signDate" value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.signDate)" onmouseover="_calendar()" readonly/></td>	
+					<td><input type="text" name="signDate" 
+					#if($!qzApplnYwsqb.signDate != $null) value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.signDate)" #end
+					onmouseover="_calendar()" readonly/></td>	
 				</tr>	
 			</table>
 		</div><!--/content-->
@@ -561,7 +567,9 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 						<input type="hidden" name="managerName" value="$!qzApplnYwsqb.managerName"/>
 						<input type="hidden" name="managerId" value="$!qzApplnYwsqb.managerId"/></td>	
 					<td class="table-label">日期：<font color="#ff0000">*</font></td>	
-					<td><input type="text" name="managerTime" value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.managerTime)" onmouseover="_calendar()" readonly/></td>	
+					<td><input type="text" name="managerTime" 
+					#if($!qzApplnYwsqb.managerTime != $null) value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.managerTime)" #end 
+					onmouseover="_calendar()" readonly/></td>	
 				</tr>	
 			</table>
 		</div><!--/content-->
@@ -570,7 +578,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 </form>	
 <div class="controlbtn">
 	#if($!type=="readonly")
-		<a class="btn_gr"  onclick="parent.location.href = '${contextPath}${returnUrl}'" title="返回">返回</a>
+			<a class="btn_gr"  onclick="parent.location.href = '${contextPath}${returnUrl}'" title="返回">返回</a>
 	#else
 		<a id="id_save_button" class="btn_g" href="javascript:void(0);" title="提交">提交</a>
 		<a id="id_back_button" class="btn_gr" href="javascript:void(0);" title="返回">返回</a>
@@ -619,6 +627,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				$("input[type='text']").attr("disabled",true);
 				$("input[type='radio']").attr("disabled",true);
 				$("input[type='checkbox']").attr("disabled",true);
+				$("textarea").attr("disabled",true);
 				$("select").attr("disabled",true);
 			}
 			//保存

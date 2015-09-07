@@ -1145,7 +1145,6 @@ $.extend($.validator, {
 
 			return (nCheck % 10) === 0;
 		},
-
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function(value, element, param) {
 			// bind to the blur event of the target in order to revalidate whenever the target field is updated
@@ -1705,7 +1704,7 @@ $.validator.addMethod("isMymail",function(value, element){//
 //验证身份证号  
 $.validator.addMethod("idcard",function(value, element){//
 	var idReg = /(^\d{15}$)|(^\d{17}([0-9]|[X])$)/;
-	return this.optional(element)||(idReg.test(value));
+	return this.optional(element)||(idReg.test(value) & IdCardValidate(value));
 },"请输入正确的身份证号(15/18位)");
 
 //验证密码

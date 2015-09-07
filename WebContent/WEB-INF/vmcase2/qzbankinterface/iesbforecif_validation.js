@@ -1,7 +1,7 @@
 var validator = $($formName).validate({
 	rules:
     { 
-		globalId:{required:true},
+		globalId:{required:true,idcard:true},
 		globalDesc:{required:true},
 		issDate:{required:true},
 		effectDate:{required:true},

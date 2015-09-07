@@ -20,4 +20,5 @@ public interface YwsqbDao {
 	public void deleteYwsqbZygys(@Param("ywsqbId")String ywsqbId);
 	public void deleteYwsqbZykh(@Param("ywsqbId")String ywsqbId);
 	public void deleteYwsqbJkjl(@Param("ywsqbId")String ywsqbId);
+	public List<QzApplnYwsqb> findYwsqbforCustomerId(@Param("customerId")String customerId);
 }

@@ -46,14 +46,15 @@
           <table>
             <colgroup>
              <col width="5%" />
-             <col width="10%" />
+             <col width="8%" />
+              <col width="8%" />
               <col width="10%" />
-              <col width="10%" />
               <col width="10%"/>
-              <col width="15%"/>
+              <col width="12%"/>
               <col width="10%"/>
               <col width="10%"/>
-              <col width="13%"/>
+              <col width="10%"/>
+              <col width="20%"/>
             </colgroup>
             <tr class="title">
               <th nowrap="nowrap"></th>
@@ -65,6 +66,7 @@
               <th nowrap="nowrap">审核状态</th>
               <th nowrap="nowrap">申请时间</th>
               <th nowrap="nowrap">节点名称</th>
+              <th nowrap="nowrap">退回原因</th>
             </tr>
           </table>
         </div>
@@ -72,14 +74,15 @@
           <table>
             <colgroup>
               <col width="5%" />
-              <col width="10%" />
-              <col width="10%" />
+             <col width="8%" />
+              <col width="8%" />
               <col width="10%" />
               <col width="10%"/>
-              <col width="15%"/>
+              <col width="12%"/>
               <col width="10%"/>
               <col width="10%"/>
-              <col width="13%"/>
+              <col width="10%"/>
+              <col width="20%"/>
             </colgroup>
            #foreach ($wait in $result.items)
             <tr>
@@ -88,11 +91,15 @@
               <td nowrap="nowrap">$!wait.chineseName</td>
               <td nowrap="nowrap">$format.formatNumber($!wait.contractAmt, 2, 1)</td>
               <td nowrap="nowrap">#dictVal("CERT_TYPE",$!wait.cardType)</td>
-              
               <td nowrap="nowrap">$!wait.cardId</td>
-              <td nowrap="nowrap">#dictVal("applicationStatus",$!wait.status) </td>
+              <td nowrap="nowrap">#dictVal("applicationStatus",$!wait.status)</td>
               <td nowrap="nowrap">$!date.format("yyyy-MM-dd HH:mm:ss",$!wait.auditTime)</td>
               <td nowrap="nowrap">$!wait.nodeName</td>
+              #if($!wait.status=='RETURNAPPROVE')
+              <td nowrap="nowrap">$!wait.fallbackReason</td>
+              #else
+              <td nowrap="nowrap"></td>
+              #end
             </tr>
             #end
 

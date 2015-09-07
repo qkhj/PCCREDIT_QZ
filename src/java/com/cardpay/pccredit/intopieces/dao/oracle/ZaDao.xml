@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cardpay.pccredit.intopieces.dao.ZADao" >
+    <resultMap id="ResultMap" type="com.cardpay.pccredit.intopieces.model.QzApplnZa">
+        <result property="id" column="ID" />
+		<result property="originator" column="ORIGINATOR" />
+		<result property="initiator" column="INITIATOR" />
+		<result property="initDate" column="INIT_DATE" />
+		<result property="name" column="NAME" />
+		<result property="address" column="ADDRESS" />
+		<result property="code" column="CODE" />
+		<result property="sug" column="SUG" />
+		<result property="createdBy" column="CREATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+	</resultMap>
+    
+	<select id="findZaById" resultMap="ResultMap">
+		 select * 
+		 from qz_appln_za   
+		 where ID=#{id}
+	</select>
+	<select id="findAllZaByFilter" resultMap="ResultMap" parameterType="com.cardpay.pccredit.intopieces.filter.ZAFilter">
+		SELECT * FROM
+			(SELECT ROW_.*,ROWNUM ROWNUM_
+				FROM (
+					 SELECT *
+					 FROM  qz_appln_za t
+					 WHERE 1=1
+					 <if test="name != null and name != '' ">
+						<![CDATA[ and name like '%'||#{name}||'%']]>
+					 </if>
+			<![CDATA[
+					) ROW_
+				WHERE ROWNUM <= #{limit}*#{page} + #{limit}) 
+			WHERE ROWNUM_ > #{limit}*#{page}
+			]]>
+	</select>
+	<select id="findAllZaCountByFilter" resultType="int" parameterType="com.cardpay.pccredit.intopieces.filter.ZAFilter">
+		 SELECT count(*)
+		 FROM  qz_appln_za t
+		 WHERE 1=1
+		 <if test="name != null and name != '' ">
+			<![CDATA[ and name like '%'||#{name}||'%']]>
+		 </if>
+	</select>
+	
+	<delete id="deleteZAById" parameterType="String" >
+		delete from qz_appln_za
+		where ID = #{id}
+	</delete>
+	
+	<select id="findZas" resultType="com.cardpay.pccredit.intopieces.model.QzApplnZaReturnMap">
+		 select 
+		 ID as id,
+		 ORIGINATOR as originator,
+		 INITIATOR as initiator,
+		 to_char(INIT_DATE,'yyyy-mm-dd') as initDate,
+		 NAME as name,
+		 ADDRESS as address,
+		 CODE as code,
+		 SUG as sug
+		 from qz_appln_za 
+	</select>
+</mapper>

@@ -202,28 +202,45 @@ public class IntoPiecesXindaiControl extends BaseController {
 			mv.addObject("appId", appId);
 			mv.addObject("operate", Constant.status_xinshen);
 		}
-		
-		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
-		String loginId = user.getLogin();
-		String displayName = user.getDisplayName();
-		String orgId = user.getOrganization().getId();
-		String orgName = user.getOrganization().getName();
-		StringBuilder url = new StringBuilder(Constant.SunIASUrl);
-		url.append("UserID="+loginId+"&");
-		url.append("UserName="+displayName+"&");
-		url.append("OrgID="+orgId+"&");
-		url.append("OrgName="+orgName+"&");
-		url.append("right=1111&");
-		QzApplnAttachmentList qzApplnAttachmentList = attachmentListService.findAttachmentListByAppId(appId);
-		if(qzApplnAttachmentList.getBussType().equals("1"))//工薪类
-		{
-			url.append("info1=QKXFDW:"+appId.toUpperCase());
-		}
-		else//经营类
-		{
-			url.append("info1=QKJYDW:"+appId.toUpperCase());
-		}
-		mv.addObject("url", url);
 		return mv;
 	}
+	
+	/**
+	 * 申请件退件
+	 * 从填写合同--中心复核
+	 * @param filter
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "returnAppln.json")
+	public JRadReturnMap returnAppln(HttpServletRequest request) throws SQLException {
+		JRadReturnMap returnMap = new JRadReturnMap();
+		try {
+			String nodeNo = "";
+			String appId = request.getParameter("appId");
+			String operate = request.getParameter("operate");//当前审批节点
+			String nodeName = request.getParameter("nodeName");//退回目标节点（<item name="1" title="客户经理" />
+															    //<item name="2" title="初审" />
+															    //<item name="3" title="内部审查" />
+															    //<item name="4" title="授信审批" />
+															    //<item name="5" title="中心复核" />
+															    //<item name="6" title="填写合同信息" />）
+			if(operate.equals("填写合同信息")){
+				nodeNo = "6";
+			}
+			//退回客户经理和其他岗位不一致
+			if("1".equals(nodeName)){
+				intoPiecesService.checkDoNotToManager(appId,request,Integer.parseInt(nodeName),Integer.parseInt(nodeNo));
+			}else{
+				intoPiecesService.returnAppln(appId, request,Integer.parseInt(nodeName),Integer.parseInt(nodeNo));
+			}
+			returnMap.addGlobalMessage(CHANGE_SUCCESS);
+		} catch (Exception e) {
+			returnMap.addGlobalMessage("保存失败");
+			e.printStackTrace();
+		}
+		return returnMap;
+	}
+	
 }

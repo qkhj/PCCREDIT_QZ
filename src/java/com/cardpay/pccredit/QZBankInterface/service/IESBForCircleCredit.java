@@ -581,7 +581,7 @@ public class IESBForCircleCredit {
         //账号
         Field ACCT_NO=new Field(new FieldAttr(FieldType.FIELD_STRING, 50));
         //ACCT_NO.setValue("2233");//todo:传入账号
-        ACCT_NO.setValue(circle.getFeeAcctNo());//todo:传入账号
+        ACCT_NO.setValue(circle.getAcctNo2());//todo:传入账号 费用账号与放款账号一样 modified by nihc 20150718
         FeeArrayStruct.addField("ACCT_NO", ACCT_NO);
 
         //信息加入数组

@@ -105,5 +105,7 @@ public @interface JRadOperation {
 	
 	public static final long FEEDBACK = 549755813888L;
 	
+	public static final long SCAN = 1099511627776L;//影像补扫 
+	
 	
 }

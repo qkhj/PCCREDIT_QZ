@@ -24,6 +24,10 @@ public class QzApplnAttachmentList extends BusinessModel {
 	private String user_2;
 	private String user_3;
 	private String user_4;
+	
+	private String docid;
+	private String uploadValue;
+	
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -95,5 +99,17 @@ public class QzApplnAttachmentList extends BusinessModel {
 	}
 	public void setUser_4(String user_4) {
 		this.user_4 = user_4;
+	}
+	public String getDocid() {
+		return docid;
+	}
+	public void setDocid(String docid) {
+		this.docid = docid;
+	}
+	public String getUploadValue() {
+		return uploadValue;
+	}
+	public void setUploadValue(String uploadValue) {
+		this.uploadValue = uploadValue;
 	}
 }

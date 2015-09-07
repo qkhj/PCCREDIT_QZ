@@ -277,6 +277,9 @@ public class CustomerApplicationIntopieceWaitService {
 		} else if (StringUtils.isNotEmpty(applicationStatus) && applicationStatus.equals(ApplicationStatusEnum.REJECTAPPROVE)) {
 			String refusalReason = request.getParameter("reason");
 			customerApplicationProcess.setRefusalReason(refusalReason);
+		}else{
+			customerApplicationProcess.setRefusalReason("");
+			customerApplicationProcess.setFallbackReason("");
 		}
 		customerApplicationProcess.setProcessOpStatus(applicationStatus);
 		customerApplicationProcess.setSerialNumber(serialNumber);

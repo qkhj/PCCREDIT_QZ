@@ -97,8 +97,8 @@ public class CircleService {
 		}
 		acct_Info2.setCircleId(circle.getId());
 		acct_info_ls.add(acct_Info2);
-		//费用账号
-		CompositeData req3 = iesbForCore.createCoreRequest(circle.getFeeAcctNo());
+		//费用账号，由于费用屏蔽后不用填写费用账号，所以现在默认费用账号是放款账号
+		CompositeData req3 = iesbForCore.createCoreRequest(circle.getAcctNo2());
 		CompositeData resp3 = client.sendMess(req3);
 		if(resp3 == null){
 			return false;
@@ -124,7 +124,7 @@ public class CircleService {
 		if(res){
 			commonDao.insertObject(acct_Info1);
 			commonDao.insertObject(acct_Info2);
-			commonDao.insertObject(fee_Acct_Info);
+			//commonDao.insertObject(fee_Acct_Info);
 			return true;
 		}
 		else{
@@ -156,5 +156,10 @@ public class CircleService {
 	
 	public Circle findCircleByAppId(String applicationId) {
 		return circleDao.findCircleByAppId(applicationId);
+	}
+	
+	//按客户号查询circle
+	public List<Circle> findCircleByCardNo(String cardno) {
+		return circleDao.findCircleByCardNo(cardno);
 	}
 }

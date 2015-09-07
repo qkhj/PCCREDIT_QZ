@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.dc.eai.data.Array;
 import com.dc.eai.data.CompositeData;
 import com.dc.eai.data.Field;
@@ -28,7 +29,7 @@ public class IESBForED {
         CompositeData syaHead_struct = new CompositeData();
         //在syaHead_struct中加SERVICECODE
         Field serviceCodeField = new Field(new FieldAttr(FieldType.FIELD_STRING, 11));
-        serviceCodeField.setValue("02005000001");//
+        serviceCodeField.setValue("02002000005");//
         syaHead_struct.addField("SERVICE_CODE", serviceCodeField);
 
         //在syaHead_struct中加SERVICESCENE
@@ -38,7 +39,7 @@ public class IESBForED {
         
         //在syaHead_struct中加TRAN_DATE
         Field tran_datefield = new Field(new FieldAttr(FieldType.FIELD_STRING, 8));
-        tran_datefield.setValue("20150416"); //交易日期
+        tran_datefield.setValue("20161002"); //交易日期
         syaHead_struct.addField("TRAN_DATE", tran_datefield);
         
         //在syaHead_struct中加CONSUMER_ID
@@ -53,20 +54,24 @@ public class IESBForED {
 
         //客户号
         Field CLIENT_NO=new Field(new FieldAttr(FieldType.FIELD_STRING, 50));
-        CLIENT_NO.setValue("0000000761110009");//todo:传入客户号
+        CLIENT_NO.setValue("0000001052240009");//todo:传入客户号
         body_struct.addField("CLIENT_NO", CLIENT_NO);
         
         //操作类型
         Field OPERATION_TYPE=new Field(new FieldAttr(FieldType.FIELD_STRING, 10));
-        OPERATION_TYPE.setValue("10");//todo:操作类型
+        OPERATION_TYPE.setValue("30");//todo:操作类型
         body_struct.addField("OPERATION_TYPE", OPERATION_TYPE);
         
         //关联卡号
         Field LOAN_CARD_NO=new Field(new FieldAttr(FieldType.FIELD_STRING, 30));
-        LOAN_CARD_NO.setValue("6214373100000000511");//todo:传入关联卡号
+        LOAN_CARD_NO.setValue("6223700300000006303");//todo:传入关联卡号
         body_struct.addField("LOAN_CARD_NO", LOAN_CARD_NO);
 
         //新增字段
+        //合同号
+        Field CONTRACT_NO=new Field(new FieldAttr(FieldType.FIELD_STRING, 60));
+        CONTRACT_NO.setValue("");//个人资助
+        body_struct.addField("CONTRACT_NO", CONTRACT_NO);
         //业务类型
         Field APPLY_TYPE=new Field(new FieldAttr(FieldType.FIELD_STRING, 3));
         APPLY_TYPE.setValue("001");//个人资助
@@ -80,7 +85,30 @@ public class IESBForED {
      * 解析CompositeData报文
      * @param cd
      */
-    public static void parseCoreResponse(CompositeData cd) {
+    public static String parseCoreResponse(CompositeData cd) {
+    	if(cd == null){
+    		return null;
+    	}
+        CompositeData sysHead = cd.getStruct("SYS_HEAD");
 
+        //根据数组名称去获取数组
+        Array array = sysHead.getArray("RET");
+        
+        String RET_MSG = "";//交易返回信息
+        String RET_CODE = "";//交易返回码
+        
+        if(null != array && array.size() > 0){
+            int m = array.size();
+            CompositeData array_element = null;
+            for (int i = 0; i < m; i++) {
+                //数组中的元素也是CompositeData，这是固定的写法。根据游标就可以获取到数组中的所有元素
+                array_element = array.getStruct(i);
+
+                RET_MSG=array_element.getField("RET_MSG").strValue();
+                RET_CODE=array_element.getField("RET_CODE").strValue();
+            }
+        }
+        
+        return RET_CODE;
     }
 }

@@ -1,0 +1,74 @@
+#parse ("common/iframe_page_header.htm")
+<body>
+<div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">数据维护</div>
+      </div>
+		<form id="id_module_form">
+			<div class="forms" id="formsId">
+			<!--*************************************************************专案信息*************************************************************-->
+				<table class="rule" bordercolor="#CCCCCC" border="1">
+					<caption>数据维护</caption>
+					<colgroup>
+						<col width="15%">
+						<col width="85%">
+					</colgroup>
+					<tr>
+						<td class="table-label">输入sql语句：<font color="#ff0000">*</font></td>
+						<td><textarea id="sqltext" name="sqltext" >请输入sql语句</textarea></td>		
+					</tr>
+					
+				</table>	
+			</div>
+			<div class="submit">
+		      	<input id="id_save_button" type="button" value="#i18n("button.save")" class="current" />
+	      	</div>
+		</form>	
+	</div>
+  </div>
+	<script type="text/javascript">			
+
+	#set ($formName = "'#id_module_form'")
+
+	$(document).ready(function() {	
+		//保存
+		$("#id_save_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+			if ($($formName).valid()) {
+				var formjson = $($formName).serialize();
+				var url = "${contextPath}/intopieces/sqlinputupdate/insert.json";
+				$.ajax({
+					url : url,
+					type : "get",
+					data : formjson,
+					success : function(data) {
+						if (data.success) {
+							topWin.Dialog.message("执行成功");
+							window.location.href = "${contextPath}/intopieces/sqlinputupdate/create.page";
+						}
+						else{
+							topWin.Dialog.message("保存失败！");
+					    }
+						submitFlag = 0;
+					}
+				});
+			}else{
+				submitFlag = 0;
+			}
+		});
+		
+		$("#id_back_button").click(function() {
+			var url = "${contextPath}/intopieces/intopiecesapprove/approve.page";
+            parent.location.href = url;
+		})
+		
+	});
+	</script>	
+</body>
+</html>
+

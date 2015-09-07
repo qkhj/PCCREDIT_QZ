@@ -68,9 +68,17 @@
 								<input type="radio" name="businessType" value="0" #if($!person.businessType == '0') checked="checked" #end>&nbsp;否 </td>
 						</tr>
 						<tr>
+							<td><label for="gender">是否注销:</label></td>
+							<td><input type="radio" name="writtenOff" value="1" #if($!person.writtenOff == '1') checked="checked" #end>&nbsp;是&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="writtenOff" value="0" #if($!person.writtenOff == '0') checked="checked" #end>&nbsp;否 </td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
 							<td>#mi18n("description"):</td>
 							<td colspan="4"><textarea id="description"
-									name="description" rows="5" value="$!person.description"></textarea></td>
+									name="description" rows="5">$!person.description</textarea></td>
 						</tr>
 						</table>
 						<table style="border: 1px solid #dcdcdc;margin-bottom: 10px;">

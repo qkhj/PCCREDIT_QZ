@@ -202,8 +202,19 @@ public class IntoPiecesXingzhengbeginControl extends BaseController {
 	public JRadReturnMap returnAppln(HttpServletRequest request) throws SQLException {
 		JRadReturnMap returnMap = new JRadReturnMap();
 		try {
+			int nodeNo = 3;//内部审核
 			String appId = request.getParameter("appId");
-			intoPiecesService.returnAppln(appId, request);
+			String operate = request.getParameter("operate");
+			String nodeName = request.getParameter("nodeName");
+			if(Integer.parseInt(nodeName) > nodeNo){
+				returnMap.put(JRadConstants.SUCCESS, false);
+				returnMap.put(JRadConstants.MESSAGE, "退回进件不能退回至当前节点的后面~！");
+			}
+			if("1".equals(nodeName)){
+				intoPiecesService.checkDoNotToManager(appId,request,Integer.parseInt(nodeName),nodeNo);
+			}else{
+				intoPiecesService.returnAppln(appId, request,Integer.parseInt(nodeName),nodeNo);
+			}
 			returnMap.addGlobalMessage(CHANGE_SUCCESS);
 		} catch (Exception e) {
 			returnMap.addGlobalMessage("保存失败");
@@ -232,6 +243,13 @@ public class IntoPiecesXingzhengbeginControl extends BaseController {
 		mv.addObject("customerInfo", customerInfo);
 		QzApplnJyxx qzApplnJyxx = jyxxService.findJyxx(customerInfo.getId(), null);
 		mv.addObject("qzApplnJyxx", qzApplnJyxx);
+		
+		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
+		String loginId = user.getLogin();
+		String displayName = user.getDisplayName();
+		mv.addObject("displayName", displayName);
+		mv.addObject("loginId", loginId);
+		
 		return mv;
 	}
 	
@@ -249,29 +267,6 @@ public class IntoPiecesXingzhengbeginControl extends BaseController {
 			mv.addObject("appId", appId);
 			mv.addObject("operate", Constant.status_xingzheng1);
 		}
-		
-		IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
-		String loginId = user.getLogin();
-		String displayName = user.getDisplayName();
-		String orgId = user.getOrganization().getId();
-		String orgName = user.getOrganization().getName();
-		StringBuilder url = new StringBuilder(Constant.SunIASUrl);
-		url.append("UserID="+loginId+"&");
-		url.append("UserName="+displayName+"&");
-		url.append("OrgID="+orgId+"&");
-		url.append("OrgName="+orgName+"&");
-		url.append("right=1111&");
-		QzApplnAttachmentList qzApplnAttachmentList = attachmentListService.findAttachmentListByAppId(appId);
-		if(qzApplnAttachmentList.getBussType().equals("1"))//工薪类
-		{
-			url.append("info1=QKXFDW:"+appId.toUpperCase());
-		}
-		else//经营类
-		{
-			url.append("info1=QKJYDW:"+appId.toUpperCase());
-		}
-		mv.addObject("url", url);
 		return mv;
 	}
-
 }

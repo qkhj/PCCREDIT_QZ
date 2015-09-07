@@ -86,6 +86,19 @@
 		<result property="managerTime" column="MANAGER_TIME" />
 		<result property="createdBy" column="CREATED_BY" />
 		<result property="createdTime" column="CREATED_TIME" />
+		<result property="email" column="EMAIL" />
+		<result property="unit" column="UNIT" />
+		<result property="profession" column="PROFESSION" />
+		<result property="occupation" column="OCCUPATION" />
+		<result property="jobPost" column="JOB_POST" />
+		<result property="positionTitle" column="POSITION_TITLE" />
+		<result property="workYear" column="WORK_YEAR" />
+		<result property="unitPhone" column="UNIT_PHONE" />
+		<result property="unitAddress" column="UNIT_ADDRESS" />
+		<result property="companySize" column="COMPANY_SIZE" />
+		<result property="unitType" column="UNIT_TYPE" />
+		<result property="bussdistrictAddress" column="BUSSDISTRICT_ADDRESS" />
+		
 	</resultMap>
 	<resultMap id="ResultMapYwsqbZygys" type="com.cardpay.pccredit.intopieces.model.QzApplnYwsqbZygys">
 	    <result property="id" column="ID" />
@@ -155,6 +168,14 @@
 		where 1=1
 		<if test="ywsqbId != null and ywsqbId != '' ">
 			AND YWSQB_ID=#{ywsqbId}
+		</if>
+	</select>
+	<select id="findYwsqbforCustomerId" resultMap="ResultMapYwsqb">
+		 select * 
+		 from qz_appln_ywsqb   
+		 where 1=1
+	 	<if test="customerId != null and customerId != '' ">
+			AND CUSTOMER_ID=#{customerId}
 		</if>
 	</select>
 	<delete id="deleteYwsqbZygys" parameterType="String" >

@@ -1,5 +1,20 @@
 #parse ("common/iframe_page_header3.htm")
-
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	<style type="text/css">
+	.dialog1{position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(229,229,229,0.5);display:none;}
+		.dialog1 .dialog-box{width:400px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;margin:0 auto;margin-top:100px;padding:3px;}
+		.dialog1 .dialog-box .top{height:35px;background:url(${contextPath}/images/box_head_bg.png) repeat-x;line-height:35px;font-size:14px;padding-left:15px;font-weight:bold;}
+		.dialog1 .dialog-box .top span{display:inline-block;width:35px;height:35px;background:url(${contextPath}/images/box_delete_nor.png);float:right;}
+		.dialog1 .dialog-box .top span:hover{background:url(${contextPath}/images/box_delete_hov.png);}
+		.dialog1 .dialog-box .content{font-size:12px;color:#323232;padding-left:20px;}
+		.dialog1 .dialog-box .bottom{border-top:1px solid #dddddd;height:45px;text-align:center;line-height:45px;}
+		.dialog1 .dialog-box .bottom .btn{width:70px;height:26px;margin:0 5px;background:url(${contextPath}/images/icon_button_qx_normal.png) repeat-x;border:1px solid #818181;border-radius:5px;}
+		.dialog1 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
+		.dialog1 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
+		.dialog1 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
+</style>
+</head>
 <body>
       <form id="id_module_form">
         <div class="forms" id="formsId">
@@ -69,11 +84,9 @@
             </tr>
             <tr>
               <td><label>还款期限:</label><font color="#ff0000">*</font></td>
-              <td>
-              		<select name="term">
-                    	#dict("APPLY_DEADLINE", $!circle.term)
-                  	</select>
-              </td>
+              <td><select name="term">
+	                    	#dict("REPAYMENT_TERM",  $!circle.term)
+	                  	</select></td>
 			  <td><label>期限类型:</label></td>
               <td><select name="termType"  >#dict("TERM_TYPE", $!circle.termType)</select></td>
             </tr>
@@ -81,17 +94,23 @@
 			  <td><label>业务类型:</label></td>
               <td><select id="bussType" name="bussType"  >#dict("BUSS_TYPE", $!circle.bussType)</select></td>
               <td><label>合同金额(元):</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="contractAmt" name="contractAmt" value="$!circle.contractAmt"  /></td>
+              <td><input type="text" id="contractAmt" name="contractAmt" 
+              	#if($!operate=="填写合同信息")
+              		value="$!circle.contractAmt"
+              	#else
+              		value="$!jyd.jyje"
+              	#end
+               readonly /></td>
             </tr>
 			<tr>
               <td><label>登记人:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="registeredId" name="registeredId" value="$!circle.registeredId"  /></td>
+              <td><input type="text" id="registeredId" name="registeredId" value="$!circle.registeredId" readonly /></td>
 			  <td><label>登记机构:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="registOrgNo" name="registOrgNo" value="$!circle.registOrgNo"  /></td>
+              <td><input type="text" id="registOrgNo" name="registOrgNo" value="$!circle.registOrgNo" readonly /></td>
             </tr>
 			<tr>
               <td><label>入账机构码:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="incomeOrgNo" value="$!circle.incomeOrgNo"   /></td>
+              <td><input type="text" name="incomeOrgNo" value="$!circle.incomeOrgNo" readonly /></td>
 			  <td><label>登记日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="registeredDate" name="registeredDate" value="$date.format('yyyy-MM-dd', $!circle.registeredDate)"  onmouseover="_calendar()" readonly/></td>
             </tr>
@@ -99,7 +118,13 @@
               <td><label>顺延标志:</label></td>
               <td><select name="deferFlag"  >#dict("IS_DELAY", $!circle.deferFlag)</select></td>
 			  <td><label>年执行利率(%):</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="actIntRate" value="$!circle.actIntRate"  /></td>
+              <td><input type="text" name="actIntRate" 
+              	#if($!operate=="填写合同信息")
+              		value="$!circle.actIntRate"
+              	#else
+              		value="$!jyd.jyll"
+              	#end
+               readonly /></td>
             </tr>
 			<tr>
               <td><label>年逾期利率(%):</label><font color="#ff0000">*</font></td>
@@ -185,7 +210,7 @@
             </tr>
 			<tr>
               <td><label>管理机构:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="manaOrg" value="$!circle.manaOrg"  /></td>
+              <td><input type="text" name="manaOrg" value="$!circle.manaOrg" readonly /></td>
 			  <td><label>主管客户经理:</label></td>
               <td><select name="chiCustManager"  >#dict("IS_MAIN_MANAGER", $!circle.chiCustManager)</select></td>
             </tr>
@@ -200,9 +225,12 @@
             </colgroup>
 			<tr>
               <td><label>客户号:</label></td>
-              <td><input type="text" id="aClientNo" name="aClientNo" value="$!circle.aClientNo"  disabled/></td>
+              <td><input type="text" id="aClientNo" name="aClientNo" value="$!circle.aClientNo" readonly/>
+              #if($!operate=="填写合同信息")
+              <input type="button" value="获取" onclick="checkClientNo()">
+              #end</td>
 			  <td><label>客户名称:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="clientName" name="clientName" value="$!circle.clientName"  /></td>
+              <td><input type="text" id="clientName" name="clientName" value="$!circle.clientName" readonly /></td>
             </tr>
 			<tr>
               <td><label>性别:</label></td>
@@ -214,7 +242,7 @@
               <td><label>证件类型:</label><font color="#ff0000">*</font></td>
               <td><select id="globalType" name="globalType"  >#dict("CERT_TYPE", $!circle.globalType)</select></td>
 			  <td><label>证件号码:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="globalId" name="globalId" value="$!circle.globalId"  /></td>
+              <td><input type="text" id="globalId" name="globalId" value="$!circle.globalId" readonly /></td>
             </tr>
 			<tr>
               <td><label>长期证件标志:</label></td>
@@ -294,16 +322,16 @@
             </tr>
 			<tr>
               <td><label>上级机构:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="higherOrgNo" name="higherOrgNo" value="$!circle.higherOrgNo"  ></td>
+              <td><input type="text" id="higherOrgNo" name="higherOrgNo" value="$!circle.higherOrgNo" readonly ></td>
 			  <td><label>客户经理:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="acctExec" name="acctExec" value="$!circle.acctExec"  /></td>
+              <td><input type="text" id="acctExec" name="acctExec" value="$!circle.acctExec" readonly /></td>
             </tr>
 			<tr>
               <td><label>开户日期:</label><font color="#ff0000">*</font></td>
               <td colspan="3"><input type="text" id="openAcctDate" name="openAcctDate" value="$!date.format('yyyy-MM-dd', $!circle.openAcctDate)"  onmouseover="_calendar()" readonly/></td>
             </tr>
 		  </table>
-		  <table class="rule myTable" bordercolor="#cccccc" border="1">
+		  <!--<table class="rule myTable" bordercolor="#cccccc" border="1">
           <caption>费用信息</caption>
             <colgroup>
               <col width="10%" />
@@ -314,7 +342,7 @@
 			<tr>
               <td><label>币种:</label></td>
               <td><select name="feeCcy"  >#dict("CONT_CUR_TYPE", $!circle.feeCcy)</select></td>
-			  <td><label>费用金额:</label><font color="#ff0000">*</font></td>
+			  <td><label>费用金额(元):</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="feeAmount" value="$!circle.feeAmount"  /></td>
             </tr>
 			#if($!operate!="填写合同信息")
@@ -325,18 +353,43 @@
               <td><label>费用账号:</label><font color="#ff0000">*</font></td>
               <td colspan="3"><input type="text" name="feeAcctNo" value="$!circle.feeAcctNo"  /></td>
             </tr>
-		  </table>
+		  </table>  -->
         </div>
       </form>
+      <div class="dialog1">
+		<form id="checkForm1" class="dialog-box" style="height:200px;">
+			<input type="hidden" name="appId" id="appId" value="$!appId"/>
+			<input type="hidden" name="operate" id="operate" value="$!operate"/>
+			<div class="top">
+				退件 <span onclick="$('.dialog1').hide();"></span>
+			</div>
+			<div class="content" style="height:100px;padding-top:15px;">
+				<p>
+					退回至哪一个岗:<font color="red">*</font>
+					<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
+					退件原因:<font color="red">*</font>
+					<textarea name="remark" rows="2" style="width: 300px;"></textarea>
+				</p>
+			</div>
+			<div class="bottom">
+				<input id="id_re1_button" type="button" class="btn btn-submit" value="确定" /> 
+				<input type="button" class="btn" value="关闭" onclick="$('.dialog1').hide();" />
+			</div>
+		</form>
+	</div>
       <div class="submit controlbtn">
          <a id="id_save_button" class="btn_g" >保存</a>
-         #if($!operate=="填写合同信息")
+         #if($!operate=="填写合同信息" && $!circle.acctNo1 != $null)
          <a class="btn_g" id="id_zx_in_button">审批通过</a>
-         #elseif($!operate!="补充上会")
-		 
          #end
+         #if($!operate=="填写合同信息")
+         <a class="btn_g" id="id_zx_return_button">退件</a>
+         <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
+         #else
          <a class="btn_gr" onclick="parent.location.href='${contextPath}/intopieces/intopiecesapprove/approve.page'">返回</a>
+         #end 
       </div>
+      
   <script type="text/javascript">
     //新开户json信息
   	var ecif; 
@@ -373,7 +426,7 @@
 	#parse ("qzbankinterface/iesbforcircle_validation.js")
 	
 	$(document).ready(function() {	
-		
+
 		#parse("common/part_create.js")
 		
 		//保存按钮
@@ -515,6 +568,17 @@
 		$("#loanKind_4 option").each(function(){ //遍历全部option
 			loan_type_array4.push($(this));
 	    });
+		//判断级联是否为null
+		if("$!circle.loanKind_2" == ""){
+			$("#loanKind_2").empty();
+		}
+		if("$!circle.loanKind_3" == ""){
+			$("#loanKind_3").empty();
+		}
+		if("$!circle.loanKind_4" == ""){
+			$("#loanKind_4").empty();
+		}
+		
 		//涉农贷款类型
 		$("#agriLoanKind_2 option").each(function(){ //遍历全部option
 			agriculture_type_array2.push($(this));
@@ -528,6 +592,20 @@
 		$("#agriLoanKind_5 option").each(function(){ //遍历全部option
 			agriculture_type_array5.push($(this));
 	    });
+		//判断级联是否为null
+		if("$!circle.agriLoanKind_2" == ""){
+			$("#agriLoanKind_2").empty();
+		}
+		if("$!circle.agriLoanKind_3" == ""){
+			$("#agriLoanKind_3").empty();
+		}
+		if("$!circle.agriLoanKind_4" == ""){
+			$("#agriLoanKind_4").empty();
+		}
+		if("$!circle.agriLoanKind_5" == ""){
+			$("#agriLoanKind_5").empty();
+		}
+		
 		//贷款投向
 		$("#loanDirection_2 option").each(function(){ //遍历全部option
 			loan_direction_array2.push($(this));
@@ -551,6 +629,20 @@
 		$("#loanBelong1_5 option").each(function(){ //遍历全部option
 			loan_belong1_array5.push($(this));
 	    });
+		//判断级联是否为null
+		if("$!circle.loanBelong1_2" == ""){
+			$("#loanBelong1_2").empty();
+		}
+		if("$!circle.loanBelong1_3" == ""){
+			$("#loanBelong1_3").empty();
+		}
+		if("$!circle.loanBelong1_4" == ""){
+			$("#loanBelong1_4").empty();
+		}
+		if("$!circle.loanBelong1_5" == ""){
+			$("#loanBelong1_5").empty();
+		}
+		
 		//户籍所在地
 		$("#regPermResidence_2 option").each(function(){ //遍历全部option
 			indiv_brt_place_array2.push($(this));
@@ -609,6 +701,34 @@
 								}
 						}); 
                 		});
+		});
+		$('.dialog1').hide();
+		$("#id_zx_return_button").click(function() {
+			$('.dialog1').show();
+	  	});
+		//退回
+		$("#id_re1_button").click(function() {
+			Dialog.confirm("确定提交吗？", "提示",
+                function() {
+					$('.dialog1').hide();
+					#set ($formName = "'#checkForm1'")
+					var formjson = $($formName).serialize();
+					 $.ajax({
+							url : "${contextPath}/intopieces/intopiecesxindai/returnAppln.json",
+							type : "get",
+							data : formjson,
+							success : function(data) {
+								if (data.success) {
+									topWin.Dialog.message("保存成功!");	
+					            	var url = "${contextPath}${returnUrl}";
+					                parent.location.href = url;
+								}
+								else{
+									topWin.Dialog.message("保存失败！");
+							    }
+							}
+					}); 
+			});
 		});
 	});
 	
@@ -876,6 +996,31 @@
 		
 		$("#regPermResidence_3").css('visibility','visible');//IE7
 		
+	}
+	
+	//客户号获取
+	function checkClientNo(){
+		#set ($formName = "'#id_module_form'")
+		//if ($($formName).valid()) {
+			var formjson = $($formName).serialize();
+   	          
+   	       	var url = "${contextPath}/intopieces/intopiecesapprove/detect_clientNo.json?id=${circle.id}&customerId=${customerId}";
+   	       	$.ajax({
+				url : url,
+				type : "get",
+				data : formjson,
+				success : function(data) {
+					if (data.success) {
+						topWin.Dialog.message("获取成功");
+						window.location.reload(true);
+					}
+					else{
+						topWin.Dialog.message(data.message);
+				    }
+					submitFlag = 0;
+				}
+			});
+		//}
 	}
 	//担保方式细分
 	function change_guaranteeMode(obj){

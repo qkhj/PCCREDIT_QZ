@@ -94,6 +94,19 @@ public class QzApplnYwsqbForm extends BaseForm{
 	private String managerName;
 	private String managerId;
 	private Date managerTime;
+	private String email;
+	private String unit;
+	private String profession;
+	private String occupation;
+	private String jobPost;
+	private String positionTitle;
+	private String workYear;
+	private String unitPhone;
+	private String unitAddress;
+	private String companySize;
+	private String unitType;
+	private String bussdistrictAddress;
+	private String bussdisAddDetail;
 	
 	public String getApplicationId() {
 		return applicationId;
@@ -589,6 +602,84 @@ public class QzApplnYwsqbForm extends BaseForm{
 		obj.setBussType(this.getBussType());
 		obj.setBussTypeOther(this.getBussTypeOther());
 		return obj;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+	public String getProfession() {
+		return profession;
+	}
+	public void setProfession(String profession) {
+		this.profession = profession;
+	}
+	public String getOccupation() {
+		return occupation;
+	}
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+	public String getJobPost() {
+		return jobPost;
+	}
+	public void setJobPost(String jobPost) {
+		this.jobPost = jobPost;
+	}
+	public String getPositionTitle() {
+		return positionTitle;
+	}
+	public void setPositionTitle(String positionTitle) {
+		this.positionTitle = positionTitle;
+	}
+	public String getWorkYear() {
+		return workYear;
+	}
+	public void setWorkYear(String workYear) {
+		this.workYear = workYear;
+	}
+	public String getUnitAddress() {
+		return unitAddress;
+	}
+	public void setUnitAddress(String unitAddress) {
+		this.unitAddress = unitAddress;
+	}
+	public String getUnitPhone() {
+		return unitPhone;
+	}
+	public void setUnitPhone(String unitPhone) {
+		this.unitPhone = unitPhone;
+	}
+	public String getCompanySize() {
+		return companySize;
+	}
+	public void setCompanySize(String companySize) {
+		this.companySize = companySize;
+	}
+	public String getUnitType() {
+		return unitType;
+	}
+	public void setUnitType(String unitType) {
+		this.unitType = unitType;
+	}
+	public String getBussdistrictAddress() {
+		return bussdistrictAddress;
+	}
+	public void setBussdistrictAddress(String bussdistrictAddress) {
+		this.bussdistrictAddress = bussdistrictAddress;
+	}
+	public String getBussdisAddDetail() {
+		return bussdisAddDetail;
+	}
+	public void setBussdisAddDetail(String bussdisAddDetail) {
+		this.bussdisAddDetail = bussdisAddDetail;
 	}
 	
 }

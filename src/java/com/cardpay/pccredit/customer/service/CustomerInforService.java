@@ -120,6 +120,15 @@ public class CustomerInforService {
 	public CustomerInfor findCustomerInforByCardId(String cardId){
 		return customerinforcommDao.findCustomerInforByCardId(cardId);
 	}
+	
+	/**
+	 * 根据证件号码查询
+	 * 
+	 */
+	public CustomerInfor findCustomerInforByCustomerId(String customerId){
+		return customerinforcommDao.findCustomerInforByCustomerId(customerId);
+	}
+	
 	/**
 	 * 插入数据
 	 * @param customerinfo

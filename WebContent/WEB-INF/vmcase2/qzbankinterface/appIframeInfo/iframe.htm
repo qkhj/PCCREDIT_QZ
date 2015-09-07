@@ -12,7 +12,8 @@
 		<h1>添加客户信息</h1>
 	</div>
 	<ul class="Tabs">
-		<li class="active" onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page1.page?id=${customerId}')" style="margin-left:0;">贷款申请表</li>
+		<li class="active" onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page0.page?id=${customerId}')" style="margin-left:0;">选择产品</li>
+		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page1.page?id=${customerId}')" style="margin-left:0;">贷款申请表</li>
 		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page4_list.page?id=${customerId}')" style="margin-left:0;">担保人信息表</li>
 		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page5.page?id=${customerId}')" style="margin-left:0;">待上传资料清单</li>
 		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page7.page?id=${customerId}')" style="margin-left:0;">内部审查意见表</li>
@@ -23,7 +24,7 @@
 	<div class="TabContent" id="Content1">
 		<!--*************************************行内评分项*****************************************-->
 		<div class="tabContent selectTab" id="tabContent0">		
-			<iframe frameborder="0" id="contentFrame" width="100%;" src="${contextPath}/intopieces/intopiecesapprove/page1.page?id=${customerId}" marginheight="0" marginwidth="0" onload="this.height=this.contentWindow.document.body.scrollHeight"></iframe>
+			<iframe frameborder="0" id="contentFrame" width="100%;" src="${contextPath}/intopieces/intopiecesapprove/page0.page?id=${customerId}" marginheight="0" marginwidth="0" onload="this.height=this.contentWindow.document.body.scrollHeight"></iframe>
 		</div>
 	</div>
 	<script type="text/javascript">			

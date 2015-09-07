@@ -3,24 +3,24 @@ var validator = $($formName).validate({
     { 
 		checkDate:{required:true},
 		clientName:{required:true},
-		applyAmount:{required:true},
+		applyAmount:{required:true,number:true},
 		applyDeadline:{required:true},
 		sugContent:{required:true},
-		sugAmount:{required:true},
+		sugAmount:{required:true,number:true},
 		sugDeadline:{required:true},
-		sugRates:{required:true},
-		sugGuntType:{required:true}
+		sugRates:{required:true,number:true,min:1,max:100},
+		sugGuntType:{required:true},
      },
 messages:
     {
 		checkDate:{required:"内部审查日期不能为空"},
 		clientName:{required:"客户名称不能为空"},
-		applyAmount:{required:"申请金额不能为空"},
+		applyAmount:{required:"申请金额不能为空",number:"申请金额只能为数字"},
 		applyDeadline:{required:"申请期限不能为空"},
 		sugContent:{required:"建议结论不能为空"},
-		sugAmount:{required:"建议金额不能为空"},
+		sugAmount:{required:"建议金额不能为空",number:"建议金额只能为数字"},
 		sugDeadline:{required:"建议期限不能为空"},
-		sugRates:{required:"建议利率不能为空"},
+		sugRates:{required:"建议利率不能为空",number:"建议利率只能为数字",min:"建议利率不能小于1%",max:"建议利率不能大于100%"},
 		sugGuntType:{required:"担保方式不能为空"}
    },
 	errorPlacement : function(error, element) {

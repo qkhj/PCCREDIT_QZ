@@ -3,8 +3,8 @@
 
 <log4j:configuration>
 	<appender name="DEFAULT" class="org.apache.log4j.DailyRollingFileAppender">
-	    <!-- 测试环境 
-		<param name="File" value="/usr/cardpay/wls1036_dev/user_projects/domains/base_domain/server_logs/jrad/jrad.log" />-->
+	    <!-- 测试环境
+		<param name="File" value="/usr/cardpay/wls1036_dev/user_projects/domains/base_domain/server_logs/jrad/jrad.log" /> -->
 		<!-- 生产环境 -->
 		<param name="File" value="/home/pccredit/pccredit_log/jrad/jrad.log" />
 		<param name="Append" value="true" />

@@ -1,0 +1,27 @@
+
+<HTML><HEAD><TITLE>采集影像管理</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script language="javascript">
+	var docID = "";
+	function onLoadView(){  
+		if(parent.docID != ""){
+	    	docID = parent.docID;
+	        document.getElementById("docid").value=docID;
+	        var strIp = "168.168.241.75";//测试环境 
+	        //var strIp = "168.168.214.15"; //生产环境 
+	        var strPort = "8023";
+	        SunScan.TestInitScanWnd(strIp, strPort);
+	        var result = SunScan.ViewImageByCaseIDEx("WD_CASES",docID);//根据批次号查看ECM并下载影像到本地
+	    }
+    }
+</script>
+</HEAD>
+<body onload="onLoadView()" class="classEditBody" scroll="no">
+<div style="border:1px solid #CCCCCC;margin-bottom:10px;">
+    <OBJECT ID="SunScan" CLASSID="CLSID:F527871A-FF9C-4BEE-A015-C3D3C65DFFEA" CODEBASE="TerminalScan.ocx" width="100%" height="90%" border=0 >
+        </OBJECT>
+    
+</div>
+<input type="text" id="docid" name="docid" value="" size="50" disabled>
+</body>
+</html>

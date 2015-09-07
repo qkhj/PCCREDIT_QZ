@@ -37,6 +37,7 @@ import com.cardpay.pccredit.intopieces.dao.CustomerApplicationIntopieceWaitDao;
 import com.cardpay.pccredit.intopieces.dao.IntoPiecesDao;
 import com.cardpay.pccredit.intopieces.dao.JyxxDao;
 import com.cardpay.pccredit.intopieces.dao.YwsqbDao;
+import com.cardpay.pccredit.intopieces.dao.ZA_YWSQB_R_Dao;
 import com.cardpay.pccredit.intopieces.dao.comdao.IntoPiecesComdao;
 import com.cardpay.pccredit.intopieces.filter.IntoPiecesFilter;
 import com.cardpay.pccredit.intopieces.filter.MakeCardFilter;
@@ -61,6 +62,7 @@ import com.cardpay.pccredit.intopieces.model.QzApplnYwsqb;
 import com.cardpay.pccredit.intopieces.model.QzApplnYwsqbJkjl;
 import com.cardpay.pccredit.intopieces.model.QzApplnYwsqbZygys;
 import com.cardpay.pccredit.intopieces.model.QzApplnYwsqbZykh;
+import com.cardpay.pccredit.intopieces.model.QzAppln_Za_Ywsqb_R;
 import com.cardpay.pccredit.intopieces.model.VideoAccessories;
 import com.cardpay.pccredit.intopieces.web.ApproveHistoryForm;
 import com.cardpay.pccredit.intopieces.web.QzApplnSxjcForm;
@@ -115,6 +117,9 @@ public class YwsqbService {
 	
 	@Autowired
 	private JyxxDao jyxxDao;
+	
+	@Autowired
+	private ZA_YWSQB_R_Dao za_ywsqb_r_dao;
 	
 	//保存业务申请表
 	public void insert_page1(QzApplnYwsqb qzApplnYwsqb, QzApplnJyxx qzApplnJyxx,HttpServletRequest request) throws Exception{
@@ -175,6 +180,66 @@ public class YwsqbService {
 			}
 		}
 	}
+	
+	//保存业务申请表(贷生活)
+		public void insert_page1ForLife(QzApplnYwsqb qzApplnYwsqb, HttpServletRequest request) throws Exception{
+			commonDao.insertObject(qzApplnYwsqb);
+			String ywsqbId = qzApplnYwsqb.getId();
+			
+			//添加经营信息
+//			QzApplnJyxx tmp = jyxxDao.findJyxx(qzApplnYwsqb.getCustomerId(), null);
+//			if(tmp == null){
+//				commonDao.insertObject(qzApplnJyxx);
+//			}
+//			else{
+//				qzApplnJyxx.setId(tmp.getId());
+//				commonDao.updateObject(qzApplnJyxx);
+//			}
+			
+			//获取动态新增的页面元素
+			//主要供应商
+//			int zygys_cnt = Integer.parseInt(request.getParameter("zygys_cnt"));
+//			for(int i = 1;i<=zygys_cnt;i++){
+//				QzApplnYwsqbZygys obj = new QzApplnYwsqbZygys();
+//				obj.setYwsqbId(ywsqbId);
+//				obj.setLsh(i);
+//				obj.setName(request.getParameter("name_zygys_"+i));
+//				obj.setRate(request.getParameter("rate_zygys_"+i));
+//				obj.setCondition(request.getParameter("condition_zygys_"+i));
+//				commonDao.insertObject(obj);
+//			}
+			//主要客户
+//			int zykh_cnt = Integer.parseInt(request.getParameter("zykh_cnt"));
+//			for(int i = 1;i<=zykh_cnt;i++){
+//				QzApplnYwsqbZykh obj = new QzApplnYwsqbZykh();
+//				obj.setYwsqbId(ywsqbId);
+//				obj.setLsh(i);
+//				obj.setName(request.getParameter("name_zykh_"+i));
+//				obj.setRate(request.getParameter("rate_zykh_"+i));
+//				obj.setCondition(request.getParameter("condition_zykh_"+i));
+//				commonDao.insertObject(obj);
+//			}
+			//借款记录
+			if(qzApplnYwsqb.getBorrowHistory().equals("1")){
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				int jkjl_cnt = Integer.parseInt(request.getParameter("jkjl_cnt"));
+				for(int i = 1;i<=jkjl_cnt;i++){
+					QzApplnYwsqbJkjl obj = new QzApplnYwsqbJkjl();
+					obj.setYwsqbId(ywsqbId);
+					obj.setLsh(i);
+					obj.setBankOrOtherType(request.getParameter("bankOrOtherType_jkjl_"+i));
+					obj.setPurpose(request.getParameter("purpose_jkjl_"+i));
+					obj.setTotalAmount(request.getParameter("totalAmount_jkjl_"+i));
+					obj.setLoanDate(sdf.parse(request.getParameter("loanDate_jkjl_"+i)));
+					obj.setDeadline(request.getParameter("deadline_jkjl_"+i));
+					obj.setRates(request.getParameter("rates_jkjl_"+i));
+					obj.setRepayType(request.getParameter("repayType_jkjl_"+i));
+					obj.setRemainSum(request.getParameter("remainSum_jkjl_"+i));
+					commonDao.insertObject(obj);
+				}
+			}
+		}
 	
 	public void update_page1(QzApplnYwsqb qzApplnYwsqb,QzApplnJyxx qzApplnJyxx,HttpServletRequest request) throws Exception {
 		commonDao.updateObject(qzApplnYwsqb);
@@ -238,6 +303,67 @@ public class YwsqbService {
 		}
 	}
 	
+	public void update_page1ForLife(QzApplnYwsqb qzApplnYwsqb,HttpServletRequest request) throws Exception {
+		commonDao.updateObject(qzApplnYwsqb);
+		String ywsqbId = qzApplnYwsqb.getId();
+		
+		//添加经营信息
+//		QzApplnJyxx tmp = jyxxDao.findJyxx(qzApplnYwsqb.getCustomerId(), null);
+//		if(tmp == null){
+//			commonDao.insertObject(qzApplnJyxx);
+//		}
+//		else{
+//			qzApplnJyxx.setId(tmp.getId());
+//			commonDao.updateObject(qzApplnJyxx);
+//		}
+				
+		//获取动态新增的页面元素
+//		//主要供应商
+//		this.deleteYwsqbZygys(ywsqbId);
+//		int zygys_cnt = Integer.parseInt(request.getParameter("zygys_cnt"));
+//		for(int i = 1;i<=zygys_cnt;i++){
+//			QzApplnYwsqbZygys obj = new QzApplnYwsqbZygys();
+//			obj.setYwsqbId(ywsqbId);
+//			obj.setLsh(i);
+//			obj.setName(request.getParameter("name_zygys_"+i));
+//			obj.setRate(request.getParameter("rate_zygys_"+i));
+//			obj.setCondition(request.getParameter("condition_zygys_"+i));
+//			commonDao.insertObject(obj);
+//		}
+//		//主要客户
+//		this.deleteYwsqbZykh(ywsqbId);
+//		int zykh_cnt = Integer.parseInt(request.getParameter("zykh_cnt"));
+//		for(int i = 1;i<=zykh_cnt;i++){
+//			QzApplnYwsqbZykh obj = new QzApplnYwsqbZykh();
+//			obj.setYwsqbId(ywsqbId);
+//			obj.setLsh(i);
+//			obj.setName(request.getParameter("name_zykh_"+i));
+//			obj.setRate(request.getParameter("rate_zykh_"+i));
+//			obj.setCondition(request.getParameter("condition_zykh_"+i));
+//			commonDao.insertObject(obj);
+//		}
+		//借款记录
+		this.deleteYwsqbJkjl(ywsqbId);
+		if(qzApplnYwsqb.getBorrowHistory().equals("1")){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			int jkjl_cnt = Integer.parseInt(request.getParameter("jkjl_cnt"));
+			for(int i = 1;i<=jkjl_cnt;i++){
+				QzApplnYwsqbJkjl obj = new QzApplnYwsqbJkjl();
+				obj.setYwsqbId(ywsqbId);
+				obj.setLsh(i);
+				obj.setBankOrOtherType(request.getParameter("bankOrOtherType_jkjl_"+i));
+				obj.setPurpose(request.getParameter("purpose_jkjl_"+i));
+				obj.setTotalAmount(request.getParameter("totalAmount_jkjl_"+i));
+				obj.setLoanDate(sdf.parse(request.getParameter("loanDate_jkjl_"+i)));
+				obj.setDeadline(request.getParameter("deadline_jkjl_"+i));
+				obj.setRates(request.getParameter("rates_jkjl_"+i));
+				obj.setRepayType(request.getParameter("repayType_jkjl_"+i));
+				obj.setRemainSum(request.getParameter("remainSum_jkjl_"+i));
+				commonDao.insertObject(obj);
+			}
+		}
+	}
 	//查找page1 ywsqb信息
 	public QzApplnYwsqb findYwsqb(String customerId,String applicationId){
 		return ywsqbDao.findYwsqb(customerId, applicationId);
@@ -245,6 +371,10 @@ public class YwsqbService {
 	
 	public QzApplnYwsqb findYwsqbByAppId(String applicationId){
 		return ywsqbDao.findYwsqbByAppId(applicationId);
+	}
+	
+	public List<QzApplnYwsqb> findYwsqbforCustomerId(String customerId){
+		return ywsqbDao.findYwsqbforCustomerId(customerId);
 	}
 	
 	//查找page1 zygys信息
@@ -346,5 +476,17 @@ public class YwsqbService {
 		if(!qzApplnJyxx.getBussType().equals("3")){
 			qzApplnJyxx.setBussTypeOther("");
 		}
+	}
+
+	public void insert_page0(QzAppln_Za_Ywsqb_R qzappln_za_ywsqb_r) {
+		commonDao.insertObject(qzappln_za_ywsqb_r);
+	}
+	
+	public void update_page0(QzAppln_Za_Ywsqb_R qzappln_za_ywsqb_r) {
+		commonDao.updateObject(qzappln_za_ywsqb_r);
+	}
+	
+	public void updateYwsqb(QzApplnYwsqb qzApplnYwsqb) {
+		commonDao.updateObject(qzApplnYwsqb);
 	}
 }

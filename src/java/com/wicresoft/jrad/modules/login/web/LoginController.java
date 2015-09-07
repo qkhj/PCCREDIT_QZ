@@ -28,6 +28,8 @@ import com.wicresoft.jrad.base.web.security.LDAPConfig;
 import com.wicresoft.jrad.base.web.security.LoginManager;
 import com.wicresoft.jrad.base.web.utility.WebRequestHelper;
 import com.wicresoft.jrad.modules.log.business.LoginLogManager;
+import com.wicresoft.jrad.modules.privilege.business.UserManager;
+import com.wicresoft.jrad.modules.privilege.model.User;
 
 /**
  * Description of LoginController
@@ -54,6 +56,9 @@ public class LoginController implements JRadConstants {
 
 	@Autowired
 	private I18nHelper i18nHelper;
+	
+	@Autowired
+	private UserManager userManeger;
 
 	@RequestMapping(value = { "/login.html" })
 	public JRadModelAndView login(HttpServletRequest request) {
@@ -98,7 +103,8 @@ public class LoginController implements JRadConstants {
 			else if (AuthResultType.AUTH_ACCOUNT_NOT_LOCAL.equals(authResultType)) {
 //				errorCode = "system.auth.accountNotLocal";
 			}
-
+			
+			
 			String signInMsg = null;
 			if (errorCode != null) {
 				signInMsg = i18nHelper.getMessage(errorCode);
@@ -108,8 +114,17 @@ public class LoginController implements JRadConstants {
 			}
 			else {
 				IUser user = authResult.getUser();
-				loginManager.login(user, request);
-				signInMsg = i18nHelper.getMessage("system.auth.success");
+				User obj = userManeger.getUserById(user.getId());
+				if(obj.getWrittenOff().equals("1")){//判断是否注销
+					errorCode = "用户已注销";
+					errors.addGlobalError(errorCode);
+					returnMap.setSuccess(false);
+					returnMap.setErrors(errors);
+				}
+				else{
+					loginManager.login(user, request);
+					signInMsg = i18nHelper.getMessage("system.auth.success");
+				}
 			}
 
 			loginLogManager.addSignInLog(username, LoginManager.LOCAL, ipAddress, signInMsg);

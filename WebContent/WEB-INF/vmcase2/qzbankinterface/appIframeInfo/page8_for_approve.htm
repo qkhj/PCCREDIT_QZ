@@ -70,18 +70,11 @@
 								<td><b>姓名</b></td>	
 								<td><b>证件号码</b></td>		
 							</tr>
-							#if(!$gtjkrs)
+							#foreach ($result in $gtjkrs)
 							<tr>
-								<td><input type="text" name="gtjkrxm" readonly/></td>	
-								<td><input type="text" name="gtjkrhm" readonly/></td>		
+								<td><input type="text" name="gtjkrxm" value="$!result.name" readonly/></td>	
+								<td><input type="text" name="gtjkrhm" value="$!result.cardId" readonly/></td>		
 							</tr>
-							#else
-								#foreach ($result in $gtjkrs)
-								<tr>
-									<td><input type="text" name="gtjkrxm" value="$!result.name" readonly/></td>	
-									<td><input type="text" name="gtjkrhm" value="$!result.cardId" readonly/></td>		
-								</tr>
-								#end
 							#end
 						</table>
 					</td>	
@@ -95,22 +88,15 @@
 							
 								</td>		
 							</tr>
-							#if(!$bzdbs)
 							<tr>
 								<td><b>姓名</b></td>	
 								<td><b>证件号码</b></td>		
 							</tr>
+							#foreach ($result in $bzdbs)
 							<tr>
-								<td><input type="text" name="bzdbxm" readonly/></td>	
-								<td><input type="text" name="bzdbhm" readonly/></td>		
+								<td><input type="text" name="bzdbxm" value="$!result.name" readonly/></td>	
+								<td><input type="text" name="bzdbhm" value="$!result.cardId" readonly/></td>		
 							</tr>
-							#else
-								#foreach ($result in $bzdbs)
-								<tr>
-									<td><input type="text" name="bzdbxm" value="$!result.name" readonly/></td>	
-									<td><input type="text" name="bzdbhm" value="$!result.cardId" readonly/></td>		
-								</tr>
-								#end
 							#end
 						</table>
 					</td>	
@@ -131,33 +117,23 @@
 								<td><b>权证或单据号码</b></td>	
 								<td><b>可抵押价值</b></td>	
 							</tr>
-							#if(!$dydbs)
+							#foreach ($result in $dydbs)
 							<tr>
-								<td><input type="text" name="dyr" readonly/></td>	
-								<td><input type="text" name="dywmc" readonly/></td>	
-								<td><input type="text" name="sl" readonly/></td>	
-								<td><input type="text" name="djhm" readonly/></td>	
-								<td><input type="text" name="kdyjz" readonly/></td>		
+								<td><input type="text" name="dyr" value="$!result.userName" readonly/></td>	
+							<td><input type="text" name="dywmc" value="$!result.goodsName" readonly/></td>
+							<td><input type="text" name="sl" value="$!result.goodsCount" readonly/></td>
+							<td><input type="text" name="djhm" value="$!result.card" readonly/></td>
+							<td><input type="text" name="kdyjz" value="$!result.goodsValues" readonly/></td>	
 							</tr>
-							#else
-								#foreach ($result in $dydbs)
-								<tr>
-									<td><input type="text" name="dyr" value="$!result.userName" readonly/></td>	
-								<td><input type="text" name="dywmc" value="$!result.goodsName" readonly/></td>
-								<td><input type="text" name="sl" value="$!result.goodsCount" readonly/></td>
-								<td><input type="text" name="djhm" value="$!result.card" readonly/></td>
-								<td><input type="text" name="kdyjz" value="$!result.goodsValues" readonly/></td>	
-								</tr>
-								#end
 							#end
 						</table>
 					</td>	
 				</tr>	
 				<tr>
 					<td class="table-label" rowspan="12">授信决策情况</td>					
-					<td class="table-label">金额（万元）</td>					
+					<td class="table-label">金额(元)</td>					
 					<td colspan="3"><input type="text" name="je" value="$!result.je"/></td>					
-					<td class="table-label">年利率（%）</td>	
+					<td class="table-label">年利率(%)</td>	
 					<td colspan="3"><input type="text" name="ll" value="$!result.ll"/></td>	
 				</tr>	
 				<tr>				
@@ -175,19 +151,22 @@
 				<tr>				
 					<td class="table-label" rowspan="2">抵押担保</td>					
 					<td colspan="7">
-						<label><input type="radio" name="dydb1" onclick="$('#jy1').val('');$('#jy1').attr('disabled','disabled')" value="1" #if($!result.dydb1=='1') checked #end/>1、同意建议</label>
+						<label><input type="radio" name="dydb1" onclick="$('#jy1').val('');$('#jy1').attr('disabled','disabled')" value="1" 
+						#if($!result.dydb1==$null || $!result.dydb1=='1') checked #end/>1、同意建议</label>
 					</td>	
 				</tr>		
 				<tr>								
 					<td colspan="7">
-						<label><input type="radio" name="dydb1" value="2" onclick="$('#jy1').removeAttr('disabled')" #if($!result.dydb1=='2') checked #end/>2、对建议的补充或修改</label>
+						<label><input type="radio" name="dydb1" value="2" onclick="$('#jy1').removeAttr('disabled')" 
+						#if($!result.dydb1=='2') checked #end/>2、对建议的补充或修改</label>
 						<textarea name="dydb2" id="jy1"  #if($!result.dydb1!='2') disabled #end>$!result.dydb2</textarea>
 					</td>	
 				</tr>		
 				<tr>				
 					<td class="table-label" rowspan="2">保证担保</td>					
 					<td colspan="7">
-						<label><input type="radio" name="bzdb1" value="1" onclick="$('#jy2').val('');$('#jy2').attr('disabled','disabled')"   #if($!result.bzdb1=='1') checked #end />1、同意客户经理建议</label>
+						<label><input type="radio" name="bzdb1" value="1" onclick="$('#jy2').val('');$('#jy2').attr('disabled','disabled')"
+						#if($!result.bzdb1==$null || $!result.bzdb1=='1') checked #end />1、同意客户经理建议</label>
 					</td>	
 				</tr>		
 				<tr>								
@@ -251,10 +230,15 @@
 	</div>
 	
 	<script type="text/javascript">		
+		var layout=new FormsLayout("formsId");	
+		window.top.currentWindow.setLayout(layout);
+	
 		#set ($formName = "'#id_module_form'")
+		#parse ("qzbankinterface/appIframeInfo/page8_approve_validation.js")
+		
 		$(document).ready(function() {
 			if("${type}"=="readonly"){
-				$("input[type='text']").attr("disabled",true);
+				//$("input[type='text']").attr("disabled",true);
 				$("input[type='radio']").attr("disabled",true);
 				$("input[type='checkbox']").attr("disabled",true);
 				$("select").attr("disabled",true);
@@ -266,15 +250,30 @@
 					return;
 				}
 				submitFlag = 1;
-				var formjson = $($formName).serialize();
-	   	          $.post("${contextPath}/intopieces/intopiecesshouxin/page8insert.json?id=${customerId}&appId=${appId}", formjson, function(data, textStatus, jqXhr) {
-	   	            if (data.success) {
-	   	            	Dialog.message("保存成功!");
-	   	            }
-	   	         submitFlag = 0;
-   	          });
-			})
-		})
+				if ($($formName).valid()) {
+					var formjson = $($formName).serialize();
+					var url = "${contextPath}/intopieces/intopiecesshouxin/page8insert.json?id=${customerId}&appId=${appId}";
+					$.ajax({
+						url : url,
+						type : "get",
+						data : formjson,
+						success : function(data) {
+							if (data.success) {
+								topWin.Dialog.message("保存成功！");
+								window.location.reload(true);
+							}
+							else{
+								topWin.Dialog.message("保存失败！");
+						    }
+							submitFlag = 0;
+						}
+					});
+				}else{
+					submitFlag = 0;
+				}
+				
+			});
+		});
 		function checkJKTJ(obj){
 			$('.jktj').val('');
 			$('.jktj').attr('disabled','disabled');

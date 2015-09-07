@@ -223,7 +223,8 @@
 		A.AUDIT_TIME as auditTime,
 		A.id as processId,b.id as applicationId,
 		circle.CONTRACT_AMT as contractAmt,
-		su.DISPLAY_NAME as displayName
+		su.DISPLAY_NAME as displayName,
+		A.FALLBACK_REASON as fallbackReason
 		FROM
 		CUSTOMER_APPLICATION_INFO b,
 		BASIC_CUSTOMER_INFORMATION U,
@@ -237,7 +238,7 @@
 		and a.APPLICATION_ID=b.ID
 		AND N.ID=A.NEXT_NODE_ID
 		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
-		and b.status='audit' 
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
 		and circle.application_id = a.APPLICATION_ID
 		and u.user_id = su.id
 		<if test="cardId!=null and cardId!=''">
@@ -265,7 +266,7 @@
 		and a.APPLICATION_ID=b.ID
 		AND N.ID=A.NEXT_NODE_ID
 		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
-		and b.status='audit' 
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
 		<if test="cardId!=null and cardId!=''">
 			and U.card_id=#{cardId}
 		</if>
@@ -373,7 +374,8 @@
 		A.AUDIT_TIME as auditTime,
 		A.id as processId,b.id as applicationId,
 		circle.CONTRACT_AMT as contractAmt,
-		su.DISPLAY_NAME as displayName
+		su.DISPLAY_NAME as displayName,
+		A.FALLBACK_REASON as fallbackReason
 		FROM
 		CUSTOMER_APPLICATION_INFO b,
 		BASIC_CUSTOMER_INFORMATION U,
@@ -387,7 +389,7 @@
 		and a.APPLICATION_ID=b.ID
 		AND N.ID=A.NEXT_NODE_ID
 		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
-		and b.status='audit' 
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
 		and circle.application_id = a.APPLICATION_ID
 		and u.user_id = su.id
 		<if test="cardId!=null and cardId!=''">
@@ -397,9 +399,7 @@
 			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
 		</if>
 		
-		<if test="(cardId==null and chineseName==null) or (cardId=='' and chineseName=='')">
-			and U.card_id is null
-		</if>
+		
 		<if test="nodeName!=null and nodeName!=''">
 			and N.node_name=#{nodeName}
 		</if>
@@ -419,16 +419,14 @@
 		and a.APPLICATION_ID=b.ID
 		AND N.ID=A.NEXT_NODE_ID
 		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
-		and b.status='audit' 
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
 		<if test="cardId!=null and cardId!=''">
 			and U.card_id=#{cardId}
 		</if>
 		<if test="chineseName!=null and chineseName!=''">
 			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
 		</if>
-		<if test="(cardId==null and chineseName==null) or (cardId=='' and chineseName=='')">
-			and U.card_id is null
-		</if>
+		
 		<if test="nodeName!=null and nodeName!=''">
 			and N.node_name=#{nodeName}
 		</if>

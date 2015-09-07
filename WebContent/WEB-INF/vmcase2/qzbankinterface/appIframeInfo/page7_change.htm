@@ -25,11 +25,11 @@
 					<td><input type="text" value="$!customerInfo.chineseName" disabled/>
 						<input type="hidden" name="clientName" value="$!customerInfo.chineseName"/></td>
 					<td class="table-label">店铺/企业名称：</td>
-					<td><input type="text" value="$!qzApplnJyxx.shopName"/>
-						<input type="hidden" name="shopName" value="$!qzApplnJyxx.bussName"/></td>			
+					<td><input type="text" name="shopName" value="$!qzApplnNbscyjb.shopName"/>
+						<input type="hidden" name="bussName" value="$!qzApplnJyxx.bussName"/></td>			
 				</tr>
 				<tr>
-					<td class="table-label">申请金额：<font color="#ff0000">*</font></td>
+					<td class="table-label">申请金额(元)：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="applyAmount" value="$!qzApplnNbscyjb.applyAmount"/></td>
 					<td class="table-label">申请期限：<font color="#ff0000">*</font></td>
 					<td>
@@ -46,7 +46,7 @@
 					<td colspan="3"><textarea name="sugContent">$!qzApplnNbscyjb.sugContent</textarea></td>			
 				</tr>
 				<tr>
-					<td class="table-label">建议金额：<font color="#ff0000">*</font></td>
+					<td class="table-label">建议金额(元)：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="sugAmount" value="$!qzApplnNbscyjb.sugAmount"/></td>
 					<td class="table-label">建议期限：<font color="#ff0000">*</font></td>
 					<td>
@@ -56,7 +56,7 @@
 					</td>			
 				</tr>
 				<tr>
-					<td class="table-label">建议利率：<font color="#ff0000">*</font></td>
+					<td class="table-label">建议利率(年%)：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="sugRates" value="$!qzApplnNbscyjb.sugRates"/></td>
 					<td class="table-label">担保方式：<font color="#ff0000">*</font></td>
 					<td><select name="sugGuntType"/>#dict("ASSURE_MAIN", $!qzApplnNbscyjb.sugGuntType)</select></td>			
@@ -68,7 +68,7 @@
 	</div>
 </form>	
 <div class="controlbtn">
-#if($!type=="readonly")
+#if($!type=="readonly")		
 		<a class="btn_gr"  onclick="parent.location.href = '${contextPath}${returnUrl}'" title="返回">返回</a>
 	#else
 	<a id="id_save_button" class="btn_g" href="javascript:void(0);" title="提交">提交</a>
