@@ -519,4 +519,8 @@ public class AccountManagerParameterService {
 		String hierarchy = accountManagerParameter.getLevelInformation();
 		return accountManagerParameterComdao.getcustomerManagerTargetBymanagerIdDate(hierarchy, targetDate);
 	}
+	//获取用户角色
+	public String findRoleNameByUserId(String userId){
+		return accountManagerParameterDao.findRoleNameByUserId(userId);
+	}
 }

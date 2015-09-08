@@ -28,8 +28,10 @@ import com.cardpay.pccredit.customer.web.CustomerInforForm;
 import com.cardpay.pccredit.datapri.constant.DataPriConstants;
 import com.cardpay.pccredit.intopieces.constant.Constant;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationInfo;
+import com.cardpay.pccredit.intopieces.model.CustomerApplicationProcess;
 import com.cardpay.pccredit.intopieces.model.QzApplnJyd;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationInfoService;
+import com.cardpay.pccredit.intopieces.service.CustomerApplicationProcessService;
 import com.cardpay.pccredit.intopieces.service.IntoPiecesService;
 import com.cardpay.pccredit.ipad.util.JsonDateValueProcessor;
 import com.wicresoft.jrad.base.auth.IUser;
@@ -65,6 +67,9 @@ public class IESBForCircleController extends BaseController{
 	
 	@Autowired
 	private IntoPiecesService intoPiecesService;
+	
+	@Autowired
+	private CustomerApplicationProcessService customerApplicationProcessService;
 	
 	/**
 	 * 浏览页面
@@ -113,7 +118,9 @@ public class IESBForCircleController extends BaseController{
 		String ifHideUser = request.getParameter("ifHideUser");
 		IESBForECIFReturnMap ecif = eCIFService.findEcifMapByCustomerId(customerId);
 		mv.addObject("ecif",ecif);
-				
+		//根据appid（节点名称）获取节点id
+		CustomerApplicationProcess process =  customerApplicationProcessService.findByAppId(appId);
+		
 		Circle circle = null;
 		if(appId != null && !appId.equals("")){
 			circle = circleService.findCircleByAppId(appId);
@@ -128,6 +135,10 @@ public class IESBForCircleController extends BaseController{
 		mv.addObject("appId",appId);
 		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate));
 		mv.addObject("ifHideUser", ifHideUser);
+<<<<<<< HEAD
+=======
+		mv.addObject("nodeId", process==null?"":process.getNextNodeId());
+>>>>>>> chinhBy-master
 		return mv;
 	}
 	
@@ -144,10 +155,14 @@ public class IESBForCircleController extends BaseController{
 		
 		String customerId = request.getParameter(ID);
 		String appId = request.getParameter("appId");
-		String operate = request.getParameter("operate");
+		String operate = request.getParameter("operate");//settleDownLoan表示安居贷
 		IESBForECIFReturnMap ecif = eCIFService.findEcifMapByCustomerId(customerId);
 		JSONObject json = new JSONObject();
 		json = JSONObject.fromObject(ecif);
+		
+		//根据appid（节点名称）获取节点id
+		
+		CustomerApplicationProcess process =  customerApplicationProcessService.findByAppId(appId);
 		//获取决议单信息
 		QzApplnJyd jyd = intoPiecesService.getJydByCustomerId(customerId, appId);
 		//Circle circle = circleService.findCircleByClientNo(ecif.getClientNo());
@@ -187,6 +202,7 @@ public class IESBForCircleController extends BaseController{
 		mv.addObject("appId",appId);
 		mv.addObject("jyd",jyd);
 		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate));
+		mv.addObject("nodeId", process==null?"":process.getNextNodeId());
 		
 		return mv;
 	}
@@ -202,6 +218,7 @@ public class IESBForCircleController extends BaseController{
 	@RequestMapping(value = "insert.json")
 	public JRadReturnMap insert(@ModelAttribute IESBForCircleForm iesbForCircleForm, HttpServletRequest request) {
 		JRadReturnMap returnMap = new JRadReturnMap();
+		String appId = request.getParameter("appId");
 		if (returnMap.isSuccess()) {
 			try {
 				//设置级联选项 级联未考虑空情况，已注释
@@ -311,6 +328,7 @@ public class IESBForCircleController extends BaseController{
 				circle.setCreatedBy(user.getId());
 				circle.setUserId(user.getId());
 				circle.setCustomerId(request.getParameter("customerId"));
+				circle.setApplicationId(appId);
 				circleService.insertCustomerInforCircle(circle);
 				
 				returnMap.addGlobalMessage(CREATE_SUCCESS);
@@ -337,7 +355,7 @@ public class IESBForCircleController extends BaseController{
 	@RequestMapping(value = "update.json")
 	public JRadReturnMap update(@ModelAttribute IESBForCircleForm iesbForCircleForm, HttpServletRequest request) {
 		String circleId = request.getParameter(ID);
-		
+		String appId = request.getParameter("appId");
 		JRadReturnMap returnMap = new JRadReturnMap();
 		if (returnMap.isSuccess()) {
 			try {
@@ -450,6 +468,7 @@ public class IESBForCircleController extends BaseController{
 				circle.setUserId(user.getId());
 				circle.setId(circleId);
 				circle.setCustomerId(request.getParameter("customerId"));
+				circle.setApplicationId(appId);
 				circleService.updateCustomerInforCircle(circle);
 //				returnMap.put(RECORD_ID, id);
 				returnMap.addGlobalMessage(CREATE_SUCCESS);

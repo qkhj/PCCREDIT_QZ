@@ -70,7 +70,7 @@
               <th nowrap="nowrap">客户经理</th>
               <th nowrap="nowrap">客户名称</th>
               <th nowrap="nowrap">申请金额</th>
-              <th nowrap="nowrap">证件类型</th>
+              <th nowrap="nowrap">产品名称</th>
               <th nowrap="nowrap">证件号码</th>
               <th nowrap="nowrap">审核状态</th>
               <th nowrap="nowrap">申请时间</th>
@@ -99,7 +99,7 @@
               <td nowrap="nowrap">$!wait.displayName</td>
               <td nowrap="nowrap">$!wait.chineseName</td>
               <td nowrap="nowrap">$format.formatNumber($!wait.contractAmt, 2, 1)</td>
-              <td nowrap="nowrap">#dictVal("CERT_TYPE",$!wait.cardType)</td>
+              <td nowrap="nowrap">#dictVal("ProductName",$!wait.productId)</td>
               
               <td nowrap="nowrap">$!wait.cardId</td>
               <td nowrap="nowrap">#dictVal("applicationStatus",$!wait.status) </td>

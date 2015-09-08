@@ -7,6 +7,7 @@ package com.cardpay.pccredit.QZBankInterface.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -214,7 +215,7 @@ public class IESBForECIF {
         //登记日期
         Field REGISTERED_DATE = new Field(new FieldAttr(FieldType.FIELD_STRING, 10));
         //REGISTERED_DATE.setValue("20150414");//todo:传入登记日期，格式YYYYMMdd
-        REGISTERED_DATE.setValue(formatter8.format(ecif.getRegisteredDate()));//todo:传入登记日期，格式YYYYMMdd
+        REGISTERED_DATE.setValue((ecif.getRegisteredDate()==null) ? "":formatter8.format(ecif.getRegisteredDate()));//todo:传入登记日期，格式YYYYMMdd
         CLIENT_BELONG_INFO_STRUCT.addField("REGISTERED_DATE", REGISTERED_DATE);
 
         //信息加入body_struct
@@ -249,7 +250,7 @@ public class IESBForECIF {
         //登记日期
         Field ORG_REGISTERED_DATE = new Field(new FieldAttr(FieldType.FIELD_STRING, 10));
         //ORG_REGISTERED_DATE.setValue("20150414");//todo:传入登记日期，格式YYYYMMdd
-        ORG_REGISTERED_DATE.setValue(formatter8.format(ecif.getOrgRegisteredDate()));//todo:传入登记日期，格式YYYYMMdd
+        ORG_REGISTERED_DATE.setValue(ecif.getOrgRegisteredDate()==null ? "":formatter8.format(ecif.getOrgRegisteredDate()));//todo:传入登记日期，格式YYYYMMdd
         C_BELONG_ORG_INFO_STRUCT.addField("ORG_REGISTERED_DATE", ORG_REGISTERED_DATE);
 
         //信息加入body_struct

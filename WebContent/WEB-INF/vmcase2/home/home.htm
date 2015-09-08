@@ -89,6 +89,22 @@
 							  <em>$!productNumber</em>
 						   </a>
 						</li>
+						#if($!roleName=='客户经理角色')
+						<li>
+						   <a href="${contextPath}/afterloan/afterloancheck/browse.page">
+						      <span><font color="#FF0000">贷后需检查的客户数</font></span>
+							  <em><font color="#FF0000">$!loanCount</font></em>
+						   </a>
+						</li>
+						#end
+						#if($!roleName!='客户经理角色')
+						<li>
+						   <a href="${contextPath}/afterloan/afterloanremind/remind.page">
+						      <span><font color="#FF0000">贷后检查提醒</font></span>
+							  <em><font color="#FF0000">$!remindCount</font></em>
+						   </a>
+						</li>
+						#end
 					 </ul>
 				  </div>
 			   </div>

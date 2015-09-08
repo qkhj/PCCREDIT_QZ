@@ -329,8 +329,8 @@ public class CustomerInforUpdateService {
 	 * @return String
 	 */
     public String StoD(String val){
-		
-		if(val !=null && val!=""){
+    	//月份不用转换
+    	if(val !=null && val!="" && val.indexOf("-") == 0){
 			Double monthDouble = Double.parseDouble(val) * 100;
 			String monthValue = monthDouble.toString();
 			return monthValue;

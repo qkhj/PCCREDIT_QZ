@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<td class="table-label">客户名称：<font color="#ff0000">*</font></td>
-					<td><input type="text" value="$!customerInfo.chineseName" disabled/>
+					<td><input type="text" value="$!customerInfo.chineseName" readonly/>
 						<input type="hidden" name="clientName" value="$!customerInfo.chineseName"/></td>
 					<td class="table-label">店铺/企业名称：</td>
 					<td><input type="text" name="shopName" value="$!qzApplnNbscyjb.shopName"/>
@@ -84,11 +84,11 @@
 	
 	$(document).ready(function() {	
 		if("${type}"=="readonly"){
-			$("input[type='text']").attr("disabled",true);
-			$("input[type='radio']").attr("disabled",true);
-			$("input[type='checkbox']").attr("disabled",true);
-			$("select").attr("disabled",true);
-			$("textarea").attr("disabled",true);
+			$("input[type='text']").attr("readonly",true);
+			$("input[type='radio']").attr("readonly",true);
+			$("input[type='checkbox']").attr("readonly",true);
+			$("select").attr("readonly",true);
+			$("textarea").attr("readonly",true);
 		}
 		//保存
 		$("#id_save_button").click(function() {
@@ -107,7 +107,7 @@
 					success : function(data) {
 						if (data.success) {
 							topWin.Dialog.message("保存成功！");
-							window.location.href = "${contextPath}/intopieces/intopiecesapprove/page7.page?id=${qzApplnNbscyjb.customerId}";
+							window.location.href = "${contextPath}/intopieces/intopiecesapprove/page7.page?id=${qzApplnNbscyjb.customerId}&appId=${qzApplnNbscyjb.applicationId}";
 						}
 						else{
 							topWin.Dialog.message("保存失败！");

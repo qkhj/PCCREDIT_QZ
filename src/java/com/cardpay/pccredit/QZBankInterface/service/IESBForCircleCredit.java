@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,6 +132,7 @@ public class IESBForCircleCredit {
         //END_DATE.setValue(formatter10.format(circle.getEndDate()));//todo:传入结束日期
         //结束日期加上期限传给信贷
         END_DATE.setValue(formatter10.format(DateUtil.shiftMonth(circle.getEndDate(), Integer.parseInt(circle.getTerm()))));
+        //END_DATE.setValue(formatter10.format(circle.getEndDate()));
         body_struct.addField("END_DATE", END_DATE);
 
         //外币时需要换算
@@ -690,9 +692,11 @@ public class IESBForCircleCredit {
 			</SYS_HEAD>
 		</service>
      */
-	public boolean parseEcifResponse(CompositeData resp) {
+	public String parseEcifResponse(CompositeData resp,Circle circle) {
+		String retMsg = "";
 		if(resp == null){
-			return false;
+			retMsg = "解析放贷返回信息失败";
+			return retMsg;
 		}
 		CompositeData SYS_HEAD = resp.getStruct("SYS_HEAD");
 
@@ -700,6 +704,7 @@ public class IESBForCircleCredit {
         Array RET = SYS_HEAD.getArray("RET");
         
         String RET_CODE = "";
+        String RET_MSG = "";
         if(null != RET && RET.size() > 0){
             int m = RET.size();
             CompositeData array_element = null;
@@ -708,13 +713,21 @@ public class IESBForCircleCredit {
                 array_element = RET.getStruct(i);
 
                 RET_CODE = array_element.getField("RET_CODE").strValue();
+                RET_MSG = array_element.getField("RET_MSG").strValue();
             }
         }
+        //更新贷款信息表
+        circle.setRetCode(RET_CODE);
+        circle.setRetMsg("000000".equals(RET_CODE) ? "放款成功" : RET_MSG);
+        circle.setRetContno("000000".equals(RET_CODE) ? RET_MSG : "");
+        commonDao.updateObject(circle);
         if(RET_CODE.equals( com.cardpay.pccredit.QZBankInterface.constant.Constant.RET_CODE_CIRCLE)){
-        	return true;
+        	retMsg ="放款成功";
+        	return retMsg;
         }
         else{
-        	return false;
+        	retMsg = RET_MSG;
+        	return retMsg;
         }
 	}
 }

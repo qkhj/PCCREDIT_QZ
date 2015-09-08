@@ -29,6 +29,9 @@ public class IESBForCore {
 	
 	@Autowired
 	private IESBForCircleCredit iesbForCircleCredit;
+	
+	@Autowired
+	private IESBForCredit IESBForCredit;
     /**
      * 组装CompositeData报文
      * @return
@@ -82,7 +85,7 @@ public class IESBForCore {
      */
     public Circle_ACCT_INFO parseCoreResponse(CompositeData cd,String type) {
     	
-    	boolean res = iesbForCircleCredit.parseEcifResponse(cd);
+    	boolean res = IESBForCredit.parseEcifResponse(cd);
     	if(res){
     		Circle_ACCT_INFO circle_ACCT_INFO = new Circle_ACCT_INFO();
         	

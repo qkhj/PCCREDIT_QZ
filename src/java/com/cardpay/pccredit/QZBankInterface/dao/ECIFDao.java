@@ -10,6 +10,7 @@ import com.cardpay.pccredit.QZBankInterface.web.IESBForECIFReturnMap;
 import com.cardpay.pccredit.customer.filter.AmountAdjustmentFilter;
 import com.cardpay.pccredit.customer.filter.CustomerInforFilter;
 import com.cardpay.pccredit.customer.model.CustomerInfor;
+import com.cardpay.pccredit.intopieces.model.IntoPieces;
 import com.wicresoft.jrad.base.database.model.QueryResult;
 import com.wicresoft.util.annotation.Mapper;
 
@@ -24,7 +25,9 @@ public interface ECIFDao {
 
 	public ECIF findEcifByClientNo(@Param("clientNo") String clientNo);
 
-	public List<CustomerInfor> findCustomerInforWithEcifByFilter(CustomerInforFilter filter);
+	public List<IntoPieces> findCustomerInforWithEcifByFilter(CustomerInforFilter filter);
+	
+	public List<CustomerInfor> findCustomerInfoWithEcifByFilter(CustomerInforFilter filter);
 
 	public int findCustomerInforWithEcifCountByFilter(CustomerInforFilter filter);
 
@@ -32,4 +35,11 @@ public interface ECIFDao {
 	
 	public ECIF findEcifByCustomerId(@Param("customerId") String customerId);
 	
+	public List<CustomerInfor> findCustomerInfoWithLoanByFilter(CustomerInforFilter filter);
+	
+	public int findCustomerInfoWithLoanCountByFilter(CustomerInforFilter filter);
+	
+	public List<CustomerInfor> findCustomerInfoWithNotByFilter(CustomerInforFilter filter);
+	
+	public int findCustomerInfoWithNotCountByFilter(CustomerInforFilter filter);
 }

@@ -220,6 +220,7 @@ public class ProductController extends BaseController {
 				String loginId = user.getId();
 				ProductAttribute productAttribute = productAttributeForm.createModel(ProductAttribute.class);
 				productAttribute.setCreatedBy(loginId);
+				productAttribute.setDefaultType(productAttributeForm.getDefaultType());
 				Map<String, String> result = UploadFileTool.uploadYxzlFileBySpring(file);
 				String fileName = result.get("fileName");
 				String pictureUrl = result.get("url");

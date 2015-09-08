@@ -259,19 +259,45 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <select id="findCustomerApplicationInfoCount" resultType="int">
-  select count(*) from customer_application_info c
-  left join 
-  basic_customer_information b
-  on c.customer_id = b.id
-  where b.user_id=#{userId}
-  <if test="status1!=null and status1!=''">
-  and (STATUS = #{status1,jdbcType=VARCHAR}
-  </if>
-  <if test="status2!=null and status2!=''">
-  	or STATUS = #{status2}
-  </if>
-  <if test="status1!=null and status1!=''">
-  )
-  </if>
+      select count(*) from(
+  SELECT
+	cai. ID,
+	cai.customer_id,
+	cai.chinese_name,
+	cai.product_id,
+	cai.card_id,
+	cai.apply_quota,
+	cai.status
+FROM
+	(
+		SELECT
+			*
+		FROM
+			WF_PROCESS_RECORD
+	) wsqr
+LEFT JOIN (
+	SELECT
+		T . ID,
+		T .customer_id,
+		b.chinese_name,
+		T .product_id,
+		b.card_id,
+		T .apply_quota,
+		T .status,
+		T .SERIAL_NUMBER
+	FROM
+		customer_application_info T
+	LEFT JOIN basic_customer_information b ON T .customer_id = b. ID
+	where 1=1
+		<if test="status1!=null and status1!=''">
+		  and (STATUS = #{status1,jdbcType=VARCHAR}
+	  	</if>
+	  <if test="status2!=null and status2!=''">
+	  	or STATUS = #{status2}
+	  </if>
+	  <if test="status1!=null and status1!=''">
+	  )
+	  </if>
+) cai ON wsqr.id = CAI.SERIAL_NUMBER)
   </select>
 </mapper>

@@ -82,7 +82,7 @@ public class IESBForECIFController extends BaseController{
 		filter.setRequest(request);
         IUser user = Beans.get(LoginManager.class).getLoggedInUser(request);
 		filter.setUserId(user.getId());
-		QueryResult<CustomerInfor> result = customerInforservice.findCustomerInforWithEcifByFilter(filter);
+		QueryResult<CustomerInfor> result = customerInforservice.findCustomerInfoWithEcifByFilter(filter);
 		for(int i=0;i<result.getItems().size();i++){
 				CustomerApplicationInfo info = customerInforservice.ifProcess(result.getItems().get(i).getId());
 				//目前存在申请件

@@ -3,15 +3,30 @@
 	<menu id="000000" name="" title="所有资源" url="" img="" operations="" >
 		<menu id="010000" name="home" title="系统首页" url="/home.page" img="images/icon_4.png" operations=""/>
 		<menu id="030000" name="intopieces" title="进件管理" url="" img="images/icon_sys.gif" operations="">
-			<menu id="030010" name="intopiecesquery" title="进件查询" url="/intopieces/intopiecesquery/browse.page" img="" operations="create|addbatch|change|display|import|approveloguser|approvelog|browse"/>
-			<!-- <menu id="030020" name="applyintopieces" title="申请审批进件" url="/intopieces/applyintopieces/browse.page" img="" operations="create|change|delete|display|browse"></menu> -->
+			<menu id="030010" name="intopiecesquery" title="进件查询" url="/intopieces/intopiecesquery/browse.page" img="" operations="create|addbatch|change|display|import|approveloguser|approvelog|browse|scan"/>
+			<menu id="030011" name="intopiecesqueryAll" title="进件查询(中心岗)" url="/intopieces/intopiecesqueryAll/browseAll.page" img="" operations="browse|scan"/>
+			<!-- <menu id="030070" name="circle" title="申请循环贷款" url="/intopieces/circle/browse.page" img="" operations="create|display|browse"/> -->
+			<!-- <menu id="030080" name="credit" title="申请传统贷款" url="/intopieces/credit/create.page" img="" operations="create|browse"/> 传统贷不在本系统操作 -->
+			<!-- <menu id="030003" name="intopiecessearch" title="查询进件" url="/intopieces/intopiecessearch/search.page" img="" operations="browse"></menu> -->
+			<menu id="030001" name="intopiecesapprove" title="申请进件" url="/intopieces/intopiecesapprove/approve.page" img="" operations="browse|create"></menu>
+			<menu id="030002" name="intopiecesreceive" title="初审进件" url="/intopieces/intopiecesrecieve/chushen.page" img="" operations="browse|create"></menu>
+			<menu id="030004" name="intopiecesxingzheng1" title="内部审查" url="/intopieces/intopiecesxingzheng1/xingzhengbegin.page" img="" operations="browse|create"></menu>
+			<menu id="030005" name="intopiecesshouxin" title="授信审批" url="/intopieces/intopiecesshouxin/shouxin.page" img="" operations="browse|create"></menu>
+			<menu id="030009" name="intopiecessonelevel" title="一级支行行长审批" url="/intopieces/intopiecesonelevel/onelevel.page" img="" operations="browse|create"></menu>
+			<menu id="030012" name="intopiecestwolevel" title="二级支行行长审批" url="/intopieces/intopiecestwolevel/twolevel.page" img="" operations="browse|create"></menu>
+			<menu id="030006" name="intopieceszhongxin" title="中心复核" url="/intopieces/intopieceszhongxin/zhongxin.page" img="" operations="browse|create"></menu>
+			<menu id="030007" name="intopiecesxindai" title="填写合同信息" url="/intopieces/intopiecesxindai/xindai.page" img="" operations="browse|create"></menu>
+			<menu id="030008" name="intopiecesxingzheng2" title="中心终审" url="/intopieces/intopiecesxingzheng2/xingzhengend.page" img="" operations="browse|create"></menu>
+			<menu id="030013" name="quotafreezeorthaw" title="进件额度冻结/解冻" url="/intopieces/quotafreezeorthaw/browse.page" img="" operations="browse|freeze|thaw|contend"></menu>
+			
+			<!-- <menu id="030020" name="applyintopieces" title="申请审批进件" url="/intopieces/applyintopieces/browse.page" img="" operations="create|change|delete|display|browse"></menu> 
 			<menu id="030020" name="applyintopiecewait" title="申请件待审核" url="/intopieces/applyintopiecewait/browse.page" img="" operations="approve|applyapprove|browse"></menu>
-			<!-- <menu id="030030" name="applyintopiecesquery" title="申请件上传银联" url="/intopieces/applyintopiecesquery/applyIntopiecesQuery.page" img="" operations="exportupload|display|browse"></menu> -->
+			<menu id="030030" name="applyintopiecesquery" title="申请件上传银联" url="/intopieces/applyintopiecesquery/applyIntopiecesQuery.page" img="" operations="exportupload|display|browse"></menu> 
 			<menu id="030040" name="carcenter" title="卡中心卡片管理" url="/intopieces/carcenter/queryCard.page" img="" operations="create|issuedorg|display|browse"></menu>
-			<menu id="030050" name="orgnization" title="分支机构卡片管理" url="/intopieces/orgnization/managerQueryCard.page" img="" operations="issuedcustomer|display|browse"></menu>
-		</menu>
+			<menu id="030050" name="orgnization" title="分支机构卡片管理" url="/intopieces/orgnization/managerQueryCard.page" img="" operations="issuedcustomer|display|browse"></menu>-->		</menu>
 		<menu id="040000" name="customer" title="客户管理" operations="">
-			<menu id="040010" name="basiccustomerinfor" title="客户原始信息管理" url="/customer/basiccustomerinfor/intopiecesbrowse.page" img="" operations="approveloguser|approvelog|displayaccount|display|browse"/>
+		    <menu id="040001" name="ecif" title="客户查询" url="/customer/ecif/browse.page" img="" operations="create|display|browse"/>
+			<!-- <menu id="040010" name="basiccustomerinfor" title="客户原始信息管理" url="/customer/basiccustomerinfor/intopiecesbrowse.page" img="" operations="approveloguser|approvelog|displayaccount|display|browse"/>
 			<menu id="040011" name="basiccustomerinforCreate" title="客户信息新增" url="/customer/basiccustomerinforCreate/insert.page" img="" operations="create|browse"/>
 			<menu id="040012" name="basiccustomerinforUpdate" title="客户维护信息" url="/customer/basiccustomerinforUpdate/browse.page" img="" operations="create|change|transfer|maintenance|addblacklist|browse|delete"/>
 			<menu id="040013" name="basiccustomerinforAssess" title="客户评估信息" url="/customer/basiccustomerinforAssess/browse.page" img="" operations="create|change|delete|display|browse"/>
@@ -23,7 +38,12 @@
 			<menu id="040019" name="customermaintenancelog" title="客户维护信息日志列表" url="/customer/customermaintenancelog/browse.page" img="" operations="display|browse|change"/>
 			<menu id="040020" name="adjustmentquota" title="客户调额生成" url="/customer/adjustmentquota/browse.page" img="" operations="amountadjustment|browse"/>
 			<menu id="040021" name="amountadjustment" title="客户调额待审核" url="/customer/amountadjustment/browse.page" img="" operations="approve|applyapprove|browse"/>
-			<menu id="040022" name="amountadjustmentview" title="客户调额查看" url="/customer/amountadjustmentview/browse.page" img="" operations="browse"/>
+			<menu id="040022" name="amountadjustmentview" title="客户调额查看" url="/customer/amountadjustmentview/browse.page" img="" operations="browse"/> -->
+		</menu>
+		<menu id="110000" name="afterloan" title="贷后管理" url="" img="images/icon_sys.gif" operations="">
+			<menu id="110010" name="afterloancheck" title="贷后检查" url="/afterloan/afterloancheck/browse.page" img="" operations="browse"/>
+			<menu id="110020" name="afterloanapprove" title="贷后检查审核" url="/afterloan/afterloanapprove/approve.page" img="" operations="browse"/>
+			<menu id="110030" name="afterloanremind" title="贷后检查提醒" url="/afterloan/afterloanremind/remind.page" img="" operations="browse"/>
 		</menu>
 		<menu id="050000" name="divisional" title="分案管理" operations=""> 
 			<menu id="050010" name="customerallot" title="客户主管分配" url="/divisional/customerallot/browse.page" img="" operations="distribution|browse"/>
@@ -35,6 +55,7 @@
 			<menu id="060010" name="productinformation" title="产品信息" url="/product/productinformation/browse.page" img="" operations="create|change|display|browse|confignodeintopieces|confignodeamountadjustment"/>
 			<menu id="060020" name="productpublic" title="产品发布（卡中心）" url="/product/productpublic/browse.page" img="" operations="approvepass|published|browse"/>
 			<menu id="060030" name="productfilter" title="产品筛选准入规则配置" url="/product/productfilter/browse.page" img="" operations="create|delete|browse"/>
+			<menu id="060040" name="zainformation" title="专案管理" url="/product/zainformation/browse.page" img="" operations="create|delete|browse"/>
 		</menu>
 		<menu id="070000" name="manager" title="客户经理管理" url="" img="images/icon_sys.gif" operations="">
 		    <menu id="070001" name="managercreate" title="客户经理参数配置" url="/manager/managercreate/browse.page" img="" operations="create|change|delete|display|browse"/>
@@ -87,23 +108,25 @@
 		</menu>
 		
 		<menu id="100000" name="report" title="报表统计" url="" img="images/icon_sys.gif" operations="">
-			<menu id="100010" name="cardmanagerdimension" title="客户经理“灵活金”发卡情况统计" url="/report/cardmanagerdimension/browse.page" img="" operations="browse"/>
-			<menu id="100020" name="cardorgdimension" title="支行“灵活金”发卡情况统计" url="/report/cardorgdimension/browse.page" img="" operations="browse"/>
-			<menu id="100030" name="acctmanagerdimension" title="客户经理“灵活金”透支情况统计" url="/report/acctmanagerdimension/browse.page" img="" operations="browse"/>
-			<menu id="100040" name="acctorgdimension" title="支行“灵活金”透支情况统计" url="/report/acctorgdimension/browse.page" img="" operations="browse"/>
-			<menu id="100041" name="intelligentcustomerreport" title="客户信息智能报表" url="/report/intelligentcustomerreport/browse.page" img="" operations="create|change|delete|display|browse"/>
+		    <menu id="100001" name="circlebilllist" title="贷款借据清单" url="/report/afteraccloanlist/browse.page" img="" operations="browse"/>
+		    <menu id="100002" name="circlebilllistAll" title="贷款借据清单(卡中心)" url="/report/afteraccloanlist/browseAll.page" img="" operations="browse"/>
+			<menu id="100010" name="loanoverdue" title="客户逾期清单" url="/report/loanoverdue/browse.page" img="" operations="browse"/>
+			<menu id="100020" name="loanoverdueAll" title="客户逾期清单(卡中心)" url="/report/loanoverdue/browseAll.page" img="" operations="browse"/>
+			<menu id="100030" name="afterLoancollect" title="贷款汇总查询" url="/report/afterLoancollect/browse.page" img="" operations="browse"/>
+			<menu id="100040" name="afterLoancollectAll" title="贷款汇总查询(卡中心)" url="/report/afterLoancollect/browseAll.page" img="" operations="browse"/>
+			<!-- <menu id="100041" name="intelligentcustomerreport" title="客户信息智能报表" url="/report/intelligentcustomerreport/browse.page" img="" operations="create|change|delete|display|browse"/>
 			<menu id="100042" name="intelligentaccountreport" title="客户账户智能报表" url="/report/intelligentaccountreport/browse.page" img="" operations="create|change|delete|display|browse"/>
 			<menu id="100043" name="postloanmanagementdata" title="贷后管理数据" url="/report/postloanmanagementdata/browse.page" img="" operations="create|change|delete|display|browse"/>
-			<menu id="100050" name="creditpaymentmanagerdim" title="客户经理“灵活金”用信还款情况统计" url="/report/creditpaymentmanagerdim/browse.page" img="" operations="browse"/>
-			<menu id="100060" name="creditpaymentorgdim" title="支行“灵活金”用信还款情况统计 " url="/report/creditpaymentorgdim/browse.page" img="" operations="browse"/>
-			<menu id="100070" name="cardbusinessmana" title="“灵活金”/信用卡业务流程监测报表（客户经理/微贷经理维度） " url="/report/cardbusinessmana/browse.page" img="" operations="browse"/>
-			<menu id="100080" name="cardbusinessbank" title="“灵活金”/普通信用卡业务流程监测报表（一级支行/二级支行维度） " url="/report/cardbusinessbank/browse.page" img="" operations="browse"/>
-			<menu id="100090" name="cardqualitymana" title="（退回）“灵活金”业务/普通信用卡进件质量监测报表统计 （客户经理/微贷经理维度）" url="/report/cardqualitymana/browse.page" img="" operations="browse"/>
-			<menu id="100100" name="cardqualitybank" title="（退回）“灵活金”/普通信用卡业务进件质量监测报表统计（一级支行/二级支行维度） " url="/report/cardqualitybank/browse.page" img="" operations="browse"/>
-			<menu id="100110" name="cardqualityrejectmana" title="（拒绝）“灵活金”业务/普通信用卡进件质量监测报表统计 （客户经理/微贷经理维度）" url="/report/cardqualityrejectmana/browse.page" img="" operations="browse"/>
-			<menu id="100120" name="cardqualityrejectbank" title="（拒绝）“灵活金”/普通信用卡业务进件质量监测报表统计（一级支行/二级支行维度） " url="/report/cardqualityrejectbank/browse.page" img="" operations="browse"/>
+			<menu id="100050" name="creditpaymentmanagerdim" title="客户经理用信还款情况统计" url="/report/creditpaymentmanagerdim/browse.page" img="" operations="browse"/>
+			<menu id="100060" name="creditpaymentorgdim" title="支行用信还款情况统计 " url="/report/creditpaymentorgdim/browse.page" img="" operations="browse"/>
+			<menu id="100070" name="cardbusinessmana" title="信用卡业务流程监测报表（客户经理/微贷经理维度） " url="/report/cardbusinessmana/browse.page" img="" operations="browse"/>
+			<menu id="100080" name="cardbusinessbank" title="普通信用卡业务流程监测报表（一级支行/二级支行维度） " url="/report/cardbusinessbank/browse.page" img="" operations="browse"/>
+			<menu id="100090" name="cardqualitymana" title="（退回）普通信用卡进件质量监测报表统计 （客户经理/微贷经理维度）" url="/report/cardqualitymana/browse.page" img="" operations="browse"/>
+			<menu id="100100" name="cardqualitybank" title="（退回）普通信用卡业务进件质量监测报表统计（一级支行/二级支行维度） " url="/report/cardqualitybank/browse.page" img="" operations="browse"/>
+			<menu id="100110" name="cardqualityrejectmana" title="（拒绝）普通信用卡进件质量监测报表统计 （客户经理/微贷经理维度）" url="/report/cardqualityrejectmana/browse.page" img="" operations="browse"/>
+			<menu id="100120" name="cardqualityrejectbank" title="（拒绝）普通信用卡业务进件质量监测报表统计（一级支行/二级支行维度） " url="/report/cardqualityrejectbank/browse.page" img="" operations="browse"/>
 		    <menu id="100130" name="workQuality" title="辅助岗位人员工作质量检测报告 " url="/report/workQuality/browse.page" img="" operations="browse"/>
-			<menu id="100113" name="reviewriskcontrol" title="评审岗位人员风控状况统计 " url="/report/reviewriskcontrol/browse.page" img="" operations="browse"/>
+			<menu id="100113" name="reviewriskcontrol" title="评审岗位人员风控状况统计 " url="/report/reviewriskcontrol/browse.page" img="" operations="browse"/>-->
 		</menu>
 		
 		<menu id="1030000" name="system" title="系统管理" url="" img="images/icon_sys.gif" operations="">

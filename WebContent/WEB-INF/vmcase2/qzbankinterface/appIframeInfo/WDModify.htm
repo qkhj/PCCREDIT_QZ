@@ -34,7 +34,12 @@
     	if(confirm("确认提交吗?提交后暂不支持修改!")){
     		//SunScan.SetFormNoEx("0-0021000001001000|1-0|2-0021000004001000|3-0","");
             //var result = SunScan.TestSubmitImageEx("WD_CASES", "WD_IMAGES",docID);
+<<<<<<< HEAD
             var result = SunScan.UpdateImageToEcmEx(docID,"WD_CASES");
+=======
+            //var result = SunScan.UpdateImageToEcmEx(docID,"WD_CASES");
+            var result = SunScan.UpdateImageToEcmEx(docID,"WD_CASES","WD_IMAGES");
+>>>>>>> chinhBy-master
             if (result == 200)
             {
                 //var url = "${contextPath}/intopieces/intopiecesapprove/insert_sunds.json?appId=${appId}&docID="+docID;

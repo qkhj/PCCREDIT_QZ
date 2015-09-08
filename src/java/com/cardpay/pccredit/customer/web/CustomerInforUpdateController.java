@@ -60,6 +60,7 @@ import com.cardpay.pccredit.divisional.constant.DivisionalTypeEnum;
 import com.cardpay.pccredit.divisional.service.DivisionalService;
 import com.cardpay.pccredit.intopieces.constant.Constant;
 import com.cardpay.pccredit.intopieces.model.VideoAccessories;
+import com.cardpay.pccredit.intopieces.service.IntoPiecesService;
 import com.cardpay.pccredit.product.service.ProductService;
 import com.cardpay.pccredit.riskControl.constant.RiskAttributeEnum;
 import com.cardpay.pccredit.riskControl.constant.RiskAttributeTypeEnum;
@@ -98,6 +99,9 @@ public class CustomerInforUpdateController extends BaseController {
 
 	Logger logger = Logger.getLogger(this.getClass());
 	
+	@Autowired
+	private IntoPiecesService intoPiecesService;
+
 	@Autowired
 	private CustomerInforService customerInforservice;
 
@@ -266,13 +270,16 @@ public class CustomerInforUpdateController extends BaseController {
 	@JRadOperation(JRadOperation.CREATE)
 	public AbstractModelAndView create_zcfz(HttpServletRequest request) {
 		String customerId = request.getParameter(ID);
-
+		String type = request.getParameter("type");
+		String operate = request.getParameter("operate");
 		List<CustomerInforUpdateBalanceSheet> customerInforUpdateBalanceSheet =
                 customerInforUpdateService.getCustomerInforUpdateBalanceSheetById(customerId);
 
 		JRadModelAndView mv = new JRadModelAndView("/customer/customerInforUpdate/customerinfoupdate_zcfz",request);
 		mv.addObject("customerInforUpdateBalanceSheet",	customerInforUpdateBalanceSheet);
 		mv.addObject("customerId",customerId);
+		mv.addObject("type",type);
+		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate) );
 		return mv;
 	}
 
@@ -290,13 +297,16 @@ public class CustomerInforUpdateController extends BaseController {
 	@JRadOperation(JRadOperation.CREATE)
 	public AbstractModelAndView create_syb( HttpServletRequest request) {
 		String customerId = request.getParameter(ID);
-
+		String type = request.getParameter("type");
+		String operate = request.getParameter("operate");
 		List<CustomerInforUpdateIncomeStatement> customerInforUpdateIncomeStatement =
                 customerInforUpdateService.getCustomerInforUpdateIncomeStatementById(customerId);
 
 		JRadModelAndView mv = new JRadModelAndView("/customer/customerInforUpdate/customerinfoupdate_syb",request);
 		mv.addObject("customerInforUpdateIncomeStatement",	customerInforUpdateIncomeStatement);
 		mv.addObject("customerId",customerId);
+		mv.addObject("type",type);
+		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate) );
 		return mv;
 
 	}
@@ -313,13 +323,16 @@ public class CustomerInforUpdateController extends BaseController {
 	@JRadOperation(JRadOperation.CREATE)
 	public AbstractModelAndView create_xjl( HttpServletRequest request) {
 		String customerId = request.getParameter(ID);
-
+		String type = request.getParameter("type");
+		String operate = request.getParameter("operate");
 		List<CustomerInforUpdateCashFlow> customerInforUpdateCashFlow =
                 customerInforUpdateService.getCustomerInforUpdateCashFlowById(customerId);
 
 		JRadModelAndView mv = new JRadModelAndView("/customer/customerInforUpdate/customerinfoupdate_xjl",request);
 		mv.addObject("customerInforUpdateCashFlow",	customerInforUpdateCashFlow);
 		mv.addObject("customerId",customerId);
+		mv.addObject("type",type);
+		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate) );
 		return mv;
 	}
 	
@@ -336,6 +349,8 @@ public class CustomerInforUpdateController extends BaseController {
 	public AbstractModelAndView create_jcjy(@ModelAttribute CustomerInforFilter filter, HttpServletRequest request) {
 		filter.setRequest(request);
 		String customerId = request.getParameter(ID);
+		String type = request.getParameter("type");
+		String operate = request.getParameter("operate");
 
 		List<CustomerInforUpdateCrossExamination> crossExaminationList =
                 customerInforUpdateService.getCustomerInforUpdateCrossExaminationById(customerId);
@@ -350,6 +365,8 @@ public class CustomerInforUpdateController extends BaseController {
 		mv.addObject("sjsy", balanceSheet != null ? balanceSheet.getContentsTextNumbers() : "");
 		mv.addObject("crossExaminationList",	crossExaminationList);
 		mv.addObject("customerId",customerId);
+		mv.addObject("type",type);
+		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate) );
 		return mv;
 	}
 	

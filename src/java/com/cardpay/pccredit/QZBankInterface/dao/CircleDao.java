@@ -21,4 +21,9 @@ public interface CircleDao {
 	Circle findCircle(@Param("customerId")String customerId,@Param("applicationId")String applicationId);
 	Circle findCircleByAppId(@Param("applicationId")String applicationId);
 	public List<Circle> findCircleByCardNo(@Param("globalId") String globalId);
+<<<<<<< HEAD
+=======
+	
+	Circle findCircleByClientNoAndContNo(@Param("clientNo") String clientNo,@Param("retContNo") String retContNo);
+>>>>>>> chinhBy-master
 }

@@ -28,6 +28,7 @@ public class ProductAttributeForm extends BaseForm {
 	private String productRiskTolerance;
 	private String status;
 	private String seqno;
+	private String defaultType;
 
 	public String getStatus() {
 		return status;
@@ -139,6 +140,14 @@ public class ProductAttributeForm extends BaseForm {
 
 	public void setProductRiskTolerance(String productRiskTolerance) {
 		this.productRiskTolerance = productRiskTolerance;
+	}
+
+	public String getDefaultType() {
+		return defaultType;
+	}
+
+	public void setDefaultType(String defaultType) {
+		this.defaultType = defaultType;
 	}
 
 }

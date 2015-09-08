@@ -2,10 +2,10 @@
 <body class="whitebg">
    <div class="content_main">
     <div class="contentinner">
-     <div class="place">
-          <div class="title">客户维护信息>现金流</div>
+    <div class="place">
+          <div class="title">现金流</div>
       </div>
-      <div class="tabplace">
+       <!--  <div class="tabplace">
            <ul class="com-tab" >
             <li class="tab"><a href="${contextPath}/intopieces/intopiecesapprove/changewh.page?id=${customerId}">基本信息</a></li>
             <li class="tab"><a href="${contextPath}/customer/basiccustomerinforUpdate/create_zcfz.page?id=${customerId}">资产负债</a></li>
@@ -14,7 +14,7 @@
             <li class="tab"><a href="${contextPath}/customer/basiccustomerinforUpdate/create_jcjy.page?id=${customerId}">交叉检验</a></li>
             <li class="tab"><a href="${contextPath}/customer/basiccustomerinforUpdate/create_dcnr.page?id=${customerId}">调查内容附件</a></li>
          </ul>
-         </div>
+         </div>-->
             <div id="parenDiv" >
 		<div id='div1' class="div1" style="position:absolute;"> </div>
 		</div>
@@ -1733,8 +1733,12 @@
 
    </form>
   <div class="submit">
-        <input id="id_save_button" type="button" value="#i18n("button.save")" class="current" />
-        <input type="button" onclick="returnClick();" value="#i18n("button.cancel")" />
+        #if($!type!='readonly')
+			<input id="id_save_button" type="button" value='#i18n("button.save")' class="current" /> 
+			<input type="button" onclick="returnClick();" value='#i18n("button.cancel")' />
+		#else
+			<a class="btn_gr"  onclick="parent.location.href = '${contextPath}${returnUrl}'" title="返回">返回</a>
+		#end
   </div>
     </div>
   </div>

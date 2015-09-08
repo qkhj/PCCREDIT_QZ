@@ -1,0 +1,115 @@
+#parse ("common/iframe_page_header.htm")
+#parse ("common/customerInfor.htm")
+<body>
+  <div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">选择要申请的客户</div>
+      </div>
+ <div class="inquiry">
+        <div class="search_tag">#i18n("label.browse.filter")</div>
+        <div class="search">
+          <form id="submitForm" action="${contextPath}/intopieces/intopiecesapprove/queryCustomerInfo.page">
+            <ul>
+              <li>
+                <span>客户名称：<input type="text" name="chineseName" value="$!filter.chineseName" /></span>
+              </li>
+              <li>
+                <span>证件号码：<input type="text" name="cardId" value="$!filter.cardId" /></span>
+              </li>
+              <li>
+              <!--<input type="hidden" name="appId" value="$!{appId}">  -->
+              <input type="hidden" name="productType" value="$!{productType}">
+              <input type="hidden" name="zaId" value="$!{zaId}"></li>
+              <li class="search_button">
+                <input id="id_browse_button" type="button" value="#i18n('button.browse')" class="search_button_inquiry"
+                  title="#i18n('button.browse.hint')" style="height: 26px; line-height: 24px;" onclick="javascript:this.form.submit();"/>
+              </li>
+            </ul>
+          </form>
+        </div>
+               <div id="topDiv" class="inquiry_list inquiry_top">
+          <table>
+            <colgroup>
+              <col width="5%" />
+              <col width="15%" />
+              <col width="15%" />
+              <col width="30%" />
+              <col width="30%" />
+            </colgroup>
+            <tr class="title">
+              <th nowrap="nowrap"></th>
+              <th nowrap="nowrap">中文姓名</th>
+              <th nowrap="nowrap">证件类型</th>
+              <th nowrap="nowrap">证件号码</th>
+              <th nowrap="nowrap">客户号</th>
+            </tr>
+          </table>
+        </div>
+        <div id="downDiv" class="inquiry_list inquiry_down">
+          <table>
+            <colgroup>
+              <col width="5%" />
+              <col width="15%" />
+              <col width="15%" />
+              <col width="30%" />
+              <col width="30%" />
+            </colgroup>
+            #foreach ($customer in $result.items)
+            <tr>
+              <td class="checkbox"><input type="radio" name="checkbox" value="$!customer.id"
+                  /></td>
+              <td nowrap="nowrap">$!customer.chineseName</td>
+              <td nowrap="nowrap">#dictVal("CERT_TYPE",$!customer.cardType)</td>
+              <td nowrap="nowrap">$!customer.cardId</td>
+              <td nowrap="nowrap">$!customer.clientNo</td>
+            </tr>
+            #end
+          </table>
+        </div>
+      </div>
+      <div class="pagebar">
+        <div class="controlbtn">
+        	<!-- <a class="btn_g" id="id_kaihu_button" href="javascript:void(0);" title="新增客户">新增客户</a>
+            <a class="btn_g" id="id_displaykaihu_button" href="javascript:void(0);" title="查看客户信息">查看客户信息</a>
+            <a class="btn_g" id="id_updatekaihu_button" href="javascript:void(0);" title="修改客户信息">修改客户信息</a> -->
+            <a class="btn_g" id="id_comfig_button" href="javascript:void(0);" title="确认">确认</a>
+        </div>
+        #parse ("common/pagination.htm")
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<script language="javascript" type="text/javascript">
+	var layout = new TableLayout(2);
+	window.top.currentWindow.setLayout(layout);
+	
+	$(document).ready(function() {
+		var opsObj = new Object();
+		opsObj.formObj = $("#submitForm");
+		opsObj.browseUrl = "${modulePath}/queryCustomerInfo.page";
+		$("#id_browse_button").click(function() {
+            var url = opsObj.browseUrl;
+            if (opsObj.formObj) {
+                opsObj.formObj.action = opsObj.browseUrl;
+                opsObj.formObj.submit();
+            }
+        });
+		
+		//选择客户确认
+		$("#id_comfig_button").click(function() {
+			if ($(".checkbox :checked").length == 1) {
+				var rowId = getCurrentRowId().split("@")[0];
+				if(rowId!=null){
+					var url="${contextPath}/intopieces/intopiecesapprove/iframe_create.page?id="+rowId+"&productType=$!{productType}&zaId=$!{zaId}";
+					window.location.href = url;
+				}
+			}else{
+				Dialog.message("请选择一条记录!");
+			}
+	    });
+	});
+</script>
+   <script src="${contextPath}/js/customerInfor/customer_infor.js"></script>
+#parse ("common/iframe_page_footer.htm")

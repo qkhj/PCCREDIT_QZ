@@ -29,19 +29,20 @@
           <table>
             <colgroup>
               <col width="5%" />
-              <col width="10%" />
               <col width="15%" />
-              <col width="25%" />
-              <col width="25%" />
-              <col width="25%" />
+              <col width="15%"/>
+              <col width="20%"/>
+              <col width="15%"/>
+              <col width="15%"/>
             </colgroup>
             <tr class="title">
               <th nowrap="nowrap"></th>
-              <th nowrap="nowrap">中文姓名</th>
-              <th nowrap="nowrap">证件类型</th>
+              <th nowrap="nowrap">客户名称</th>
               <th nowrap="nowrap">证件号码</th>
-              <th nowrap="nowrap">客户号</th>
+              <th nowrap="nowrap">产品名称</th>
+              <th nowrap="nowrap">申请额度</th>
               <th nowrap="nowrap">状态</th>
+              <th nowrap="nowrap">进度</th>
             </tr>
           </table>
         </div>
@@ -49,21 +50,35 @@
           <table>
             <colgroup>
               <col width="5%" />
-              <col width="10%" />
               <col width="15%" />
-              <col width="25%" />
-              <col width="25%" />
-              <col width="25%" />
+              <col width="15%"/>
+              <col width="20%"/>
+              <col width="15%"/>
+              <col width="15%"/>
             </colgroup>
-            #foreach ($customer in $result.items)
+            #foreach ($intoPieces in $result.items)
             <tr>
-              <td class="checkbox"><input type="radio" name="checkbox" value="$!customer.id@$!customer.processId"
-                  /></td>
-              <td nowrap="nowrap">$!customer.chineseName</td>
-              <td nowrap="nowrap">#dictVal("CERT_TYPE",$!customer.cardType)</td>
-              <td nowrap="nowrap">$!customer.cardId</td>
-              <td nowrap="nowrap">$!customer.clientNo</td>
-              <td nowrap="nowrap">$!customer.processId</td>
+             <td class="checkbox"><input type="radio" name="checkbox" value="$!{intoPieces.customerId}@$!{intoPieces.id}@$!intoPieces.status"/></td>
+              <td nowrap="nowrap">$!intoPieces.chineseName</td>
+              <td nowrap="nowrap">$!intoPieces.cardId</td>
+              <td nowrap="nowrap">#dictVal("ProductName",$!intoPieces.productId)</td>
+              <td nowrap="nowrap">$format.formatNumber($!intoPieces.applyQuota, 2, 1)</td>
+              <td nowrap="nowrap">
+	              #if($!intoPieces.status=='audit')已申请  
+	              #elseif($!intoPieces.status=='save')暂存 
+	              #elseif($!intoPieces.status=='nopass')申请未通过 
+	              #elseif($!intoPieces.status=='refuse')被拒绝
+	              #elseif($!intoPieces.status=='RETURNAPPROVE')审核退回
+	              #elseif($!intoPieces.status=='approved')审批结束  
+	              #elseif($!intoPieces.status=='succeed')申请成功 
+	              #elseif($!intoPieces.status=='returnedToFirst')退回客户经理 
+	              #end
+              </td>
+              #if($!intoPieces.status=='returnedToFirst')
+               <td nowrap="nowrap">客户经理</td>
+               #else
+               <td nowrap="nowrap">$!intoPieces.nodeName</td>
+               #end
             </tr>
             #end
           </table>
@@ -72,7 +87,9 @@
       <div class="pagebar">
         <div class="controlbtn">
             <a class="btn_g" id="id_displaykaihu_button" href="javascript:void(0);" title="查看开户信息">查看开户信息</a>
-        	<a id="id_create_button_1" class="btn_g" href="javascript:void(0);" title="填写申请信息">填写申请信息</a>
+        	<a id="id_create_button_1" class="btn_g" href="javascript:void(0);" title="修改申请信息">修改申请信息</a>
+        	<a id="id_create_button_2" class="btn_g" href="javascript:void(0);" title="创建申请信息">创建申请信息</a>
+        	<a id="id_delete_button" class="btn_g" href="javascript:void(0);" title="删除申请信息">删除申请信息</a>
 			<a id="id_apply_button" class="btn_g" href="javascript:void(0);" title="申请">申请贷款</a>
 			<a id="id_add_button" class="btn_g" title="初审拒件记录">补充上会记录</a>
         </div>
@@ -94,16 +111,18 @@
 		$("#id_apply_button").click(function() {
 			if ($(".checkbox :checked").length == 1) {
 				var rowId = getCurrentRowId().split("@")[0];
-				var sec = getCurrentRowId().split("@")[1];
-				if(sec=='已申请'){
+				var appId = getCurrentRowId().split("@")[1];
+				var sec = getCurrentRowId().split("@")[2];
+				if(sec=='audit' || sec=='approved'){
 					Dialog.message("已申请贷款,请勿重复提交！");
 					return;
 				} 
 				if(rowId!=null){
 					Dialog.confirm("确定提交申请吗？", "提示",
 		                function() {
-							var url = "${modulePath}/save_apply.json?id="+rowId;
+							var url = "${modulePath}/save_apply.json?id="+rowId+"&appId="+appId;
 			   	        	$.ajax({
+			   	        		timeout : 500,
 								url : url,
 								type : "get",
 								success : function(data) {
@@ -126,18 +145,59 @@
 		$("#id_create_button_1").click(function() {
 			if ($(".checkbox :checked").length == 1) {
 				var rowId = getCurrentRowId().split("@")[0];
-				var sec = getCurrentRowId().split("@")[1];
-			 	  if(sec=='已申请'){
+				var appId = getCurrentRowId().split("@")[1];
+				var sec = getCurrentRowId().split("@")[2];
+			 	  if(sec=='audit' || sec=='RETURNAPPROVE'){
 					Dialog.message("已申请进件，无法继续添加进件信息！");
 					return;
 				}   
 				if(rowId!=null){
 					//var url="${modulePath}/changewh.page?id="+rowId;
-					var url="${modulePath}/iframe.page?id="+rowId;
+					var url="${modulePath}/iframe.page?id="+rowId+"&appId="+appId;
 					window.location.href = url;
 				}
 			}else{
 				Dialog.message("请选择要进件的客户!");
+			}
+	    });
+		//进入创建申请信息
+		$("#id_create_button_2").click(function() {
+					//var url="${modulePath}/changewh.page?id="+rowId;?id="+rowId+"&appId="+appId
+					var url="${modulePath}/selectProduct.page";
+					window.location.href = url;
+	    });
+		//删除申请信息
+		$("#id_delete_button").click(function() {
+			if ($(".checkbox :checked").length == 1) {
+				var rowId = getCurrentRowId().split("@")[0];
+				var appId = getCurrentRowId().split("@")[1];
+				var sec = getCurrentRowId().split("@")[2];
+
+				if(sec =='audit' || sec =='RETURNAPPROVE' || sec =='succeed' || sec =='approved' || sec =='refuse' || sec =='nopass'){
+					Dialog.message("已申请贷款,不在您的岗位不能删除！");
+					return;
+				}   
+				if(rowId!=null){
+					Dialog.confirm("确定删除申请吗？", "提示",
+		                function() {
+							var url = "${modulePath}/delete_apply.json?id="+rowId+"&appId="+appId;
+			   	        	$.ajax({
+								url : url,
+								type : "get",
+								success : function(data) {
+									if (data.success) {
+										topWin.Dialog.message("保存成功！");
+										window.location.reload(true);
+									}
+									else{
+										topWin.Dialog.message(data.message);
+								    }
+								}
+							});
+		                });
+				}
+			}else{
+				Dialog.message("请选择一条记录!");
 			}
 	    });
 		//进入补充上会页面

@@ -10,7 +10,120 @@
       <form id="id_module_form">
         <div class="forms" id="formsId">
           <table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>客户证件信息</caption>
+          <caption>客户信息</caption>
+          
+          <table class="rule" bordercolor="#CCCCCC" border="1">
+          <!-- <caption>个人客户名称信息</caption> -->
+          <th>客户基本信息</th>
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>客户名称:</label><font color="#ff0000">*</font></td>
+              <td><input disabled type="text" name="clientName" value="$!ecif.clientName" /></td>
+              <td><label>客户名称类型:</label></td>
+              <td><select disabled name="clientNameType">#dict("CLIENT_NAME_TYPE", $!ecif.clientNameType )</select></td>
+            </tr>
+            <tr>
+              <td><label>出生日期:</label><font color="#ff0000">*</font></td>
+              <td><input disabled type="text" name="birthDate" value="$date.format('yyyy-MM-dd', $!ecif.birthDate)" onmouseover="_calendar()"/></td>
+			  <td><label>性别:</label></td>
+              <td><select disabled name="sex">#dict("INDIV_SEX", $!ecif.sex )</select></td>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <!--<caption>个人客户基本信息</caption>-->
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>客户类型:</label></td>
+              <td><select disabled name="clientType">#dict("CLIENT_TYPE", $!ecif.clientType )</select></td>
+              <td><label>客户状态:</label></td>
+              <td><select disabled name="clientStatus">#dict("CLIENT_STATUS", $!ecif.clientStatus )</select></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <!--<caption>个人客户扩展信息</caption>-->
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>国籍/注册地:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="countryCitizen">#dict("CUS_COUNTRY", $!ecif.countryCitizen )</select></td>
+              <td><label>民族代码:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="nationalityCode">#dict("INDIV_NTN", $!ecif.nationalityCode )</select></td>
+            </tr>
+			<tr>
+              <td><label>户籍所在地:</label><font color="#ff0000">*</font></td>
+              <td>
+				1:<select disabled id="regPermResidence_1" name="regPermResidence_1" style="width:29%;margin:2px;" onchange="change_regPermResidence_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!ecif.regPermResidence_1 )</select>
+            	2:<select disabled id="regPermResidence_2" name="regPermResidence_2" style="width:29%;margin:2px;" onchange="change_regPermResidence_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!ecif.regPermResidence_2 )</select>
+            	3:<select disabled id="regPermResidence_3" name="regPermResidence_3" style="width:29%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!ecif.regPermResidence_3 )</select>
+			  </td>            </tr>
+			<tr>
+              <td><label>婚姻状况:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="maritalStatus">#dict("MARITAL_STATUS", $!ecif.maritalStatus )</select></td>
+              <td><label>教育水平:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="educationLevel">#dict("EDUCATION_LEVEL", $!ecif.educationLevel )</select></td>
+            </tr>
+			<tr>
+              <td><label>城市:</label><font color="#ff0000">*</font></td>
+              <td>
+              	1:<select disabled id="city_1" name="city_1" style="width:29%;margin:2px;" onchange="change_city_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!ecif.city_1 )</select>
+            	2:<select disabled id="city_2" name="city_2" style="width:29%;margin:2px;" onchange="change_city_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!ecif.city_2 )</select>
+            	3:<select disabled id="city_3" name="city_3" style="width:29%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!ecif.city_3 )</select>
+              </td>
+              <td><label>地区代码:</label></td>
+              <td><input disabled type="text" name="areaCode" value="$!ecif.areaCode" /></td>
+            </tr>
+			<tr>
+              <td><label>关联关系:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="incidenceRelation">#dict("CUS_BANK_REL", $!ecif.incidenceRelation )</select></td>
+              <td><label>身份类别:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="identityType">#dict("IDENTITY_TYPE", $!ecif.identityType )</select></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+          <!--<caption>客户地址信息</caption>-->
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+			<tr>
+              <td><label>地址:</label><font color="#ff0000">*</font></td>
+              <td><input disabled type="text" name="address" value="$!ecif.address" /></td>
+              <td><label>地址类型:</label><font color="#ff0000">*</font></td>
+              <td><select disabled name="addressType">#dict("ADDRESS_TYPE", $!ecif.addressType )</select></td>
+            </tr>
+			<tr>
+              <td><label>邮编:</label><font color="#ff0000">*</font></td>
+              <td colspan="3"><input disabled type="text" name="postalCode" value="$!ecif.postalCode" /></td>
+            </tr>
+		</table>
+		<table class="rule" bordercolor="#CCCCCC" border="1">
+         <!-- <caption>个人客户信息</caption>-->
+            <colgroup>
+              <col width="10%" />
+              <col width="40%" />
+              <col width="10%" />
+              <col width="40%" />
+            </colgroup>
+            <!-- <tr>
+              <td><label>客户类型:</label></td>
+              <td colspan="3"><select name="clientType">#dict("CLIENT_TYPE", "")</select></td>
+			</tr> -->
+          <th>客户证件信息</th>
             <colgroup>
               <col width="10%" />
               <col width="40%" />
@@ -42,77 +155,11 @@
               <td><input disabled type="text" name="expiryDate" value="$date.format('yyyy-MM-dd', $!ecif.expiryDate)" onmouseover="_calendar()"/></td>
             </tr>
 		</table>
-		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>个人客户名称信息</caption>
-            <colgroup>
-              <col width="10%" />
-              <col width="40%" />
-              <col width="10%" />
-              <col width="40%" />
-            </colgroup>
-			<tr>
-              <td><label>客户名称:</label><font color="#ff0000">*</font></td>
-              <td><input disabled type="text" name="clientName" value="$!ecif.clientName" /></td>
-              <td><label>客户名称类型:</label></td>
-              <td><select disabled name="clientNameType">#dict("CLIENT_NAME_TYPE", $!ecif.clientNameType )</select></td>
-            </tr>
-		</table>
-		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>个人客户基本信息</caption>
-            <colgroup>
-              <col width="10%" />
-              <col width="40%" />
-              <col width="10%" />
-              <col width="40%" />
-            </colgroup>
-			<tr>
-              <td><label>客户类型:</label></td>
-              <td><select disabled name="clientType">#dict("CLIENT_TYPE", $!ecif.clientType )</select></td>
-              <td><label>客户状态:</label></td>
-              <td><select disabled name="clientStatus">#dict("CLIENT_STATUS", $!ecif.clientStatus )</select></td>
-            </tr>
-		</table>
-		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>个人客户信息</caption>
-            <colgroup>
-              <col width="10%" />
-              <col width="40%" />
-              <col width="10%" />
-              <col width="40%" />
-            </colgroup>
-			<tr>
-              <td><label>出生日期:</label><font color="#ff0000">*</font></td>
-              <td><input disabled type="text" name="birthDate" value="$date.format('yyyy-MM-dd', $!ecif.birthDate)" onmouseover="_calendar()"/></td>
-			  <td><label>性别:</label></td>
-              <td><select disabled name="sex">#dict("INDIV_SEX", $!ecif.sex )</select></td>
-            </tr>
-            <!-- <tr>
-              <td><label>客户类型:</label></td>
-              <td colspan="3"><select name="clientType">#dict("CLIENT_TYPE", "")</select></td>
-			</tr> -->
 			
 		</table>
 		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>客户所属信息</caption>
-            <colgroup>
-              <col width="10%" />
-              <col width="40%" />
-              <col width="10%" />
-              <col width="40%" />
-            </colgroup>
-			<tr>
-              <td><label>客户经理代码:</label><font color="#ff0000">*</font></td>
-              <td><input disabled type="text" name="custManagerId" value="$!ecif.custManagerId"  /></td>
-              <td><label>录入柜员:</label><font color="#ff0000">*</font></td>
-              <td><input disabled type="text" name="recordTellerNo" value="$!ecif.recordTellerNo"  /></td>
-            </tr>
-			<tr>
-              <td><label>登记日期:</label><font color="#ff0000">*</font></td>
-              <td colspan="3"><input disabled type="text" name="registeredDate" value="$date.format('yyyy-MM-dd', $!ecif.registeredDate)" onmouseover="_calendar()"/></td>
-            </tr>
-		</table>
-		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>客户所属机构信息</caption>
+          <caption>客户开户信息</caption>
+          <th>客户所属信息</th>
             <colgroup>
               <col width="10%" />
               <col width="40%" />
@@ -130,30 +177,8 @@
               <td><input disabled type="text" name="registOrgNo"  value="$!ecif.registOrgNo"  /></td>
               <td><label>登记日期:</label><font color="#ff0000">*</font></td>
               <td><input disabled type="text" name="orgRegisteredDate" value="$date.format('yyyy-MM-dd', $!ecif.orgRegisteredDate)" onmouseover="_calendar()"/></td>
-            </tr>
-		</table>
-		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>个人客户扩展信息</caption>
-            <colgroup>
-              <col width="10%" />
-              <col width="40%" />
-              <col width="10%" />
-              <col width="40%" />
-            </colgroup>
-			<tr>
-              <td><label>国籍/注册地:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="countryCitizen">#dict("CUS_COUNTRY", $!ecif.countryCitizen )</select></td>
-              <td><label>民族代码:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="nationalityCode">#dict("INDIV_NTN", $!ecif.nationalityCode )</select></td>
-            </tr>
-			<tr>
-              <td><label>户籍所在地:</label><font color="#ff0000">*</font></td>
-              <td>
-				1:<select disabled id="regPermResidence_1" name="regPermResidence_1" style="width:29%;margin:2px;" onchange="change_regPermResidence_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!ecif.regPermResidence_1 )</select>
-            	2:<select disabled id="regPermResidence_2" name="regPermResidence_2" style="width:29%;margin:2px;" onchange="change_regPermResidence_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!ecif.regPermResidence_2 )</select>
-            	3:<select disabled id="regPermResidence_3" name="regPermResidence_3" style="width:29%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!ecif.regPermResidence_3 )</select>
-			  </td>
-              <td><label>开户机构:</label><font color="#ff0000">*</font></td>
+            <tr>
+            <td><label>开户机构:</label><font color="#ff0000">*</font></td>
               <td><input disabled type="text" name="openAcctBranchId" value="$!ecif.openAcctBranchId" /></td>
             </tr>
 			<tr>
@@ -161,32 +186,9 @@
               <td><input disabled type="text" name="openTellerNo" value="$!ecif.openTellerNo" /></td>
               <td><label>开户日期:</label><font color="#ff0000">*</font></td>
               <td><input disabled type="text" name="openAcctDate" value="$date.format('yyyy-MM-dd', $!ecif.openAcctDate)" onmouseover="_calendar()"/></td>
-            </tr>
-			<tr>
-              <td><label>婚姻状况:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="maritalStatus">#dict("MARITAL_STATUS", $!ecif.maritalStatus )</select></td>
-              <td><label>教育水平:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="educationLevel">#dict("EDUCATION_LEVEL", $!ecif.educationLevel )</select></td>
-            </tr>
-			<tr>
-              <td><label>城市:</label><font color="#ff0000">*</font></td>
-              <td>
-              	1:<select disabled id="city_1" name="city_1" style="width:29%;margin:2px;" onchange="change_city_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!ecif.city_1 )</select>
-            	2:<select disabled id="city_2" name="city_2" style="width:29%;margin:2px;" onchange="change_city_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!ecif.city_2 )</select>
-            	3:<select disabled id="city_3" name="city_3" style="width:29%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!ecif.city_3 )</select>
-              </td>
-              <td><label>地区代码:</label></td>
-              <td><input disabled type="text" name="areaCode" value="$!ecif.areaCode" /></td>
-            </tr>
-			<tr>
-              <td><label>关联关系:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="incidenceRelation">#dict("CUS_BANK_REL", $!ecif.incidenceRelation )</select></td>
-              <td><label>身份类别:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="identityType">#dict("IDENTITY_TYPE", $!ecif.identityType )</select></td>
-            </tr>
+			</tr>
 		</table>
 		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>客户地址信息</caption>
             <colgroup>
               <col width="10%" />
               <col width="40%" />
@@ -194,18 +196,19 @@
               <col width="40%" />
             </colgroup>
 			<tr>
-              <td><label>地址:</label><font color="#ff0000">*</font></td>
-              <td><input disabled type="text" name="address" value="$!ecif.address" /></td>
-              <td><label>地址类型:</label><font color="#ff0000">*</font></td>
-              <td><select disabled name="addressType">#dict("ADDRESS_TYPE", $!ecif.addressType )</select></td>
+              <td><label>客户经理代码:</label><font color="#ff0000">*</font></td>
+              <td><input disabled type="text" name="custManagerId" value="$!ecif.custManagerId"  /></td>
+              <td><label>录入柜员:</label><font color="#ff0000">*</font></td>
+              <td><input disabled type="text" name="recordTellerNo" value="$!ecif.recordTellerNo"  /></td>
             </tr>
 			<tr>
-              <td><label>邮编:</label><font color="#ff0000">*</font></td>
-              <td colspan="3"><input disabled type="text" name="postalCode" value="$!ecif.postalCode" /></td>
+              <td><label>登记日期:</label><font color="#ff0000">*</font></td>
+              <td colspan="3"><input disabled type="text" name="registeredDate" value="$date.format('yyyy-MM-dd', $!ecif.registeredDate)" onmouseover="_calendar()"/></td>
             </tr>
 		</table>
+		
 		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>客户联系信息</caption>
+          <th>客户联系信息</th>
             <colgroup>
               <col width="10%" />
               <col width="40%" />
@@ -220,7 +223,7 @@
             </tr>
 		</table>
 		<table class="rule" bordercolor="#CCCCCC" border="1">
-          <caption>个人客户职业信息</caption>
+          <th>个人客户职业信息</th>
             <colgroup>
               <col width="10%" />
               <col width="40%" />

@@ -1,0 +1,142 @@
+#parse ("common/iframe_page_header.htm")
+<body>
+  <div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">客户逾期清单(卡中心)</div>
+      </div>
+      
+      <div class="inquiry">
+<!-----------搜索------------------------------------------->  
+  
+        <div class="search_tag"></div>
+        <div class="search">
+          <form id="submitForm">
+            <ul>
+              <li>
+                <span>所属机构：<select id="orgId" name="orgId">
+                	<option value="">请选择...</option>
+	                   #dict("Organizations", $!filter.orgId)
+	                </select>
+				</span>
+              </li>
+              <li>
+                <span>客户经理号：<input type="text" name="managerId" value='$!filter.managerId' /></span>
+              </li>
+              <li>
+                <span>客户名称：<input type="text" name="clientName" value='$!filter.clientName' /></span>
+              </li>
+              
+             <li class="search_button">
+              	<input id="id_export_button" type="button" value="导出excel" class="search_button_export"
+                  title="#i18n('button.export.hint')" style="height: 26px; line-height: 24px;" />
+              </li>
+              <li class="search_button">
+                <input id="id_browse_button" type="button" value="筛选" class="search_button_inquiry"
+                  title="#i18n('button.browse.hint')" style="height: 26px; line-height: 24px;" />
+               </li>
+            </ul>
+          </form>
+        </div>
+       
+		<!-------------- 信息显示 ------------------------------------->      
+		<div id="topDiv" class="inquiry_list inquiry_top">
+           <table>
+            <colgroup>
+              <col width="60"/>
+              <col width="80"/>
+              <col width="200"/>
+              <col width="180"/>
+              <col width="180"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+            </colgroup>
+            <tr class="title" align="center">
+              <th nowrap="nowrap">序号</th>
+              <th nowrap="nowrap">客户经理号</th>
+              
+              <th nowrap="nowrap">所属机构</th>
+               <th nowrap="nowrap">借据号</th>
+              <th nowrap="nowrap">账户名称</th>
+              <th nowrap="nowrap">利率</th>
+              <th nowrap="nowrap">贷款日期</th>
+              
+              <th nowrap="nowrap">到期日期</th>
+              <th nowrap="nowrap">授信金额</th>
+              <th nowrap="nowrap">贷款金额</th>
+              <th nowrap="nowrap">欠息总额</th>
+              <th nowrap="nowrap">起息日期</th>
+              <th nowrap="nowrap">贷款状态</th>
+              <th nowrap="nowrap">累计逾期金额</th>
+              <th nowrap="nowrap">逾期期数</th>
+            </tr>
+          </table>
+        </div>  
+        
+        <div id="downDiv" class="inquiry_list inquiry_down">
+          <table>
+            <colgroup>
+              <col width="60"/>
+              <col width="80"/>
+              <col width="200"/>
+              <col width="180"/>
+              <col width="180"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+               <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+              <col width="120"/>
+            </colgroup>
+            #foreach ($accloan in $list)
+            	<tr id="$!accloan.rowIndex">
+	              <td nowrap="nowrap">$!accloan.rowIndex</td>
+	              <td nowrap="nowrap">$!accloan.managerId</td>
+	              <td nowrap="nowrap">$!accloan.orgName</td>
+	              <td nowrap="nowrap">$!accloan.billNo</td>
+	              <td nowrap="nowrap">$!accloan.acctName</td>
+	              <td nowrap="nowrap">$format.formatNumber(6,$!accloan.realityIrY)</td>
+	              <td nowrap="nowrap">$!accloan.contStartDate</td>
+	              <td nowrap="nowrap">$!accloan.contEndDate</td>
+	              <td nowrap="nowrap">$format.formatNumber(2,$!accloan.contAmt)</td>
+	              <td nowrap="nowrap">$format.formatNumber(2,$!accloan.loanAmt)</td>
+	              <td nowrap="nowrap">$format.formatNumber(2,$!accloan.intAccum)</td>
+	              <td nowrap="nowrap">$!accloan.qixiDate</td>
+	              <td nowrap="nowrap">#dictVal("LOAN_STATUS", $!accloan.accStatus)</td>
+	              <td nowrap="nowrap">$format.formatNumber(2,$!accloan.overdueMoney)</td>
+	              <td nowrap="nowrap">$!accloan.overdue</td>
+	            </tr>
+            #end
+          </table>
+        </div>
+      </div>		
+        <div class="clear"></div>
+      </div>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+	var layout = new TableLayout(2);
+	window.top.currentWindow.setLayout(layout);
+
+	
+	$(document).ready(function() {
+		var opsObj = new Object();
+		opsObj.formObj = $("#submitForm");
+		opsObj.browseUrl = "${modulePath}/browseAll.page";
+		opsObj.exportUrl = "${modulePath}/exportAll.page";
+		prepareOperations(opsObj);
+	});
+</script>
+#parse ("common/iframe_page_footer.htm")

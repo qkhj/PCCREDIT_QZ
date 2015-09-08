@@ -1,0 +1,179 @@
+#parse ("common/iframe_page_header.htm")
+<script type="text/javascript">
+</script>
+<body>
+  <div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">客户台账借据清单</div>
+      </div>
+      <div class="inquiry">
+       <div class="search_tag">客户台账借据清单</div>
+       		<input type="hidden" name="clientNo" id="clientNo" value="$!clientNo">
+       		<input type="hidden" name="taskId" id="taskId" value="$!taskId">
+       		<input type="hidden" name="type" id="clientNo" value="$!type">
+        <!-- <div class="search">
+          <form id="queryForm" action="${contextPath}/afterloan/afterloancheck/browse.page">
+          <ul>
+              <li>
+                <span>客户名称：<input type="text" id="clientName" name="clientName" value="$!result.filter.chineseName" /></span>
+              </li>
+               <li>
+                <span>证件号码：<input type="text" id="globalId" name="globalId" value="$!result.filter.cardId" /></span>
+              </li>
+               <li>
+                <span>客户编号：<input type="text" id="globalId" name="globalId" value="$!result.filter.clientNo" /></span>
+              </li>
+              <li class="search_button">
+                <input type="button" value="#i18n('button.browse')" class="search_button_inquiry"
+                  title="#i18n('button.browse.hint')" style="height: 26px; line-height: 24px;" onclick="javascript:this.form.submit();"/>
+              </li>
+          </ul>
+          </form>
+        </div> -->
+        <div id="topDiv" class="inquiry_list inquiry_top">
+          <table>
+            <colgroup>
+              <col width="5%" />
+              <col width="15%" />
+              <col width="15%"/>
+              <col width="15%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col />
+            </colgroup>
+            <tr class="title">
+              <th nowrap="nowrap">序号</th>
+              <th nowrap="nowrap">客户编号</th>
+              <th nowrap="nowrap">借据编号</th>
+              <th nowrap="nowrap">合同编号</th>
+              <th nowrap="nowrap">贷款金额</th>
+              <th nowrap="nowrap">发放日期</th>
+              <th nowrap="nowrap">逾期期数</th>
+              <th nowrap="nowrap">逾期余额</th>
+              <th nowrap="nowrap">台账状态</th>
+              
+            </tr>
+          </table>
+        </div>
+        <div id="downDiv" class="inquiry_list inquiry_down">
+          <table>
+            <colgroup>
+              <col width="5%" />
+              <col width="15%" />
+              <col width="15%"/>
+              <col width="15%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col />
+            </colgroup>
+            #foreach ($loan in $accLoanLsit)
+            <tr>
+              <td class="nowrap">$!loan.rowIndex</td>
+              <td nowrap="nowrap">$!loan.cusId</td>
+              <td nowrap="nowrap">$!loan.billNo</td>
+              <td nowrap="nowrap">$!loan.contNo</td>
+              <td nowrap="nowrap">$format.formatNumber(2,$!loan.loanAmt)</td>
+              <td nowrap="nowrap">$!loan.distrDate</td>
+              <td nowrap="nowrap">$!loan.overdue</td>
+              <td nowrap="nowrap">$format.formatNumber(2,$!loan.overdueBalance)</td>
+              <td nowrap="nowrap">#dictVal("LOAN_STATUS",$!loan.accStatus)</td>
+            </tr>
+            #end
+          </table>
+        </div>
+      </div>
+      <div class="pagebar">
+        <div class="controlbtn">
+        #if($!{type}=="readonly")
+        <!-- <a id="id_apply_button" class="btn_g" href="javascript:void(0);" title="审核">审核</a> -->
+		<a class="btn_gr"  onclick="parent.location.href = '${contextPath}/afterloan/afterloancheck/approve.page'" title="返回">返回</a>
+		#else
+		<a id="id_approve_button" class="btn_g" href="javascript:void(0);" title="提交">提交</a>
+        <a id="id_back_button" class="btn_gr" href="javascript:void(0);" title="返回">返回</a>
+        #end
+         <!-- <a class="btn_g" id="id_create_button" href="javascript:void(0);" title="填写检查信息">填写检查信息</a>
+         <a class="btn_g" id="id_display_button" href="javascript:void(0);" title="提交检查">提交检查</a> -->
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<script language="javascript" type="text/javascript">
+	var layout = new TableLayout(2);
+	window.top.currentWindow.setLayout(layout);
+
+	$(document).ready(function() {
+		$("#id_apply_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+			var clientNo = document.getElementById("clientNo");
+			var taskId = document.getElementById("taskId");
+			var type = document.getElementById("type")
+			if (taskId!=null) {
+				var url = "${contextPath}/afterloan/afterloancheck/insert_loanpage1.json?taskId=${taskId}&clientNo=${clientNo}&type=${type}";
+				$.ajax({
+					url : url,
+					type : "get",
+					success : function(data) {
+						if (data.success) {
+							topWin.Dialog.message("保存成功！");
+							window.location.href = "${contextPath}/afterloan/afterloancheck/loanpage0_display.page?taskId=${taskId}&clientNo=${clientNo}&type=$!{type}";
+						}
+						else{
+							topWin.Dialog.message("保存失败！");
+					    }
+						submitFlag = 0;
+					}
+				});
+			}else{
+				submitFlag = 0;
+			}
+		});
+	
+	$("#id_approve_button").click(function() {
+		if(submitFlag == 1){
+			alert("请勿重复提交!")
+			return;
+		}
+		submitFlag = 1;
+		var clientNo = document.getElementById("clientNo");
+		var taskId = document.getElementById("taskId");
+		var type = document.getElementById("type")
+		if (taskId!=null) {
+			var url = "${contextPath}/afterloan/afterloancheck/insert_loanpage1.json?taskId=${taskId}&clientNo=${clientNo}&type=${type}";
+			$.ajax({
+				url : url,
+				type : "get",
+				success : function(data) {
+					if (data.success) {
+						topWin.Dialog.message("保存成功！");
+						window.location.href = "${contextPath}/afterloan/afterloancheck/loanpage0_display.page?taskId=${taskId}&clientNo=${clientNo}&type=$!{type}";
+					}
+					else{
+						topWin.Dialog.message("保存失败！");
+				    }
+					submitFlag = 0;
+				}
+			});
+		}else{
+			submitFlag = 0;
+		}
+	});
+	//返回
+	$("#id_back_button").click(function() {
+		window.parent.location.href = "${contextPath}/afterloan/afterloancheck/browse.page";
+	});
+	});
+</script>
+#parse ("common/iframe_page_footer.htm")

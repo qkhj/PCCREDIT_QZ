@@ -312,7 +312,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				submitFlag = 1;
 				if ($($formName).valid()) {
 					var formjson = $($formName).serialize();
-					var url = "${contextPath}/intopieces/intopiecesapprove/insert_page4.json?customerId=${customerId}";
+					var url = "${contextPath}/intopieces/intopiecesapprove/insert_page4.json?customerId=${customerId}&appId=${appId}";
 					$.ajax({
 						url : url,
 						type : "get",
@@ -320,7 +320,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 						success : function(data) {
 							if (data.success) {
 								topWin.Dialog.message("保存成功！");
-								window.location.href = "${contextPath}/intopieces/intopiecesapprove/page4_list.page?id=${customerId}";
+								window.location.href = "${contextPath}/intopieces/intopiecesapprove/page4_list.page?id=${customerId}&appId=${appId}";
 							}
 							else{
 								topWin.Dialog.message("保存失败！");

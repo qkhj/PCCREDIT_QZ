@@ -361,6 +361,7 @@ function prepareOperations(opsObj) {
             if (submitForm) {
                 submitForm.action = opsObj.exportUrl;
                 submitForm.submit();
+                submitForm.action = "";
             }
         });
     }

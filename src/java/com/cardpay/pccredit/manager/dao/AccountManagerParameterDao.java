@@ -37,4 +37,6 @@ public interface AccountManagerParameterDao {
 	public int findAccountManagerParametersCountByFilter(AccountManagerParameterFilter filter);
 
 	public AccountManagerParameterForm findAccountManagerParameterByUserId(@Param("userId") String userId);
+	
+	public String findRoleNameByUserId(@Param("userId") String userId);
 }

@@ -963,11 +963,11 @@
 	</dictionary>
 	
 	<dictionary name="LOAN_BELONG4" title="贷款归属4">
+	    <item name="1040" title="农户及个人经营性贷款" />
 		<item name="1030" title="个人消费贷款" />
 		<item name="1020" title="个体合作贷款" />
 		<item name="1010" title="个体户贷款" />
 		<item name="0000" title="对公贷款" />
-		<item name="1040" title="农户及个人经营性贷款" />
 	</dictionary>
 	
 	<dictionary name="ACCT_ATTR" title="账户属性">
@@ -1720,14 +1720,25 @@
 	</dictionary>
 	
 	<dictionary name="REPAYMENT_TERM" title="还款期限">
+<<<<<<< HEAD
 	    <item name="3" title="3" />
 	    <item name="6" title="6" />
 	    <item name="9" title="9" />
+=======
+	    <item name="1" title="1" />
+	    <item name="2" title="2" />
+	    <item name="3" title="3" />
+	    <item name="6" title="6" />
+	    <item name="8" title="8" />
+	    <item name="9" title="9" />
+	    <item name="10" title="10" />
+>>>>>>> chinhBy-master
 	    <item name="12" title="12" />
 	    <item name="15" title="15" />
 
 	</dictionary>
 	
+<<<<<<< HEAD
 	<dictionary name="NODE_LIST" title="进件流程节点">
 	    <item name="1" title="客户经理" />
 	    <item name="2" title="初审" />
@@ -1738,6 +1749,8 @@
 
 	</dictionary>
 	
+=======
+>>>>>>> chinhBy-master
 	<dictionary name="UNIT_TYPE" title="公司类型">
 	    <item name="1" title="国有" />
 	    <item name="2" title="外商独资" />
@@ -1749,4 +1762,58 @@
 		<item name="8" title="国内上市公司" />
 		<item name="9" title="其他" />
 	</dictionary>
+<<<<<<< HEAD
+=======
+	
+	<dictionary name="LOAN_STATUS" title="台账状态">
+	    <item name="0" title="出帐未确认" />
+	    <item name="1" title="正常" />
+	    <item name="2" title="正回购卖出" />
+	    <item name="3" title="逆回购买入" />
+	    <item name="4" title="逆回购到期" />
+	    <item name="5" title="正回购到期" />
+	    <item name="6" title="垫款" />
+		<item name="7" title="已扣款" />
+		<item name="8" title="退回未用" />
+		<item name="9" title="结清/核销" />
+		<item name="10" title="闭卷" />
+		<item name="11" title="撤销" />
+	</dictionary>
+	<dictionary name="APPROVE_STATUS" title="贷后检查审核状态">
+	    <item name="0" title="待检查" />
+	    <item name="1" title="待审核" />
+	    <item name="2" title="审核通过" />
+	</dictionary>
+	<dictionary name="TASK_TYPE" title="任务类型">
+	    <item name="1" title="首次放款检查" />
+	    <item name="2" title="满额用信" />
+	    <item name="3" title="授信到期前最高额用信检查" />
+	    <item name="4" title="放款次月客户回访" />
+	</dictionary>
+	<dictionary name="repayment_type" title="还款情况">
+	    <item name="1" title="正常" />
+	    <item name="2" title="逾期" />
+	    <item name="3" title="其他" />
+	</dictionary>
+	<dictionary name="reciprocalType" title="回访类型">
+	    <item name="1" title="电话" />
+	    <item name="2" title="实地考察" />
+	    <item name="3" title="客户上门" />
+	</dictionary>
+	
+	<dictionary name="cusRisk" title="客户风险判断">
+	    <item name="极小" title="极小" />
+	    <item name="小" title="小" />
+	    <item name="较小" title="较小" />
+	    <item name="中等" title="中等" />
+	    <item name="较大" title="较大" />
+	    <item name="大" title="大" />
+	    <item name="极大" title="极大" />
+	</dictionary>
+	<dictionary name="loanStatus" title="贷款状态">
+	    <item name="00" title="正常" />
+	    <item name="10" title="冻结" />
+	    <item name="30" title="终止" />
+	</dictionary>
+>>>>>>> chinhBy-master
 </dictionaries>

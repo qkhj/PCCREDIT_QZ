@@ -195,6 +195,16 @@ public class CustomerApplicationIntopieceWaitService {
 
 	}
 	
+	// 查询需要团队初审的进件信息
+		//全部显示-根据审核人审核的机构分部（安居贷）
+		public QueryResult<CustomerApplicationIntopieceWaitForm> intopieceWaitFormByUsered(CustomerApplicationProcessFilter filter) {
+			List<CustomerApplicationIntopieceWaitForm> listCAI = customerApplicationIntopieceWaitDao.intopieceWaitFormByUsered(filter);
+			int size = customerApplicationIntopieceWaitDao.CountIntopieceWaitFormByUsered(filter);
+			QueryResult<CustomerApplicationIntopieceWaitForm> qs = new QueryResult<CustomerApplicationIntopieceWaitForm>(size, listCAI);
+			return qs;
+
+		}
+		
 	//手动搜件
 	public QueryResult<CustomerApplicationIntopieceWaitForm> recieveIntopieceWaitFormM(CustomerApplicationProcessFilter filter) {
 		List<CustomerApplicationIntopieceWaitForm> listCAI = customerApplicationIntopieceWaitDao.IntopieceWaitFormM(filter);

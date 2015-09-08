@@ -178,11 +178,17 @@ public class IntoPiecesXindaiControl extends BaseController {
 			//查找审批金额
 			Circle circle = circleService.findCircleByAppId(appId);
 			
+			if(StringUtils.isBlank(circle.getaClientNo())){
+				returnMap.setSuccess(false);
+				returnMap.put("message", "客户号不能为空");
+				return returnMap;
+			}
 			request.setAttribute("examineAmount", circle.getContractAmt());
 			customerApplicationIntopieceWaitService.updateCustomerApplicationProcessBySerialNumberApplicationInfo1(request);
 			returnMap.addGlobalMessage(CHANGE_SUCCESS);
 		} catch (Exception e) {
 			returnMap.addGlobalMessage("保存失败");
+			returnMap.put("message", "保存失败");
 			e.printStackTrace();
 		}
 		return returnMap;
@@ -220,6 +226,7 @@ public class IntoPiecesXindaiControl extends BaseController {
 			String nodeNo = "";
 			String appId = request.getParameter("appId");
 			String operate = request.getParameter("operate");//当前审批节点
+<<<<<<< HEAD
 			String nodeName = request.getParameter("nodeName");//退回目标节点（<item name="1" title="客户经理" />
 															    //<item name="2" title="初审" />
 															    //<item name="3" title="内部审查" />
@@ -234,6 +241,15 @@ public class IntoPiecesXindaiControl extends BaseController {
 				intoPiecesService.checkDoNotToManager(appId,request,Integer.parseInt(nodeName),Integer.parseInt(nodeNo));
 			}else{
 				intoPiecesService.returnAppln(appId, request,Integer.parseInt(nodeName),Integer.parseInt(nodeNo));
+=======
+			String nodeName = request.getParameter("nodeName");//退回目标节点id
+			//退回客户经理和其他岗位不一致
+			if("1".equals(nodeName)){
+				
+				intoPiecesService.checkDoNotToManager(appId,request);
+			}else{
+				intoPiecesService.returnAppln(appId, request,nodeName);
+>>>>>>> chinhBy-master
 			}
 			returnMap.addGlobalMessage(CHANGE_SUCCESS);
 		} catch (Exception e) {

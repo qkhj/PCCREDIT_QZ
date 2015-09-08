@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cardpay.pccredit.report.dao.AfterAccLoanDao">
+	<resultMap id="ResultMap" type="com.cardpay.pccredit.report.model.AccLoanInfo">
+	    <result property="rowIndex" column="row_index" />
+	    <result property="managerId" column="managerId" />
+	    <result property="orgName" column="orgName" />
+	    <result property="billNo" column="billNo" />
+	    <result property="acctNo" column="acctNo" />
+	    <result property="acctName" column="acctName" />
+	    <result property="realityIrY" column="realityIrY" />
+	    <result property="contStartDate" column="contStartDate" />
+	    <result property="contEndDate" column="contEndDate" />
+	    <result property="contAmt" column="contAmt" />
+	    <result property="loanAmt" column="loanAmt" />
+	    <result property="loanBalance" column="loanBalance" />
+	    <result property="intAccum" column="intAccum" />
+	    <result property="qixiDate" column="qixiDate" />
+	    <result property="distrDate" column="distrDate" />
+	    <result property="accStatus" column="accStatus" />
+	    <result property="clientName" column="clientName" />
+	 </resultMap>
+	 
+	<resultMap id="OverResultMap" type="com.cardpay.pccredit.report.model.AccLoanOverdueInfo">
+	    <result property="rowIndex" column="row_index" />
+	    <result property="managerId" column="managerId" />
+	    <result property="orgName" column="orgName" />
+	    <result property="billNo" column="billNo" />
+	    <result property="acctName" column="acctName" />
+	    <result property="realityIrY" column="realityIrY" />
+	    <result property="contStartDate" column="contStartDate" />
+	    <result property="contEndDate" column="contEndDate" />
+	    <result property="contAmt" column="contAmt" />
+	    <result property="loanAmt" column="loanAmt" />
+	    <result property="loanBalance" column="loanBalance" />
+	    <result property="intAccum" column="intAccum" />
+	    <result property="qixiDate" column="qixiDate" />
+	    <result property="accStatus" column="accStatus" />
+	    <result property="clientName" column="clientName" />
+	    <result property="overdueMoney" column="overdueMoney" />
+	    <result property="overdue" column="overdue" />
+	 </resultMap>
+	 
+	<resultMap id="CollectResultMap" type="com.cardpay.pccredit.report.model.AccLoanCollectInfo">
+	    <result property="rowIndex" column="rowindex" />
+	    <result property="increaseLoancount" column="newUsedLoans" />
+	    <result property="loanCustomerSum" column="allLoans" />
+	    <result property="increaseCusSum" column="newCreditLoans" />
+	    <result property="centreLoansSun" column="allCreditLoans" />
+	    <result property="loanBalanceSum" column="loanBalanceSum" />
+	    <result property="contAmt" column="contAmt" />
+	    <result property="contBalace" column="contBalace" />
+	    <result property="increaseLoanCredit" column="newCreditMoney" />
+	    <result property="increaseBalanceTheMonth" column="newUsedAge" />
+	    <result property="overdueBalanceTheMon" column="overdueBalance" />
+	    <result property="overdueBalance" column="overdueBalanceCount" />
+	    <result property="increseOverdueCusTheMon" column="newoverdue" />
+	    <result property="alloverdue" column="alloverdue" />
+	    <result property="resvIntAccum" column="resvIntAccum" />
+	    <result property="overdueCusM0" column="M0" />
+	    <result property="overdueCusM1" column="M1" />
+	    <result property="overdueCusM2" column="M2" />
+	    <result property="overdueCusM3" column="M3" />
+	    <result property="overdueCusM4" column="M4" />
+	 </resultMap>
+	 
+	<select id="getAfterAccLoan" resultMap="ResultMap"
+			parameterType="com.cardpay.pccredit.report.filter.OClpmAccLoanFilter">
+	    SELECT * FROM
+			(SELECT ROW_.*,ROWNUM row_index
+			FROM (
+	    select distinct circle.registered_id as managerId,
+       		sd.name as orgName,
+       		loan.bill_no as billNo,
+       		acct.acct_no as acctNo,
+       		acct.acct_name as acctName,
+       		loan.REALITY_IR_Y as realityIrY,
+       		cont.CONT_START_DATE as contStartDate,
+       		cont.CONT_END_DATE as contEndDate,
+       		cont.CONT_AMT as contAmt,
+       		loan.LOAN_AMT as loanAmt,
+       		loan.LOAN_BALANCE as loanBalance,
+       		(loan.Rec_Int_Accum - loan.recv_int_accum) as intAccum,
+       		loan.DISTR_DATE as qixiDate,
+       		loan.DISTR_DATE as distrDate,
+       		loan.ACC_STATUS as accStatus,
+       		circle.client_name as clientName
+  		from O_CLPM_ACC_LOAN loan
+  		inner join qz_iesb_for_circle circle on loan.cus_id = circle.client_no
+  		inner join O_CLPM_IQP_CUS_ACCT acct on loan.cont_no = acct.cont_no
+  		inner join O_CLPM_CTR_LOAN_CONT cont on loan.cont_no = cont.cont_no
+  		inner join sys_user su on circle.registered_id = su.login
+  		inner join SYS_ORGANIZATION sd on circle.regist_org_no = sd.id
+ 	  where 1 = 1
+  		and acct.acct_attr = '03'
+  		
+  		and to_date(loan.distr_date,'yyyy-mm-dd') between #{startDate} and #{endDate}
+  		<if test="managerId != null and managerId != '' ">
+			and circle.registered_id = #{managerId}
+ 		</if>
+ 		<if test="orgId != null and orgId != '' ">
+			and circle.regist_org_no = #{orgId}
+ 		</if>
+ 		<if test="clientName != null and clientName != '' ">
+			and circle.client_name = #{clientName}
+ 		</if>
+ 		<if test="userId != null and userId != '' ">
+			and su.id = #{userId}
+ 		</if>
+ 		<![CDATA[		
+				) ROW_
+			WHERE ROWNUM <= #{limit}*#{page} + #{limit}) 
+		WHERE row_index > #{limit}*#{page}
+		]]>
+	</select>
+	
+	<select id="getAfterAccLoanCount" resultType="int"
+			parameterType="com.cardpay.pccredit.report.filter.OClpmAccLoanFilter">
+ 		SELECT count(*)
+			FROM (
+	    select distinct circle.registered_id as managerId,
+       		sd.name as orgName,
+       		loan.bill_no as billNo,
+       		acct.acct_no as acctNo,
+       		acct.acct_name as acctName,
+       		loan.REALITY_IR_Y as realityIrY,
+       		cont.CONT_START_DATE as contStartDate,
+       		cont.CONT_END_DATE as contEndDate,
+       		cont.CONT_AMT as contAmt,
+       		loan.LOAN_AMT as loanAmt,
+       		(loan.Rec_Int_Accum - loan.recv_int_accum) as intAccum,
+       		loan.DISTR_DATE as qixiDate,
+       		loan.DISTR_DATE as distrDate,
+       		loan.ACC_STATUS as accStatus,
+       		circle.client_name as clientName
+  		from O_CLPM_ACC_LOAN loan
+  		inner join qz_iesb_for_circle circle on loan.cus_id = circle.client_no
+  		inner join O_CLPM_IQP_CUS_ACCT acct on loan.cont_no = acct.cont_no
+  		inner join O_CLPM_CTR_LOAN_CONT cont on loan.cont_no = cont.cont_no
+  		inner join sys_user su on circle.registered_id = su.login
+  		inner join SYS_ORGANIZATION sd on circle.regist_org_no = sd.id
+ 	  where 1 = 1
+  		and acct.acct_attr = '03'
+  		
+  		and to_date(loan.distr_date,'yyyy-mm-dd') between #{startDate} and #{endDate}
+  		<if test="managerId != null and managerId != '' ">
+			and circle.registered_id = #{managerId}
+ 		</if>
+ 		<if test="orgId != null and orgId != '' ">
+			and circle.regist_org_no = #{orgId}
+ 		</if>
+ 		<if test="clientName != null and clientName != '' ">
+			and circle.client_name = #{clientName}
+ 		</if>
+ 		<if test="userId != null and userId != '' ">
+			and su.id = #{userId}
+ 		</if>
+ 		) ROW_
+   </select>		
+	<select id="getLoanOverdue" resultMap="OverResultMap"
+			parameterType="com.cardpay.pccredit.report.filter.OClpmAccLoanFilter">
+	     select a.*,rownum row_index from
+	    (
+	    select distinct circle.registered_id as managerId,
+       		sd.name as orgName,
+       		loan.bill_no as billNo,
+       		acct.acct_name as acctName,
+       		loan.REALITY_IR_Y as realityIrY,
+       		cont.CONT_START_DATE as contStartDate,
+       		cont.CONT_END_DATE as contEndDate,
+       		cont.CONT_AMT as contAmt,
+       		loan.LOAN_AMT as loanAmt,
+       		(loan.Rec_Int_Accum - loan.recv_int_accum) as intAccum,
+       		loan.DISTR_DATE as qixiDate,
+       		loan.ACC_STATUS as accStatus,
+       		circle.client_name as clientName,
+       		(loan.Rec_Int_Accum - loan.recv_int_accum) as overdueMoney,
+       		loan.overdue as overdue
+  		from O_CLPM_ACC_LOAN loan
+  		inner join qz_iesb_for_circle circle on loan.cus_id = circle.client_no
+  		inner join O_CLPM_IQP_CUS_ACCT acct on loan.cont_no = acct.cont_no
+  		inner join O_CLPM_CTR_LOAN_CONT cont on loan.cont_no = cont.cont_no
+  		inner join sys_user su on circle.registered_id = su.login
+  		inner join SYS_ORGANIZATION sd on circle.regist_org_no = sd.id
+ 	  where 1 = 1
+  		and acct.acct_attr = '03'
+  		and (cont.prd_id='100084' or cont.prd_id='100085')
+  		and (loan.Rec_Int_Accum - loan.recv_int_accum)<![CDATA[ >  ]]>0
+      <if test="managerId != null and managerId != '' ">
+      and circle.registered_id = #{managerId}
+     </if>
+     <if test="orgId != null and orgId != '' ">
+      and circle.regist_org_no = #{orgId}
+     </if>
+     <if test="clientName != null and clientName != '' ">
+      and circle.client_name = #{clientName}
+     </if>
+     <if test="userId != null and userId != '' ">
+      and su.id = #{userId}
+     </if>) a
+ 	</select>
+ 		
+	<select id="getAccLoanCollect" resultMap="CollectResultMap"
+			parameterType="com.cardpay.pccredit.report.filter.AccLoanCollectFilter">
+select t1.*,
+       t2.*,
+       t3.*,
+       t4.*,
+       t5.*,
+       t6.*,
+       t7.*,
+       t8.*,
+       t9.*,
+       t10.*,
+       t11.*,
+       t12.*,
+       t13.*,
+       t14.*,
+       t15.*,
+       t16.*,
+       t17.*,
+       t18.*,
+       t19.*,
+       rownum rowindex
+  FROM (select count(laons.cont_no) as newUsedLoans
+  from (select distinct loan.cont_no
+               from o_clpm_acc_loan loan
+               inner join o_clpm_ctr_loan_cont cont on cont.cus_id=loan.cus_id
+               inner join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                  ecif.client_no
+               inner join customer_application_info info on ecif.customer_id =info.customer_id
+                where 1=1
+                 and loan.distr_date <![CDATA[ <=  ]]> #{endDate}
+                and  loan.distr_date <![CDATA[ >=  ]]> #{startDate}
+              <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+                </if>
+                <if test="userId != null and userId != '' ">
+                  and ecif.customer_id =#{userId}
+                </if>        
+               and  (loan.prd_id='100084' or loan.prd_id='100085') 
+              order by loan.cont_no)  laons ) t1,
+ (select count(laons.cont_no) as allLoans
+  from (select distinct loan.cont_no
+               from o_clpm_acc_loan loan
+               inner join o_clpm_ctr_loan_cont cont on cont.cus_id=loan.cus_id
+               inner join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                  ecif.client_no
+               inner join customer_application_info info on ecif.customer_id =info.customer_id
+                where 1=1
+                 and loan.distr_date <![CDATA[ <=  ]]> #{endDate}
+              <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+                </if>
+                <if test="userId != null and userId != '' ">
+                  and ecif.customer_id =#{userId}
+                </if>        
+               and  (loan.prd_id='100084' or loan.prd_id='100085') 
+              order by loan.cont_no)  laons) t2,
+ (select count(cont.cont_no) as newCreditLoans
+          from o_clpm_ctr_loan_cont cont
+          inner join qz_iesb_for_ecif ecif on cont.cus_id = ecif.client_no
+          inner join customer_application_info info on ecif.customer_id =
+                                                      info.customer_id
+         where cont.cont_start_date <![CDATA[ <=  ]]> #{endDate}
+           and cont.cont_start_date <![CDATA[ >=  ]]> #{startDate}
+           and (cont.prd_id='100084' or cont.prd_id='100085')
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t3,
+ (select count(cont.cont_no) as allCreditLoans
+          from o_clpm_ctr_loan_cont cont
+          inner join qz_iesb_for_ecif ecif on cont.cus_id = ecif.client_no
+          inner join customer_application_info info on ecif.customer_id =
+                                                      info.customer_id
+         where cont.cont_start_date <![CDATA[ <=  ]]> #{endDate}
+         and (cont.prd_id='100084' or cont.prd_id='100085')
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t4,
+ (select sum(loan.LOAN_BALANCE) as loanBalanceSum
+          from o_clpm_acc_loan loan
+          inner join qz_iesb_for_ecif ecif on loan.cus_id = ecif.client_no
+          inner join customer_application_info info on ecif.customer_id =info.customer_id
+          inner join o_clpm_ctr_loan_cont cont on cont.cus_id=loan.cus_id
+         where cont.cont_start_date <![CDATA[ <=  ]]> #{endDate}
+           and cont.cont_start_date <![CDATA[ >=  ]]> #{startDate}
+           and (cont.prd_id='100084' or cont.prd_id='100085')
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t5,
+ (select sum(cont.cont_amt) as contAmt
+                          from o_clpm_ctr_loan_cont cont
+                          inner join qz_iesb_for_ecif ecif on cont.cus_id =
+                                                             ecif.client_no
+                          inner join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where cont.cont_start_date <![CDATA[ <=  ]]> #{endDate}
+                           
+                           and (cont.prd_id='100084' or cont.prd_id='100085')
+                            <if test="productId != null and productId != '' ">
+                      and info.product_id = #{productId}
+                       </if>
+                       <if test="userId != null and userId != '' ">
+                        and ecif.customer_id =#{userId}
+                    </if>) t6,
+ (select sum(loan.loan_balance) as contBalace
+                          from o_clpm_acc_loan loan
+                          inner join o_clpm_ctr_loan_cont cont on cont.cus_id=loan.cus_id
+                          inner join qz_iesb_for_ecif ecif on cont.cus_id =
+                                                             ecif.client_no
+                          inner join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where loan.distr_date <![CDATA[ <=  ]]> #{endDate}
+                           
+                           and (cont.prd_id='100084' or cont.prd_id='100085')
+                           and loan.acc_status='1'
+                            <if test="productId != null and productId != '' ">
+                        and info.product_id = #{productId}
+                       </if>
+                       <if test="userId != null and userId != '' ">
+                        and ecif.customer_id =#{userId}
+                    </if>) t7,
+ (select sum(cont.CONT_AMT) as newCreditMoney
+          from o_clpm_ctr_loan_cont cont
+          left join qz_iesb_for_ecif ecif on cont.cus_id = ecif.client_no
+          left join customer_application_info info on ecif.customer_id =
+                                                      info.customer_id
+         where cont.cont_start_date <![CDATA[ <=  ]]> #{endDate}
+           and cont.cont_start_date <![CDATA[ >=  ]]> #{startDate}
+           and (cont.prd_id='100084' or cont.prd_id='100085')
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t8,
+ (select sum(balance) / count(data_dt) as newUsedAge
+          from (select sum(his.loan_balance) balance, data_dt
+                  from o_clpm_acc_loan_history his
+                  left join o_clpm_ctr_loan_cont cont on his.cus_id=cont.cus_id
+                  left join qz_iesb_for_ecif ecif on his.cus_id =
+                                                     ecif.client_no
+                  left join customer_application_info info on ecif.customer_id =
+                                                              info.customer_id
+                 where his.data_dt <![CDATA[ <=  ]]> #{endDate}
+                   and his.data_dt <![CDATA[ >=  ]]> #{startDate}
+                   and (cont.prd_id='100084' or cont.prd_id='100085')
+                    <if test="productId != null and productId != '' ">
+                    and info.product_id = #{productId}
+                    </if>
+                    <if test="userId != null and userId != '' ">
+                    and ecif.customer_id =#{userId}
+                </if>
+                 group by data_dt)) t9,
+ (select sum(loan.overdue_balance) as overdueBalance
+          from o_clpm_acc_loan loan
+          inner join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+          inner join qz_iesb_for_ecif ecif on loan.cus_id = ecif.client_no
+          inner join customer_application_info info on ecif.customer_id =
+                                                      info.customer_id
+         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+           and loan.OVERDUE_DATE <![CDATA[ >=  ]]> #{startDate}
+           and (cont.prd_id='100084' or cont.prd_id='100085')
+           
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t10,
+ (select sum(loan.overdue_balance) as overdueBalanceCount
+          from o_clpm_acc_loan loan
+          left join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+          left join qz_iesb_for_ecif ecif on loan.cus_id = ecif.client_no
+          left join customer_application_info info on ecif.customer_id =
+                                                      info.customer_id
+         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+         and (cont.prd_id='100084' or cont.prd_id='100085')
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t11,
+ (select count(loans.cus_id) as newoverdue
+          from (select loan.cus_id
+                  from o_clpm_acc_loan loan
+                  left join o_clpm_ctr_loan_cont cont on loan.cus_id=cont.cus_id
+                  left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                     ecif.client_no
+                  left join customer_application_info info on ecif.customer_id =
+                                                              info.customer_id
+                 where loan.OVERDUE_DATE <![CDATA[ >=  ]]> #{startDate}
+                   and loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                   and (cont.prd_id='100084' or cont.prd_id='100085')
+                    <if test="productId != null and productId != '' ">
+                    and info.product_id = #{productId}
+                   </if>
+                   and loan.overdue_balance > 0
+                   <if test="userId != null and userId != '' ">
+                  and ecif.customer_id =#{userId}
+                 </if>
+                 order by loan.cus_id) loans) t12,
+ (select count(loans.cus_id) as alloverdue
+          from (select loan.cus_id
+                  from o_clpm_acc_loan loan
+                  left join o_clpm_ctr_loan_cont cont on loan.cus_id=cont.cus_id
+                  left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                     ecif.client_no
+                  left join customer_application_info info on ecif.customer_id =
+                                                              info.customer_id
+                 where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                   and (cont.prd_id='100084' or cont.prd_id='100085')
+                    <if test="productId != null and productId != '' ">
+                    and info.product_id = #{productId}
+                   </if>
+                   and loan.overdue_balance > 0
+                   <if test="userId != null and userId != '' ">
+                  and ecif.customer_id =#{userId}
+                 </if>
+                 order by loan.cus_id) loans) t13,
+ (select sum(loan.recv_int_accum) as resvIntAccum
+          from o_clpm_acc_loan_history loan
+          inner join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+          inner join qz_iesb_for_ecif ecif on loan.cus_id = ecif.client_no
+          inner join customer_application_info info on ecif.customer_id =
+                                                      info.customer_id
+         where loan.data_dt <![CDATA[ =  ]]> #{endDate}
+           
+           and (cont.prd_id='100084' or cont.prd_id='100085')
+            <if test="productId != null and productId != '' ">
+                and info.product_id = #{productId}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ecif.customer_id =#{userId}
+            </if>) t14,
+ (select count(*) as M0
+          from (select a.cus_id
+                  from (select loan.*
+                          from o_clpm_acc_loan loan
+                          left join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+                          left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                             ecif.client_no
+                          left join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                          and (cont.prd_id='100084' or cont.prd_id='100085')
+                            <if test="productId != null and productId != '' ">
+                        and info.product_id = #{productId}
+                       </if>
+                           and loan.overdue = 0
+                           <if test="userId != null and userId != '' ">
+                      and ecif.customer_id =#{userId}
+                     </if>) a
+                 group by a.cus_id)) t15,
+ (select count(*) as M1
+          from (select a.cus_id
+                  from (select loan.*
+                          from o_clpm_acc_loan loan
+                          left join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+                          left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                             ecif.client_no
+                          left join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                         and (cont.prd_id='100084' or cont.prd_id='100085')
+                            <if test="productId != null and productId != '' ">
+                         and info.product_id = #{productId}
+                       </if>
+                           and loan.overdue = 1
+                           <if test="userId != null and userId != '' ">
+                      and ecif.customer_id =#{userId}
+                     </if>) a
+                 group by a.cus_id)) t16,                
+ (select count(*) as M2
+          from (select a.cus_id
+                  from (select loan.*
+                          from o_clpm_acc_loan loan
+                           left join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+                          left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                             ecif.client_no
+                          left join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                         and (cont.prd_id='100084' or cont.prd_id='100085')
+                           <if test="productId != null and productId != '' ">
+                        and info.product_id = #{productId}
+                       </if>
+                           and loan.overdue = 2
+                           <if test="userId != null and userId != '' ">
+                      and ecif.customer_id =#{userId}
+                     </if>) a
+                 group by a.cus_id)) t17,
+ (select count(*) as M3
+          from (select a.cus_id
+                  from (select loan.*
+                          from o_clpm_acc_loan loan
+                           left join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+                          left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                             ecif.client_no
+                          left join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                         and (cont.prd_id='100084' or cont.prd_id='100085')
+                            <if test="productId != null and productId != '' ">
+                        and info.product_id = #{productId}
+                       </if>
+                           and loan.overdue = 3
+                           <if test="userId != null and userId != '' ">
+                      and ecif.customer_id =#{userId}
+                     </if>) a
+                 group by a.cus_id)) t18,
+ (select count(*) as M4
+          from (select a.cus_id
+                  from (select loan.*
+                          from o_clpm_acc_loan loan
+                           left join o_clpm_ctr_loan_cont cont on loan.cont_no = cont.cont_no
+                          left join qz_iesb_for_ecif ecif on loan.cus_id =
+                                                             ecif.client_no
+                          left join customer_application_info info on ecif.customer_id =
+                                                                      info.customer_id
+                         where loan.OVERDUE_DATE <![CDATA[ <=  ]]> #{endDate}
+                         and (cont.prd_id='100084' or cont.prd_id='100085')
+                            <if test="productId != null and productId != '' ">
+                          and info.product_id = #{productId}
+                       </if>
+                           and loan.overdue >= 4
+                           <if test="userId != null and userId != '' ">
+                      and ecif.customer_id =#{userId}
+                     </if>) a
+                 group by a.cus_id)) t19
+ 
+	    
+ 		</select>
+ 		<select id="getAfterAccLoanByCustomerId" resultMap="ResultMap">
+ 		    select    loan.bill_no as billNo,
+       		loan.REALITY_IR_Y as realityIrY,
+       		loan.END_DATE as contEndDate,
+       		loan.LOAN_AMT as loanAmt,
+       		(loan.Rec_Int_Accum - loan.recv_int_accum) as intAccum,
+       		loan.DISTR_DATE as qixiDate,
+       		loan.DISTR_DATE as distrDate,
+       		loan.ACC_STATUS as accStatus,
+       		ecif.client_name as clientName,
+       		rownum row_index
+  		from o_clpm_acc_loan loan
+ 		inner join qz_iesb_for_ecif ecif on loan.cus_id = ecif.client_no
+ 		and ecif.customer_id = #{customerId}
+ 		</select>
+ 		
+ 		<select id="getAfterAccLoanAll" resultMap="ResultMap"
+			parameterType="com.cardpay.pccredit.report.filter.OClpmAccLoanFilter">
+	    SELECT ROW_.*,ROWNUM row_index
+			FROM (
+	    select distinct circle.registered_id as managerId,
+       		sd.name as orgName,
+       		loan.bill_no as billNo,
+       		acct.acct_no as acctNo,
+       		acct.acct_name as acctName,
+       		loan.REALITY_IR_Y as realityIrY,
+       		cont.CONT_START_DATE as contStartDate,
+       		cont.CONT_END_DATE as contEndDate,
+       		cont.CONT_AMT as contAmt,
+       		loan.LOAN_AMT as loanAmt,
+       		loan.loan_balance as loanBalance,
+       		(loan.Rec_Int_Accum - loan.recv_int_accum) as intAccum,
+       		loan.DISTR_DATE as qixiDate,
+       		loan.DISTR_DATE as distrDate,
+       		loan.ACC_STATUS as accStatus,
+       		circle.client_name as clientName
+  		from O_CLPM_ACC_LOAN loan
+  		inner join qz_iesb_for_circle circle on loan.cus_id = circle.client_no
+  		inner join O_CLPM_IQP_CUS_ACCT acct on loan.cont_no = acct.cont_no
+  		inner join O_CLPM_CTR_LOAN_CONT cont on loan.cont_no = cont.cont_no
+  		inner join sys_user su on circle.registered_id = su.login
+  		inner join SYS_ORGANIZATION sd on circle.regist_org_no = sd.id
+ 	  where 1 = 1
+  		and acct.acct_attr = '03'
+  		
+  		and to_date(loan.distr_date,'yyyy-mm-dd') between #{startDate} and #{endDate}
+  		<if test="managerId != null and managerId != '' ">
+			and circle.registered_id = #{managerId}
+ 		</if>
+ 		<if test="orgId != null and orgId != '' ">
+			and circle.regist_org_no = #{orgId}
+ 		</if>
+ 		<if test="clientName != null and clientName != '' ">
+			and circle.client_name = #{clientName}
+ 		</if>
+ 		<if test="userId != null and userId != '' ">
+			and su.id = #{userId}
+ 		</if>		
+				) ROW_
+	</select>
+	 </mapper>

@@ -42,10 +42,10 @@
 				</tr>
 				<tr>
 					<td class="table-label">借款人姓名：</td>
-					<td><input type="text" value="$!customerInfo.chineseName" disabled/>
+					<td><input type="text" value="$!customerInfo.chineseName" readonly/>
 						<input type="hidden" name="clientName" value="$!customerInfo.chineseName"/></td>
 					<td class="table-label">身份证号码：</td>
-					<td><input type="text" value="$!customerInfo.cardId" disabled/>
+					<td><input type="text" value="$!customerInfo.cardId" readonly/>
 						<input type="hidden" name="globalId" value="$!customerInfo.cardId"/></td>			
 				</tr>
 			</table>
@@ -697,7 +697,7 @@
 			</colgroup>
 			<tr>
 				<td class="table-label">主办客户经理：</td>
-				<td><input type="text" value="$!qzApplnAttachmentList.user_1" disabled/>
+				<td><input type="text" value="$!qzApplnAttachmentList.user_1" readonly/>
 					<input type="hidden" name="user_1" value="$!qzApplnAttachmentList.user_1"/></td>
 				<!--  <td class="table-label">行政岗：<font color="#ff0000">*</font></td>
 				<td><input type="text" name="user_2" value="$!qzApplnAttachmentList.user_2"/></td>	-->		
@@ -755,10 +755,10 @@
 		
 		$(document).ready(function() {	
 			if("${type}"=="readonly"){
-				$("input[type='text']").attr("disabled",true);
-				$("input[type='radio']").attr("disabled",true);
-				$("input[type='checkbox']").attr("disabled",true);
-				$("select").attr("disabled",true);
+				$("input[type='text']").attr("readonly",true);
+				$("input[type='radio']").attr("readonly",true);
+				$("input[type='checkbox']").attr("readonly",true);
+				$("select").attr("readonly",true);
 			}
 			//保存
 			$("#id_save_button").click(function() {
@@ -769,7 +769,7 @@
 				submitFlag = 1;
 				if ($($formName).valid()) {
 					var formjson = $($formName).serialize();
-					var url = "${contextPath}/intopieces/intopiecesapprove/update_page5.json?id=${qzApplnAttachmentList.id}&customerId=${qzApplnAttachmentList.customerId}";
+					var url = "${contextPath}/intopieces/intopiecesapprove/update_page5.json?id=${qzApplnAttachmentList.id}&customerId=${qzApplnAttachmentList.customerId}&appId=${appId}";
 					$.ajax({
 						url : url,
 						type : "get",
@@ -777,7 +777,7 @@
 						success : function(data) {
 							if (data.success) {
 								topWin.Dialog.message("保存成功！");
-								window.location.href = "${contextPath}/intopieces/intopiecesapprove/page5.page?id=${qzApplnAttachmentList.customerId}";
+								window.location.href = "${contextPath}/intopieces/intopiecesapprove/page5.page?id=${qzApplnAttachmentList.customerId}&appId=${appId}";
 							}
 							else{
 								topWin.Dialog.message("保存失败！");

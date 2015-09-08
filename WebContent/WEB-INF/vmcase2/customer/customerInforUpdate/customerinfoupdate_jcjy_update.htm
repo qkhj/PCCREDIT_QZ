@@ -8,7 +8,7 @@
 <body class="whitebg">
 	<div class="content_main">
 		<div class="contentinner">
-			<div class="place">
+			<!--<div class="place">
 			   <div class="title">客户维护信息>交叉检验</div>
 			</div>
 				   <div class="tabplace">
@@ -26,7 +26,7 @@
             <li class="tab" ><a href="${contextPath}/customer/basiccustomerinforUpdate/create_khtz.page?id=${customerId}">台账信息</a></li>
             <li class="tab"><a href="${contextPath}/customer/basiccustomerinforUpdate/create_yxzl.page?id=${customerId}">影像资料</a></li>  
          </ul>
-         </div>
+         </div>-->
 			
 
 			<form id="id_module_form" action="${modulePath}/saveCrossExamination.page" method="post">
@@ -196,8 +196,12 @@
 			</form>
 
 			<div class="submit">
+			#if($!type!='readonly')
 				<input id="id_save_button" type="button" value='#i18n("button.save")' class="current" /> 
 				<input type="button" onclick="returnClick();" value='#i18n("button.cancel")' />
+				#else
+			<a class="btn_gr"  onclick="parent.location.href = '${contextPath}${returnUrl}'" title="返回">返回</a>
+				#end
 			</div>
 		</div>
 	</div>

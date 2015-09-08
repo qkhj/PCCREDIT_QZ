@@ -238,4 +238,1560 @@
 		<item name="0" title="否" />
 	</dictionary>
 	
+
+	<!-- ESB 数据字典 -->
+	<!-- 客户信息 -->
+	<dictionary name="INDIV_SEX" title="性别">
+		<item name="01" title="男" />
+		<item name="02" title="女" />
+		<item name="03" title="未说明的性别" />
+	</dictionary>
+	
+	<dictionary name="CERT_TYPE" title="证件类型">
+	    <item name="100" title="身份证"/>
+	    <item name="00B" title="登记注册号"/>
+		<item name="010" title="无身份证N"/>
+		<item name="011" title="其他证件"/>
+		<item name="014" title="批文"/>
+		<item name="015" title="主管证明"/>
+		<item name="026" title="其他"/>
+		<item name="090" title="学生证"/>
+		<item name="101" title="临时身份证"/>
+		<item name="102" title="第一代身份证"/>
+		<item name="111" title="士兵证"/>
+		<item name="112" title="军官证"/>
+		<item name="113" title="军事学员证"/>
+		<item name="114" title="军官退休证"/>
+		<item name="115" title="文职干部退休证"/>
+		<item name="121" title="武警证"/>
+		<item name="122" title="警官证"/>
+		<item name="130" title="户口簿"/>
+		<item name="131" title="村民委员会证明"/>
+		<item name="139" title="离休干部荣誉证"/>
+		<item name="140" title="护照"/>
+		<item name="142" title="外国护照"/>
+		<item name="161" title="港澳居民来往内地通行证"/>
+		<item name="162" title="台湾同胞来往内地通行证"/>
+		<item name="163" title="边民出入境通行证"/>
+		<item name="164" title="台湾身份证"/>
+		<item name="165" title="香港身份证"/>
+		<item name="166" title="澳门身份证"/>
+		<item name="181" title="外国人居留证"/>
+		<item name="190" title="社会保障证"/>
+		<item name="191" title="个人纳税证"/>
+		<item name="199" title="个人其它证件"/>
+		<item name="200" title="营业执照"/>
+		<item name="201" title="注册登记证"/>
+		<item name="203" title="企业法人代码"/>
+		<item name="210" title="组织机构代码证"/>
+		<item name="299" title="企业其他证件"/>
+		<item name="301" title="外貿许可证"/>
+		<item name="302" title="开户许可证"/>
+		<item name="303" title="特种行业许可证"/>
+		<item name="304" title="外汇经营许可证"/>
+		<item name="305" title="金融经营许可证"/>
+		<item name="311" title="贷款证"/>
+		<item name="401" title="国税登记证"/>
+		<item name="402" title="地税登记证"/>
+	</dictionary>
+	<dictionary name="CERT_TYPE_FOR_XD" title="信贷证件类型">
+		<item name="0" title="身份证"/>
+		<item name="1" title="户口簿"/>
+		<item name="2" title="护照"/>
+		<item name="3" title="军官证"/>
+		<item name="4" title="士兵证"/>
+		<item name="5" title="港澳居民来往内地通行证"/>
+		<item name="6" title="台湾同胞来往内地通行证"/>
+		<item name="7" title="临时身份证"/>
+		<item name="8" title="外国人居留证"/>
+		<item name="9" title="警官证"/>
+		<item name="99" title="其他证件-个人"/>
+		<item name="d" title="香港身份证"/>
+		<item name="e" title="澳门身份证"/>
+		<item name="f" title="台湾身份证"/>
+		<item name="X" title="其他证件-对公"/>
+		<item name="a" title="组织机构代码证"/>
+		<item name="b" title="营业执照"/>
+		<item name="c" title="贷款卡"/>
+	</dictionary>
+	
+	<dictionary name="IS_LONG_INDIV" title="是否为长期证件">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="AGRI_FLG" title="是否农户">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="CUS_COUNTRY" title="国别">
+	    <item name="CHN" title="中华人民共和国" />
+		<item name="ABW" title="阿鲁巴" />
+        <item name="AFG" title="阿富汗伊斯兰国" />
+        <item name="AGO" title="安哥拉共和国" />
+        <item name="ALB" title="阿尔巴尼亚共和国" />
+        <item name="AND" title="安道尔公国" />
+        <item name="ANT" title="荷属安的列斯" />
+        <item name="ARE" title="阿拉伯联合酋长国" />
+        <item name="ARG" title="阿根廷共和国" />
+        <item name="ARM" title="亚美尼亚共和国" />
+        <item name="ASM" title="美属萨摩亚" />
+        <item name="ATA" title="安圭拉" />
+        <item name="ATF" title="法属南部领土" />
+        <item name="ATG" title="安提瓜和巴布达" />
+        <item name="AUS" title="澳大利亚联邦" />
+        <item name="AUT" title="奥地利共和国" />
+        <item name="AZE" title="阿塞拜疆共和国" />
+        <item name="BDI" title="布隆迪共和国" />
+        <item name="BEL" title="比利时王国" />
+        <item name="BEN" title="贝宁共和国" />
+        <item name="BFA" title="布基纳法索" />
+        <item name="BGD" title="孟加拉人民共和国" />
+        <item name="BGR" title="保加利亚共和国" />
+        <item name="BHR" title="巴林国" />
+        <item name="BHS" title="巴哈马联邦" />
+        <item name="BIH" title="波斯尼亚和黑塞哥维那共和国" />
+        <item name="BLR" title="白俄罗斯共和国" />
+        <item name="BLZ" title="伯利兹" />
+        <item name="BMU" title="百慕大群岛" />
+        <item name="BOL" title="玻利维亚共和国" />
+        <item name="BRA" title="巴西联邦共和国" />
+        <item name="BRB" title="巴巴多斯" />
+        <item name="BRN" title="文莱达鲁萨兰国" />
+        <item name="BTN" title="不丹王国" />
+        <item name="BVT" title="布维岛" />
+        <item name="BWA" title="博茨瓦纳共和国" />
+        <item name="CAF" title="中非共和国" />
+        <item name="CAN" title="加拿大" />
+        <item name="CCK" title="科科斯（基林）群岛" />
+        <item name="CHE" title="瑞士联邦" />
+        <item name="CHL" title="智利共和国" />
+        
+        <item name="CIV" title="科特迪瓦共和国" />
+        <item name="CMR" title="喀麦隆共和国" />
+        <item name="COG" title="刚果共和国" />
+        <item name="COK" title="库克群岛" />
+        <item name="COL" title="哥伦比亚共和国" />
+        <item name="COM" title="科摩罗伊斯兰联邦共和国" />
+        <item name="CPV" title="佛得角共和国" />
+        <item name="CSR" title="圣诞岛" />
+        <item name="CTN" title="中国台湾" />
+        <item name="CUB" title="古巴共和国" />
+        <item name="CYM" title="开曼群岛" />
+        <item name="CYP" title="塞浦路斯共和国" />
+        <item name="CZE" title="捷克共和国" />
+        <item name="DEU" title="德意志联邦共和国" />
+        <item name="DJI" title="吉布提共和国" />
+        <item name="DMA" title="多米尼克联邦" />
+        <item name="DNK" title="丹麦王国" />
+        <item name="DOM" title="多米尼加共和国" />
+        <item name="DZA" title="阿尔及利亚民主人民共和国" />
+        <item name="ECU" title="厄瓜多尔共和国" />
+        <item name="EGY" title="阿拉伯埃及共和国" />
+        <item name="ERI" title="厄立特里亚国" />
+        <item name="ESH" title="西撒哈拉" />
+        <item name="ESP" title="西班牙" />
+        <item name="EST" title="爱沙尼亚共和国" />
+        <item name="ETH" title="埃塞俄比亚" />
+        <item name="FIN" title="芬兰共和国" />
+        <item name="FJI" title="斐济共和国" />
+        <item name="FLK" title="马尔维纳斯群岛（福克兰群岛）" />
+        <item name="FRA" title="法兰西共和国" />
+        <item name="FRO" title="法罗群岛" />
+        <item name="FSM" title="密克罗尼西亚联邦" />
+        <item name="GAB" title="加蓬共和国" />
+        <item name="GBR" title="大不列颠及北爱尔兰联合王国" />
+        <item name="GEO" title="格鲁吉亚共和国" />
+        <item name="GHA" title="加纳共和国" />
+        <item name="GIB" title="直布罗陀" />
+        <item name="GIN" title="几内亚共和国" />
+        <item name="GLP" title="瓜德罗普" />
+        <item name="GMB" title="冈比亚共和国" />
+        <item name="GNB" title="几内亚比绍共和国" />
+        <item name="GNQ" title="赤道几内亚共和国" />
+        <item name="GRC" title="希腊共和国" />
+        <item name="GRD" title="格林纳达" />
+        <item name="GRL" title="格陵兰" />
+        <item name="GTM" title="危地马拉共和国" />
+        <item name="GUF" title="法属圭亚那" />
+        <item name="GUM" title="关岛" />
+        <item name="GUY" title="圭亚那合作共和国" />
+        <item name="HKG" title="香港" />
+        <item name="HMD" title="赫德岛和麦克唐纳岛" />
+        <item name="HND" title="洪都拉斯共和国" />
+        <item name="HRV" title="克罗地亚共和国" />
+        <item name="HTI" title="海地共和国" />
+        <item name="HUN" title="匈牙利共和国" />
+        <item name="IDN" title="印度尼西亚共和国" />
+        <item name="IND" title="印度共和国" />
+        <item name="IOT" title="英属印度洋领土" />
+        <item name="IRL" title="爱尔兰" />
+        <item name="IRN" title="伊朗伊斯兰共和国" />
+        <item name="IRQ" title="伊拉克共和国" />
+        <item name="ISL" title="冰岛共和国" />
+        <item name="ISR" title="以色列国" />
+        <item name="ITA" title="意大利共和国" />
+        <item name="JAM" title="牙买加" />
+        <item name="JOR" title="约旦哈希姆王国" />
+        <item name="JPN" title="日本国" />
+        <item name="KAZ" title="哈萨克斯坦共和国" />
+        <item name="KEN" title="肯尼亚共和国" />
+        <item name="KGZ" title="吉尔吉斯共和国" />
+        <item name="KHM" title="柬埔寨王国" />
+        <item name="KIR" title="基里巴斯共和国" />
+        <item name="KNA" title="圣革茨和尼维斯联邦" />
+        <item name="KOR" title="大韩民国" />
+        <item name="KWT" title="科威特国" />
+        <item name="LAO" title="老挝人民民主共和国" />
+        <item name="LBN" title="黎巴嫩共和国" />
+        <item name="LBR" title="利比里亚共和国" />
+        <item name="LBY" title="大阿拉伯利比亚人民社会主义民众国" />
+        <item name="LCA" title="圣卢西亚" />
+        <item name="LIE" title="列支敦士登公国" />
+        <item name="LKA" title="斯里兰卡民主社会主义共和国" />
+        <item name="LSO" title="莱索托王国" />
+        <item name="LTU" title="立陶宛共和国" />
+        <item name="LUX" title="卢森堡大公国" />
+        <item name="LVA" title="拉脱维亚共和国" />
+        <item name="MAC" title="澳门" />
+        <item name="MAR" title="摩洛哥王国" />
+        <item name="MCO" title="摩纳哥公国" />
+        <item name="MDA" title="摩尔多瓦共和国" />
+        <item name="MDG" title="马达加斯加共和国" />
+        <item name="MDV" title="马尔代夫共和国" />
+        <item name="MEX" title="墨西哥合众国" />
+        <item name="MHL" title="马绍尔群岛共和国" />
+        <item name="MKD" title="马其顿共和国" />
+        <item name="MLI" title="马里共和国" />
+        <item name="MLT" title="马耳他共和国" />
+        <item name="MMR" title="缅甸联邦" />
+        <item name="MNG" title="蒙古国" />
+        <item name="MNP" title="北马里亚纳自由联邦" />
+        <item name="MOZ" title="莫桑比克共和国" />
+        <item name="MSR" title="蒙特萨拉特" />
+        <item name="MTQ" title="马提尼克" />
+        <item name="MUS" title="毛里求斯共和国" />
+        <item name="MWI" title="马拉维共和国" />
+        <item name="MYS" title="马来西亚" />
+        <item name="MYT" title="马约特" />
+        <item name="NAM" title="纳米比亚共和国" />
+        <item name="NCL" title="新喀里多尼亚" />
+        <item name="NER" title="尼日尔共和国" />
+        <item name="NFK" title="诺福克岛" />
+        <item name="NGA" title="尼日利亚联邦共和国" />
+        <item name="NIC" title="尼加拉瓜共和国" />
+        <item name="NIU" title="纽埃" />
+        <item name="NLD" title="荷兰王国" />
+        <item name="NOR" title="挪威王国" />
+        <item name="NPL" title="尼泊尔王国" />
+        <item name="NRU" title="瑙鲁共和国" />
+        <item name="NZL" title="新西兰" />
+        <item name="OMN" title="阿曼苏丹国" />
+        <item name="PAK" title="巴基斯坦伊斯兰共和国" />
+        <item name="PAN" title="巴拿马共和国" />
+        <item name="PCN" title="皮竺凯恩群岛" />
+        <item name="PER" title="秘鲁共和国" />
+        <item name="PHL" title="菲律宾共和国" />
+        <item name="PLW" title="贝劳共和国" />
+        <item name="PNG" title="巴布亚新几内亚独立国" />
+        <item name="POL" title="波兰共和国" />
+        <item name="PRA" title="巴拉圭共和国" />
+        <item name="PRI" title="波多黎各自由联邦" />
+        <item name="PRK" title="朝鲜民主主义人民共和国" />
+        <item name="PRT" title="葡萄牙共和国" />
+        <item name="PST" title="巴勒斯坦国" />
+        <item name="PYF" title="法属波利尼西亚" />
+        <item name="QAT" title="卡塔尔国" />
+        <item name="REU" title="留尼汪" />
+        <item name="ROM" title="罗马尼亚" />
+        <item name="RUS" title="俄罗斯联邦" />
+        <item name="RWA" title="卢旺达共和国" />
+        <item name="SAU" title="沙特阿拉伯王国" />
+        <item name="SDN" title="苏丹共和国" />
+        <item name="SEN" title="塞内加尔共和国" />
+        <item name="SGP" title="新加坡共和国" />
+        <item name="SGS" title="南乔治亚岛和南桑德韦奇岛" />
+        <item name="SHN" title="圣赫勒拿" />
+        <item name="SJM" title="斯瓦尔巴群岛" />
+        <item name="SLB" title="所罗门群岛" />
+        <item name="SLE" title="塞拉利昂共和国" />
+        <item name="SLV" title="萨尔瓦多共和国" />
+        <item name="SMR" title="圣马力诺共和国" />
+        <item name="SOM" title="索马里共和国" />
+        <item name="SPM" title="圣皮埃尔和密克隆" />
+        <item name="STP" title="圣多美和普林西比民主共和国" />
+        <item name="SUR" title="苏里南共和国" />
+        <item name="SVK" title="斯洛伐克共和国" />
+        <item name="SVN" title="斯洛文尼亚共和国" />
+        <item name="SWE" title="瑞典王国" />
+        <item name="SWZ" title="斯威士兰王国" />
+        <item name="SYC" title="塞舌尔共和国" />
+        <item name="SYR" title="阿拉伯叙利亚共和国" />
+        <item name="TCA" title="特克斯和凯科斯群岛" />
+        <item name="TCD" title="乍得共和国" />
+        <item name="TGO" title="多哥共和国" />
+        <item name="THA" title="泰王国" />
+        <item name="TJK" title="塔吉克斯坦共和国" />
+        <item name="TKL" title="托克劳" />
+        <item name="TKM" title="土库曼斯坦" />
+        <item name="TMP" title="东帝汶" />
+        <item name="TON" title="汤加王国" />
+        <item name="TTO" title="特立尼达和多巴哥共和国" />
+        <item name="TUN" title="突尼斯共和国" />
+        <item name="TUR" title="土耳其共和国" />
+        <item name="TUV" title="图卢瓦" />
+        <item name="TZA" title="坦桑尼亚联合共和国" />
+        <item name="UGA" title="乌干达共和国" />
+        <item name="UKR" title="乌克兰" />
+        <item name="URY" title="乌拉圭东岸共和国" />
+        <item name="USA" title="美利坚合众国" />
+        <item name="UZB" title="乌兹别克斯坦共和国" />
+        <item name="VAT" title="梵蒂冈城国" />
+        <item name="VCT" title="圣文森特和格林纳丁斯" />
+        <item name="VEN" title="委内瑞拉共和国" />
+        <item name="VIR" title="美属维尔京群岛" />
+        <item name="VNM" title="越南社会主义共和国" />
+        <item name="VUT" title="瓦努阿图共和国" />
+        <item name="WLF" title="瓦利斯和富图纳群岛" />
+        <item name="WSM" title="西萨摩亚独立国" />
+        <item name="YEM" title="也门共和国" />
+        <item name="YUG" title="南斯拉夫联盟共和国" />
+        <item name="ZAF" title="南非共和国" />
+        <item name="ZAR" title="扎伊尔共和国" />
+        <item name="ZMB" title="赞比亚共和国" />
+        <item name="ZWE" title="津巴布韦共和国" />
+	</dictionary>
+	
+	<dictionary name="INDIV_NTN" title="民族">
+		<item name="01" title="汉族" />
+		<item name="02" title="蒙族" />
+		<item name="03" title="回族" />
+		<item name="04" title="藏族" />
+		<item name="05" title="维吾尔族" />
+		<item name="06" title="苗族" />
+		<item name="07" title="彝族" />
+		<item name="08" title="壮族" />
+		<item name="09" title="布依族" />
+		<item name="10" title="朝鲜族" />
+		<item name="11" title="满族" />
+		<item name="12" title="侗族" />
+		<item name="13" title="瑶族" />
+		<item name="14" title="白族" />
+		<item name="15" title="土家族" />
+		<item name="16" title="哈尼族" />
+		<item name="17" title="哈萨克族" />
+		<item name="18" title="傣族" />
+		<item name="19" title="黎族" />
+		<item name="20" title="僳僳族" />
+		<item name="21" title="佤族" />
+		<item name="22" title="畲族" />
+		<item name="23" title="高山族" />
+		<item name="24" title="拉祜族" />
+		<item name="25" title="水族" />
+		<item name="26" title="东乡族" />
+		<item name="27" title="纳西族" />
+		<item name="28" title="景颇族" />
+		<item name="29" title="柯尔克孜族" />
+		<item name="30" title="土族" />
+		<item name="31" title="达斡尔族" />
+		<item name="32" title="仫佬族" />
+		<item name="33" title="羌族" />
+		<item name="34" title="布朗族" />
+		<item name="35" title="撒拉族" />
+		<item name="36" title="毛难族" />
+		<item name="37" title="仡佬族" />
+		<item name="38" title="锡伯族" />
+		<item name="39" title="阿昌族" />
+		<item name="40" title="普米族" />
+		<item name="41" title="塔吉克族" />
+		<item name="42" title="怒族" />
+		<item name="43" title="乌孜别克族" />
+		<item name="44" title="俄罗斯族" />
+		<item name="45" title="鄂温克族" />
+		<item name="46" title="崩龙族" />
+		<item name="47" title="保安族" />
+		<item name="48" title="裕固族" />
+		<item name="49" title="京族" />
+		<item name="50" title="塔塔尔族" />
+		<item name="51" title="独龙族" />
+		<item name="52" title="鄂伦春族" />
+		<item name="53" title="赫哲族" />
+		<item name="54" title="门巴族" />
+		<item name="55" title="珞巴族" />
+		<item name="56" title="基诺族" />
+		<item name="98" title="外国血统" />
+		<item name="99" title="其他" />
+		<item name="9A" title="外籍人员" />
+		<item name="9B" title="无国籍人员" />
+		<item name="9C" title="香港人" />
+		<item name="9D" title="澳门人" />
+		<item name="9E" title="台湾人" />
+		<item name="9F" title="华侨" />
+	</dictionary>
+	
+	<dictionary name="INDIV_EDT" title="文化程度（最高学历）">
+	    <item name="99" title="未知" />
+		<item name="10" title="研究生" />
+		<item name="20" title="大学本科（简称'大学'）" />
+		<item name="30" title="大学专科和专科学校（简称'大专'）" />
+		<item name="40" title="中等专业学校或中等技术学校" />
+		<item name="50" title="技术学校" />
+		<item name="60" title="高中" />
+		<item name="70" title="初中" />
+		<item name="80" title="小学" />
+		<item name="90" title="文盲或半文盲" />
+	</dictionary>
+	
+	<dictionary name="INDIV_DGR" title="最高学位">
+		<item name="0" title="无" />
+		<item name="1" title="名誉博士" />
+		<item name="2" title="博士" />
+		<item name="3" title="硕士" />
+		<item name="4" title="学士" />
+		<item name="9" title="未知" />
+	</dictionary>
+	
+	<dictionary name="HOLD_CARD" title="持卡情况">
+		<item name="1" title="有本行卡" />
+		<item name="2" title="有他行卡" />
+		<item name="3" title="无银行卡" />
+	</dictionary>
+	
+	<dictionary name="PASSPORT_FLG" title="是否拥有外国护照或居住权">
+	    <item name="2" title="否" />
+		<item name="1" title="是" />
+	</dictionary>
+	
+	<dictionary name="CUS_CRD_GRADE" title="信用等级">
+		<item name="00" title="未评级" />
+		<item name="11" title="AAA" />
+		<item name="12" title="AA" />
+		<item name="13" title="A" />
+		<item name="14" title="BBB" />
+		<item name="15" title="BB" />
+		<item name="16" title="B" />
+		<item name="19" title="C" />
+		<item name="17" title="CCC" />
+		<item name="18" title="CC" />
+	</dictionary>
+	
+	<dictionary name="IS_RELA_CUST" title="是否为我行关联客户">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="CUS_BANK_REL" title="与我行关联关系">
+		<item name="B1" title="普通客户关系" />
+		<item name="B2" title="本行一般股东" />
+		<item name="B3" title="本行主要股东(持有本行5％(含)以上股份)" />
+		<item name="B4" title="本行董事、高管" />
+		<item name="B5" title="本行董事、高管＋股东" />
+		<item name="B6" title="本行董事、高管亲属" />
+		<item name="B7" title="本行普通员工" />
+		<item name="B8" title="本行普通员工＋股东" />
+		<item name="B9" title="本行普通员工亲属" />
+		<item name="B10" title="本行高管" />
+		<item name="B11" title="本行中层干部" />
+		<item name="B12" title="本行中层干部＋股东" />
+	</dictionary>
+	
+	<dictionary name="BANK_DUTY" title="在我行职务">
+	    <item name="7" title="非本行员工" />
+		<item name="1" title="理事/董事" />
+		<item name="2" title="监事" />
+		<item name="3" title="影响信贷决策的管理人员" />
+		<item name="5" title="高管" />
+		<item name="4" title="其他人员" />
+		<item name="6" title="客户经理" />
+	</dictionary>
+	
+	<dictionary name="LOAN_CARD_FLG" title="是否有贷款卡">
+	    <item name="2" title="否" />
+		<item name="1" title="是" />
+	</dictionary>
+	
+	<!-- 业务信息 -->
+	<dictionary name="ASSURE_MAIN" title="担保方式">
+	    <item name="400" title="信用" />
+		<item name="100" title="抵押" />
+		<item name="200" title="质押" />
+		<item name="210" title="准全额质押" />
+		<item name="220" title="低风险质押" />
+		<item name="300" title="保证" />
+		<item name="500" title="100%保证金" />
+		<item name="510" title="准全额保证金" />
+	</dictionary>
+	
+	<dictionary name="ASSURE_MAIN_DETAILS" title="担保方式细分">
+	    <item name="9" title="信用" />
+		<item name="1" title="普通抵押" />
+		<item name="2" title="普通质押" />
+		<item name="3" title="存货质押" />
+		<item name="4" title="应收账款权利质押" />
+		<item name="5" title="票据质押" />
+		<item name="6" title="租金收益权质押" />
+		<item name="7" title="动产融资质押" />
+		<item name="8" title="保证" />
+		<item name="10" title="100%保证金" />
+		<item name="11" title="准全额保证金" />
+	</dictionary>
+	
+	<dictionary name="IS_COLLECT_STAMP" title="是否收取印花税">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="STAMP_COLLECT_MODE" title="印花税收取方式">
+		<item name="1" title="双边各自支付" />
+		<item name="2" title="全由借款人支付" />
+		<item name="3" title="全由委托人支付" />
+		<item name="4" title="仅代扣借款人" />
+	</dictionary>
+	
+	<dictionary name="CONT_CUR_TYPE" title="合同币种">
+		<item name="CNY" title="人民币" />
+		<item name="EUR" title="欧元" />
+		<item name="GBP" title="英镑" />
+		<item name="HKD" title="港币" />
+		<item name="SFR" title="瑞士法郎" />
+		<item name="AUD" title="澳元" />
+		<item name="JPY" title="日元" />
+		<item name="MOP" title="澳门币" />
+		<item name="CAD" title="加元" />
+		<item name="USD" title="美元" />
+		<item name="SGD" title="新加坡元" />
+		<item name="DEM" title="德国马克" />
+		<item name="FRF" title="法国法郎" />
+	</dictionary>
+	
+	<dictionary name="TERM_TYPE" title="期限类型">
+		<item name="002" title="月" />
+	</dictionary>
+	
+	<dictionary name="IS_DELAY" title="是否节假日顺延">
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="IR_ADJUST_TYPE" title="利率调整方式">
+		<item name="01" title="议价利率依据" />
+	</dictionary>
+	
+	<dictionary name="REPAY_TYPE" title="还款方式">
+		<item name="A004" title="按期付息到期还本" />
+	</dictionary>
+	
+	<dictionary name="FIVE_CLASSFIY" title="五级分类">
+		<item name="10" title="正常" />
+		<item name="20" title="关注" />
+		<item name="30" title="次级" />
+		<item name="40" title="可疑" />
+		<item name="50" title="损失" />
+		<item name="00" title="未分类" />
+	</dictionary>
+	
+	<dictionary name="SPE_LOAN_TYPE" title="特殊贷款类型">
+		<item name="1" title="非特殊贷款" />
+		<item name="2" title="股东贷款" />
+		<item name="3" title="关系人贷款" />
+		<item name="4" title="其他特殊贷款" />
+	</dictionary>
+	
+	<dictionary name="LIMIT_USEED_TYPE" title="额度占用类型">
+		<item name="01" title="小微金融债" />
+		<item name="02" title="自营资金" />
+		<item name="03" title="支小再贷款" />
+	</dictionary>
+	
+	<dictionary name="LOAN_USE_TYPE" title="借款用途">
+	    <item name="13" title="流动资金周转" />
+		<item name="1" title="土地开发" />
+		<item name="2" title="土地储备贷款" />
+		<item name="3" title="房地产类" />
+		<item name="4" title="保障性住房贷款" />
+		<item name="5" title="其他固定资产贷款" />
+		<item name="6" title="技术改造" />
+		<item name="7" title="引进设备技术" />
+		<item name="8" title="购机器、设备" />
+		<item name="9" title="新产品开发" />
+		<item name="10" title="购原材料" />
+		<item name="11" title="产品、商品贸易" />
+		<item name="12" title="施工备料" />
+		<item name="14" title="房地产开发周转" />
+		<item name="15" title="一般透支" />
+		<item name="16" title="铺底资金" />
+		<item name="17" title="临时周转" />
+		<item name="18" title="个人住房按揭" />
+		<item name="19" title="个人购买汽车" />
+		<item name="20" title="个人消费性贷款" />
+		<item name="21" title="房屋维修贷款" />
+		<item name="22" title="公积金贷款" />
+		<item name="23" title="个人其他" />
+		<item name="24" title="其他" />
+	</dictionary>
+	
+	<dictionary name="COM_UP_INDTIFY" title="工业转型升级标识">
+	    <item name="2" title="否" />
+		<item name="1" title="是" />
+	</dictionary>
+	
+	<dictionary name="ENSURE_PROJECT_LOAN" title="个人经营性贷款归属">
+		<item name="10" title="个人工商户贷款(适用个人)" />
+		<item name="20" title="小微企业主贷款(适用个人)" />
+		<item name="90" title="其他贷款(适用对公、个人)" />
+		<item name="30" title="保障性安居工程贷款(适用对公)" />
+		<item name="3010" title="廉租住房贷款" />
+		<item name="301010" title="廉租住房开发贷款" />
+		<item name="301020" title="廉租住房收购贷款" />
+		<item name="301030" title="廉租住房租赁贷款" />
+		<item name="3020" title="公共租赁住房贷款" />
+		<item name="302010" title="公共租赁住房开发贷款" />
+		<item name="302020" title="公共租赁住房收购贷款" />
+		<item name="302030" title="公共租赁住房租赁贷款" />
+		<item name="3030" title="经济适用住房开发贷款" />
+		<item name="3040" title="限价商品住房开发贷款" />
+		<item name="3050" title="棚户区改造贷款" />      
+		<item name="3060" title="农村危房改造贷款" />    
+		<item name="3070" title="游牧民定居工程贷款 " /> 
+		<item name="0" title="保障性安居工程贷款/个人经营性贷款归属" />
+	</dictionary>
+	
+	<dictionary name="ESTATE_ADJUST_TYPE" title="产业结构调整类型">
+	    <item name="4" title="其他" />
+		<item name="2" title="限制产业" />
+		<item name="3" title="淘汰" />
+		<item name="21" title="高污染产业" />
+		<item name="22" title="高耗能产业" />
+		<item name="23" title="产能过剩产业" />
+		<item name="24" title="消耗资源性产业" />
+		<item name="25" title="其他限制产业" />
+		<item name="31" title="高污染产业" />
+		<item name="32" title="高耗能产业" />
+		<item name="33" title="产能过剩产业" />
+		<item name="34" title="消耗资源性产业" />
+		<item name="35" title="其他限制产业" />
+		<item name="0" title="产业结构调整类型" />
+		<item name="1" title="鼓励产业" />
+	</dictionary>
+	
+	<dictionary name="STRATEGY_NEW_TYPE" title="战略新兴产业类型">
+	    <item name="02" title="否" />
+		<item name="0" title="战略新兴产业类型" />
+		<item name="01" title="是" />
+		<item name="1" title="节能环保" />
+		<item name="10" title="高技术服务业" />
+		<item name="11" title="其他高新产业" />
+		<item name="2" title="新一代信息技术" />
+		<item name="3" title="生物医药" />
+		<item name="4" title="高端装备制造" />
+		<item name="5" title="新能源" />
+		<item name="6" title="新材料" />
+		<item name="7" title="新能源汽车" />
+		<item name="8" title="光电产品" />
+		<item name="9" title="电子信息产品" />
+	</dictionary>
+	
+	<dictionary name="NEW_PRD_LOAN" title="新兴产业贷款">
+		<item name="0" title="新兴产业贷款" />
+		<item name="01" title="是" />
+		<item name="02" title="否" />
+		<item name="1" title="光电产品" />
+		<item name="2" title="电子信息产品" />
+		<item name="3" title="生物医药产品" />
+		<item name="4" title="高技术服务业" />
+		<item name="5" title="其他高新产品" />
+	</dictionary>
+	
+	<dictionary name="LOAN_BELONG2" title="贷款归属2">
+	    <item name="20" title="对私贷款" />
+		<item name="10" title="对公贷款" />
+		<item name="1000" title="对公贷款" />
+		<item name="2000" title="个人住房按揭贷款" />
+		<item name="2005" title="个人商用房按揭贷款" />
+		<item name="2010" title="个人二手房贷款" />
+		<item name="2015" title="耐用品消费贷款" />
+		<item name="2020" title="存单质押贷款" />
+		<item name="2025" title="黄金质押贷款" />
+		<item name="2030" title="动产质押贷款" />
+		<item name="2035" title="住房抵押贷款" />
+		<item name="2040" title="住房装修贷款" />
+		<item name="2045" title="个体工商户贷款" />
+		<item name="2050" title="留学生贷款" />
+		<item name="2055" title="个人助业贷款" />
+		<item name="2060" title="公务员贷款" />
+		<item name="2065" title="个人信用贷款" />
+		<item name="2070" title="汽车消费贷款" />
+		<item name="2075" title="个人委托贷款" />
+		<item name="2080" title="动产抵押贷款" />
+		<item name="2085" title="应收账款质押" />
+	</dictionary>
+	
+	<dictionary name="LOAN_BELONG3" title="贷款归属3">
+	    <item name="15" title="信用贷款及透支" />
+		<item name="1510" title="信用贷款及透支" />
+		<item name="10" title="公共企业贷款" />
+		<item name="1010" title="对国家投资的公共企业贷款" />
+		<item name="1020" title="对省级政府投资的公共企业贷款" />
+		<item name="1030" title="对地及地以下政府投资公共企业贷款" />
+		<item name="1040" title="对其他公共企业贷款" />
+		<item name="20" title="保证贷款" />
+		<item name="2010" title="国有商业银行及政策性银行保证" />
+		<item name="2020" title="其他银行保证" />
+		<item name="2030" title="城市合作银行保证" />
+		<item name="2040" title="非银行金融机构保证" />
+		<item name="2050" title="外资或中外合资银行保证" />
+		<item name="2060" title="外资或中外合资非银行金融机构保证" />
+		<item name="2070" title="国家大型或特大型企业担保" />
+		<item name="2080" title="其他企业担保" />
+		<item name="2090" title="其他保证" />
+		<item name="30" title="质押贷款" />
+		<item name="3005" title="国债质押" />
+		<item name="3010" title="现汇质押" />
+		<item name="3015" title="金融债券质押" />
+		<item name="3020" title="其他有价证券及可转让权质押" />
+		<item name="3025" title="商业及政策性银行承兑汇票贴现" />
+		<item name="3030" title="商业承兑汇票贴现质押" />
+		<item name="3035" title="可转让股份股票权质押" />
+		<item name="3040" title="人民币存单质押" />
+		<item name="3045" title="外币存单质押" />
+		<item name="3050" title="其他质押" />
+		<item name="40" title="抵押贷款" />
+		<item name="4010" title="土地房产权转让抵押" />
+		<item name="4020" title="居住楼宇抵押" />
+		<item name="4030" title="动产物业抵押" />
+		<item name="4040" title="其他抵押" />
+	</dictionary>
+	
+	<dictionary name="LOAN_BELONG4" title="贷款归属4">
+	    <item name="1040" title="农户及个人经营性贷款" />
+		<item name="1030" title="个人消费贷款" />
+		<item name="1020" title="个体合作贷款" />
+		<item name="1010" title="个体户贷款" />
+		<item name="0000" title="对公贷款" />
+	</dictionary>
+	
+	<dictionary name="ACCT_ATTR" title="账户属性">
+		<item name="03" title="收息收款账号 " />
+		<item name="02" title="借款人印花税账号" />
+		<item name="01" title="放款账号" />
+		<item name="07" title="费用账号" />
+	</dictionary>
+	
+	<dictionary name="IS_THIS_ORG_ACCT" title="是否本行账户">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="CUR_TYPE" title="币种">
+		<item name="CNY" title="人民币" />
+		<item name="EUR" title="欧元" />
+		<item name="GBP" title="英镑" />
+		<item name="HKD" title="港币" />
+		<item name="SFR" title="瑞士法郎" />
+		<item name="AUD" title="澳元" />
+		<item name="JPY" title="日元" />
+		<item name="MOP" title="澳门币" />
+		<item name="CAD" title="加元" />
+		<item name="USD" title="美元" />
+		<item name="SGD" title="新加坡元" />
+		<item name="DEM" title="德国马克" />
+		<item name="FRF" title="法国法郎" />
+	</dictionary>
+	
+	<dictionary name="IS_MAIN_MANAGER" title="是否主管客户经理">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="FEE_CODE" title="费用代码">
+		<item name="10" title="银团安排费" />
+		<item name="11" title="银团承诺费" />
+		<item name="12" title="银团代理费" />
+		<item name="07" title="银承手续费" />
+		<item name="06" title="印花税" />
+		<item name="05" title="待摊销费用" />
+		<item name="04" title="工本费收入" />
+		<item name="03" title="银行汇票业务收入" />
+		<item name="02" title="保函手续费" />
+		<item name="01" title="借款人委托贷款费用" />
+		<item name="08" title="贷款承诺手续费" />
+		<item name="09" title="委托人委托贷款费用" />
+		<item name="13" title="国内保理费" />
+	</dictionary>
+	
+	<dictionary name="FEE_TYPE" title="费用类型">
+		<item name="101" title="案件受理费" />
+		<item name="102" title="评估费" />
+		<item name="103" title="公证费" />
+		<item name="104" title="拍卖费" />
+		<item name="105" title="仲裁费" />
+		<item name="106" title="勘验费" />
+		<item name="107" title="鉴定费" />
+		<item name="108" title="公告费" />
+		<item name="109" title="翻译费" />
+		<item name="110" title="证人、鉴定人员出庭的交通费、住宿费、生活费和误工补贴费" />
+		<item name="111" title="财产保全费" />
+		<item name="112" title="保全实际支出费" />
+		<item name="113" title="支付令申请费" />
+		<item name="114" title="法院认为应由我行负担的其他费用" />
+		<item name="115" title="执行费" />
+		<item name="116" title="其他" />
+	</dictionary>
+	
+	<dictionary name="FEE_CUR_TYPE" title="币种">
+		<item name="CNY" title="人民币" />
+		<item name="EUR" title="欧元" />
+		<item name="GBP" title="英镑" />
+		<item name="HKD" title="港币" />
+		<item name="SFR" title="瑞士法郎" />
+		<item name="AUD" title="澳元" />
+		<item name="JPY" title="日元" />
+		<item name="MOP" title="澳门币" />
+		<item name="CAD" title="加元" />
+		<item name="USD" title="美元" />
+		<item name="SGD" title="新加坡元" />
+		<item name="DEM" title="德国马克" />
+		<item name="FRF" title="法国法郎" />
+	</dictionary>
+	
+	<dictionary name="IS_CYCLE_CHRG" title="是否周期性收费">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="COLLECT_TYPE" title="收取方式,按固定金额/按比率">
+		<item name="01" title="按固定金额" />
+		<item name="02" title="按比率" />
+	</dictionary>
+	
+	<dictionary name="CHRG_FREQ" title="收费频率">
+		<item name="Y" title="年" />
+		<item name="Q" title="季" />
+		<item name="M" title="月" />
+	</dictionary>
+	
+	<!-- 担保信息 -->
+	<dictionary name="GUAR_CONT_TYPE" title="担保合同类型">
+		<item name="00" title="一般担保合同" />
+		<item name="01" title="最高额担保合同" />
+	</dictionary>
+	
+	<dictionary name="GUAR_WAY" title="担保方式">
+		<item name="00" title="抵押" />
+		<item name="01" title="质押" />
+		<item name="02" title="保证-单人担保" />
+		<item name="03" title="保证-多人分保" />
+		<item name="04" title="保证-多人联保" />
+	</dictionary>
+	
+	<dictionary name="IS_PER_GUR" title="是否阶段性担保">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="IS_ADD_GUAR" title="是否追加担保">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<!-- 押品信息 -->
+	<dictionary name="GUARANTY_CLS" title="押品类别">
+		<item name="1" title="抵押物" />
+		<item name="2" title="质押物" />
+	</dictionary>
+	
+	<dictionary name="IS_COMMON_OWNER" title="是否有共有人">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="IS_WARRANT_FULL" title="权证信息是否完整">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="IS_TAKEOVER" title="是否可转让">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="GUARANTY_CUR_TYPE" title="押品原值币种">
+		<item name="CNY" title="人民币" />
+		<item name="EUR" title="欧元" />
+		<item name="GBP" title="英镑" />
+		<item name="HKD" title="港币" />
+		<item name="SFR" title="瑞士法郎" />
+		<item name="AUD" title="澳元" />
+		<item name="JPY" title="日元" />
+		<item name="MOP" title="澳门币" />
+		<item name="CAD" title="加元" />
+		<item name="USD" title="美元" />
+		<item name="SGD" title="新加坡元" />
+		<item name="DEM" title="德国马克" />
+		<item name="FRF" title="法国法郎" />
+	</dictionary>
+	
+	<dictionary name="WARRANT_CLS" title="权证类别">
+		<item name="1" title="权利证明类型" />
+		<item name="2" title="其他权证类型" />
+	</dictionary>
+	
+	<dictionary name="WARRANT_TYPE" title="权证类型">
+		<item name="01" title="土地他项权证或登记证明" />
+		<item name="02" title="房屋他项权证或登记证明" />
+		<item name="03" title="交通设备抵押登记证明" />
+		<item name="05" title="其他抵押登记证明" />
+		<item name="04" title="机器设备抵押登记证明" />
+		<item name="06" title="质押登记证明" />
+		<item name="07" title="银行本票\汇票" />
+		<item name="08" title="银行承兑汇票" />
+		<item name="09" title="批准文件\收费许可证" />
+		<item name="10" title="背书仓单\背书提单" />
+		<item name="11" title="股权登记证" />
+		<item name="12" title="抵押备案证明" />
+		<item name="13" title="其他可证明我行拥有合法抵质押权利的" />
+		<item name="14" title="收费许可证" />
+		<item name="15" title="提单" />
+		<item name="16" title="汽车合格证" />
+		<item name="17" title="共有权证" />
+		<item name="18" title="进口证明书/随车检验单" />
+		<item name="19" title="保函" />
+		<item name="20" title="汽车履约保证保函" />
+		<item name="21" title="备用信用证" />
+		<item name="22" title="理财产品协议" />
+		<item name="23" title="信托产品协议" />
+		<item name="24" title="股权证" />
+		<item name="25" title="债券" />
+		<item name="27" title="营运车牌" />
+		<item name="28" title="增值税发票" />
+		<item name="29" title="购房合同" />
+		<item name="30" title="股票" />
+		<item name="31" title="批准证件" />
+		<item name="32" title="权利证明单据" />
+		<item name="33" title="商业承兑汇票" />
+		<item name="34" title="水域滩涂养殖使用证" />
+		<item name="35" title="机动车销售统一发票" />
+		<item name="36" title="车辆购置税缴交凭证" />
+		<item name="37" title="购房发票" />
+		<item name="40" title="存单" />
+		<item name="41" title="房屋所有权证" />
+		<item name="44" title="国有土地使用证" />
+		<item name="45" title="机动车登记证" />
+		<item name="46" title="设备购置发票" />
+		<item name="48" title="轮船所有权证" />
+		<item name="49" title="标准仓单" />
+		<item name="51" title="保单" />
+		<item name="52" title="银行本票" />
+		<item name="53" title="银行承兑汇票" />
+		<item name="54" title="理财产品协议(权利证明)" />
+		<item name="99" title="其他" />
+	</dictionary>
+	
+	<dictionary name="IS_MAIN_WARRANT" title="是否主权证">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<dictionary name="EVAL_TYPE" title="评估类型">
+		<item name="0200" title="外部评估" />
+		<item name="0300" title="内部评估" />
+		<item name="0400" title="尚未评估" />
+		<item name="0900" title="其它" />
+	</dictionary>
+	
+	<dictionary name="EVAL_MODE" title="评估方式">
+		<item name="1" title="评估公司评估" />
+		<item name="2" title="银行认可（具有发票等证明）" />
+		<item name="3" title="其他" />
+	</dictionary>
+	
+	<!-- 保证人信息 -->
+	<dictionary name="GUAR_TYPE" title="保证形式">
+		<item name="00" title="一般责任担保" />
+		<item name="01" title="连带责任担保" />
+	</dictionary>
+	
+	<dictionary name="IS_SPADD" title="是否为追加担保">
+		<item name="1" title="是" />
+		<item name="2" title="否" />
+	</dictionary>
+	
+	<!-- 个人客户信息新增 -->
+	<dictionary name="CLIENT_NAME_TYPE" title="客户名称类型">
+	    <item name="20" title="个人名称" />
+		<item name="10" title="公司名称" />
+		<item name="11" title="注册名" />
+		<item name="12" title="正式名称" />
+		<item name="13" title="简称" />
+		<item name="21" title="正式名称（证件用名）" />
+		<item name="22" title="别名" />
+		<item name="23" title="音译名" />
+		<item name="24" title="外文名" />
+		<item name="25" title="曾用名" />
+		<item name="26" title="艺名" />
+		<item name="27" title="笔名" />
+		<item name="28" title="昵称" />
+		<item name="29" title="商务名" />
+		<item name="30" title="外文名全称" />
+		<item name="31" title="外文名简称" />
+		<item name="41" title="商务卡持卡人所在公司中文名简称" />
+		<item name="42" title="商务卡持卡人所在公司中文名全称" />
+		<item name="43" title="商务卡持卡人所在公司英文名" />
+		<item name="99" title="其他" />
+	</dictionary>	
+	
+	<dictionary name="CLIENT_TYPE" title="客户类型">
+		<item name="Z3" title="个体工商户(无字号)" />
+		<item name="Z2" title="个体经营户(无字号)" />
+		<item name="Z1" title="一般自然人" />
+		<item name="H2" title="军事机关非法人" />
+		<item name="H1" title="军事机关法人" />
+		<item name="G" title="境外机构" />
+		<item name="F9" title="其他" />
+		<item name="E2" title="社团非法人" />
+		<item name="E1" title="社团法人" />
+		<item name="D2" title="事业非法人" />
+		<item name="D1" title="事业法人" />
+		<item name="C2" title="行政非法人" />
+		<item name="C1" title="行政法人" />
+		<item name="B2" title="党政机关非法人" />
+		<item name="B1" title="党政机关法人" />
+		<item name="A3" title="小额贷款公司客户" />
+		<item name="A2" title="担保公司客户" />
+		<item name="A142" title="外商企业投资非法人" />
+		<item name="A141" title="外商企业投资法人" />
+		<item name="A132" title="港澳台商投资企业非法人" />
+		<item name="A131" title="港澳台商投资企业法人" />
+		<item name="A122" title="国有企业非法人" />
+		<item name="A121" title="国有企业法人" />
+		<item name="A112" title="民营企业非法人" />
+		<item name="A111" title="民营企业法人" />
+	</dictionary>
+	
+	<dictionary name="CLIENT_STATUS" title="客户状态">
+		<item name="0" title="有效" />
+		<item name="1" title="注销" />
+		<item name="2" title="预登记" />
+		<item name="3" title="锁定" />
+	</dictionary>
+	
+	<!-- 个人客户信息维护 -->
+	<dictionary name="ADDRESS_TYPE" title="地址类型">
+		<item name="01" title="证件地址" />
+		<item name="02" title="住宅地址" />
+		<item name="03" title="户籍地址" />
+		<item name="04" title="单位地址" />
+		<item name="05" title="联系地址" />
+		<item name="06" title="注册地址" />
+		<item name="07" title="英文地址" />
+		<item name="08" title="对账单地址" />
+		<item name="09" title="英文办公地址" />
+		<item name="10" title="通讯地址" />
+		<item name="11" title="经营地址" />
+		<item name="99" title="其他" />
+	</dictionary>
+	
+	<dictionary name="CONTACT_MODE_TYPE" title="联系方式类型">
+		<item name="01" title="常用联系电话" />
+		<item name="02" title="办公电话" />
+		<item name="03" title="家庭电话" />
+		<item name="04" title="手机号码" />
+		<item name="05" title="手机银行号码" />
+		<item name="06" title="短信签约号码" />
+		<item name="07" title="传真号码" />
+		<item name="08" title="电子邮件" />
+		<item name="081" title="外管局联系用eMail" />
+		<item name="082" title="交易用Email" />
+		<item name="09" title="公司主页" />
+		<item name="10" title="QQ号码" />
+		<item name="11" title="MSN" />
+		<item name="12" title="个人主页" />
+		<item name="13" title="小灵通" />
+		<item name="99" title="其他" />
+	</dictionary>
+	
+	<dictionary name="NATIONALITY_CODE" title="民族代码">
+		<item name="01" title="汉族" />
+		<item name="02" title="蒙族" />
+		<item name="03" title="回族" />
+		<item name="04" title="藏族" />
+		<item name="05" title="维吾尔族" />
+		<item name="06" title="苗族" />
+		<item name="07" title="彝族" />
+		<item name="08" title="壮族" />
+		<item name="09" title="布依族" />
+		<item name="10" title="朝鲜族" />
+		<item name="11" title="满族" />
+		<item name="12" title="侗族" />
+		<item name="13" title="瑶族" />
+		<item name="14" title="白族" />
+		<item name="15" title="土家族" />
+		<item name="16" title="哈尼族" />
+		<item name="17" title="哈萨克族" />
+		<item name="18" title="傣族" />
+		<item name="19" title="黎族" />
+		<item name="20" title="僳僳族" />
+		<item name="21" title="佤族" />
+		<item name="22" title="畲族" />
+		<item name="23" title="高山族" />
+	</dictionary>
+	
+	<dictionary name="MARITAL_STATUS" title="婚姻状况">
+		<item name="10" title="未婚" />
+		<item name="20" title="已婚" />
+		<item name="21" title="初婚" />
+		<item name="22" title="再婚" />
+		<item name="23" title="复婚" />
+		<item name="30" title="丧偶" />
+		<item name="40" title="离婚" />
+		<item name="90" title="未说明的婚姻状况" />
+	</dictionary>
+	
+	<dictionary name="EDUCATION_LEVEL" title="教育水平">
+		<item name="000" title="未输入" />
+		<item name="100" title="高等教育" />
+		<item name="101" title="博士及以上" />
+		<item name="102" title="硕士/双学士" />
+		<item name="103" title="大学本科" />
+		<item name="104" title="大专和专科学校" />
+		<item name="200" title="中等教育" />
+		<item name="205" title="中专和中等技校" />
+		<item name="206" title="技工学校" />
+		<item name="207" title="高中或同等职业教育" />
+		<item name="208" title="中学毕业" />
+		<item name="300" title="初等教育" />
+		<item name="309" title="小学毕业" />
+		<item name="400" title="文盲/半文盲" />
+		<item name="998" title="其他" />
+		<item name="999" title="错误" />
+	</dictionary>
+	
+	<dictionary name="IDENTITY_TYPE" title="身份类别">
+		<item name="01" title="中国居民" />
+		<item name="02" title="军人" />
+		<item name="03" title="武警" />
+		<item name="04" title="香港、澳门、台湾居民" />
+		<item name="05" title="外国公民" />
+	</dictionary>
+	
+	<!-- 对公客户信息维护 -->
+	<dictionary name="GLOBAL_TYPE" title="证件类型">
+		<item name="1" title="一般个人客户" />
+		<item name="2" title="生产经营性客户" />
+		<item name="24" title="担保公司客户" />
+		<item name="4" title="企业客户" />
+		<item name="5" title="行政事业客户" />
+		<item name="23" title="社会团体客户" />
+		<item name="3" title="混合型个人客户" />
+	</dictionary>
+		<dictionary name="ORG_FORM" title="组织形式">
+		<item name="11" title="工业股份有限公司" />
+		<item name="13" title="工业联营企业" />
+		<item name="15" title="商业有限责任公司" />
+		<item name="16" title="商业股份有限公司" />
+		<item name="18" title="商业联营企业" />
+		<item name="20" title="建筑业有限责任公司" />
+		<item name="21" title="建筑业股份有限公司" />
+		<item name="23" title="建筑业联营企业" />
+		<item name="25" title="农业有限责任公司" />
+		<item name="26" title="农业股份有限公司" />
+		<item name="28" title="农业联营企业" />
+		<item name="30" title="城乡集体企业" />
+		<item name="32" title="三资企业" />
+		<item name="34" title="外商独资" />
+		<item name="35" title="中外合资" />
+		<item name="37" title="无贷款卡户" />
+		<item name="90" title="其他企业" />
+		<item name="10" title="工业有限责任公司" />
+		<item name="12" title="工业国有企业" />
+		<item name="14" title="工业股份合作企业" />
+		<item name="17" title="商业国有企业" />
+		<item name="19" title="商业股份合作企业" />
+		<item name="22" title="建筑业国有企业" />
+		<item name="24" title="建筑业股份合作企业" />
+		<item name="27" title="农业国有企业" />
+		<item name="29" title="农业股份合作企业" />
+		<item name="31" title="乡镇企业" />
+		<item name="33" title="私营企业及个体户" />
+		<item name="36" title="中外合作" />
+		<item name="38" title="事业单位" />
+	</dictionary>
+	
+	<dictionary name="CORP_TYPE" title="企业类型">
+		<item name="202" title="大型企业" />
+		<item name="303" title="中型企业" />
+		<item name="404" title="小型企业" />
+		<item name="505" title="微型企业" />
+		<item name="902" title="其他（融资平台大企业）" />
+		<item name="903" title="其他（融资平台中企业）" />
+		<item name="904" title="其他（融资平台小企业）" />
+		<item name="909" title="其他（事业单位）" />
+	</dictionary>
+	
+	<dictionary name="GROUP_TYPE" title="集团类型">
+		<item name="2" title="集团客户子公司" />
+		<item name="1" title="集团客户母公司" />
+		<item name="9" title="非集团客户" />
+	</dictionary>
+	
+	<!-- 新增同业客户 -->
+	<dictionary name="BANK_CATEGORY_CODE" title="行别代码">
+		<item name="010" title="国有商业银行" />
+		<item name="020" title="股份制银行" />
+		<item name="030" title="城商行" />
+		<item name="040" title="农村商业银行和农信社" />
+		<item name="050" title="政策性商业银行" />
+		<item name="060" title="外资银行" />
+		<item name="090" title="其他金融机构" />
+		<item name="999" title="信托公司" />
+	</dictionary>
+	
+	<!-- 客户我行存款账号信息查询 -->
+	<dictionary name="ACCT_STAT" title="账户状态">
+		<item name="0" title="正常 0" />
+		<item name="1" title="异常 1" />
+		<item name="2" title="销户 2" />
+		<item name="3" title="未生效 100" />
+		<item name="4" title="生效 200" />
+		<item name="5" title="已出账 800" />
+		<item name="6" title="核销 900" />
+		<item name="6" title="核销 901" />
+		<item name="6" title="核销 902" />
+		<item name="6" title="核销 903" />
+		<item name="6" title="核销 904" />
+		<item name="6" title="核销 905" />
+		<item name="6" title="核销 906" />
+		<item name="6" title="核销 907" />
+		<item name="6" title="核销 908" />
+		<item name="6" title="核销 909" />
+		<item name="7" title="出帐未确认 0" />
+		<item name="8" title="正回购卖出 1" />
+		<item name="8" title="正回购卖出 2" />
+		<item name="9" title="逆回购买入 3" />
+		<item name="10" title="逆回购到期 4" />
+		<item name="11" title="正回购到期 5" />
+		<item name="12" title="垫款 6" />
+		<item name="13" title="已扣款 7" />
+		<item name="14" title="退回未用 8" />
+		<item name="6" title="核销 9" />
+		<item name="7" title="出帐未确认 00" />
+		<item name="16" title="直贴 10" />
+		<item name="17" title="卖出回购 11" />
+		<item name="18" title="转贴现－买入 20" />
+		<item name="19" title="内部转贴现 30" />
+		<item name="20" title="托收在途 80" />
+		<item name="6" title="核销 90" />
+		<item name="21" title="重打 1" />
+		<item name="22" title="已挂失 2" />
+		<item name="23" title="已解付 3" />
+		<item name="24" title="已退票 4" />
+		<item name="25" title="撤销 5" />
+	</dictionary>
+	
+	<!-- 新增或修改潜在客户信息 -->
+	<dictionary name="OPERATION_TYPE" title="操作类型">
+		<item name="0" title="新增" />
+		<item name="1" title="修改" />
+	</dictionary>
+	
+	<!-- 贷款本金回收通知 -->
+	<dictionary name="DUEBILL_STATUS" title="借据状态">
+		<item name="NBAP" title="未放款" />
+		<item name="ACTV" title="已发放" />
+		<item name="SETL" title="已结清" />
+	</dictionary>
+	
+	<dictionary name="RECYCLE_TYPE" title="回收方式">
+		<item name="01" title="正常收回" />
+		<item name="02" title="资产重组" />
+		<item name="03" title="资产剥离" />
+		<item name="04" title="以资抵债" />
+		<item name="05" title="担保代偿" />
+		<item name="06" title="核损核销" />
+		<item name="07" title="政策性还款" />
+		<item name="08" title="债转股" />
+		<item name="09" title="转出" />
+	</dictionary>
+	
+	<!-- 银票出票通知 -->
+	<dictionary name="FILE_FLAG" title="文件标识">
+		<item name="0" title="无" />
+		<item name="1" title="有" />
+	</dictionary>
+	
+	<!-- 银票、保函到期扣款通知 -->
+	<dictionary name="BUSS_TYPE" title="业务类型">
+		<item name="001" title="消费类" />
+		<item name="002" title="经营类" />
+	</dictionary>
+	
+	<!-- 垫款还款通知 -->
+	<dictionary name="CANCEL_FLAG" title="撤销标志">
+		<item name="1" title="正常回收" />
+		<item name="2" title="撤销" />
+	</dictionary>
+	
+	<!-- 保证金追加增加提取通知 -->
+	<dictionary name="TRAN_TYPE" title="交易类型">
+		<item name="01" title="追加" />
+		<item name="02" title="增加" />
+		<item name="03" title="提取" />
+	</dictionary>
+	
+	<!-- 抵质押物权证出入库授权成功通知 -->
+	<dictionary name="IN_OUT_TYPE" title="出入库方式">
+		<item name="01" title="取出" />
+		<item name="02" title="借出" />
+		<item name="03" title="注销出库" />
+		<item name="04" title="入库" />
+	</dictionary>
+	
+	<!-- 公共代码对应表 -->
+	<dictionary name="DISCOUNT_MODE" title="贴现方式">
+		<item name="0" title="不使用" />
+		<item name="1" title="票据回购型" />
+		<item name="2" title="票据买断型" />
+		<item name="3" title="商票质押贴现" />
+		<item name="4" title="商票抵押贴现" />
+		<item name="5" title="商票保证贴现" />
+		<item name="6" title="商票信用贴现" />
+	</dictionary>
+	
+	<dictionary name="BILL_TYPE" title="票据类型">
+		<item name="81" title="银行承兑汇票" />
+		<item name="82" title="商业承兑汇票" />
+	</dictionary>
+	
+	<dictionary name="DISCOUNT_MODE" title="贴现方式">
+		<item name="0" title="买断" />
+		<item name="1" title="回购" />
+	</dictionary>
+	
+	<dictionary name="SETTLE_TYPE" title="结算方式">
+		<item name="0" title="买断" />
+		<item name="1" title="回购" />
+	</dictionary>
+	
+	<dictionary name="IN_AND_OUT_FLAG" title="往来标志">
+		<item name="0" title="往账" />
+		<item name="1" title="来账" />
+	</dictionary>
+	
+	<dictionary name="TERMINAL_TYPE" title="终端类型">
+		<item name="0101" title="柜台" />
+		<item name="0201" title="ATM" />
+		<item name="0203" title="自助终端" />
+		<item name="0302" title="网上银行" />
+		<item name="0303" title="短信通" />
+		<item name="0304" title="I型电话终端" />
+		<item name="0305" title="手机银行" />
+		<item name="0402" title="客服中心" />
+		<item name="0403" title="中软系统" />
+		<item name="0404" title="财务系统" />
+		<item name="0406" title="第三方发起机构" />
+		<item name="0408" title="本行中心" />
+		<item name="0409" title="网点" />
+		<item name="0502" title="海峡借记卡" />
+		<item name="0503" title="手机银行卡" />
+		<item name="0601" title="POS" />
+		<item name="0701" title="网上支付" />
+		<item name="0801" title="批量" />
+		<item name="0802" title="支付结算" />
+		<item name="9999" title="非柜台终端/其它" />
+		<item name="0102" title="低柜" />
+		<item name="0301" title="电话银行" />
+		<item name="0306" title="II型电话终端" />
+		<item name="0405" title="银联数据" />
+		<item name="0501" title="手续费" />
+		<item name="0602" title="EPOS机生意通商户" />
+		<item name="0202" title="回单柜(ATC)" />
+		<item name="0401" title="银联系统" />
+		<item name="0407" title="应用平台" />
+		<item name="0603" title="农信POS" />
+		<item name="0901" title="开卡机" />
+	</dictionary>
+
+	<!-- （核心柜台-综合前置）公共头 -->	
+	<dictionary name="TRACK_FLAG" title="磁道标志">
+		<item name="1" title="有磁道" />
+		<item name="2" title="无磁道" />
+	</dictionary>
+	
+	<dictionary name="FINGERPRINT_AUTH" title="指纹授权 ">
+		<item name="1" title="指纹授权通过" />
+		<item name="0" title="未通过" />
+	</dictionary>
+
+	<!-- （国际-综合前置）公共头-->	
+	<dictionary name="FILE_FLAG" title="文件标识">
+		<item name="0" title="无文件" />
+		<item name="1" title="有文件" />
+	</dictionary>
+
+	<!-- （手机银行-综合前置）公共头-->	
+	<dictionary name="SOURCE_TYPE" title="渠道类型">
+		<item name="01" title="自助终端" />
+		<item name="02" title="电话银行" />
+		<item name="03" title="手机银行" />
+	</dictionary>
+	
+	<!-- （呼叫中心-综合前置）公共头-->	
+	<dictionary name="PWD_CHECK_FLAG" title="密码校验标志">
+		<item name="0" title="不" />
+		<item name="1" title="要" />
+	</dictionary>
+	
+	<!-- 职业 OCCUPATION -->
+	<dictionary name="OCCUPATION" title="职业">
+		<item name="1A" title="各类专业/技术人员" />
+		<item name="1B" title="国家机关/党群组织/企事业单位的负责人" />
+		<item name="1C" title="办事人员和有关人员" />
+		<item name="1D" title="商业工作人员" />
+		<item name="1E" title="服务性工作人员" />
+		<item name="1F" title="农林牧渔劳动者" />
+		<item name="1G" title="生产工作/运输工作和部分体力劳动者" />
+		<item name="1H" title="不便分类的其他劳动者" />
+		<item name="2A" title="农、林、牧、渔业" />
+		<item name="2B" title="采矿业" />
+		<item name="2C" title="制造业" />
+		<item name="2D" title="电力、燃气及水的生产和供应业" />
+		<item name="2E" title="建筑业" />
+		<item name="2F" title="批发和零售业" />
+		<item name="2G" title="交通运输、仓储和邮政业" />
+		<item name="2H" title="住宿和餐饮业" />
+		<item name="2I" title="信息传输、计算机服务和软件业" />
+		<item name="2J" title="银行业" />
+		<item name="2K" title="房地产业" />
+		<item name="2L" title="租赁和商务服务业" />
+		<item name="2M" title="科学研究、技术服务和地质勘查业" />
+		<item name="2N" title="水利、环境和公共设施管理业" />
+		<item name="2O" title="居民服务和其他服务业" />
+		<item name="2P" title="教育" />
+		<item name="2Q" title="卫生和社会工作" />
+		<item name="2R" title="文化、体育和娱乐业" />
+		<item name="2S" title="公共管理、社会保障和社会组织" />
+		<item name="2T" title="国际组织" />
+	</dictionary>
+	
+	<dictionary name="APPLY_DEADLINE" title="贷款期限">
+	    <item name="3" title="3个月" />
+	    <item name="6" title="6个月" />
+	    <item name="9" title="9个月" />
+	    <item name="12" title="12个月" />
+	    <item name="15" title="15个月" />
+	    <item name="18" title="18个月" />
+	</dictionary>
+	<!-- ESB 数据字典 -->
+	
+	<!-- 2015-05-19 新需求数据字典 -->
+	<dictionary name="ADDRESS_TYPE_NEW" title="地址类型">
+		<item name="1" title="自置" />
+		<item name="2" title="按揭" />
+		<item name="3" title="亲属楼宇" />
+		<item name="4" title="租用" />
+		<item name="5" title="其他" />
+	</dictionary>
+	
+	<dictionary name="BUSS_TYPE_NEW" title="组织形式">
+		<item name="1" title="个体户" />
+		<item name="2" title="企业" />
+		<item name="3" title="其他" />
+	</dictionary>
+	
+	<dictionary name="INFO_TYPE" title="信息渠道">
+		<item name="1" title="宣传单" />
+		<item name="2" title="电话" />
+		<item name="3" title="朋友/家人" />
+		<item name="4" title="泉州银行客户" />
+		<item name="5" title="报纸/杂志" />
+		<item name="6" title="广播/电视" />
+		<item name="7" title="流动广告" />
+		<item name="8" title="其他" />
+	</dictionary>
+	
+	<dictionary name="PROFIT_TYPE" title="组织形式">
+		<item name="1" title="毛利润" />
+		<item name="2" title="净利润" />
+	</dictionary>
+	
+	<dictionary name="PRODUCT_TYPE" title="产品类型">
+		<item name="1" title="贷成长" />
+		<item name="2" title="贷生活" />
+	</dictionary>
+	
+	<dictionary name="REPAYMENT_TERM" title="还款期限">
+	    <item name="1" title="1" />
+	    <item name="2" title="2" />
+	    <item name="3" title="3" />
+	    <item name="6" title="6" />
+	    <item name="8" title="8" />
+	    <item name="9" title="9" />
+	    <item name="10" title="10" />
+	    <item name="12" title="12" />
+	    <item name="15" title="15" />
+
+	</dictionary>
+	
+	<dictionary name="UNIT_TYPE" title="公司类型">
+	    <item name="1" title="国有" />
+	    <item name="2" title="外商独资" />
+	    <item name="3" title="中外合资" />
+	    <item name="4" title="民营" />
+	    <item name="5" title="公务员" />
+	    <item name="6" title="事业单位" />
+		<item name="7" title="个人工商" />
+		<item name="8" title="国内上市公司" />
+		<item name="9" title="其他" />
+	</dictionary>
+	
+	<dictionary name="LOAN_STATUS" title="台账状态">
+	    <item name="0" title="出帐未确认" />
+	    <item name="1" title="正常" />
+	    <item name="2" title="正回购卖出" />
+	    <item name="3" title="逆回购买入" />
+	    <item name="4" title="逆回购到期" />
+	    <item name="5" title="正回购到期" />
+	    <item name="6" title="垫款" />
+		<item name="7" title="已扣款" />
+		<item name="8" title="退回未用" />
+		<item name="9" title="结清/核销" />
+		<item name="10" title="闭卷" />
+		<item name="11" title="撤销" />
+	</dictionary>
+	<dictionary name="APPROVE_STATUS" title="贷后检查审核状态">
+	    <item name="0" title="待检查" />
+	    <item name="1" title="待审核" />
+	    <item name="2" title="审核通过" />
+	</dictionary>
+	<dictionary name="TASK_TYPE" title="任务类型">
+	    <item name="1" title="首次放款检查" />
+	    <item name="2" title="满额用信" />
+	    <item name="3" title="授信到期前最高额用信检查" />
+	    <item name="4" title="放款次月客户回访" />
+	</dictionary>
+	<dictionary name="repayment_type" title="还款情况">
+	    <item name="1" title="正常" />
+	    <item name="2" title="逾期" />
+	    <item name="3" title="其他" />
+	</dictionary>
+	<dictionary name="reciprocalType" title="回访类型">
+	    <item name="1" title="电话" />
+	    <item name="2" title="实地考察" />
+	    <item name="3" title="客户上门" />
+	</dictionary>
+	
+	<dictionary name="cusRisk" title="客户风险判断">
+	    <item name="极小" title="极小" />
+	    <item name="小" title="小" />
+	    <item name="较小" title="较小" />
+	    <item name="中等" title="中等" />
+	    <item name="较大" title="较大" />
+	    <item name="大" title="大" />
+	    <item name="极大" title="极大" />
+	</dictionary>
+	<dictionary name="loanStatus" title="贷款状态">
+	    <item name="00" title="正常" />
+	    <item name="10" title="冻结" />
+	    <item name="30" title="终止" />
+	</dictionary>
 </dictionaries>

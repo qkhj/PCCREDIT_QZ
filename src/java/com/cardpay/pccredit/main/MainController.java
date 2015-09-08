@@ -23,6 +23,7 @@ import com.cardpay.pccredit.customer.service.CustomerInforService;
 import com.cardpay.pccredit.customer.service.CustomerMarketingService;
 import com.cardpay.pccredit.customer.service.MaintenanceService;
 import com.cardpay.pccredit.divisional.service.DivisionalService;
+import com.cardpay.pccredit.afterloan.service.AfterloanCheckService;
 import com.cardpay.pccredit.intopieces.constant.Constant;
 import com.cardpay.pccredit.intopieces.service.CustomerApplicationInfoService;
 import com.cardpay.pccredit.manager.dao.StatisticsManagerDao;
@@ -122,6 +123,9 @@ public class MainController {
 	private MainService mainService;
 	
 	@Autowired
+	private AfterloanCheckService afterLoanCheckService;
+	
+	@Autowired
 	private StatisticalCommonService statisticalCommonService;
 	
 	@ResponseBody
@@ -158,6 +162,12 @@ public class MainController {
 		//Date day2 = DateHelper.normalizeDate(DateHelper.shiftDay(date, 4), "yyyy-MM-dd");
 		Organization organization = organizationService.findOrgByUserId(userId);
 		AccountManagerParameterForm accountManagerParameter = accountManagerParameterService.findAccountManagerParameterByUserId(userId);
+		//查询贷后检查任务数
+		int loanCount = afterLoanCheckService.findAferLoanCheckCountByUserId(userId);
+		//查询所检查提醒任务
+		int remindCount = afterLoanCheckService.findAferLoanCheckRemindCount();
+		//获取该用户角色
+		String roleName = accountManagerParameterService.findRoleNameByUserId(userId);
 		//客户经理层级
 		String level = "";
 		if(accountManagerParameter != null ){
@@ -186,6 +196,9 @@ public class MainController {
 		mv.addObject("doubleApply",doubleApply);
 		mv.addObject("day1",day1);
 		mv.addObject("day2",day2);
+		mv.addObject("loanCount",loanCount);
+		mv.addObject("remindCount",remindCount);
+		mv.addObject("roleName",roleName);
 		/*center*/
 		mv.addObject("marketing",homeData.get("marketing"));
 		mv.addObject("divisional",homeData.get("divisional"));

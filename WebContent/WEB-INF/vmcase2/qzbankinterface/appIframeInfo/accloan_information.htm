@@ -1,0 +1,123 @@
+#parse ("common/iframe_page_header.htm")
+<script type="text/javascript">
+</script>
+<body>
+  <div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">客户台账信息</div>
+      </div>
+      <div class="inquiry">
+      <!--<div class="inquiry">
+       <div class="search_tag">贷后检查提醒</div>
+        <div class="search">
+          <form id="queryForm" action="${contextPath}/afterloan/afterloancheck/remind.page">
+          <ul>
+              <li>
+                <span>客户名称：<input type="text" id="clientName" name="clientName" value="$!result.filter.chineseName" /></span>
+              </li>
+               <li>
+                <span>证件号码：<input type="text" id="globalId" name="globalId" value="$!result.filter.cardId" /></span>
+              </li>
+               <li>
+                <span>客户编号：<input type="text" id="globalId" name="globalId" value="$!result.filter.clientNo" /></span>
+              </li>
+              <li class="search_button">
+                <input type="button" value="#i18n('button.browse')" class="search_button_inquiry"
+                  title="#i18n('button.browse.hint')" style="height: 26px; line-height: 24px;" onclick="javascript:this.form.submit();"/>
+              </li>
+          </ul>
+          </form>
+        </div>  -->
+        <div id="topDiv" class="inquiry_list inquiry_top">
+          <table>
+            <colgroup>
+              <col width="5%" />
+              <col width="10%" />
+              <col width="15%"/>
+              <col width="12%"/>
+              <col width="10%"/>
+              <col width="8%" />
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+            </colgroup>
+            <tr class="title">
+              <th nowrap="nowrap">序号</th>
+              <th nowrap="nowrap">客户名称</th>
+              <th nowrap="nowrap">借据号</th>
+              <th nowrap="nowrap">贷款金额</th>
+              <th nowrap="nowrap">到期日期</th>
+              <th nowrap="nowrap">利率</th>
+              <th nowrap="nowrap">发放日期</th>
+              <th nowrap="nowrap">起息日期</th>
+              <th nowrap="nowrap">欠息总额</th>
+              <th nowrap="nowrap">贷款状态</th>
+            </tr>
+          </table>
+        </div>
+        <div id="downDiv" class="inquiry_list inquiry_down">
+          <table>
+            <colgroup>
+               <col width="5%" />
+              <col width="10%" />
+              <col width="15%"/>
+              <col width="12%"/>
+              <col width="10%"/>
+              <col width="8%" />
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+            </colgroup>
+            #foreach ($obj in $loan)
+            <tr>
+              <td nowrap="nowrap">$!obj.rowIndex</td>
+              <td nowrap="nowrap">$!obj.clientName</td>
+              <td nowrap="nowrap">$!obj.billNo</td>
+              <td nowrap="nowrap">$!obj.loanAmt</td>
+              <td nowrap="nowrap">$!obj.contEndDate</td>
+              <td nowrap="nowrap">$format.formatNumber(2,$!obj.realityIrY)</td>
+              <td nowrap="nowrap">$!obj.distrDate</td>
+              <td nowrap="nowrap">$!obj.qixiDate</td>
+              <td nowrap="nowrap">$format.formatNumber(2,$!obj.intAccum)</td>
+              <td nowrap="nowrap">#dictVal("LOAN_STATUS", $!obj.accStatus)</td>
+            </tr>
+            #end
+          </table>
+        </div>
+      </div>
+      <div class="pagebar">
+        <!--<div class="controlbtn">
+         <a class="btn_g" id="id_create_button" href="javascript:void(0);" title="填写检查信息">填写检查信息</a>
+         <a class="btn_g" id="id_display_button" href="javascript:void(0);" title="提交检查">提交检查</a>  
+        </div> 
+        #parse ("common/pagination.htm") -->
+        <div class="clear"></div>
+      </div>
+    </div> 
+    <div class="clear"></div>
+    </div>
+  </div>
+</body>
+<script language="javascript" type="text/javascript">
+	var layout = new TableLayout(2);
+	window.top.currentWindow.setLayout(layout);
+
+	$(document).ready(function() {
+		$("#id_create_button").click(function() {
+			if ($(".checkbox :checked").length == 1) {
+				var clientNo = getCurrentRowId().split("@")[0];
+				var cardId = getCurrentRowId().split("@")[1];
+				var taskId = getCurrentRowId().split("@")[1];
+				if(rowId!=null){
+					var url="${contextPath}/afterloan/afterloancheck/iframe.page?id="+clientNo+"&cardId="+cardId+"&taskId="+taskId;
+					window.location.href = url;
+				}
+			}
+		});
+	});
+	
+</script>
+#parse ("common/iframe_page_footer.htm")

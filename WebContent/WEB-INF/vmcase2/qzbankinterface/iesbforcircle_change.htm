@@ -13,6 +13,32 @@
 		.dialog1 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
 		.dialog1 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
 		.dialog1 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
+<<<<<<< HEAD
+=======
+		.dialog5{position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(229,229,229,0.5);display:none;}
+		.dialog5 .dialog-box{width:400px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;margin:0 auto;margin-top:100px;padding:3px;}
+		.dialog5 .dialog-box .top{height:35px;background:url(${contextPath}/images/box_head_bg.png) repeat-x;line-height:35px;font-size:14px;padding-left:15px;font-weight:bold;}
+		.dialog5 .dialog-box .top span{display:inline-block;width:35px;height:35px;background:url(${contextPath}/images/box_delete_nor.png);float:right;}
+		.dialog5 .dialog-box .top span:hover{background:url(${contextPath}/images/box_delete_hov.png);}
+		.dialog5 .dialog-box .content{font-size:12px;color:#323232;padding-left:20px;}
+		.dialog5 .dialog-box .bottom{border-top:1px solid #dddddd;height:45px;text-align:center;line-height:45px;}
+		.dialog5 .dialog-box .bottom .btn{width:70px;height:26px;margin:0 5px;background:url(${contextPath}/images/icon_button_qx_normal.png) repeat-x;border:1px solid #818181;border-radius:5px;}
+		.dialog5 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
+		.dialog5 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
+		.dialog5 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
+		.dialog6{position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(229,229,229,0.5);display:none;}
+		.dialog6 .dialog-box{width:400px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;margin:0 auto;margin-top:100px;padding:3px;}
+		.dialog6 .dialog-box .top{height:35px;background:url(${contextPath}/images/box_head_bg.png) repeat-x;line-height:35px;font-size:14px;padding-left:15px;font-weight:bold;}
+		.dialog6 .dialog-box .top span{display:inline-block;width:35px;height:35px;background:url(${contextPath}/images/box_delete_nor.png);float:right;}
+		.dialog6 .dialog-box .top span:hover{background:url(${contextPath}/images/box_delete_hov.png);}
+		.dialog6 .dialog-box .content{font-size:12px;color:#323232;padding-left:20px;}
+		.dialog6 .dialog-box .bottom{border-top:1px solid #dddddd;height:45px;text-align:center;line-height:45px;}
+		.dialog6 .dialog-box .bottom .btn{width:70px;height:26px;margin:0 5px;background:url(${contextPath}/images/icon_button_qx_normal.png) repeat-x;border:1px solid #818181;border-radius:5px;}
+		.dialog6 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
+		.dialog6 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
+		.dialog6 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
+		
+>>>>>>> chinhBy-master
 </style>
 </head>
 <body>
@@ -28,24 +54,36 @@
             </colgroup>
             <tr>
             	<td><label>客户名称:</label></td>
-              	<td><input type="text" value="$!ecif.clientName" disabled/></td>
+              	<td><input type="text" value="$!ecif.clientName" readonly/></td>
               	<td><input type="hidden" id="clientNo" name="clientNo" value="$!circle.clientNo"/></td>
               	<td><input type="hidden" id="circleId" name="$!circleId" value="$!circle.id"/></td>
             </tr>
-            #if($!operate!="填写合同信息")
-            <tr style="display: none;">
-            #else
+             #if($!operate=="填写合同信息")
             <tr>
+            #elseif($!operate=="settleDownLoan")
+            <tr>
+             #elseif($!operate=="二级审核")
+            <tr>
+             #elseif($!operate=="一级审核")
+            <tr>
+            #else
+            <tr style="display: none;">
             #end
             	<td><label>收息收款账号:</label><font color="#ff0000">*</font></td>
               	<td><input type="text" name="acctNo1" value="$!circle.acctNo1"  /></td>
               	<td><label>放款账号:</label><font color="#ff0000">*</font></td>
               	<td><input type="text" name="acctNo2" value="$!circle.acctNo2"  /></td>
             </tr>
-            #if($!operate!="填写合同信息")
-            <tr style="display: none;">
-            #else
+            #if($!operate=="填写合同信息")
             <tr>
+            #elseif($!operate=="settleDownLoan")
+            <tr>
+             #elseif($!operate=="二级审核")
+            <tr>
+             #elseif($!operate=="一级审核")
+            <tr>
+            #else
+            <tr style="display: none;">
             #end
               <td><label>合同号:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="contractNo" value="$!circle.contractNo"  /></td>
@@ -64,10 +102,16 @@
               <td><label>外币时需要换算:</label></td>
               <td><input type="text" id="exchangeRate" name="exchangeRate" value="$!circle.exchangeRate"  /></td>
             </tr>
-            #if($!operate!="填写合同信息")
-            <tr style="display: none;">
-            #else
+             #if($!operate=="填写合同信息")
             <tr>
+            #elseif($!operate=="settleDownLoan")
+            <tr>
+             #elseif($!operate=="二级审核")
+            <tr>
+             #elseif($!operate=="一级审核")
+            <tr>
+            #else
+            <tr style="display: none;">
             #end
 			  <td><label>授信起始日期:</label><font color="#ff0000">*</font></td>
 			  #if($!circle.startDate == $null)
@@ -95,12 +139,18 @@
               <td><select id="bussType" name="bussType"  >#dict("BUSS_TYPE", $!circle.bussType)</select></td>
               <td><label>合同金额(元):</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="contractAmt" name="contractAmt" 
-              	#if($!operate=="填写合同信息")
-              		value="$!circle.contractAmt"
-              	#else
-              		value="$!jyd.jyje"
-              	#end
-               readonly /></td>
+              	 #if($!operate=="填写合同信息")
+            	value="$!circle.contractAmt"
+            	#elseif($!operate=="settleDownLoan")
+            	value="$!circle.contractAmt"
+            	 #elseif($!operate=="二级审核")
+            	value="$!circle.contractAmt"
+             	#elseif($!operate=="一级审核")
+            	value="$!circle.contractAmt"
+            	#else
+            	value="$!circle.contractAmt"
+            	#end
+                /></td>
             </tr>
 			<tr>
               <td><label>登记人:</label><font color="#ff0000">*</font></td>
@@ -121,10 +171,16 @@
               <td><input type="text" name="actIntRate" 
               	#if($!operate=="填写合同信息")
               		value="$!circle.actIntRate"
-              	#else
-              		value="$!jyd.jyll"
+              	#elseif($!operate=="settleDownLoan")
+              		value="$!circle.actIntRate"
+              	#elseif($!operate=="二级审核")
+              	    value="$!circle.actIntRate"
+              	#elseif($!operate=="一级审核")
+              	    value="$!circle.actIntRate"
+              	#else        	
+              		value="$!circle.actIntRate"
               	#end
-               readonly /></td>
+                /></td>
             </tr>
 			<tr>
               <td><label>年逾期利率(%):</label><font color="#ff0000">*</font></td>
@@ -281,8 +337,6 @@
 			<tr>
               <td><label>最高学位:</label></td>
               <td><select id="degree" name="degree"  >#dict("INDIV_DGR", $!circle.degree)</select></td>
-			  <td><label>签约日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="signDate" name="signDate" value="$date.format('yyyy-MM-dd', $!circle.signDate)"  onmouseover="_calendar()" readonly/></td>
             </tr>
 			<tr>
               <td><label>持卡情况:</label></td>
@@ -298,7 +352,7 @@
               #if($!circle.expiryDate == $null)
               <input type="text" id="expiryDate" name="expiryDate"  onmouseover="_calendar()"/>
               #else
-              <input type="text" id="expiryDate" name="expiryDate" value="$date.format('yyyy-MM-dd', $!circle.expiryDate)"  onmouseover="_calendar()" readonly/>
+              <input type="text" id="expiryDate" name="expiryDate" value="$date.format('yyyy-MM-dd', $!circle.expiryDate)"  onmouseover="_calendar()" />
               #end
               </td>
             </tr>
@@ -328,7 +382,9 @@
             </tr>
 			<tr>
               <td><label>开户日期:</label><font color="#ff0000">*</font></td>
-              <td colspan="3"><input type="text" id="openAcctDate" name="openAcctDate" value="$!date.format('yyyy-MM-dd', $!circle.openAcctDate)"  onmouseover="_calendar()" readonly/></td>
+              <td><input type="text" id="openAcctDate" name="openAcctDate" value="$!date.format('yyyy-MM-dd', $!circle.openAcctDate)"  onmouseover="_calendar()" readonly/></td>
+              <td><label>签约日期:</label><font color="#ff0000">*</font></td>
+              <td><input type="text" id="signDate" name="signDate" value="$date.format('yyyy-MM-dd', $!circle.signDate)"  onmouseover="_calendar()" readonly/></td>
             </tr>
 		  </table>
 		  <!--<table class="rule myTable" bordercolor="#cccccc" border="1">
@@ -366,7 +422,11 @@
 			<div class="content" style="height:100px;padding-top:15px;">
 				<p>
 					退回至哪一个岗:<font color="red">*</font>
+<<<<<<< HEAD
 					<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
+=======
+					<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false, $nodeId)</select><br>
+>>>>>>> chinhBy-master
 					退件原因:<font color="red">*</font>
 					<textarea name="remark" rows="2" style="width: 300px;"></textarea>
 				</p>
@@ -377,14 +437,79 @@
 			</div>
 		</form>
 	</div>
+<<<<<<< HEAD
+=======
+	<div class="dialog5">
+			<form id="checkForm5" class="dialog-box" style="height:200px;" action="${contextPath}/intopieces/intopiecesonelevel/returnAppln.json">
+				<input type="hidden" name="appId" id="appId" value="$!appId" />
+				<input type="hidden" name="operate" id="operate" value="$!operate"/>
+				<div class="top">
+					退件 <span onclick="$('.dialog5').hide();"></span>
+				</div>
+				<div class="content" style="height:100px;padding-top:15px;">
+					<p>
+						退回至哪一个岗:<font color="red">*</font>
+						<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
+						退件原因:<font color="red">*</font>
+						<textarea name="remark" rows="2" style="width:300px;"></textarea>
+					</p>
+				</div>
+				<div class="bottom">
+					<input id="id_re5_button" type="button" class="btn btn-submit" value="确定" /> 
+					<input type="button" class="btn" value="关闭" onclick="$('.dialog5').hide();"/>
+				</div>
+			</form>
+		</div>
+		
+		<div class="dialog6">
+			<form id="checkForm6" class="dialog-box" style="height:200px;" action="${contextPath}/intopieces/intopiecesonelevel/returnAppln.json">
+				<input type="hidden" name="appId" id="appId" value="$!appId" />
+				<input type="hidden" name="operate" id="operate" value="$!operate"/>
+				<div class="top">
+					退件 <span onclick="$('.dialog6').hide();"></span>
+				</div>
+				<div class="content" style="height:100px;padding-top:15px;">
+					<p>
+						退回至哪一个岗:<font color="red">*</font>
+						<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
+						退件原因:<font color="red">*</font>
+						<textarea name="remark" rows="2" style="width:300px;"></textarea>
+					</p>
+				</div>
+				<div class="bottom">
+					<input id="id_re6_button" type="button" class="btn btn-submit" value="确定" /> 
+					<input type="button" class="btn" value="关闭" onclick="$('.dialog5').hide();"/>
+				</div>
+			</form>
+		</div>
+		
+>>>>>>> chinhBy-master
       <div class="submit controlbtn">
          <a id="id_save_button" class="btn_g" >保存</a>
          #if($!operate=="填写合同信息" && $!circle.acctNo1 != $null)
          <a class="btn_g" id="id_zx_in_button">审批通过</a>
          #end
+<<<<<<< HEAD
          #if($!operate=="填写合同信息")
          <a class="btn_g" id="id_zx_return_button">退件</a>
          <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
+=======
+         #if($!operate=="一级审核")
+	    	<a id="id_in5_button" class="btn_g" >审批通过</a>
+	     #end
+	    #if($!operate=="二级审核")
+	    	<a id="id_in6_button" class="btn_g" >审批通过</a>
+	      #end  	
+         #if($!operate=="填写合同信息")
+         <a class="btn_g" id="id_zx_return_button">退件</a>
+         <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
+         #elseif($!operate=="一级审核")
+         <a id="id_return5_button" class="btn_g" >退件</a>
+         <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
+         #elseif($!operate=="二级审核")
+         <a id="id_return6_button" class="btn_g" >退件</a>
+         <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
+>>>>>>> chinhBy-master
          #else
          <a class="btn_gr" onclick="parent.location.href='${contextPath}/intopieces/intopiecesapprove/approve.page'">返回</a>
          #end 
@@ -474,7 +599,7 @@
 					if ($($formName).valid()) {
 						var formjson = $($formName).serialize();
 			   	          
-			   	       	var url = "${modulePath}/update.json?id=${circle.id}&customerId=${customerId}";
+			   	       	var url = "${modulePath}/update.json?id=${circle.id}&customerId=${customerId}&appId=${appId}";
 			   	       	$.ajax({
 							url : url,
 							type : "get",
@@ -730,6 +855,125 @@
 					}); 
 			});
 		});
+<<<<<<< HEAD
+=======
+		
+		/*一级审核操作*/
+		//通过
+		$("#id_in5_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+                Dialog.confirm("确定提交吗？", "提示",
+                	    function() {
+               				url="${contextPath}/intopieces/intopiecesonelevel/save_apply.json?id=${appId}";
+			                $.ajax({
+								url : url,
+								type : "get",
+								success : function(data) {
+									if (data.success) {
+										topWin.Dialog.message(data.retMsg);	
+						            	var url = "${contextPath}${returnUrl}";
+						                parent.location.href = url;
+									}
+									else{
+										topWin.Dialog.message(data.retMsg);
+								    }
+									submitFlag = 0;
+								}
+						}); 
+                		});
+		});
+		
+		$("#id_return5_button").click(function() {
+			$('.dialog5').show();
+	  	});
+		
+		//退回
+		$("#id_re5_button").click(function() {
+			Dialog.confirm("确定提交吗？", "提示",
+                function() {
+					$('.dialog5').hide();
+					#set ($formName = "'#checkForm5'")
+					var formjson = $($formName).serialize();
+					 $.ajax({
+							url : "${contextPath}/intopieces/intopiecesonelevel/returnAppln.json",
+							type : "get",
+							data : formjson,
+							success : function(data) {
+								if (data.success) {
+									topWin.Dialog.message("保存成功!");	
+					            	var url = "${contextPath}${returnUrl}";
+					                parent.location.href = url;
+								}
+								else{
+									topWin.Dialog.message("保存失败！");
+							    }
+							}
+					}); 
+			});
+		});
+		
+		/*二级审核操作*/
+		//通过
+		$("#id_in6_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+                Dialog.confirm("确定提交吗？", "提示",
+                	    function() {
+               				url="${contextPath}/intopieces/intopiecestwolevel/save_apply.json?id=${appId}";
+			                $.ajax({
+								url : url,
+								type : "get",
+								success : function(data) {
+									if (data.success) {
+										topWin.Dialog.message("审批成功!");	
+						            	var url = "${contextPath}${returnUrl}";
+						                parent.location.href = url;
+									}
+									else{
+										topWin.Dialog.message("审批失败！");
+								    }
+									submitFlag = 0;
+								}
+						}); 
+                		});
+		});
+		
+		$("#id_return6_button").click(function() {
+			$('.dialog6').show();
+	  	});
+		
+		//退回
+		$("#id_re6_button").click(function() {
+			Dialog.confirm("确定提交吗？", "提示",
+                function() {
+					$('.dialog6').hide();
+					#set ($formName = "'#checkForm6'")
+					var formjson = $($formName).serialize();
+					 $.ajax({
+							url : "${contextPath}/intopieces/intopiecestwolevel/returnAppln.json",
+							type : "get",
+							data : formjson,
+							success : function(data) {
+								if (data.success) {
+									topWin.Dialog.message("保存成功!");	
+					            	var url = "${contextPath}${returnUrl}";
+					                parent.location.href = url;
+								}
+								else{
+									topWin.Dialog.message("保存失败！");
+							    }
+							}
+					}); 
+			});
+		});
+>>>>>>> chinhBy-master
 	});
 	
 	//级联菜单

@@ -67,4 +67,8 @@ public interface CustomerApplicationIntopieceWaitDao {
 	public List<CustomerApplicationIntopieceWaitForm> shouxinAddInforForm(CustomerApplicationProcessFilter filter);
 	// 获取补充上会的进件count
 	public int CountshouxinAddInforForm(CustomerApplicationProcessFilter filter);
+	//安居贷相应状态进件显示-针对审核人不同
+	public List<CustomerApplicationIntopieceWaitForm> intopieceWaitFormByUsered(CustomerApplicationProcessFilter filter);
+	//安居贷相应状态进件显示count-针对审核人不同
+	public int CountIntopieceWaitFormByUsered(CustomerApplicationProcessFilter filter);
 }

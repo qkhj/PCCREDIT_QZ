@@ -1,0 +1,37 @@
+#parse ("common/iframe_page_header2.htm")
+<style type="text/css">
+	.Tabs{position:absolute;top:50px;margin-left:10px;margin-top:10px;height:30px;}
+	.Tabs li{list-style:none;border:1px solid #b9c4cf;border-radius:5px 5px 0 0;background:#ebf3fa;width:120px;text-align:center;line-height:30px;color:#333333;display:inline-block;float:left;}
+	.Tabs .active{background:#135aa4;border:1px solid #135aa4;color:#ffffff;}
+	.TabContent{width:100%;position:absolute;top:90px;}
+	.tabContent{display:none;padding:1px 10px;padding-bottom:0;margin-top:-1px\9;padding-right:0;}
+	.selectTab{display:block}
+</style>
+<body>
+	<div class="fixed">
+		<h1>添加客户信息</h1>
+	</div>
+	<ul class="Tabs">
+		<li class="active" onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page0.page?id=${customerId}&appId=${appId}')" style="margin-left:0;">选择产品</li>
+		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/page1.page?id=${customerId}&appId=${appId}')" style="margin-left:0;">贷款申请表</li>
+		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/intopiecesapprove/accLoan_info.page?id=${customerId}&appId=${appId}')" style="margin-left:0;">台账明细</li>
+		<li onclick="selectTab('tabContent0',this);$('#contentFrame').attr('src','${contextPath}/intopieces/circle/create_or_change.page?id=${customerId}&appId=${appId}&operate=settleDownLoan')" style="margin-left:0;">贷款信息</li>
+		
+	</ul>
+	<div class="TabContent" id="Content1">
+		<!--*************************************行内评分项*****************************************-->
+		<div class="tabContent selectTab" id="tabContent0">		
+			<iframe frameborder="0" id="contentFrame" width="100%;" src="${contextPath}/intopieces/intopiecesapprove/page0.page?id=${customerId}&appId=${appId}&operate=settleDownLoan" marginheight="0" marginwidth="0" onload="this.height=this.contentWindow.document.body.scrollHeight"></iframe>
+		</div>
+	</div>
+	<script type="text/javascript">			
+		function selectTab(id,obj){//tab页
+			$(".Tabs li").attr("class","");
+			$(obj).attr("class","active");
+			//$(".TabContent div").hide();			
+			//$("#"+id).show();
+		}
+	</script>	
+</body>
+</html>
+

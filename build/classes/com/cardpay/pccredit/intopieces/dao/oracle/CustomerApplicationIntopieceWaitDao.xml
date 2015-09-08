@@ -52,6 +52,8 @@
 
 		<result column="USER_ID" property="userId"/>
 		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="CONTRACT_AMT" property="contractAmt"/>
+		<result column="DISPLAY_NAME" property="displayName"/>
 
 	</resultMap>
 
@@ -208,4 +210,309 @@
 			and app.ACTUAL_QUOTE is not null 
 			<![CDATA[ and app.ACTUAL_QUOTE <> FINAL_APPROVAL ]]>
 	</select>
+	
+		<select id="IntopieceWaitForm" resultMap="BaseResultMap">
+		SELECT
+		b.*, U.CHINESE_NAME as chineseName,
+		U.RESIDENTIAL_ADDRESS AS residentialAddress,
+		U.CARD_TYPE AS cardType,
+		U.CARD_ID AS cardId,
+		b.APPLY_QUOTA AS applyQuota,
+		A.SERIAL_NUMBER as SERIALNUMBER,
+   		N.NODE_NAME as nodeName,
+		A.AUDIT_TIME as auditTime,
+		A.id as processId,b.id as applicationId,
+		circle.CONTRACT_AMT as contractAmt,
+		su.DISPLAY_NAME as displayName,
+		A.FALLBACK_REASON as fallbackReason
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p,
+		QZ_IESB_FOR_CIRCLE circle,
+		sys_user su
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and ((U .process_id !='3' and U .process_id !='4') or U .process_id is null)
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
+		and circle.application_id = a.APPLICATION_ID
+		and u.user_id = su.id
+		<if test="cardId!=null and cardId!=''">
+			and U.card_id=#{cardId}
+		</if>
+		<if test="chineseName!=null and chineseName!=''">
+			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
+		</if>
+		<if test="nodeName!=null and nodeName!=''">
+			and N.node_name=#{nodeName}
+		</if>
+		</select>
+		
+		<select id="CountIntopieceWaitForm" resultType="int">
+		SELECT
+		count(*) 
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and ((U .process_id !='3' and U .process_id !='4') or U .process_id is null)
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
+		<if test="cardId!=null and cardId!=''">
+			and U.card_id=#{cardId}
+		</if>
+		<if test="chineseName!=null and chineseName!=''">
+			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
+		</if>
+		<if test="nodeName!=null and nodeName!=''">
+			and N.node_name=#{nodeName}
+		</if>
+		</select>
+		
+		<select id="IntopieceChushenRejectForm" resultMap="BaseResultMap">
+		SELECT
+		b.*, U.CHINESE_NAME as chineseName,
+		U.RESIDENTIAL_ADDRESS AS residentialAddress,
+		U.CARD_TYPE AS cardType,
+		U.CARD_ID AS cardId,
+		b.APPLY_QUOTA AS applyQuota,
+		A.SERIAL_NUMBER as SERIALNUMBER,
+   		N.NODE_NAME as nodeName,
+		A.AUDIT_TIME as auditTime,
+		A.id as processId,b.id as applicationId,s.remark as rejectRemark 
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p,qz_appln_process_result s 
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and u.process_id='3'
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID
+		and b.status='audit' and s.application_id=a.application_id and s.operate_type='拒件'
+		
+		</select>
+		<select id="CountIntopieceChushenRejectForm" resultType="int">
+		SELECT count(*) 
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p,qz_appln_process_result s 
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and u.process_id='拒件'
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID
+		and b.status='audit' and s.application_id=a.application_id and s.operate_type='3'
+		
+		</select>
+		
+		<select id="shouxinAddInforForm" resultMap="BaseResultMap">
+		SELECT
+		b.*, U.CHINESE_NAME as chineseName,
+		U.RESIDENTIAL_ADDRESS AS residentialAddress,
+		U.CARD_TYPE AS cardType,
+		U.CARD_ID AS cardId,
+		b.APPLY_QUOTA AS applyQuota,
+		A.SERIAL_NUMBER as SERIALNUMBER,
+   		N.NODE_NAME as nodeName,
+		A.AUDIT_TIME as auditTime,
+		A.id as processId,b.id as applicationId
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and U .process_id ='4'
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and b.status='audit' 
+		</select>
+		
+		<select id="CountshouxinAddInforForm" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and U .process_id ='4'
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and b.status='audit' 
+		</select>
+		
+		<select id="IntopieceWaitFormM" resultMap="BaseResultMap" parameterType="com.cardpay.pccredit.intopieces.filter.CustomerApplicationProcessFilter">
+		SELECT
+		b.*, U.CHINESE_NAME as chineseName,
+		U.RESIDENTIAL_ADDRESS AS residentialAddress,
+		U.CARD_TYPE AS cardType,
+		U.CARD_ID AS cardId,
+		b.APPLY_QUOTA AS applyQuota,
+		A.SERIAL_NUMBER as SERIALNUMBER,
+   		N.NODE_NAME as nodeName,
+		A.AUDIT_TIME as auditTime,
+		A.id as processId,b.id as applicationId,
+		circle.CONTRACT_AMT as contractAmt,
+		su.DISPLAY_NAME as displayName,
+		A.FALLBACK_REASON as fallbackReason
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p,
+		QZ_IESB_FOR_CIRCLE circle ,
+		sys_user su
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and ((U .process_id !='3' and U .process_id !='4') or U .process_id is null)
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
+		and circle.application_id = a.APPLICATION_ID
+		and u.user_id = su.id
+		<if test="cardId!=null and cardId!=''">
+			and U.card_id=#{cardId}
+		</if>
+		<if test="chineseName!=null and chineseName!=''">
+			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
+		</if>
+		
+		
+		<if test="nodeName!=null and nodeName!=''">
+			and N.node_name=#{nodeName}
+		</if>
+		</select>
+		
+		<select id="CountIntopieceWaitFormM" resultType="int" parameterType="com.cardpay.pccredit.intopieces.filter.CustomerApplicationProcessFilter">
+		SELECT
+		count(*) 
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and ((U .process_id !='3' and U .process_id !='4') or U .process_id is null)
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
+		<if test="cardId!=null and cardId!=''">
+			and U.card_id=#{cardId}
+		</if>
+		<if test="chineseName!=null and chineseName!=''">
+			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
+		</if>
+		
+		<if test="nodeName!=null and nodeName!=''">
+			and N.node_name=#{nodeName}
+		</if>
+		</select>
+		
+		<select id="intopieceWaitFormByUsered" resultMap="BaseResultMap">
+		SELECT
+		b.*, U.CHINESE_NAME as chineseName,
+		U.RESIDENTIAL_ADDRESS AS residentialAddress,
+		U.CARD_TYPE AS cardType,
+		U.CARD_ID AS cardId,
+		b.APPLY_QUOTA AS applyQuota,
+		A.SERIAL_NUMBER as SERIALNUMBER,
+   		N.NODE_NAME as nodeName,
+		A.AUDIT_TIME as auditTime,
+		A.id as processId,b.id as applicationId,
+		circle.CONTRACT_AMT as contractAmt,
+		su.DISPLAY_NAME as displayName,
+		A.FALLBACK_REASON as fallbackReason
+		FROM
+		CUSTOMER_APPLICATION_INFO b,
+		BASIC_CUSTOMER_INFORMATION U,
+		CUSTOMER_APPLICATION_PROCESS A,
+   		NODE_AUDIT N,NODE_AUDIT_USER p,
+   		sys_user_organization so,
+		QZ_IESB_FOR_CIRCLE circle,
+		sys_user su
+		WHERE
+		1=1
+		and U.ID = b.CUSTOMER_ID and ((U .process_id !='3' and U .process_id !='4') or U .process_id is null)
+		and a.APPLICATION_ID=b.ID
+		AND N.ID=A.NEXT_NODE_ID
+		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
+		and (b.status='audit' or b.status='RETURNAPPROVE') 
+		and so.user_id =
+       (select s.login
+          from sys_user s
+         where s.id = #{loginId})
+   		and so.orgno = circle.regist_org_no
+		and circle.application_id = a.APPLICATION_ID
+		and u.user_id = su.id
+		<if test="cardId!=null and cardId!=''">
+			and U.card_id=#{cardId}
+		</if>
+		<if test="chineseName!=null and chineseName!=''">
+			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
+		</if>
+		<if test="nodeName!=null and nodeName!=''">
+			and N.node_name=#{nodeName}
+		</if>
+		</select>
+		
+		<select id="CountIntopieceWaitFormByUsered" resultType="int">
+		SELECT
+		count(*) 
+		 	FROM CUSTOMER_APPLICATION_INFO    b,
+       		BASIC_CUSTOMER_INFORMATION   U,
+       		CUSTOMER_APPLICATION_PROCESS A,
+       		NODE_AUDIT                   N,
+       		NODE_AUDIT_USER              p,
+       		QZ_IESB_FOR_CIRCLE           circle,
+       		sys_user_organization        so,
+       		sys_user                     su
+ 		WHERE 1 = 1
+   		and U.ID = b.CUSTOMER_ID
+   		and ((U.process_id != '3' and U.process_id != '4') or U.process_id is null)
+   		and a.APPLICATION_ID = b.ID
+   		AND N.ID = A.NEXT_NODE_ID
+   		and A.NEXT_NODE_ID = p.NODE_ID
+   		and (b.status = 'audit' or b.status = 'RETURNAPPROVE')
+   		and circle.application_id = a.APPLICATION_ID
+   		and p.USER_ID = #{loginId}
+   		and so.user_id =
+       	(select s.login
+          from sys_user s
+         where s.id = #{loginId}
+   		and so.orgno = circle.regist_org_no)
+   		and u.user_id = su.id
+		<if test="cardId!=null and cardId!=''">
+			and U.card_id=#{cardId}
+		</if>
+		<if test="chineseName!=null and chineseName!=''">
+			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
+		</if>
+		<if test="nodeName!=null and nodeName!=''">
+			and N.node_name=#{nodeName}
+		</if>
+		</select>
 </mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/test/spring-junit.xml</file>
+          <file>file://$MODULE_DIR$/resources/modules/module-log.xml</file>
+          <file>file://$MODULE_DIR$/resources/modules/module-mail.xml</file>
+          <file>file://$MODULE_DIR$/resources/modules/module-sample.xml</file>
+          <file>file://$MODULE_DIR$/resources/modules/module-system.xml</file>
+          <file>file://$MODULE_DIR$/resources/modules/module-privilege.xml</file>
+          <file>file://$MODULE_DIR$/resources/beans-base.xml</file>
+          <file>file://$MODULE_DIR$/resources/beans-modules.xml</file>
+          <file>file://$MODULE_DIR$/resources/beans-utility.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring-servlet.xml</file>
+          <file>file://$MODULE_DIR$/resources/beans-database-oracle.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+

@@ -76,7 +76,7 @@
               <td class="checkbox"><input type="radio" name="checkbox" value="$!{intoPieces.id}_$!{intoPieces.customerId}"/></td>
               <td nowrap="nowrap">$!intoPieces.chineseName</td>
               <td nowrap="nowrap">$!intoPieces.cardId</td>
-              <td nowrap="nowrap">$!intoPieces.productName</td>
+              <td nowrap="nowrap">#dictVal("ProductName",$!intoPieces.productId)</td>
               <td nowrap="nowrap">$format.formatNumber($!intoPieces.applyQuota, 2, 1)</td>
               <td nowrap="nowrap">
 	              #if($!intoPieces.status=='audit')已申请  
@@ -96,7 +96,12 @@
       </div>
       <div class="pagebar">
         <div class="controlbtn"><a class="btn_g" href="javascript:void(0);" title="查看审批记录" onclick="viewIntoPicesApproveHistory('NO')">查看审批记录</a>
-        <div class="controlbtn"><a class="btn_g" href="javascript:void(0);" title="查看申请信息" onclick="viewIntoPicesApproveDisplay('NO')">查看申请信息</a>
+
+        <div class="controlbtn">
+
+        <a class="btn_g" href="javascript:void(0);" title="查看申请信息" onclick="viewIntoPicesApproveDisplay('NO')">查看申请信息</a>
+        #btnpriv("scan")<a class="btn_g" href="javascript:void(0);" title="影像补扫" onclick="scan('NO')">影像补扫</a>#end
+
         </div>
         #parse ("common/pagination.htm")
         <div class="clear"></div>
@@ -146,6 +151,23 @@
 		
 		}else{
 			Dialog.message("请选择要被查看的进件!");
+		}
+	}
+
+	//flag: 1:为影像补扫入口。null：内部审核
+	function scan(flag){
+		var id = null;
+		var appId = null;
+		$("input[name='checkbox']:checked").each(function() {
+			appId = $(this).val().split("_")[0];
+			id = $(this).val().split("_")[1];
+		});
+		if(id!=null){
+			var url="${contextPath}/intopieces/intopiecesapprove/sunds_ocx.page?appId=" + appId;
+			window.location.href = url;
+		
+		}else{
+			Dialog.message("请选择一条记录!");
 		}
 	}
 	

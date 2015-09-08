@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cardpay.pccredit.afterloan.dao.AfterLoanDao">
+    <resultMap id="ResultMap" type="com.cardpay.pccredit.afterloan.model.AfterLoaninfo" >
+        <!-- <id column="ID" property="id" jdbcType="DECIMAL" /> -->
+        <result column="ROWNUM_" property="rowindex"  />
+    	<result column="taskId" property="taskId"  />
+    	<result column="cusId" property="cusId"  />
+    	<result column="taskType" property="taskType"  />
+    	<result column="taskCreateDate" property="taskCreateDate"  />
+    	<result column="taskRequestTime" property="taskRequestTime" />
+    	<result column="qnt" property="qnt"  />
+    	<result column="LoanTotlAmt" property="loanTotlAmt"  />
+    	<result column="loanBalance" property="loanBalance"  />
+    	<result column="taskHuser" property="taskHuser"  />
+    	<result column="taskHorg" property="taskHorg"  />
+    	<result column="managerId" property="managerId"  />
+    	<result column="MANAGER_BR_ID" property="managerBrId"  />
+    	<result column="checkTime" property="checkTime"  />
+    	<result column="checkAddr" property="checkAddr" />
+    	<result column="agreedPerson" property="agreedPerson"  />
+    	<result column="remarks" property="remarks" />
+    	<result column="approveStatus" property="approveStatus"  />
+    	<result column="industryOutlook" property="industryOutlook"  />
+    	<result column="repayment" property="repayment"  />
+    	<result column="reciprocalType" property="reciprocalType"  />
+    	<result column="contactInformation" property="contactInformation"  />
+    	<result column="chineseName" property="chineseName"  />
+    	<result column="cardId" property="cardId"  />
+    	<result column="repaymentOther" property="repaymentOther"  />
+    </resultMap>
+    
+    <select id="findAfterLoanCheckTaskByFilter" parameterType="com.cardpay.pccredit.afterloan.filter.AfterLoanCheckFilter"
+        resultMap="ResultMap">
+    	SELECT * FROM
+			(SELECT ROW_.*,ROWNUM ROWNUM_
+			FROM (
+			select 
+				distinct task.task_id as taskId,       
+  				task.cus_id as cusId,
+  				task.task_type as taskType,
+  				task.task_create_date as taskCreateDate,
+  				task.task_request_time as taskRequestTime,
+  				task.qnt as qnt,
+  				task.loan_totl_amt as LoanTotlAmt,
+  				task.loan_balance as loanBalance,
+  				task.task_huser as taskHuser,
+  				task.task_horg as taskHorg,
+  				task.manager_id as managerId,
+  				task.manager_br_id as managerBrId,
+  				task.check_time as checkTime,
+  				task.check_addr as checkAddr,
+  				task.agreed_person as agreedPerson,
+   				task.remarks as remarks,
+    			task.approve_status as approveStatus,
+    			task.industry_outlook as industryOutlook,
+    			task.repayment as repayment,
+    			task.reciprocal_type as reciprocalType,
+    			task.contact_information as contactInformation,
+    			ecif.client_name as chineseName,
+    			ecif.global_id as cardId,
+    			task.REPAYMENT_OTHER as repaymentOther
+  			from psp_check_task task 
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+ 			where 1 = 1
+   			and ecif.USER_ID = #{userId}
+   			and task.approve_status='0'
+   			 <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			<if test="clientNo != null and clientNo != '' ">
+				AND ecif.client_no=#{clientNo}
+			</if>
+			<if test="checkType != null and checkType != '' ">
+				AND task.task_type=#{checkType}
+			</if>
+			<![CDATA[		
+				) ROW_
+			WHERE ROWNUM <= #{limit}*#{page} + #{limit}) 
+		WHERE ROWNUM_ > #{limit}*#{page}
+		]]>
+	</select>
+	
+     <select id="findAfterLoanCheckTaskCountByFilter" parameterType="com.cardpay.pccredit.afterloan.filter.AfterLoanCheckFilter"
+        resultType="int">
+			select count(*)
+			from(
+			select 
+				distinct task.task_id as taskId,       
+  				task.cus_id as cusId,
+  				task.task_type as taskType,
+  				task.task_create_date as taskCreateDate,
+  				task.task_request_time as taskRequestTime,
+  				task.qnt as qnt,
+  				task.loan_totl_amt as LoanTotlAmt,
+  				task.loan_balance as loanBalance,
+  				task.task_huser as taskHuser,
+  				task.task_horg as taskHorg,
+  				task.manager_id as managerId,
+  				task.manager_br_id as managerBrId,
+  				task.check_time as checkTime,
+  				task.check_addr as checkAddr,
+  				task.agreed_person as agreedPerson,
+   				task.remarks as remarks,
+    			task.approve_status as approveStatus,
+    			task.industry_outlook as industryOutlook,
+    			task.repayment as repayment,
+    			task.reciprocal_type as reciprocalType,
+    			task.contact_information as contactInformation,
+    			ecif.client_name as chineseName,
+    			ecif.global_id as cardId,
+    			task.REPAYMENT_OTHER as repaymentOther
+  			from psp_check_task task
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+ 			where 1 = 1
+   			and ecif.USER_ID = #{userId}
+   			and task.approve_status='0'
+   			 <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			<if test="clientNo != null and clientNo != '' ">
+				AND ecif.client_no=#{clientNo}
+			</if>
+			<if test="checkType != null and checkType != '' ">
+				AND task.task_type=#{checkType}
+			</if>) a
+	</select>
+	
+     <select id="findAfterLoanCheckTaskToByFilter" parameterType="com.cardpay.pccredit.afterloan.filter.AfterLoanCheckFilter"
+        resultMap="ResultMap">
+    	SELECT * FROM
+			(SELECT ROW_.*,ROWNUM ROWNUM_
+			FROM (
+			select 
+				distinct task.task_id as taskId,       
+  				task.cus_id as cusId,
+  				task.task_type as taskType,
+  				task.task_create_date as taskCreateDate,
+  				task.task_request_time as taskRequestTime,
+  				task.qnt as qnt,
+  				task.loan_totl_amt as LoanTotlAmt,
+  				task.loan_balance as loanBalance,
+  				task.task_huser as taskHuser,
+  				task.task_horg as taskHorg,
+  				task.manager_id as managerId,
+  				task.manager_br_id as managerBrId,
+  				task.check_time as checkTime,
+  				task.check_addr as checkAddr,
+  				task.agreed_person as agreedPeson,
+   				task.remarks as remarks,
+    			task.approve_status as approveStatus,
+    			task.industry_outlook as industryOutlook,
+    			task.repayment as repayment,
+    			task.reciprocal_type as reciprocalType,
+    			task.contact_information as contactInformation,
+    			ecif.client_name as chineseName,
+    			ecif.global_id as cardId,
+    			task.REPAYMENT_OTHER as repaymentOther
+  			from psp_check_task task
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+ 			where 1 = 1
+   			and task.approve_status='1'
+   			 <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			<if test="clientNo != null and clientNo != '' ">
+				AND ecif.client_no=#{clientNo}
+			</if>
+			<if test="checkType != null and checkType != '' ">
+				AND task.task_type=#{checkType}
+			</if>
+			<![CDATA[		
+				) ROW_
+			WHERE ROWNUM <= #{limit}*#{page} + #{limit}) 
+		WHERE ROWNUM_ > #{limit}*#{page}
+		]]>
+	</select>
+	
+      <select id="findAfterLoanCheckTaskCountToByFilter" parameterType="com.cardpay.pccredit.afterloan.filter.AfterLoanCheckFilter"
+        resultType="int">
+			select 
+				count(*)
+  			from psp_check_task task
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+ 			where 1 = 1
+   			and task.approve_status='1'
+   			 <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			<if test="clientNo != null and clientNo != '' ">
+				AND ecif.client_no=#{clientNo}
+			</if>
+			<if test="checkType != null and checkType != '' ">
+				AND task.task_type=#{checkType}
+			</if>
+	</select>
+	
+      <select id="findAfterLoanCheckTaskRemindByFilter" parameterType="com.cardpay.pccredit.afterloan.filter.AfterLoanCheckFilter"
+        resultMap="ResultMap">
+    	SELECT * FROM
+			(SELECT ROW_.*,ROWNUM ROWNUM_
+			FROM (
+			select 
+				distinct task.task_id as taskId,       
+  				task.cus_id as cusId,
+  				task.task_type as taskType,
+  				task.task_create_date as taskCreateDate,
+  				task.task_request_time as taskRequestTime,
+  				task.qnt as qnt,
+  				task.loan_totl_amt as LoanTotlAmt,
+  				task.loan_balance as loanBalance,
+  				task.task_huser as taskHuser,
+  				task.task_horg as taskHorg,
+  				task.manager_id as managerId,
+  				task.manager_br_id as managerBrId,
+  				task.check_time as checkTime,
+  				task.check_addr as checkAddr,
+  				task.agreed_person as agreedPeson,
+   				task.remarks as remarks,
+    			task.approve_status as approveStatus,
+    			task.industry_outlook as industryOutlook,
+    			task.repayment as repayment,
+    			task.reciprocal_type as reciprocalType,
+    			task.contact_information as contactInformation,
+    			ecif.client_name as chineseName,
+    			ecif.global_id as cardId,
+    			task.REPAYMENT_OTHER as repaymentOther
+  			from psp_check_task task
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+  			inner join sys_user s on s.id=ecif.user_id
+ 			where 1 = 1
+   			and task.approve_status='0'
+   			and trunc(sysdate-to_date(task.TASK_CREATE_DATE,'yyyy-mm-dd'))<![CDATA[ >  ]]> 10
+   			 <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			<if test="clientNo != null and clientNo != '' ">
+				AND ecif.a_client_no=#{clientNo}
+			</if>
+			<if test="userNo != null and userNo != '' ">
+				AND s.login=#{userNo}
+			</if>
+			<if test="checkType != null and checkType != '' ">
+				AND task.task_type=#{checkType}
+			</if>
+			<![CDATA[		
+				) ROW_
+			WHERE ROWNUM <= #{limit}*#{page} + #{limit}) 
+		WHERE ROWNUM_ > #{limit}*#{page}
+		]]>
+	</select>
+	
+       <select id="findAfterLoanCheckTaskCountRemindByFilter" parameterType="com.cardpay.pccredit.afterloan.filter.AfterLoanCheckFilter"
+        resultType="int">
+			select 
+				count(*)
+  			from psp_check_task task
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+  			inner join sys_user s on s.id=ecif.user_id
+ 			where 1 = 1
+   			and task.approve_status='0'
+   			and trunc(sysdate-to_date(task.TASK_CREATE_DATE,'yyyy-mm-dd'))<![CDATA[ >  ]]> 10
+   			 <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			<if test="clientNo != null and clientNo != '' ">
+				AND ecif.a_client_no=#{clientNo}
+			</if>
+			<if test="checkType != null and checkType != '' ">
+				AND task.task_type=#{checkType}
+			</if>
+			<if test="userNo != null and userNo != '' ">
+				AND s.login=#{userNo}
+			</if>
+	</select>
+	 <select id="findAferLoanCheckCountByUserId" 
+        resultType="int">
+			select 
+				count(*)
+  			from psp_check_task task
+  			left join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+ 			where 1 = 1
+   			and task.approve_status='0'
+   			and ecif.user_Id=#{userId}
+   			 
+	</select>
+	<select id="findAferLoanCheckRemindCount" 
+        resultType="int">
+			select 
+				count(*)
+  			from psp_check_task task
+  			inner join qz_iesb_for_ecif ecif on task.cus_id = ecif.client_no
+ 			where 1 = 1
+   			and task.approve_status='0'
+   			and trunc(sysdate-to_date(task.TASK_CREATE_DATE,'yyyy-mm-dd'))<![CDATA[ >  ]]> 10
+   			 
+	</select>
+</mapper>

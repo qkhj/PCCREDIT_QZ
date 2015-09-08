@@ -13,11 +13,13 @@ import com.dc.eai.data.CompositeData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.wicresoft.jrad.base.database.dao.common.CommonDao;
 import com.wicresoft.jrad.base.database.id.IDGenerator;
 import com.wicresoft.jrad.base.database.model.QueryResult;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,12 +66,14 @@ public class CircleService {
 	}
     
     //对接并存db
-    public boolean updateCustomerInforCircle_ESB(Circle circle) {
+    public String updateCustomerInforCircle_ESB(Circle circle) {
+    	String returnMessage = "";
     	//先开户
-    	boolean rtn = ecifService.updateCustomerInfor(circle,ecifService.findEcifByCustomerId(circle.getCustomerId()));
-    	if(rtn == false){
-    		return false;
-    	}
+//    	boolean rtn = ecifService.updateCustomerInfor(circle,ecifService.findEcifByCustomerId(circle.getCustomerId()));
+//    	if(rtn == false){
+//    		returnMessage = "开户失败";
+//    		return returnMessage;
+//    	}
     	
 		//先查询核心
 		List<Circle_ACCT_INFO> acct_info_ls = new ArrayList<Circle_ACCT_INFO>();
@@ -77,11 +81,13 @@ public class CircleService {
 		CompositeData req1 = iesbForCore.createCoreRequest(circle.getAcctNo1());
 		CompositeData resp1 = client.sendMess(req1);
 		if(resp1 == null){
-			return false;
+			returnMessage = "收息账号不存在";
+			return returnMessage;
 		}
 		Circle_ACCT_INFO acct_Info1 = iesbForCore.parseCoreResponse(resp1,"03");
 		if(acct_Info1 == null){
-			return false;
+			returnMessage = "解析ecif返回信息失败";
+			return returnMessage;
 		}
 		acct_Info1.setCircleId(circle.getId());
 		acct_info_ls.add(acct_Info1);
@@ -89,11 +95,13 @@ public class CircleService {
 		CompositeData req2 = iesbForCore.createCoreRequest(circle.getAcctNo2());
 		CompositeData resp2 = client.sendMess(req2);
 		if(resp2 == null){
-			return false;
+			returnMessage = "放款账号不存在";
+			return returnMessage;
 		}
 		Circle_ACCT_INFO acct_Info2 = iesbForCore.parseCoreResponse(resp2,"01");
 		if(acct_Info2 == null){
-			return false;
+			returnMessage = "解析ecif返回信息失败";
+			return returnMessage;
 		}
 		acct_Info2.setCircleId(circle.getId());
 		acct_info_ls.add(acct_Info2);
@@ -101,11 +109,13 @@ public class CircleService {
 		CompositeData req3 = iesbForCore.createCoreRequest(circle.getAcctNo2());
 		CompositeData resp3 = client.sendMess(req3);
 		if(resp3 == null){
-			return false;
+			returnMessage = "费用账号不存在";
+			return returnMessage;
 		}
 		Circle_ACCT_INFO fee_Acct_Info = iesbForCore.parseCoreResponse(resp3,"07");
 		if(fee_Acct_Info == null){
-			return false;
+			returnMessage = "解析ecif返回信息失败";
+			return returnMessage;
 		}
 		fee_Acct_Info.setCircleId(circle.getId());
 		acct_info_ls.add(fee_Acct_Info);
@@ -115,21 +125,27 @@ public class CircleService {
 		//发送
 		CompositeData resp = client.sendMess(req);
 		if(resp == null){
-			return false;
+			returnMessage = "放款交易发送失败";
+			return returnMessage;
 		}
 		//解析，存db
-		boolean res = iesbForCircleCredit.parseEcifResponse(resp);
+		String res = iesbForCircleCredit.parseEcifResponse(resp,circle);
 		
 		//如果成功，保存circle_acct_info，并置ecif状态
-		if(res){
+		if("放款成功".equals(res)){
 			commonDao.insertObject(acct_Info1);
 			commonDao.insertObject(acct_Info2);
 			//commonDao.insertObject(fee_Acct_Info);
+<<<<<<< HEAD
 			return true;
 		}
 		else{
 			return false;
+=======
+			
+>>>>>>> chinhBy-master
 		}
+		return res;
 	}
     
 	/**
@@ -162,4 +178,12 @@ public class CircleService {
 	public List<Circle> findCircleByCardNo(String cardno) {
 		return circleDao.findCircleByCardNo(cardno);
 	}
+<<<<<<< HEAD
+=======
+	
+	//按照客户号号和合同号查询贷款记录
+	public Circle findCircleByClientNoAndContNo(String clientNo,String retContNo){
+		return circleDao.findCircleByClientNoAndContNo(clientNo, retContNo);
+	}
+>>>>>>> chinhBy-master
 }

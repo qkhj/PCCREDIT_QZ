@@ -172,6 +172,46 @@
 	</select>
 	
 	<select id="findCustomerInforWithEcifByFilter" parameterType="com.cardpay.pccredit.customer.filter.CustomerInforFilter"
+	    resultType="com.cardpay.pccredit.intopieces.model.IntoPieces">
+	    
+	    SELECT * FROM
+			(SELECT ROW_.*,ROWNUM ROWNUM_
+			FROM (
+			select
+			    info.id as id,
+			    ecif.customer_id as customerId,
+			    ecif.client_name as chineseName,
+			    ecif.GLOBAL_ID as cardId,
+			    circle.CONTRACT_AMT as applyQuota,
+			    info.product_id as productId,
+			    info.status as status,
+			    n.node_name as nodeName
+			 from customer_application_info info 
+			 left join QZ_IESB_FOR_ECIF ecif
+			 on info.customer_id = ecif.CUSTOMER_ID
+			 left join customer_application_process p
+			 on info.id = p.application_id
+			 left join QZ_IESB_FOR_CIRCLE circle
+			 on circle.application_id=info.id
+			 left join node_audit n
+			 on n.id=p.next_node_id
+		    where 1=1
+		    and ecif.USER_ID = #{userId}
+		    <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+			order by info.created_time desc
+		<![CDATA[		
+				) ROW_
+			WHERE ROWNUM <= #{limit}*#{page} + #{limit}) 
+		WHERE ROWNUM_ > #{limit}*#{page}
+		]]>
+	</select>
+	
+	<select id="findCustomerInfoWithEcifByFilter" parameterType="com.cardpay.pccredit.customer.filter.CustomerInforFilter"
 	    resultType="com.cardpay.pccredit.customer.model.CustomerInfor">
 	    
 	    SELECT * FROM
@@ -205,16 +245,16 @@
 	    resultType="int">
 			select
 			    count(*)
-			 from BASIC_CUSTOMER_INFORMATION bci
+			 from customer_application_info info 
 			 left join QZ_IESB_FOR_ECIF ecif
-			 on bci.ID = ecif.CUSTOMER_ID
+			 on info.customer_id = ecif.CUSTOMER_ID
 		    where 1=1
-		    and bci.USER_ID = #{userId}
+		    and ecif.USER_ID = #{userId}
 		    <if test="chineseName != null and chineseName != '' ">
-				AND bci.CHINESE_NAME=#{chineseName}
+				AND ecif.client_name=#{chineseName}
 			</if>
 			<if test="cardId != null and cardId != '' ">
-				AND bci.CARD_ID=#{cardId}
+				AND ecif.global_id=#{cardId}
 			</if>
 	</select>
 	
@@ -224,4 +264,107 @@
 		from QZ_IESB_FOR_ECIF
 		where CUSTOMER_ID  = #{customerId}
 	</select>
+	
+	<select id="findCustomerInfoWithLoanByFilter" parameterType="com.cardpay.pccredit.customer.filter.CustomerInforFilter"
+	    resultType="com.cardpay.pccredit.customer.model.CustomerInfor">
+			select ecif.customer_id as id,
+       			ecif.client_name as chineseName,
+       			ecif.client_no   as clientNo,
+       			ecif.global_id   as cardId,
+       			ecif.GLOBAL_TYPE as cardType
+  		from qz_iesb_for_ecif ecif
+ 		inner join (select cont.cus_id
+               from O_CLPM_CTR_LOAN_CONT cont
+               left join o_clpm_acc_loan loan 
+               on cont.cus_id=loan.cus_id
+              where cont.prd_id = '100028'
+              and loan.acc_status='1'
+              group by cont.cus_id) con on ecif.client_no = con.cus_id
+              where 1=1
+               and ecif.USER_ID = #{userId}
+              <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+    </select>
+    <select id="findCustomerInfoWithLoanCountByFilter" parameterType="com.cardpay.pccredit.customer.filter.CustomerInforFilter"
+	    resultType="int">
+        select count(*)
+  		from qz_iesb_for_ecif ecif
+ 		inner join (select cont.cus_id
+               from O_CLPM_CTR_LOAN_CONT cont
+               left join o_clpm_acc_loan loan 
+               on cont.cus_id=loan.cus_id
+              where cont.prd_id = '100028'
+              and loan.acc_status='1'
+              group by cont.cus_id) con on ecif.client_no = con.cus_id
+              where 1=1
+               and ecif.USER_ID = #{userId}
+              <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+    </select>
+    
+    <select id="findCustomerInfoWithNotByFilter" parameterType="com.cardpay.pccredit.customer.filter.CustomerInforFilter"
+	    resultType="com.cardpay.pccredit.customer.model.CustomerInfor">
+			select ecif.customer_id as id,
+       			ecif.client_name as chineseName,
+       			ecif.client_no   as clientNo,
+       			ecif.global_id   as cardId,
+       			ecif.GLOBAL_TYPE as cardType
+  			from qz_iesb_for_ecif ecif
+ 			where 1 = 1
+   			and ecif.customer_id not in
+       		(select distinct ecif.customer_id
+          		from qz_iesb_for_ecif ecif
+         		inner join customer_application_info info 
+         		on ecif.customer_id =info.customer_id
+         		where (info.status='audit' or info.status='RETURNAPPROVE'))
+   			and ecif.customer_id not in
+       		(select ecif.customer_id
+          		from qz_iesb_for_ecif ecif
+         		inner join (select cont.cus_id
+                      from O_CLPM_CTR_LOAN_CONT cont
+                     where prd_id = '100028'
+                     group by cont.cus_id) 
+                     con on ecif.client_no =con.cus_id)
+               and ecif.USER_ID = #{userId}
+              <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+    </select>
+    <select id="findCustomerInfoWithNotCountByFilter" parameterType="com.cardpay.pccredit.customer.filter.CustomerInforFilter"
+	    resultType="int">
+        select count(*)
+  		from qz_iesb_for_ecif ecif
+ 			where 1 = 1
+   			and ecif.customer_id not in
+       		(select distinct ecif.customer_id
+          		from qz_iesb_for_ecif ecif
+         		inner join customer_application_info info 
+         		on ecif.customer_id =info.customer_id)
+   			and ecif.customer_id not in
+       		(select ecif.customer_id
+          		from qz_iesb_for_ecif ecif
+         		inner join (select cont.cus_id
+                      from O_CLPM_CTR_LOAN_CONT cont
+                     where prd_id = '100028'
+                     group by cont.cus_id) 
+                     con on ecif.client_no =con.cus_id)
+               and ecif.USER_ID = #{userId}
+              <if test="chineseName != null and chineseName != '' ">
+				AND ecif.client_name=#{chineseName}
+			</if>
+			<if test="cardId != null and cardId != '' ">
+				AND ecif.global_id=#{cardId}
+			</if>
+    </select>
 </mapper> 

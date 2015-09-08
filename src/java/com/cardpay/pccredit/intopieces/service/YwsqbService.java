@@ -127,7 +127,7 @@ public class YwsqbService {
 		String ywsqbId = qzApplnYwsqb.getId();
 		
 		//添加经营信息
-		QzApplnJyxx tmp = jyxxDao.findJyxx(qzApplnYwsqb.getCustomerId(), null);
+		QzApplnJyxx tmp = jyxxDao.findJyxx(qzApplnYwsqb.getCustomerId(), request.getParameter("appId"));
 		if(tmp == null){
 			commonDao.insertObject(qzApplnJyxx);
 		}

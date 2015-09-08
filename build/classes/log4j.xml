@@ -3,7 +3,10 @@
 
 <log4j:configuration>
 	<appender name="DEFAULT" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${jboss.server.log.dir}/jrad/jrad.log" />
+	    <!-- 测试环境
+		<param name="File" value="/usr/cardpay/wls1036_dev/user_projects/domains/base_domain/server_logs/jrad/jrad.log" /> -->
+		<!-- 生产环境 -->
+		<param name="File" value="/home/pccredit/pccredit_log/jrad/jrad.log" />
 		<param name="Append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyyy/MM/dd HH:mm:ss,SSS} %5p [%t] %20c{1} %x - %m%n" />
@@ -17,15 +20,15 @@
 	</appender>
 
 	<category name="java.sql">
-		<priority value="debug" />
+		<priority value="INFO" />
 		<appender-ref ref="STDOUT" />
 	</category>
 
 	<category name="com.ibatis">
-		<priority value="debug" />
+		<priority value="INFO" />
 		<appender-ref ref="STDOUT" />
 	</category>
-
+	
 	<root>
 		<priority value="info" />
 		<appender-ref ref="DEFAULT" />

@@ -24,6 +24,10 @@ var validator = $($formName).validate({
 		outMoney:{number:true},
 		otherOut:{number:true},
 		monthOtherIncome:{number:true},
+<<<<<<< HEAD
+=======
+		workYear:{number:true},
+>>>>>>> chinhBy-master
 		
 		bussStartYear:{number:true},
 		bussEmployeeNum:{number:true},
@@ -66,7 +70,12 @@ messages:
 		bussdisAddDetail:{required:"商圈地址不能为空"},
 		unit:{required:"单位名称不能为空"},
 		//maritalGlobalId:{idcard:""},
+<<<<<<< HEAD
 		familyNum:{number:"家庭人数只能为数字"}
+=======
+		familyNum:{number:"家庭人数只能为数字"},
+		workYear:{number:"工作年限只能为数字"}
+>>>>>>> chinhBy-master
    },
 	errorPlacement : function(error, element) {
 		element.after(error);

@@ -144,7 +144,7 @@
 		ID AS name,
 		PRODUCT_NAME AS title
 		FROM
-		PRODUCT_ATTRIBUTE
+		PRODUCT_ATTRIBUTE order by created_time
 	</dictionary>
 	<dictionary name="CustomerName" title="客户名称" timeout="1000">
 		select
@@ -369,4 +369,203 @@ AND A.IS_DELETED = '0'
 
 	</dictionary>
 
+
+	<!-- ESB 数据字典 -->
+	<dictionary name="INDIV_BRT_PLACE_LEVEL_1" title="籍贯" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from INDIV_BRT_PLACE
+		where levels = 1
+		order by name
+	</dictionary>
+	<dictionary name="INDIV_BRT_PLACE_LEVEL_2" title="籍贯" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from INDIV_BRT_PLACE
+		where levels = 2
+		order by name
+	</dictionary>
+	<dictionary name="INDIV_BRT_PLACE_LEVEL_3" title="籍贯" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from INDIV_BRT_PLACE
+		where levels = 3
+		order by name
+	</dictionary>
+	
+	<dictionary name="GUARANTY_TYPE_LEVEL_1" title="押品类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from GUARANTY_TYPE
+		where levels = 1
+		order by name
+	</dictionary>
+	<dictionary name="GUARANTY_TYPE_LEVEL_2" title="押品类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from GUARANTY_TYPE
+		where levels = 2
+		order by name
+	</dictionary>
+	<dictionary name="GUARANTY_TYPE_LEVEL_3" title="押品类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from GUARANTY_TYPE
+		where levels = 3
+		order by name
+	</dictionary>
+	<dictionary name="GUARANTY_TYPE_LEVEL_4" title="押品类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from GUARANTY_TYPE
+		where levels = 4
+		order by name
+	</dictionary>
+	<dictionary name="GUARANTY_TYPE_LEVEL_5" title="押品类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from GUARANTY_TYPE
+		where levels = 5
+		order by name
+	</dictionary>
+	
+	<dictionary name="LOAN_DIRECTION_LEVEL_1" title="贷款投向" timeout="10000">
+		select ABVENNAME||'_'||ENNAME as NAME,CNNAME as title 
+		from std_gb
+		where (length(locate)-length(replace(locate,',','')))=2
+	</dictionary>
+	<dictionary name="LOAN_DIRECTION_LEVEL_2" title="贷款投向" timeout="10000">
+		select ABVENNAME||'_'||ENNAME as NAME,CNNAME as title 
+		from std_gb
+		where (length(locate)-length(replace(locate,',','')))=3
+	</dictionary>
+	<dictionary name="LOAN_DIRECTION_LEVEL_3" title="贷款投向" timeout="10000">
+		select ABVENNAME||'_'||ENNAME as NAME,CNNAME as title 
+		from std_gb
+		where (length(locate)-length(replace(locate,',','')))=4
+	</dictionary>
+	<dictionary name="LOAN_DIRECTION_LEVEL_4" title="贷款投向" timeout="10000">
+		select ABVENNAME||'_'||ENNAME as NAME,CNNAME as title 
+		from std_gb
+		where (length(locate)-length(replace(locate,',','')))=5
+	</dictionary>
+	
+	<dictionary name="LOAN_BELONG1_LEVEL_1" title="贷款归属1" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_BELONG1
+		where levels=1
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_BELONG1_LEVEL_2" title="贷款归属1" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_BELONG1
+		where levels=2
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_BELONG1_LEVEL_3" title="贷款归属1" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_BELONG1
+		where levels=3
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_BELONG1_LEVEL_4" title="贷款归属1" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_BELONG1
+		where levels=4
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_BELONG1_LEVEL_5" title="贷款归属1" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_BELONG1
+		where levels=5
+		order by name
+	</dictionary>
+	
+	<dictionary name="LOAN_TYPE_LEVEL_1" title="贷款种类" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_TYPE
+		where levels=1
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_TYPE_LEVEL_2" title="贷款种类" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_TYPE
+		where levels=2
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_TYPE_LEVEL_3" title="贷款种类" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_TYPE
+		where levels=3
+		order by name
+	</dictionary>
+	<dictionary name="LOAN_TYPE_LEVEL_4" title="贷款种类" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from LOAN_TYPE
+		where levels=4
+		order by name
+	</dictionary>
+	
+	<dictionary name="AGRICULTURE_TYPE_LEVEL_1" title="涉农贷款类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from AGRICULTURE_TYPE
+		where levels=1
+		order by name  
+	</dictionary>
+	<dictionary name="AGRICULTURE_TYPE_LEVEL_2" title="涉农贷款类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from AGRICULTURE_TYPE
+		where levels=2
+		order by name
+	</dictionary>
+	<dictionary name="AGRICULTURE_TYPE_LEVEL_3" title="涉农贷款类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from AGRICULTURE_TYPE
+		where levels=3
+		order by name
+	</dictionary>
+	<dictionary name="AGRICULTURE_TYPE_LEVEL_4" title="涉农贷款类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from AGRICULTURE_TYPE
+		where levels=4
+		order by name
+	</dictionary>
+	<dictionary name="AGRICULTURE_TYPE_LEVEL_5" title="涉农贷款类型" timeout="10000">
+		select
+		parent_code ||'_'|| type_code as name,type_name as title
+		from AGRICULTURE_TYPE
+		where levels=5
+		order by name
+	</dictionary>
+	<dictionary name="product" title="涉农贷款类型" timeout="10000">
+		select
+		default_type as name,product_name as title
+		from product_attribute order by created_time
+	</dictionary>
+	<dictionary name="NODE_LIST" title="进件流程节点">
+		select name,title from (
+	   select n.node_name as title,n.id as name from (
+		select t.* from node_control t
+		<![CDATA[where level <>1]]>
+		start with current_node='#P{0}'
+		connect by next_node= prior current_node
+		) m,node_audit n where m.current_node=n.id
+		union 
+		select '客户经理' as name,'1' as title from dual
+		)
+	</dictionary>
+	<!-- ESB 数据字典 -->
 </dictionaries>

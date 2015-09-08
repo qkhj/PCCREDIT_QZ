@@ -20,10 +20,10 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				<tr>
 					<td class="table-label">机构名称：</td>
 					<td>
-						<input type="text" value="$!orgName" disabled>
+						<input type="text" value="$!orgName" readonly>
 						<input type="hidden" value="$!orgName" name="orgName">
-						<input type="hidden" name="orgId" value="$!orgId"></select></td>
-					<td class="table-label">申请日期：</td>
+						<input type="hidden" name="orgId" value="$!orgId"></td>
+					<td class="table-label">申请日期：<font color="#ff0000">*</font></td>
 					<td><input type="text" name="applyTime" onmouseover="_calendar()" readonly/></td>					
 				</tr>
 			</table>
@@ -48,7 +48,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				<tr>
 					<td class="table-label">姓名：<font color="#ff0000">*</font></td>
 					<td>
-						<input type="text" value="$!ecif.clientName" disabled />
+						<input type="text" value="$!ecif.clientName" readonly />
 						<input type="hidden" name="name" value="$!ecif.clientName" /></td>	
 					<td class="table-label">性别：<font color="#ff0000">*</font></td>
 					<td>
@@ -60,7 +60,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>
 				<tr>
 					<td class="table-label">证件号码：<font color="#ff0000">*</font></td>
-					<td><input type="text" value="$!ecif.globalId" disabled/><input type="hidden" name="globalId" value="$!ecif.globalId" /></td>	
+					<td><input type="text" value="$!ecif.globalId" readonly/><input type="hidden" name="globalId" value="$!ecif.globalId" /></td>	
 					<td class="table-label">证件类型：<font color="#ff0000">*</font></td>
 					<td>
 						<select id="globalType" name="globalType" onchange="setSelect(this,'qtzjlx')">
@@ -494,7 +494,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>						
 				<tr>
 					<td class="table-label">客户签名：<font color="#ff0000">*</font></td>
-					<td><input type="text" value="$!ecif.clientName" disabled/><input type="hidden" name="sign" value="$!ecif.clientName"/></td>	
+					<td><input type="text" value="$!ecif.clientName" readonly/><input type="hidden" name="sign" value="$!ecif.clientName"/></td>	
 					<td class="table-label">签名日期：<font color="#ff0000">*</font></td>	
 					<td><input type="text" name="signDate" onmouseover="_calendar()" readonly/></td>	
 				</tr>	
@@ -523,7 +523,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 						<select name="infoType" onchange="setSelect(this,'qtxxqd')">
 							#dict("INFO_TYPE", "")
 						</select>
-						<input type="text" name="infoTypeOther" id="qtxxqd" disabled/>	
+						<input type="text" name="infoTypeOther" id="qtxxqd" readonly/>	
 					</td>	
 						
 				</tr>
@@ -546,7 +546,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>
 				<tr>
 					<td class="table-label">经办人：</td>
-					<td><input type="text" value="$!userName" disabled/>
+					<td><input type="text" value="$!userName" readonly/>
 						<input type="hidden" name="managerName" value="$!userName"/>
 						<input type="hidden" name="managerId" value="$!externalId"/></td>	
 					<td class="table-label">日期：<font color="#ff0000">*</font></td>	
@@ -614,15 +614,16 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				submitFlag = 1;
 				if ($($formName).valid()) {
 					var formjson = $($formName).serialize();
-					var url = "${contextPath}/intopieces/intopiecesapprove/insert_page1.json?customerId=${customerId}";
+					var url = "${contextPath}/intopieces/intopiecesapprove/insert_page1.json?customerId=${customerId}&appId=${appId}";
 					$.ajax({
+						timeout : 500,
 						url : url,
 						type : "get",
 						data : formjson,
 						success : function(data) {
 							if (data.success) {
 								topWin.Dialog.message("保存成功！");
-								window.location.href = "${contextPath}/intopieces/intopiecesapprove/page1.page?id=${customerId}";
+								window.location.href = "${contextPath}/intopieces/intopiecesapprove/page1.page?id=${customerId}&appId=${appId}";
 							}
 							else{
 								topWin.Dialog.message("保存失败！");

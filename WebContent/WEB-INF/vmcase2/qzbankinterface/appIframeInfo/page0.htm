@@ -19,13 +19,13 @@
 				<tr>
 					<td class="table-label">产品类型：<font color="#ff0000">*</font></td>
 					<td>
-						<select id="productType" name="productType" onchange="changeProduct(this.value)">
-							#dict("PRODUCT_TYPE", $!qzappln_za_ywsqb_r.productType)
+						<select id="productType" name="productType" onchange="changeProduct(this.value)" disabled>
+							#dict("product", $!qzappln_za_ywsqb_r.productType)
 						</select>
 					</td>	
 					<td id="za_1" class="table-label" #if($!qzappln_za_ywsqb_r.productType != '2') style="display:none" #end>选择专案：<font color="#ff0000">*</font></td>
 					<td id="za_2" #if($!qzappln_za_ywsqb_r.productType != '2') style="display:none" #end>
-						<select id="zaId" name="zaId" onchange="changeZa(this)">
+						<select id="zaId" name="zaId" onchange="changeZa(this)" disabled>
 							#foreach ($obj in $za_ls)
 							<option value="$!obj.id" #if($!qzappln_za_ywsqb_r.zaId == $!obj.id) selected #end>$!obj.name</option>
 							#end
@@ -80,7 +80,7 @@
 	</div>
 </form>	
 <div class="controlbtn">
-	<a id="id_save_button" class="btn_g" href="javascript:void(0);" title="提交">提交</a>
+	<!--  <a id="id_save_button" class="btn_g" href="javascript:void(0);" title="提交">提交</a>-->
 	<a class="btn_gr" id="id_back_button" title="返回">返回</a>
 </div>
 	<script type="text/javascript">		

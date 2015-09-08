@@ -200,9 +200,44 @@ public class ECIFService {
 	 * @param filter
 	 * @return
 	 */
-	public QueryResult<CustomerInfor> findCustomerInforWithEcifByFilter(CustomerInforFilter filter) {
-		List<CustomerInfor> ls = ecifDao.findCustomerInforWithEcifByFilter(filter);
+	public QueryResult<IntoPieces> findCustomerInforWithEcifByFilter(CustomerInforFilter filter) {
+		List<IntoPieces> ls = ecifDao.findCustomerInforWithEcifByFilter(filter);
 		int size = ecifDao.findCustomerInforWithEcifCountByFilter(filter);
+		QueryResult<IntoPieces> qs = new QueryResult<IntoPieces>(size, ls);
+		return qs;
+	}
+	/**
+	 * 过滤查询  关联ecif开户信息
+	 * @param filter
+	 * @return
+	 */
+	public QueryResult<CustomerInfor> findCustomerInfoWithEcifByFilter(CustomerInforFilter filter) {
+		List<CustomerInfor> ls = ecifDao.findCustomerInfoWithEcifByFilter(filter);
+		int size = ecifDao.findCustomerInforWithEcifCountByFilter(filter);
+		QueryResult<CustomerInfor> qs = new QueryResult<CustomerInfor>(size, ls);
+		return qs;
+	}
+	
+	/**
+	 * 过滤查询，查询有做过贷款业务的客户(个人住房按揭贷款客户对应产品编号为100028)
+	 * @param filter
+	 * @return
+	 */
+	public QueryResult<CustomerInfor> findCustomerInfoWithLoanByFilter(CustomerInforFilter filter){
+		List<CustomerInfor> ls = ecifDao.findCustomerInfoWithLoanByFilter(filter);
+		int size = ecifDao.findCustomerInfoWithLoanCountByFilter(filter);
+		QueryResult<CustomerInfor> qs = new QueryResult<CustomerInfor>(size, ls);
+		return qs;
+	}
+	
+	/**
+	 * 过滤查询，查询未做过贷款的客户（不包括个人住房贷款客户）
+	 * @param filter
+	 * @return
+	 */
+	public QueryResult<CustomerInfor> findCustomerInfoWithNotByFilter(CustomerInforFilter filter){
+		List<CustomerInfor> ls = ecifDao.findCustomerInfoWithNotByFilter(filter);
+		int size = ecifDao.findCustomerInfoWithNotCountByFilter(filter);
 		QueryResult<CustomerInfor> qs = new QueryResult<CustomerInfor>(size, ls);
 		return qs;
 	}

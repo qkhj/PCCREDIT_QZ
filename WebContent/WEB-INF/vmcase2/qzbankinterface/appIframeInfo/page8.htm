@@ -73,7 +73,7 @@
 					<td class="table-label">审议事项:<font color="#ff0000">*</font></td>
 					<td colspan="2"><input type="text" name="sysx" value="贷款申请" readonly/></td>
 					<td class="table-label">产品名称:<font color="#ff0000">*</font></td>
-					<td><select name="cpmc">#dict("ProductName",$!result.cpmc)</select></td>	
+					<td><select name="cpmc" readonly>#dict("ProductName",$!result.cpmc)</select></td>	
 					<td class="table-label">证件号码:<font color="#ff0000">*</font></td>
 					<td colspan="3"><input type="text" name="zjhm" value="$!ecif.globalId" readonly/></td>		
 				</tr>			
@@ -257,9 +257,9 @@
 		
 		$(document).ready(function() {
 			if("${type}"=="readonly"){
-				$("input[type='text']").attr("disabled",true);
-				$("input[type='checkbox']").attr("disabled",true);
-				$("select").attr("disabled",true);
+				$("input[type='text']").attr("readonly",true);
+				$("input[type='checkbox']").attr("readonly",true);
+				$("select").attr("readonly",true);
 			}
 			$("#id_save_button").click(function() {
 				if(submitFlag == 1){
@@ -269,7 +269,7 @@
 				submitFlag = 1;
 				if ($($formName).valid()) {
 					var formjson = $($formName).serialize();
-		   	        var url = "${contextPath}/intopieces/intopiecesapprove/page8insert.json?id=${customerId}&appId=${appId}";
+		   	        var url = "${contextPath}/intopieces/intopiecesapprove/page8insert.json?id=${customerId}&appId=${appId}&flag=${flag}";
 		   	        	$.ajax({
 							url : url,
 							type : "get",
@@ -277,7 +277,7 @@
 							success : function(data) {
 								if (data.success) {
 									topWin.Dialog.message("保存成功！");
-									window.location.href ="${contextPath}/intopieces/intopiecesapprove/page8.page?id=${customerId}&appId=${appId}";
+									window.location.href ="${contextPath}/intopieces/intopiecesapprove/page8.page?id=${customerId}&appId=${appId}&flag=${flag}";
 								}
 								else{
 									topWin.Dialog.message("保存失败！");

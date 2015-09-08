@@ -1,0 +1,208 @@
+#parse ("common/iframe_page_header.htm")
+#parse ("common/customerInfor.htm")
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	<script type="text/javascript" src="jquery-1.js"></script>
+	<style type="text/css">
+		.dialog{position:absolute;top:0;left:0;z-index:10;width:100%;height:100%;background:rgba(229,229,229,0.5);display:none;}
+		.dialog .dialog-box{width:400px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;margin:0 auto;margin-top:200px;padding:3px;}
+		.dialog .dialog-box .top{height:35px;background:url(${contextPath}/images/xm_appln/box_head_bg.png) repeat-x;line-height:35px;font-size:14px;padding-left:15px;font-weight:bold;}
+		.dialog .dialog-box .top span{display:inline-block;width:35px;height:35px;background:url(${contextPath}/images/xm_appln/box_delete_nor.png);float:right;}
+		.dialog .dialog-box .top span:hover{background:url(${contextPath}/images/xm_appln/box_delete_hov.png);}
+		.dialog .dialog-box .content{font-size:12px;color:#323232;padding-left:20px;}
+		.dialog .dialog-box .bottom{border-top:1px solid #dddddd;height:45px;text-align:center;line-height:45px;}
+		.dialog .dialog-box .bottom .btn{width:70px;height:26px;margin:0 5px;background:url(/images/xm_appln/icon_button_qx_normal.png) repeat-x;border:1px solid #818181;border-radius:5px;}
+		.dialog .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/xm_appln/icon_button_qx_hover.png) repeat-x;}
+		.dialog .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/xm_appln/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
+		.dialog .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/xm_appln/icon_button_hover.png") repeat-x;}
+		.dialog1{position:absolute;top:0;left:0;z-index:10;width:100%;height:100%;background:rgba(229,229,229,0.5);display:none;}
+		.dialog1 .dialog-box{width:400px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;margin:0 auto;margin-top:200px;padding:3px;}
+		.dialog1 .dialog-box .top{height:35px;background:url(${contextPath}/images/xm_appln/box_head_bg.png) repeat-x;line-height:35px;font-size:14px;padding-left:15px;font-weight:bold;}
+		.dialog1 .dialog-box .top span{display:inline-block;width:35px;height:35px;background:url(${contextPath}/images/xm_appln/box_delete_nor.png);float:right;}
+		.dialog1.dialog-box .top span:hover{background:url(${contextPath}/images/xm_appln/box_delete_hov.png);}
+		.dialog1 .dialog-box .content{font-size:12px;color:#323232;padding-left:20px;}
+		.dialog1 .dialog-box .bottom{border-top:1px solid #dddddd;height:45px;text-align:center;line-height:45px;}
+		.dialog1 .dialog-box .bottom .btn{width:70px;height:26px;margin:0 5px;background:url(/images/xm_appln/icon_button_qx_normal.png) repeat-x;border:1px solid #818181;border-radius:5px;}
+		.dialog1 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/xm_appln/icon_button_qx_hover.png) repeat-x;}
+		.dialog1 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/xm_appln/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
+		.dialog1 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/xm_appln/icon_button_hover.png") repeat-x;}
+	</style>
+</head>
+<body>
+  <div class="content_main">
+    <div class="contentinner">
+      <div class="place">
+        <div class="title">二级支行审批进件</div>
+      </div>
+      <div class="inquiry">
+       <div class="search_tag">进件查询</div>
+        <div class="search">
+          <form id="submitForm" action="${contextPath}/intopieces/intopiecestwolevel/twolevel.page">
+          <ul>
+          	  <li>
+                <span>客户名称：<input type="text" name="chineseName" value="$!result.filter.chineseName" /></span>
+              </li>
+              <li>
+                <span>证件号码：<input type="text" name="cardId" value="$!result.filter.cardId" maxlength="30" /></span>
+              </li>
+              <li class="search_button">
+                <input type="button" value="筛选" class="search_button_inquiry" title="#i18n('button.browse.hint')" style="height: 26px; line-height: 24px;" onclick="javascript:this.form.submit();"/>
+              </li>
+          </ul>
+          </form>
+        </div>
+        <div id="topDiv" class="inquiry_list inquiry_top">
+          <table>
+            <colgroup>
+             <col width="5%" />
+             <col width="8%" />
+              <col width="8%" />
+              <col width="10%" />
+              <col width="10%"/>
+              <col width="12%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="20%"/>
+            </colgroup>
+            <tr class="title">
+              <th nowrap="nowrap"></th>
+              <th nowrap="nowrap">客户经理</th>
+              <th nowrap="nowrap">客户名称</th>
+              <th nowrap="nowrap">申请金额</th>
+              <th nowrap="nowrap">产品名称</th>
+              <th nowrap="nowrap">证件号码</th>
+              <th nowrap="nowrap">审核状态</th>
+              <th nowrap="nowrap">申请时间</th>
+              <th nowrap="nowrap">节点名称</th>
+              <th nowrap="nowrap">退回原因</th>
+            </tr>
+          </table>
+        </div>
+        <div id="downDiv" class="inquiry_list inquiry_down">
+                    <table>
+            <colgroup>
+             <col width="5%" />
+             <col width="8%" />
+              <col width="8%" />
+              <col width="10%" />
+              <col width="10%"/>
+              <col width="12%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="10%"/>
+              <col width="20%"/>
+            </colgroup>
+           #foreach ($wait in $result.items)
+            <tr>
+              <td class="checkbox"><input type="radio" name="checkbox" value="$!wait.applicationId@$!wait.customerId"/></td>
+              <td nowrap="nowrap">$!wait.displayName</td>
+              <td nowrap="nowrap">$!wait.chineseName</td>
+              <td nowrap="nowrap">$format.formatNumber($!wait.contractAmt, 2, 1)</td>
+              <td nowrap="nowrap">#dictVal("ProductName",$!wait.productId)</td>
+              <td nowrap="nowrap">$!wait.cardId</td>
+              <td nowrap="nowrap">#dictVal("applicationStatus",$!wait.status)</td>
+              <td nowrap="nowrap">$!date.format("yyyy-MM-dd HH:mm:ss",$!wait.auditTime)</td>
+              <td nowrap="nowrap">$!wait.nodeName</td>
+              #if($!wait.status=='RETURNAPPROVE')
+              <td nowrap="nowrap">$!wait.fallbackReason</td>
+              #else
+              <td nowrap="nowrap"></td>
+              #end
+            </tr>
+            #end
+
+
+          </table>
+        </div>
+         <div class="dialog">
+			<form id="checkForm1" class="dialog-box" action="${contextPath}/intopieces/intopiecestwolevel/returnAppln.json">
+				<input type="hidden" name="appId" id="appId" value="${appId}" />
+				<div class="top">
+					退件 <span onclick="$('.dialog').hide();"></span>
+				</div>
+				<div class="content">
+					<p>
+						退件原因:<font color="red">*</font>
+					<textarea name="remark" clos="300px" rows="2" style="width:300px;"></textarea>
+					</p>
+				</div>
+				<div class="bottom">
+					<input id="id_re_button" type="button" class="btn btn-submit" value="确定" /> <input
+						 type="button" class="btn btn-submit" value="关闭" onclick="$('.dialog').hide();"/>
+				</div>
+			</form>
+		</div>
+		<div class="dialog1">
+			<form id="checkForm2" class="dialog-box">
+				<input type="hidden" name="appId1" id="appId1" value="${appId}" />
+				<div class="top">
+					拒件 <span onclick="$('.dialog1').hide();"></span>
+				</div>
+				<div class="content">
+					<p>
+						拒件原因:<font color="red">*</font>
+					<textarea name="remark" clos="300px" rows="2" style="width:300px;"></textarea>
+					</p>
+				</div>
+				<div class="bottom">
+					<input id="id_re1_button" type="button" class="btn btn-submit" value="确定" /> <input
+						 type="button" class="btn btn-submit" value="关闭" onclick="$('.dialog1').hide();"/>
+				</div>
+			</form>
+		</div>
+      <div class="pagebar">
+        <div class="controlbtn">
+         <a id="id_display_button" class="btn_g" href="javascript:void(0);" title="查看申请信息">查看申请信息</a>
+       <!--  <a id="id_show_button" class="btn_g" href="javascript:void(0);"  title="上传扫描件">查看扫描件</a>
+          <a id="id_apply_button" class="btn_g" href="javascript:void(0);"  title="决议单">决议单</a>
+         <a id="id_syjy_button" class="btn_g" href="javascript:void(0);"  title="审议纪要">审议纪要</a>
+         <a id="id_edu_button" class="btn_g" href="javascript:void(0);"  title="调额">调额</a> 
+		 <a id="id_pass_button" class="btn_g" href="javascript:void(0);"  title="审批通过">审批通过</a>
+         <a id="id_return_button" class="btn_g" title="退件">退件</a>
+		<a id="id_reject_button" class="btn_g" title="拒件">拒件</a>
+        <a id="id_return_to_cu_button" class="btn_g" href="javascript:void(0);"  title="补充上会">补充上会</a>-->
+        <!--  <a id="id_chureject_button" class="btn_g" title="初审拒件记录">初审拒件记录</a>-->
+        </div>
+        #parse ("common/pagination.htm")
+        <div class="clear"></div>
+        	
+      </div>
+    </div>
+  </div>
+
+
+<script language="javascript" type="text/javascript">
+	var layout = new TableLayout(2);
+	window.top.currentWindow.setLayout(layout);
+
+	$(document).ready(function() {
+		
+		$('.dialog').hide();
+		$("#id_return_button").click(function() {
+			$('.dialog').show();
+      });
+		$("#id_reject_button").click(function() {
+			$('.dialog1').show();
+      });
+	    //查看申请信息
+		$("#id_display_button").click(function() {
+			if ($(".checkbox :checked").length == 1) {
+				var rowId = getCurrentRowId().split("@")[1];
+				var appId = getCurrentRowId().split("@")[0];
+				if(rowId!=null){
+					var url="${contextPath}/intopieces/intopiecestwolevel/iframe_approve.page?id="+rowId+"&appId="+appId;
+					window.location.href = url;
+				}
+			}else{
+				Dialog.message("请选择要进件的客户!");
+			}
+	    });
+	
+	});
+	
+</script>
+
+</body>
+</html>
+#parse ("common/iframe_page_footer.htm")

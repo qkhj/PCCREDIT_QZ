@@ -1,0 +1,217 @@
+#parse ("common/iframe_page_header3.htm")
+<script type="text/javascript">
+var now = new Date();
+var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+</script>
+<body>
+<form id="id_module_form">
+<div class="forms" id="formsId">
+<!--*************************************************************贷后检查信息*************************************************************-->
+	<div class="box">
+		<div name="content">
+			<table class="myTable">
+				<caption>贷后检查任务信息</caption>
+				<colgroup>
+					<col width="10%">
+					<col width="40%">
+					<col width="10%">
+					<col width="40%">
+				</colgroup>
+				<tr>
+					<td class="table-label">客户名称：</td>
+					<td>
+						<input type="hidden" name="clientNo" id="clientNo" value="$!clientNo">
+       					<input type="hidden" name="taskId" id="taskId" value="$!taskId">
+       					<input type="hidden" name="type" id="clientNo" value="$!type">
+						<input type="text" value="$!ecif.clientName" name="clientName" readonly>
+					</td>
+					<td class="table-label">身份证号：</td>
+					<td><input type="text" name="globalId" value="$!ecif.globalId" readonly/></td>					
+				</tr>
+				<tr>
+					<td class="table-label">客户编码：</td>
+					<td>
+					
+						<input type="text" value="$!pspCheckTask.cusId" name="cusId" readonly>
+					</td>
+					<td class="table-label">任务类型：</td>
+					<td><input type="text" name="taskType" value="#dictVal("TASK_TYPE",$!pspCheckTask.taskType)" readonly/></td>					
+				</tr>
+				<tr>
+					<td class="table-label">任务生成日期：</td>
+					<td>
+						
+						<input type="text" value="$!pspCheckTask.taskCreateDate" onmouseover="_calendar()" name="taskCreatedate" readonly>
+					</td>
+					<td class="table-label">笔数：</td>
+					<td>
+						
+						<input type="text" value="$!pspCheckTask.qnt" name="qnt" readonly>
+					</td>
+					<!--<td class="table-label">要求完成时间：</td>
+					<td><input type="text" name="taskRequestTime" onmouseover="_calendar()" /></td>	  -->				
+				</tr>
+				<tr>
+					<td class="table-label">授信总额：</td>
+					<td><input type="text" name="loanTotlAmt" value="$format.formatNumber(2,$!pspCheckTask.loanTotlAmt)" readonly/></td>
+					<td class="table-label">用信余额：</td>
+					<td>
+						
+						<input type="text" value="$format.formatNumber(2,$!pspCheckTask.loanBalance)" name="loanBalance" readonly>
+					</td>					
+				</tr>
+				<tr>
+					<td class="table-label">主管客户经理：</td>
+					<td><input type="text" name="managerId" value="$!pspCheckTask.managerId" readonly/></td>			
+				    <td class="table-label">主管机构：</td>
+					<td>
+						
+						<input type="text" value="$!pspCheckTask.managerBrId" name="managerBrId" readonly>
+					</td>
+				</tr>
+				<tr>
+					
+					<td class="table-label">检查时间：</td>
+					<td><input type="text" name="checkTime" value="$!pspCheckTask.checkTime" onmouseover="_calendar()"/></td>					
+				
+				<td class="table-label">检查地点：</td>
+					<td>
+						
+						<input type="text" value="$!pspCheckTask.checkAddr" name="checkAddr" >
+					</td>
+				</tr>
+				<tr>
+
+					<td class="table-label">约见人员：</td>
+					<td><input type="text" name="agreedPerson" value="$!pspCheckTask.agreedPerson" /></td>	
+					<td class="table-label">联系方式：</td>
+					<td><input type="text" name="contactInformation" value="$!pspCheckTask.contactInformation" />
+				    </td>	
+					<!--<td><input type="text" name="industryOutlook" value="$!pspCheckTask.industryOutlook" /></td>  -->				
+				</tr>
+				<tr>
+					<td class="table-label">还款情况：</td>
+					<td><select id="repayment" name="repayment" onchange="setSelect(this.value,'repaymentOther')">
+	                   #dict("repayment_type", $!pspCheckTask.repayment)
+	                </select>
+	                <input type="text" name="repaymentOther" id="repaymentOther" value="$!pspCheckTask.repaymentOther" disabled />
+				    </td>	
+					<td class="table-label">回访类型：</td>
+					<td><select id="reciprocalType" name="reciprocalType">
+	                   #dict("reciprocalType", $!pspCheckTask.reciprocalType)
+	                </select>				
+				</tr>
+				<tr>
+				    <td class="table-label">客户风险判断：</td>
+					<td><select id="industryOutlook" name="industryOutlook">
+	                   #dict("cusRisk", $!pspCheckTask.industryOutlook)
+	                </select></td>	
+				</tr>
+				<tr>
+					<td class="table-label">检查结论：</td>
+					<td>
+						
+						<textarea name="remarks"> $!pspCheckTask.remarks</textarea>
+					</td>
+					<!--<td class="table-label">审批状态：</td>
+					<td><input type="text" name="approveStatus" value="$!pspCheckTask.approveStatus" readonly/></td>  -->					
+				</tr>
+			</table>
+		</div>
+	</div>
+</form>	
+<div class="controlbtn">
+	#if($!{type}=="readonly")
+		<a class="btn_gr"  onclick="parent.location.href = '${contextPath}/afterloan/afterloancheck/browse.page'" title="返回">返回</a>
+	#else
+		<a id="id_save_button" class="btn_g" href="javascript:void(0);" title="保存">保存</a>
+		<a id="id_approve_button" class="btn_g" href="javascript:void(0);" title="提交">提交</a>
+		<a id="id_back_button" class="btn_gr" href="javascript:void(0);" title="返回">返回</a>
+	#end
+	</div>
+	<script type="text/javascript">			
+		var layout=new FormsLayout("formsId");	
+		window.top.currentWindow.setLayout(layout);
+		
+		#set ($formName = "'#id_module_form'")
+		#parse ("qzbankinterface/appIframeInfo/page1_validation.js")
+		
+		$(document).ready(function() {	
+			//保存
+			$("#id_save_button").click(function() {
+				if(submitFlag == 1){
+					alert("请勿重复提交!")
+					return;
+				}
+				submitFlag = 1;
+				if ($($formName).valid()) {
+					var formjson = $($formName).serialize();
+					var url = "${contextPath}/afterloan/afterloancheck/insert_loanpage0.json?taskId=${taskId}&clientNo=${clientNo}";
+					$.ajax({
+						url : url,
+						type : "get",
+						data : formjson,
+						success : function(data) {
+							if (data.success) {
+								topWin.Dialog.message("保存成功！");
+								window.location.href = "${contextPath}/afterloan/afterloancheck/loanpage0.page?taskId=${taskId}&clientNo=${clientNo}&type=$!{type}";
+							}
+							else{
+								topWin.Dialog.message("保存失败！");
+						    }
+							submitFlag = 0;
+						}
+					});
+				}else{
+					submitFlag = 0;
+				}
+			});
+			//提交
+			$("#id_approve_button").click(function() {
+				if(submitFlag == 1){
+					alert("请勿重复提交!")
+					return;
+				}
+				submitFlag = 1;
+				var clientNo = document.getElementById("clientNo");
+				var taskId = document.getElementById("taskId");
+				var type = document.getElementById("type")
+				if (taskId!=null) {
+					var url = "${contextPath}/afterloan/afterloancheck/insert_loanpage1.json?taskId=${taskId}&clientNo=${clientNo}&type=${type}";
+					$.ajax({
+						url : url,
+						type : "get",
+						success : function(data) {
+							if (data.success) {
+								topWin.Dialog.message("保存成功！");
+								window.location.href = "${contextPath}/afterloan/afterloancheck/loanpage0_display.page?taskId=${taskId}&clientNo=${clientNo}&type=$!{type}";
+							}
+							else{
+								topWin.Dialog.message("保存失败！");
+						    }
+							submitFlag = 0;
+						}
+					});
+				}else{
+					submitFlag = 0;
+				}
+			});
+			//返回
+			$("#id_back_button").click(function() {
+				window.parent.location.href = "${contextPath}/afterloan/afterloancheck/browse.page";
+			});
+			
+		});
+		function setSelect(obj,id){//其他证件类型、其他教育水平等
+			if(obj=="3"){
+				$("#"+id).removeAttr('disabled');
+			}
+			else{
+				$("#"+id).val('');
+				$("#"+id).attr('disabled','disabled');
+			}
+		}
+	</script>	
+</body>
+</html>
+

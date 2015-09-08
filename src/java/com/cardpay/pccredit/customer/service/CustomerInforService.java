@@ -49,6 +49,7 @@ import com.cardpay.pccredit.intopieces.model.CustomerApplicationInfo;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationOther;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationProcess;
 import com.cardpay.pccredit.intopieces.model.CustomerApplicationRecom;
+import com.cardpay.pccredit.intopieces.model.IntoPieces;
 import com.cardpay.pccredit.intopieces.model.QzApplnDcnr;
 import com.cardpay.pccredit.intopieces.model.VideoAccessories;
 import com.cardpay.pccredit.ipad.model.ProductAttribute;
@@ -157,12 +158,40 @@ public class CustomerInforService {
 	 * @param filter
 	 * @return
 	 */
-	public QueryResult<CustomerInfor> findCustomerInforWithEcifByFilter(CustomerInforFilter filter) {
+	public QueryResult<IntoPieces> findCustomerInforWithEcifByFilter(CustomerInforFilter filter) {
 		/*filter.setSqlString(dataAccessSqlService.getSqlByResTbl(filter.getRequest(), ResourceTableEnum.KEHU));*/
 		
 		return eCIFService.findCustomerInforWithEcifByFilter(filter);
 	}
 	
+	/**
+	 * 过滤查询  关联ecif开户信息
+	 * @param filter
+	 * @return
+	 */
+	public QueryResult<CustomerInfor> findCustomerInfoWithEcifByFilter(CustomerInforFilter filter) {
+		/*filter.setSqlString(dataAccessSqlService.getSqlByResTbl(filter.getRequest(), ResourceTableEnum.KEHU));*/
+		
+		return eCIFService.findCustomerInfoWithEcifByFilter(filter);
+	}
+	
+	/**
+	 * 过滤查询  关联ecif开户信息(查询有做过贷款业务的客户)
+	 * @param filter
+	 * @return
+	 */
+	public QueryResult<CustomerInfor> findCustomerInfoWithLoanByFilter(CustomerInforFilter filter){
+		return eCIFService.findCustomerInfoWithLoanByFilter(filter);
+	}
+	
+	/**
+	 * 过滤查询  关联ecif开户信息(为做过贷款的客户)
+	 * @param filter
+	 * @return
+	 */
+	public QueryResult<CustomerInfor> findCustomerInfoWithNotByFilter(CustomerInforFilter filter){
+		return eCIFService.findCustomerInfoWithNotByFilter(filter);
+	}
 	/**
 	 * 过滤查询影像资料
 	 * @param filter

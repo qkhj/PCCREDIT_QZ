@@ -317,7 +317,34 @@ public class IESBForCredit {
      */
 
 	public boolean parseEcifResponse(CompositeData resp) {
+		if(resp == null){
+			return false;
+		}
+		CompositeData SYS_HEAD = resp.getStruct("SYS_HEAD");
 		
-		return true;
+		 //根据数组名称去获取数组
+        Array RET = SYS_HEAD.getArray("RET");
+        
+        String RET_CODE = "";
+      
+        if(null != RET && RET.size() > 0){
+            int m = RET.size();
+            CompositeData array_element = null;
+            for (int i = 0; i < m; i++) {
+                //数组中的元素也是CompositeData，这是固定的写法。根据游标就可以获取到数组中的所有元素
+                array_element = RET.getStruct(i);
+
+                RET_CODE = array_element.getField("RET_CODE").strValue();
+                
+            }
+        }
+        if(RET_CODE.equals( com.cardpay.pccredit.QZBankInterface.constant.Constant.RET_CODE_CIRCLE)){
+        	
+        	return true;
+        }
+        else{
+        
+        	return false;
+        }
 	}
 }

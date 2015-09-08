@@ -1,0 +1,168 @@
+#parse ("common/iframe_page_header3.htm")
+<style type="text/css">
+	
+</style>
+<body>
+<form id="id_module_form">
+<div class="forms" id="formsId">
+<!--*************************************************************选择产品*************************************************************-->
+	<div class="box">
+		<div name="content">
+			<table class="myTable">
+				<caption>选择产品</caption>
+				<colgroup>
+					<col width="15%">
+					<col width="35%">
+					<col width="15%">
+					<col width="35%">
+				</colgroup>
+				<tr>
+					<td class="table-label">产品类型：<font color="#ff0000">*</font></td>
+					<td>
+						<select id="productType" name="productType" onchange="changeProduct(this.value)">
+							#dict("product", "")
+						</select>
+					</td>	
+					<td id="za_1" class="table-label" #if($!qzappln_za_ywsqb_r.productType != '2') style="display:none" #end>选择专案：<font color="#ff0000">*</font></td>
+					<td id="za_2" #if($!qzappln_za_ywsqb_r.productType != '2') style="display:none" #end>
+						<select id="zaId" name="zaId" onchange="changeZa(this)" >
+							#foreach ($obj in $za_ls)
+							<option value="$!obj.id" #if($!qzappln_za_ywsqb_r.zaId == $!obj.id) selected #end>$!obj.name</option>
+							#end
+						</select>
+					</td>		
+				</tr>
+			</table>			
+		</div>
+	</div>
+	
+	<!--*************************************************************专案信息*************************************************************-->
+	<div id="za_3" class="box" #if($!qzappln_za_ywsqb_r.productType != '2') style="display:none" #end>
+		<table class="title">
+			<tr>
+				<td>专案信息</td>
+				<td><img src="${contextPath}/images/min.gif"/></td>
+			</tr>
+		</table>
+		<div name="content" class="display_show">
+			<table class="myTable">
+				<colgroup>
+					<col width="10%">
+					<col width="40%">
+					<col width="10%">
+					<col width="40%">
+				</colgroup>
+				<tr>
+					<td class="table-label">发起方：<font color="#ff0000">*</font></td>
+					<td><input type="text" id="originator" name="originator" value="$!qzApplnZa.originator" disabled/></td>
+					<td class="table-label">发起人：<font color="#ff0000">*</font></td>
+					<td><input type="text" id="initiator" name="initiator" value="$!qzApplnZa.initiator" disabled/></td>			
+				</tr>
+				<tr>
+					<td class="table-label">发起时间：<font color="#ff0000">*</font></td>
+					<td><input type="text" id="initDate" name="initDate" onmouseover="_calendar()" 
+					#if($!qzApplnZa.initDate != $null) value="$date.format('yyyy-MM-dd', $!qzApplnZa.initDate)" #end disabled/></td>	
+					<td class="table-label">专案名称：<font color="#ff0000">*</font></td>
+					<td><input type="text" id="name" name="name" value="$!qzApplnZa.name" disabled/></td>		
+				</tr>
+				<td class="table-label">专案地址：<font color="#ff0000">*</font></td>
+					<td><input type="text" id="address" name="address" value="$!qzApplnZa.address" disabled/></td>
+					<td class="table-label">专案编号：<font color="#ff0000">*</font></td>
+					<td><input type="text" id="code" name="code" value="$!qzApplnZa.code" disabled/></td>
+				<tr>
+					<td class="table-label">评审意见：<font color="#ff0000">*</font></td>
+					<td colspan="3"><textarea id="sug" name="sug" disabled>$!qzApplnZa.sug</textarea></td>			
+				</tr>
+			</table>
+		</div><!--/content-->
+	</div>
+	
+	</div>
+</form>	
+<div class="controlbtn">
+	<a id="id_save_button" class="btn_g" href="javascript:void(0);" title="下一步">下一步</a>
+	<a class="btn_gr" id="id_back_button" title="返回">返回</a>
+</div>
+	<script type="text/javascript">		
+	var jsoObjs = ${za_ls_json};
+	var layout=new FormsLayout("formsId");	
+	window.top.currentWindow.setLayout(layout);
+	
+	#set ($formName = "'#id_module_form'")
+	
+	$(document).ready(function() {	
+		//保存
+		$("#id_save_button").click(function() {
+			if(submitFlag == 1){
+				alert("请勿重复提交!")
+				return;
+			}
+			submitFlag = 1;
+			var productType = $("#productType").val();
+			var zaId = ""
+			if(productType == "2" && document.getElementById("zaId").selectedIndex == -1){
+				topWin.Dialog.message("请先添加专案！");
+				submitFlag = 0;
+				return;
+			}
+			
+			if(productType == "2"){
+				zaId = jsoObjs[document.getElementById("zaId").selectedIndex].id
+			}
+			/**var url = "${contextPath}/intopieces/intopiecesapprove/insert_page0.json?productType="+productType+"&zaId="+zaId;
+			$.ajax({
+				url : url,
+				type : "get",
+				success : function(data) {
+					if (data.success) {
+						topWin.Dialog.message("保存成功！" );
+						//调整置其他页签
+						window.location.href = "${contextPath}/intopieces/intopiecesapprove/queryCustomerInfo.page?appId="+data.appId+"&productId="+data.productId+"&zaId="+data.zaId;
+					}
+					else{
+						topWin.Dialog.message("保存失败！");
+				    }
+					submitFlag = 0;
+				}
+			});*/
+			var url="${contextPath}/intopieces/intopiecesapprove/queryCustomerInfo.page?productType="+productType+"&zaId="+zaId;
+			window.location.href = url;
+		});
+		
+		$("#id_back_button").click(function() {
+			window.location.href = "${contextPath}/intopieces/intopiecesapprove/approve.page";
+		})
+		
+	});
+	
+	function changeProduct(value){
+		if(value == "2"){
+			$("#za_1").css("display","");
+			$("#za_2").css("display","");
+			$("#za_3").css("display","");
+			
+			changeZa(document.getElementById("zaId"));
+		}
+		else{
+			$("#za_1").css("display","none");
+			$("#za_2").css("display","none");
+			$("#za_3").css("display","none");
+		}
+	}
+	
+	function changeZa(obj){
+		if(obj.selectedIndex != -1){
+			//alert(jsoObjs[obj.selectedIndex]);
+			$("#originator").val(jsoObjs[obj.selectedIndex].originator);
+			$("#initiator").val(jsoObjs[obj.selectedIndex].initiator);
+			$("#initDate").val(jsoObjs[obj.selectedIndex].initDate);
+			$("#name").val(jsoObjs[obj.selectedIndex].name);
+			$("#address").val(jsoObjs[obj.selectedIndex].address);
+			$("#code").val(jsoObjs[obj.selectedIndex].code);
+			$("#sug").val(jsoObjs[obj.selectedIndex].sug);
+		}
+	}
+	</script>	
+</body>
+</html>
+

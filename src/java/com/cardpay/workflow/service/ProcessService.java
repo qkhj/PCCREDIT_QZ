@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cardpay.pccredit.intopieces.model.CustomerApplicationProcess;
 import com.cardpay.workflow.constant.ApproveOperationTypeEnum;
 import com.cardpay.workflow.dao.WfStatusInfoDao;
 import com.cardpay.workflow.dao.WfStatusQueueRecordDao;
@@ -164,5 +165,17 @@ public class ProcessService {
 	 */
 	public List<WfStatusQueueRecord> getExamineHistory(String exUserID) {
 		return wfStatusQueueRecordDao.getExamineHistory(exUserID);
+	}
+	/**
+	 * 根据application_id查询customer_application_process信息
+	 * 
+	 */
+	public CustomerApplicationProcess findProcessByAppId(String appId){
+		String sql="select * from customer_application_process p where p.application_id='"+appId+"'";
+		List<CustomerApplicationProcess> pl = commonDao.queryBySql(CustomerApplicationProcess.class,sql, null);
+		if(pl.size()>0){
+			return pl.get(0);
+		}
+		return null;
 	}
 }

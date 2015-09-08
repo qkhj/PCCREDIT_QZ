@@ -132,6 +132,11 @@ public class Circle extends BusinessModel{
 //	private String cInterbankId;
 	private String userId;
 	
+	private String retMsg;
+	private String retCode;
+	private String retContno;
+	private String loanStatus;
+	
 	private String acctNo1;//收息收款账号
 	private String acctNo2;//放款账号
 	
@@ -744,5 +749,29 @@ public class Circle extends BusinessModel{
 	}
 	public void setApplicationId(String applicationId) {
 		this.applicationId = applicationId;
+	}
+	public String getRetMsg() {
+		return retMsg;
+	}
+	public void setRetMsg(String retMsg) {
+		this.retMsg = retMsg;
+	}
+	public String getRetCode() {
+		return retCode;
+	}
+	public void setRetCode(String retCode) {
+		this.retCode = retCode;
+	}
+	public String getRetContno() {
+		return retContno;
+	}
+	public void setRetContno(String retContno) {
+		this.retContno = retContno;
+	}
+	public String getLoanStatus() {
+		return loanStatus;
+	}
+	public void setLoanStatus(String loanStatus) {
+		this.loanStatus = loanStatus;
 	}
 }

@@ -28,24 +28,28 @@
             </colgroup>
             <tr>
             	<td><label>客户名称:</label></td>
-              	<td><input type="text" value="$!ecif.clientName" disabled/></td>
+              	<td><input type="text" value="$!ecif.clientName" readonly/></td>
               	<td><input type="hidden" id="clientNo" name="clientNo"/></td>
               	<td></td>
             </tr>
-            #if($!operate!="填写合同信息")
-            <tr style="display: none;">
-            #else
+            #if($!operate=="填写合同信息")
             <tr>
+            #elseif($!operate=="settleDownLoan")
+            <tr>
+            #else
+            <tr style="display: none;">
             #end
             	<td><label>收息收款账号:</label><font color="#ff0000">*</font></td>
               	<td><input type="text" name="acctNo1"/></td>
               	<td><label>放款账号:</label><font color="#ff0000">*</font></td>
               	<td><input type="text" name="acctNo2"/></td>
             </tr>
-            #if($!operate!="填写合同信息")
-            <tr style="display: none;">
-            #else
+             #if($!operate=="填写合同信息")
             <tr>
+            #elseif($!operate=="settleDownLoan")
+            <tr>
+            #else
+            <tr style="display: none;">
             #end
               <td><label>合同号:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="contractNo"/></td>
@@ -64,10 +68,12 @@
               <td><label>外币时需要换算:</label></td>
               <td><input type="text" id="exchangeRate" name="exchangeRate"/></td>
             </tr>
-            #if($!operate!="填写合同信息")
-            <tr style="display: none;">
-            #else
+             #if($!operate=="填写合同信息")
             <tr>
+            #elseif($!operate=="settleDownLoan")
+            <tr>
+            #else
+            <tr style="display: none;">
             #end
 			  <td><label>授信起始日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="startDate" onmouseover="_calendar()" readonly/></td>
@@ -86,13 +92,13 @@
 			  <td><label>业务类型:</label></td>
               <td><select id="bussType" name="bussType">#dict("BUSS_TYPE", "")</select></td>
               <td><label>合同金额(元):</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="contractAmt" name="contractAmt" value="$!jyd.jyje" readonly/></td>
+              <td><input type="text" id="contractAmt" name="contractAmt" value="$!jyd.jyje" /></td>
             </tr>
 			<tr>
               <td><label>登记人:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="registeredId" name="registeredId" readonly/></td>
+              <td><input type="text" id="registeredId" name="registeredId" /></td>
 			  <td><label>登记机构:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="registOrgNo" name="registOrgNo" readonly/></td>
+              <td><input type="text" id="registOrgNo" name="registOrgNo" /></td>
             </tr>
 			<tr>
               <td><label>入账机构码:</label><font color="#ff0000">*</font></td>
@@ -104,7 +110,7 @@
               <td><label>顺延标志:</label></td>
               <td><select name="deferFlag">#dict("IS_DELAY", "")</select></td>
 			  <td><label>年执行利率(%):</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="actIntRate" value="$!jyd.jyll" readonly/></td>
+              <td><input type="text" name="actIntRate" value="$!jyd.jyll" /></td>
             </tr>
 			<tr>
               <td><label>年逾期利率(%):</label><font color="#ff0000">*</font></td>
@@ -205,7 +211,11 @@
             </colgroup>
 			<tr>
               <td><label>客户号:</label></td>
+<<<<<<< HEAD
               <td><input type="text" id="aClientNo" name="aClientNo" disabled/>
+=======
+              <td><input type="text" id="aClientNo" name="aClientNo" readonly/>
+>>>>>>> chinhBy-master
               <!--<input type="button" value="检测" onclick="checkClientNo()"></td>  -->
 			  <td><label>客户名称:</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="clientName" name="clientName" readonly/></td>
@@ -259,8 +269,6 @@
 			<tr>
               <td><label>最高学位:</label></td>
               <td><select id="degree" name="degree">#dict("INDIV_DGR", "")</select></td>
-			  <td><label>签约日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="signDate" name="signDate" onmouseover="_calendar()" readonly/></td>
             </tr>
 			<tr>
               <td><label>持卡情况:</label></td>
@@ -272,7 +280,7 @@
               <td><label>信用等级:</label></td>
               <td><select id="creditLevel" name="creditLevel">#dict("CUS_CRD_GRADE", "")</select></td>
 			  <td><label>信用到期日期:</label></td>
-              <td><input type="text" id="expiryDate" name="expiryDate" onmouseover="_calendar()" readonly/></td>
+              <td><input type="text" id="expiryDate" name="expiryDate" onmouseover="_calendar()" /></td>
             </tr>
 			<tr>
               <td><label>是否关联客户:</label></td>
@@ -301,6 +309,8 @@
 			<tr>
               <td><label>开户日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="openAcctDate" name="openAcctDate" onmouseover="_calendar()" readonly/></td>
+               <td><label>签约日期:</label><font color="#ff0000">*</font></td>
+              <td><input type="text" id="signDate" name="signDate" onmouseover="_calendar()" readonly/></td>
             </tr>
 		  </table>
 		  <!-- <table class="rule myTable" bordercolor="#cccccc" border="1">
@@ -444,7 +454,7 @@
 					if ($($formName).valid()) {
 						var formjson = $($formName).serialize();
 			   	          
-			   	       	var url = "${modulePath}/insert.json?customerId=${customerId}";
+			   	       	var url = "${modulePath}/insert.json?customerId=${customerId}&appId=${appId}";
 			   	       	
 			   	       	$.ajax({
 							url : url,

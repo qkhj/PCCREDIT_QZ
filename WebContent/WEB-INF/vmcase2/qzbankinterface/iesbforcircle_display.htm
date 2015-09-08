@@ -57,7 +57,7 @@
 		.dialog4 .dialog-box .bottom .btn{width:70px;height:26px;margin:0 5px;background:url(${contextPath}/images/icon_button_qx_normal.png) repeat-x;border:1px solid #818181;border-radius:5px;}
 		.dialog4 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
 		.dialog4 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
-		.dialog4 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
+		.dialog4 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}	
 	</style>
 </head>
 <body>
@@ -82,9 +82,15 @@
             #if($!operate =='中心终审')
             <tr>
             #elseif($!operate =='进件查询')
+<<<<<<< HEAD
             <tr>
             #elseif($!operate =='卡中心进件查询')
             <tr>
+=======
+            <tr>
+            #elseif($!operate =='卡中心进件查询')
+            <tr>
+>>>>>>> chinhBy-master
             #else
             <tr style="display: none;">
             #end
@@ -96,9 +102,15 @@
             #if($!operate=='中心终审')
             <tr>
             #elseif($!operate =='进件查询')
+<<<<<<< HEAD
             <tr>
             #elseif($!operate =='卡中心进件查询')
             <tr>
+=======
+            <tr>
+            #elseif($!operate =='卡中心进件查询')
+            <tr>
+>>>>>>> chinhBy-master
             #else
             <tr style="display: none;">
 			#end
@@ -109,19 +121,20 @@
             </tr>
             <tr>
               <td><label>担保方式:</label></td>
-              <td><select id="guaranteeMode" name="guaranteeMode" onchange="change_guaranteeMode(this);" disabled >#dict("ASSURE_MAIN", $!circle.guaranteeMode)</select></td>
+              <td><select id="guaranteeMode" name="guaranteeMode" onchange="change_guaranteeMode(this);" readonly >#dict("ASSURE_MAIN", $!circle.guaranteeMode)</select></td>
               <td><label>担保方式细分:</label></td>
-              <td><select id="guaranteeModeDetail" name="guaranteeModeDetail" disabled >#dict("ASSURE_MAIN_DETAILS", $!circle.guaranteeModeDetail)</select></td>
+              <td><select id="guaranteeModeDetail" name="guaranteeModeDetail" readonly >#dict("ASSURE_MAIN_DETAILS", $!circle.guaranteeModeDetail)</select></td>
             </tr>
             <tr>
 			  <td><label>币种:</label></td>
-              <td><select id="ccy1" name="ccy1" disabled >#dict("CONT_CUR_TYPE", $!circle.ccy1)</select></td>
+              <td><select id="ccy1" name="ccy1" readonly >#dict("CONT_CUR_TYPE", $!circle.ccy1)</select></td>
               <td><label>外币时需要换算:</label></td>
               <td><input type="text" id="exchangeRate" name="exchangeRate" value="$!circle.exchangeRate" readonly style="color:#000000" /></td>
             </tr>
             <tr style="display: ;">
             #if($!circle.startDate == $null)
 			  <td><label>授信起始日期:</label><font color="#ff0000">*</font></td>
+<<<<<<< HEAD
               <td><input type="text" name="startDate" onmouseover="_calendar()" value="" disabled /></td>
 			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="endDate" onmouseover="_calendar()" value="" disabled /></td>
@@ -130,17 +143,27 @@
               <td><input type="text" name="startDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.startDate)" disabled /></td>
 			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="endDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.endDate)" disabled /></td>
+=======
+              <td><input type="text" name="startDate" onmouseover="_calendar()" value="" readonly /></td>
+			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
+              <td><input type="text" name="endDate" onmouseover="_calendar()" value="" readonly /></td>
+              #else
+              <td><label>授信起始日期:</label><font color="#ff0000">*</font></td>
+              <td><input type="text" name="startDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.startDate)" readonly /></td>
+			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
+              <td><input type="text" name="endDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.endDate)" readonly /></td>
+>>>>>>> chinhBy-master
               #end
             </tr>
             <tr>
               <td><label>还款期限:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="term" value="$!circle.term" readonly style="color:#000000" /></td>
 			  <td><label>期限类型:</label></td>
-              <td><select name="termType" disabled >#dict("TERM_TYPE", $!circle.termType)</select></td>
+              <td><select name="termType" readonly >#dict("TERM_TYPE", $!circle.termType)</select></td>
             </tr>
 			<tr>
 			  <td><label>业务类型:</label></td>
-              <td><select id="bussType" name="bussType" disabled >#dict("BUSS_TYPE", $!circle.bussType)</select></td>
+              <td><select id="bussType" name="bussType" readonly >#dict("BUSS_TYPE", $!circle.bussType)</select></td>
               <td><label>合同金额(元):</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="contractAmt" name="contractAmt" value="$!circle.contractAmt" readonly style="color:#000000" /></td>
             </tr>
@@ -154,11 +177,15 @@
               <td><label>入账机构码:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="incomeOrgNo" value="$!circle.incomeOrgNo" readonly style="color:#000000"  /></td>
 			  <td><label>登记日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="registeredDate" name="registeredDate" value="$date.format('yyyy-MM-dd', $!circle.registeredDate)" disabled onmouseover="_calendar()"/></td>
+              <td><input type="text" id="registeredDate" name="registeredDate" value="$date.format('yyyy-MM-dd', $!circle.registeredDate)" readonly onmouseover="_calendar()"/></td>
             </tr>
 			<tr>
               <td><label>顺延标志:</label></td>
+<<<<<<< HEAD
               <td><select name="deferFlag" disabled>#dict("IS_DELAY", $!circle.deferFlag)</select></td>
+=======
+              <td><select name="deferFlag" readonly>#dict("IS_DELAY", $!circle.deferFlag)</select></td>
+>>>>>>> chinhBy-master
 			  <td><label>年执行利率(%):</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="actIntRate" value="$!circle.actIntRate" readonly style="color:#000000" /></td>
             </tr>
@@ -170,85 +197,89 @@
             </tr>
 			<tr>
               <td><label>还款方式:</label></td>
-              <td><select name="repayType" disabled >#dict("REPAY_TYPE", $!circle.repayType)</select></td>
+              <td><select name="repayType" readonly >#dict("REPAY_TYPE", $!circle.repayType)</select></td>
 			  <td><label>还款日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="repayDate" value="$!circle.repayDate" disabled /></td>
+              <td><input type="text" name="repayDate" value="$!circle.repayDate" readonly /></td>
             </tr>
 			<tr>
               <td><label>五级分类:</label></td>
-              <td><select name="fiveLevelType" disabled >#dict("FIVE_CLASSFIY", $!circle.fiveLevelType)</select></td>
+              <td><select name="fiveLevelType" readonly >#dict("FIVE_CLASSFIY", $!circle.fiveLevelType)</select></td>
 			  <td><label>特殊贷款类型:</label></td>
-              <td><select name="speLoanType" disabled >#dict("SPE_LOAN_TYPE", $!circle.speLoanType)</select></td>
+              <td><select name="speLoanType" readonly >#dict("SPE_LOAN_TYPE", $!circle.speLoanType)</select></td>
             </tr>
 			<tr>
               <td><label>额度占用类型:</label></td>
-              <td><select name="limitUseedType" disabled >#dict("LIMIT_USEED_TYPE", $!circle.limitUseedType)</select></td>
+              <td><select name="limitUseedType" readonly >#dict("LIMIT_USEED_TYPE", $!circle.limitUseedType)</select></td>
 			  <td><label>借款用途:</label></td>
-              <td><select name="drUsage" disabled >#dict("LOAN_USE_TYPE", $!circle.drUsage)</select></td>
+              <td><select name="drUsage" readonly >#dict("LOAN_USE_TYPE", $!circle.drUsage)</select></td>
             </tr>
 			<tr>
               <td><label>工业转型升级标识:</label></td>
-              <td><select name="flag" disabled >#dict("COM_UP_INDTIFY", $!circle.flag)</select></td>
+              <td><select name="flag" readonly >#dict("COM_UP_INDTIFY", $!circle.flag)</select></td>
 			  <td><label>贷款种类:</label></td>
               <td>
-              	1:<select disabled id="loanKind_1" name="loanKind_1" style="width:45%;margin:3px;" onchange="change_loanKind_1(this.value);">#dict("LOAN_TYPE_LEVEL_1", $!circle.loanKind_1)</select>
-              	2:<select disabled id="loanKind_2" name="loanKind_2" style="width:45%;margin:3px;" onchange="change_loanKind_2(this.value);">#dict("LOAN_TYPE_LEVEL_2", $!circle.loanKind_2)</select>
-              	3:<select disabled id="loanKind_3" name="loanKind_3" style="width:45%;margin:3px;" onchange="change_loanKind_3(this.value);">#dict("LOAN_TYPE_LEVEL_3", $!circle.loanKind_3)</select>
-              	4:<select disabled id="loanKind_4" name="loanKind_4" style="width:45%;margin:3px;">#dict("LOAN_TYPE_LEVEL_4", $!circle.loanKind_4)</select>
+              	1:<select readonly id="loanKind_1" name="loanKind_1" style="width:45%;margin:3px;" onchange="change_loanKind_1(this.value);">#dict("LOAN_TYPE_LEVEL_1", $!circle.loanKind_1)</select>
+              	2:<select readonly id="loanKind_2" name="loanKind_2" style="width:45%;margin:3px;" onchange="change_loanKind_2(this.value);">#dict("LOAN_TYPE_LEVEL_2", $!circle.loanKind_2)</select>
+              	3:<select readonly id="loanKind_3" name="loanKind_3" style="width:45%;margin:3px;" onchange="change_loanKind_3(this.value);">#dict("LOAN_TYPE_LEVEL_3", $!circle.loanKind_3)</select>
+              	4:<select readonly id="loanKind_4" name="loanKind_4" style="width:45%;margin:3px;">#dict("LOAN_TYPE_LEVEL_4", $!circle.loanKind_4)</select>
               </td>
             </tr>
 			<tr>
               <td><label>涉农贷款类型:</label></td>
               <td>
-	              1:<select disabled id="agriLoanKind_1" name="agriLoanKind_1" style="width:28%;margin:2px;" onchange="change_agriLoanKind_1(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_1", $!circle.agriLoanKind_1)</select>
-	              2:<select disabled id="agriLoanKind_2" name="agriLoanKind_2" style="width:28%;margin:2px;" onchange="change_agriLoanKind_2(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_2", $!circle.agriLoanKind_2)</select>
-	              3:<select disabled id="agriLoanKind_3" name="agriLoanKind_3" style="width:28%;margin:2px;" onchange="change_agriLoanKind_3(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_3", $!circle.agriLoanKind_3)</select>
-	              4:<select disabled id="agriLoanKind_4" name="agriLoanKind_4" style="width:28%;margin:2px;" onchange="change_agriLoanKind_4(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_4", $!circle.agriLoanKind_4)</select>
-	              5:<select disabled id="agriLoanKind_5" name="agriLoanKind_5" style="width:28%;margin:2px;">#dict("AGRICULTURE_TYPE_LEVEL_5", $!circle.agriLoanKind_5)</select>
+	              1:<select readonly id="agriLoanKind_1" name="agriLoanKind_1" style="width:28%;margin:2px;" onchange="change_agriLoanKind_1(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_1", $!circle.agriLoanKind_1)</select>
+	              2:<select readonly id="agriLoanKind_2" name="agriLoanKind_2" style="width:28%;margin:2px;" onchange="change_agriLoanKind_2(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_2", $!circle.agriLoanKind_2)</select>
+	              3:<select readonly id="agriLoanKind_3" name="agriLoanKind_3" style="width:28%;margin:2px;" onchange="change_agriLoanKind_3(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_3", $!circle.agriLoanKind_3)</select>
+	              4:<select readonly id="agriLoanKind_4" name="agriLoanKind_4" style="width:28%;margin:2px;" onchange="change_agriLoanKind_4(this.value);">#dict("AGRICULTURE_TYPE_LEVEL_4", $!circle.agriLoanKind_4)</select>
+	              5:<select readonly id="agriLoanKind_5" name="agriLoanKind_5" style="width:28%;margin:2px;">#dict("AGRICULTURE_TYPE_LEVEL_5", $!circle.agriLoanKind_5)</select>
               </td>
 			  <td><label>个人经营性贷款类型:</label></td>
-              <td><select name="personLoanKind" disabled >#dict("ENSURE_PROJECT_LOAN", $!circle.personLoanKind)</select></td>
+              <td><select name="personLoanKind" readonly >#dict("ENSURE_PROJECT_LOAN", $!circle.personLoanKind)</select></td>
             </tr>
 			<tr>
               <td><label>调整类型:</label></td>
-              <td><select name="adjustType" disabled >#dict("ESTATE_ADJUST_TYPE", $!circle.adjustType)</select></td>
+              <td><select name="adjustType" readonly >#dict("ESTATE_ADJUST_TYPE", $!circle.adjustType)</select></td>
 			  <td><label>新兴产业类型:</label></td>
-              <td><select name="newPrdType" disabled >#dict("STRATEGY_NEW_TYPE", $!circle.newPrdType)</select></td>
+              <td><select name="newPrdType" readonly >#dict("STRATEGY_NEW_TYPE", $!circle.newPrdType)</select></td>
             </tr>
 			<tr>
               <td><label>新兴产业贷款:</label></td>
+<<<<<<< HEAD
               <td><select name="newPrdLoan" disabled>#dict("NEW_PRD_LOAN", $!circle.newPrdLoan)</select></td>
+=======
+              <td><select name="newPrdLoan" readonly>#dict("NEW_PRD_LOAN", $!circle.newPrdLoan)</select></td>
+>>>>>>> chinhBy-master
 			  <td><label>贷款投向:</label></td>
               <td>
-              	1:<select disabled id="loanDirection_1" name="loanDirection_1" style="width:45%;margin:3px;" onchange="change_loanDirection_1(this.value);">#dict("LOAN_DIRECTION_LEVEL_1",$!circle.loanDirection_1)</select>
-              	2:<select disabled id="loanDirection_2" name="loanDirection_2" style="width:45%;margin:3px;" onchange="change_loanDirection_2(this.value);">#dict("LOAN_DIRECTION_LEVEL_2",$!circle.loanDirection_2)</select>
-              	3:<select disabled id="loanDirection_3" name="loanDirection_3" style="width:45%;margin:3px;" onchange="change_loanDirection_3(this.value);">#dict("LOAN_DIRECTION_LEVEL_3",$!circle.loanDirection_3)</select>
-              	4:<select disabled id="loanDirection_4" name="loanDirection_4" style="width:45%;margin:3px;">#dict("LOAN_DIRECTION_LEVEL_4",$!circle.loanDirection_4)</select>
+              	1:<select readonly id="loanDirection_1" name="loanDirection_1" style="width:45%;margin:3px;" onchange="change_loanDirection_1(this.value);">#dict("LOAN_DIRECTION_LEVEL_1",$!circle.loanDirection_1)</select>
+              	2:<select readonly id="loanDirection_2" name="loanDirection_2" style="width:45%;margin:3px;" onchange="change_loanDirection_2(this.value);">#dict("LOAN_DIRECTION_LEVEL_2",$!circle.loanDirection_2)</select>
+              	3:<select readonly id="loanDirection_3" name="loanDirection_3" style="width:45%;margin:3px;" onchange="change_loanDirection_3(this.value);">#dict("LOAN_DIRECTION_LEVEL_3",$!circle.loanDirection_3)</select>
+              	4:<select readonly id="loanDirection_4" name="loanDirection_4" style="width:45%;margin:3px;">#dict("LOAN_DIRECTION_LEVEL_4",$!circle.loanDirection_4)</select>
               </td>
             </tr>
 			<tr>
               <td><label>贷款归属1:</label></td>
               <td>
-              	1:<select disabled id="loanBelong1_1" name="loanBelong1_1" style="width:28%;margin:2px;" onchange="change_loanBelong1_1(this.value);">#dict("LOAN_BELONG1_LEVEL_1", $!circle.loanBelong1_1)</select>
-              	2:<select disabled id="loanBelong1_2" name="loanBelong1_2" style="width:28%;margin:2px;" onchange="change_loanBelong1_2(this.value);">#dict("LOAN_BELONG1_LEVEL_2", $!circle.loanBelong1_2)</select>
-              	3:<select disabled id="loanBelong1_3" name="loanBelong1_3" style="width:28%;margin:2px;" onchange="change_loanBelong1_3(this.value);">#dict("LOAN_BELONG1_LEVEL_3", $!circle.loanBelong1_3)</select>
-              	4:<select disabled id="loanBelong1_4" name="loanBelong1_4" style="width:28%;margin:2px;" onchange="change_loanBelong1_4(this.value);">#dict("LOAN_BELONG1_LEVEL_4", $!circle.loanBelong1_4)</select>
-              	5:<select disabled id="loanBelong1_5" name="loanBelong1_5" style="width:28%;margin:2px;">#dict("LOAN_BELONG1_LEVEL_5", $!circle.loanBelong1_5)</select>
+              	1:<select readonly id="loanBelong1_1" name="loanBelong1_1" style="width:28%;margin:2px;" onchange="change_loanBelong1_1(this.value);">#dict("LOAN_BELONG1_LEVEL_1", $!circle.loanBelong1_1)</select>
+              	2:<select readonly id="loanBelong1_2" name="loanBelong1_2" style="width:28%;margin:2px;" onchange="change_loanBelong1_2(this.value);">#dict("LOAN_BELONG1_LEVEL_2", $!circle.loanBelong1_2)</select>
+              	3:<select readonly id="loanBelong1_3" name="loanBelong1_3" style="width:28%;margin:2px;" onchange="change_loanBelong1_3(this.value);">#dict("LOAN_BELONG1_LEVEL_3", $!circle.loanBelong1_3)</select>
+              	4:<select readonly id="loanBelong1_4" name="loanBelong1_4" style="width:28%;margin:2px;" onchange="change_loanBelong1_4(this.value);">#dict("LOAN_BELONG1_LEVEL_4", $!circle.loanBelong1_4)</select>
+              	5:<select readonly id="loanBelong1_5" name="loanBelong1_5" style="width:28%;margin:2px;">#dict("LOAN_BELONG1_LEVEL_5", $!circle.loanBelong1_5)</select>
               </td>
 			  <td><label>贷款归属2:</label></td>
-              <td><select name="loanBelong2" disabled >#dict("LOAN_BELONG2", $!circle.loanBelong2)</select></td>
+              <td><select name="loanBelong2" readonly >#dict("LOAN_BELONG2", $!circle.loanBelong2)</select></td>
             </tr>
 			<tr>
               <td><label>贷款归属3:</label></td>
-              <td><select name="loanBelong3" disabled >#dict("LOAN_BELONG3", $!circle.loanBelong3)</select></td>
+              <td><select name="loanBelong3" readonly >#dict("LOAN_BELONG3", $!circle.loanBelong3)</select></td>
 			  <td><label>贷款归属4:</label></td>
-              <td><select name="loanBelong4" disabled >#dict("LOAN_BELONG4", $!circle.loanBelong4)</select></td>
+              <td><select name="loanBelong4" readonly >#dict("LOAN_BELONG4", $!circle.loanBelong4)</select></td>
             </tr>
 			<tr>
               <td><label>管理机构:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="manaOrg" value="$!circle.manaOrg" readonly style="color:#000000" /></td>
 			  <td><label>主管客户经理:</label></td>
-              <td><select name="chiCustManager" disabled >#dict("IS_MAIN_MANAGER", $!circle.chiCustManager)</select></td>
+              <td><select name="chiCustManager" readonly >#dict("IS_MAIN_MANAGER", $!circle.chiCustManager)</select></td>
             </tr>
 		  </table>
 		  <table class="rule myTable" bordercolor="#cccccc" border="1">
@@ -267,85 +298,87 @@
             </tr>
 			<tr>
               <td><label>性别:</label></td>
-              <td><select id="sex" name="sex" disabled >#dict("INDIV_SEX", $!circle.sex)</select></td>
+              <td><select id="sex" name="sex" readonly >#dict("INDIV_SEX", $!circle.sex)</select></td>
 			  <td><label>客户类型:</label></td>
-              <td><select id="clientType" name="clientType" disabled >#dict("CLIENT_TYPE", $!circle.clientType)</select></td>
+              <td><select id="clientType" name="clientType" readonly >#dict("CLIENT_TYPE", $!circle.clientType)</select></td>
             </tr>
 			<tr>
               <td><label>证件类型:</label><font color="#ff0000">*</font></td>
-              <td><select id="globalType" name="globalType" disabled >#dict("CERT_TYPE", $!circle.globalType)</select></td>
+              <td><select id="globalType" name="globalType" readonly >#dict("CERT_TYPE", $!circle.globalType)</select></td>
 			  <td><label>证件号码:</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="globalId" name="globalId" value="$!circle.globalId" readonly style="color:#000000" /></td>
             </tr>
 			<tr>
               <td><label>长期证件标志:</label></td>
+<<<<<<< HEAD
               <td><select id="longGlobalType" name="longGlobalType" disabled >#dict("IS_LONG_INDIV", $!circle.longGlobalType)</select></td>  
+=======
+              <td><select id="longGlobalType" name="longGlobalType" readonly >#dict("IS_LONG_INDIV", $!circle.longGlobalType)</select></td>  
+>>>>>>> chinhBy-master
 			  <td><label>签发日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="issDate" name="issDate" value="$date.format('yyyy-MM-dd', $!circle.issDate)" disabled onmouseover="_calendar()"/></td>
+              <td><input type="text" id="issDate" name="issDate" value="$date.format('yyyy-MM-dd', $!circle.issDate)" readonly onmouseover="_calendar()"/></td>
             </tr>
 			<tr>
               <td><label>证件有效日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="globalEffDate" name="globalEffDate" value="$date.format('yyyy-MM-dd', $!circle.globalEffDate)" disabled onmouseover="_calendar()"/></td>
+              <td><input type="text" id="globalEffDate" name="globalEffDate" value="$date.format('yyyy-MM-dd', $!circle.globalEffDate)" readonly onmouseover="_calendar()"/></td>
 			  <td><label>农户标识:</label></td>
-              <td><select id="agriFlag" name="agriFlag" disabled >#dict("AGRI_FLG", $!circle.agriFlag)</select></td>
+              <td><select id="agriFlag" name="agriFlag" readonly >#dict("AGRI_FLG", $!circle.agriFlag)</select></td>
             </tr>
 			<tr>
               <td><label>国家代码:</label></td>
-              <td><select id="countryCode" name="countryCode" disabled >#dict("CUS_COUNTRY", $!circle.countryCode)</select></td>
+              <td><select id="countryCode" name="countryCode" readonly >#dict("CUS_COUNTRY", $!circle.countryCode)</select></td>
 			  <td><label>民族代码:</label></td>
-              <td><select id="nationalityCode" name="nationalityCode" disabled >#dict("NATIONALITY_CODE", $!circle.nationalityCode)</select></td>
+              <td><select id="nationalityCode" name="nationalityCode" readonly >#dict("NATIONALITY_CODE", $!circle.nationalityCode)</select></td>
             </tr>
             <tr>
               <td><label>户籍所在地:</label></td>
               <td>
-             		1:<select disabled id="regPermResidence_1" name="regPermResidence_1" style="width:28%;margin:2px;" onchange="change_regPermResidence_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!circle.regPermResidence_1)</select>
-             		2:<select disabled id="regPermResidence_2" name="regPermResidence_2" style="width:28%;margin:2px;" onchange="change_regPermResidence_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!circle.regPermResidence_2)</select>
-             		3:<select disabled id="regPermResidence_3" name="regPermResidence_3" style="width:28%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!circle.regPermResidence_3)</select>
+             		1:<select readonly id="regPermResidence_1" name="regPermResidence_1" style="width:28%;margin:2px;" onchange="change_regPermResidence_1(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_1", $!circle.regPermResidence_1)</select>
+             		2:<select readonly id="regPermResidence_2" name="regPermResidence_2" style="width:28%;margin:2px;" onchange="change_regPermResidence_2(this.value);">#dict("INDIV_BRT_PLACE_LEVEL_2", $!circle.regPermResidence_2)</select>
+             		3:<select readonly id="regPermResidence_3" name="regPermResidence_3" style="width:28%;margin:2px;">#dict("INDIV_BRT_PLACE_LEVEL_3", $!circle.regPermResidence_3)</select>
               </td>
 			  <td><label>地址:</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="address" name="address" value="$!circle.address" readonly style="color:#000000" /></td>
             </tr>
 			<tr>
               <td><label>出生日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="birthDate" name="birthDate" value="$date.format('yyyy-MM-dd', $!circle.birthDate)" disabled onmouseover="_calendar()"/></td>
+              <td><input type="text" id="birthDate" name="birthDate" value="$date.format('yyyy-MM-dd', $!circle.birthDate)" readonly onmouseover="_calendar()"/></td>
 			  <td><label>最高学历:</label></td>
-              <td><select id="education" name="education" disabled >#dict("INDIV_EDT", $!circle.education)</select></td>
+              <td><select id="education" name="education" readonly >#dict("INDIV_EDT", $!circle.education)</select></td>
             </tr>
 			<tr>
               <td><label>最高学位:</label></td>
-              <td><select id="degree" name="degree" disabled >#dict("INDIV_DGR", $!circle.degree)</select></td>
-			  <td><label>签约日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" id="signDate" name="signDate" value="$date.format('yyyy-MM-dd', $!circle.signDate)" disabled onmouseover="_calendar()"/></td>
+              <td><select id="degree" name="degree" readonly >#dict("INDIV_DGR", $!circle.degree)</select></td>
             </tr>
 			<tr>
               <td><label>持卡情况:</label></td>
-              <td><select id="holdCardMsg" name="holdCardMsg" disabled >#dict("HOLD_CARD", $!circle.holdCardMsg)</select></td>
+              <td><select id="holdCardMsg" name="holdCardMsg" readonly >#dict("HOLD_CARD", $!circle.holdCardMsg)</select></td>
 			  <td><label>是否拥有外国护照或居住权:</label></td>
-              <td><select id="passportFlag" name="passportFlag" disabled >#dict("PASSPORT_FLG", $!circle.passportFlag)</select></td>
+              <td><select id="passportFlag" name="passportFlag" readonly >#dict("PASSPORT_FLG", $!circle.passportFlag)</select></td>
             </tr>
 			<tr>
               <td><label>信用等级:</label></td>
-              <td><select id="creditLevel" name="creditLevel" disabled >#dict("CUS_CRD_GRADE", $!circle.creditLevel)</select></td>
+              <td><select id="creditLevel" name="creditLevel" readonly >#dict("CUS_CRD_GRADE", $!circle.creditLevel)</select></td>
 			  <td><label>信用到期日期:</label></td>
               <td>
               #if($!circle.expiryDate == $null)
-              <input type="text" id="expiryDate" name="expiryDate" disabled onmouseover="_calendar()"/>
+              <input type="text" id="expiryDate" name="expiryDate" readonly onmouseover="_calendar()"/>
               #else
-              <input type="text" id="expiryDate" name="expiryDate" value="$date.format('yyyy-MM-dd', $!circle.expiryDate)" disabled onmouseover="_calendar()"/>
+              <input type="text" id="expiryDate" name="expiryDate" value="$date.format('yyyy-MM-dd', $!circle.expiryDate)" readonly onmouseover="_calendar()"/>
               #end
               </td>
             </tr>
 			<tr>
               <td><label>是否关联客户:</label></td>
-              <td><select id="relClientFlag" name="relClientFlag" disabled >#dict("IS_RELA_CUST", $!circle.relClientFlag)</select></td>
+              <td><select id="relClientFlag" name="relClientFlag" readonly >#dict("IS_RELA_CUST", $!circle.relClientFlag)</select></td>
 			  <td><label>与我行关系:</label></td>
-              <td><select id="ownBranchRelation" name="ownBranchRelation" disabled >#dict("CUS_BANK_REL", $!circle.ownBranchRelation)</select></td>
+              <td><select id="ownBranchRelation" name="ownBranchRelation" readonly >#dict("CUS_BANK_REL", $!circle.ownBranchRelation)</select></td>
             </tr>
 			<tr>
               <td><label>我行职务:</label></td>
-              <td><select id="post" name="post" disabled >#dict("BANK_DUTY", $!circle.post)</select></td>
+              <td><select id="post" name="post" readonly >#dict("BANK_DUTY", $!circle.post)</select></td>
 			  <td><label>贷款卡标识:</label></td>
-              <td><select id="loanCardFlag" name="loanCardFlag" disabled >#dict("LOAN_CARD_FLG", $!circle.loanCardFlag)</select></td>
+              <td><select id="loanCardFlag" name="loanCardFlag" readonly >#dict("LOAN_CARD_FLG", $!circle.loanCardFlag)</select></td>
             </tr>
 			<tr>
               <td><label>贷款卡号:</label></td>
@@ -361,7 +394,9 @@
             </tr>
 			<tr>
               <td><label>开户日期:</label><font color="#ff0000">*</font></td>
-              <td colspan="3"><input type="text" id="openAcctDate" name="openAcctDate" value="$!date.format('yyyy-MM-dd', $!circle.openAcctDate)" disabled onmouseover="_calendar()"/></td>
+              <td><input type="text" id="openAcctDate" name="openAcctDate" value="$!date.format('yyyy-MM-dd', $!circle.openAcctDate)" readonly onmouseover="_calendar()"/></td>
+              <td><label>签约日期:</label><font color="#ff0000">*</font></td>
+              <td><input type="text" id="signDate" name="signDate" value="$date.format('yyyy-MM-dd', $!circle.signDate)" readonly onmouseover="_calendar()"/></td>
             </tr>
 		  </table>
 		  <!--<table class="rule myTable" bordercolor="#cccccc" border="1">
@@ -374,7 +409,7 @@
             </colgroup>
 			<tr>
               <td><label>币种:</label></td>
-              <td><select name="feeCcy" disabled >#dict("CONT_CUR_TYPE", $!circle.feeCcy)</select></td>
+              <td><select name="feeCcy" readonly >#dict("CONT_CUR_TYPE", $!circle.feeCcy)</select></td>
 			  <td><label>费用金额(元):</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="feeAmount" value="$!circle.feeAmount" readonly style="color:#000000" /></td>
             </tr>
@@ -439,7 +474,11 @@
 			<div class="content" style="height:100px;padding-top:15px;">
 				<p>
 					退回至哪一个岗:<font color="red">*</font>
+<<<<<<< HEAD
 					<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
+=======
+					<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
+>>>>>>> chinhBy-master
 					退件原因:<font color="red">*</font>
 					<textarea name="remark" rows="2" style="width: 300px;"></textarea>
 				</p>
@@ -478,7 +517,11 @@
 				<div class="content" style="height:100px;padding-top:15px;">
 					<p>
 						退回至哪一个岗:<font color="red">*</font>
+<<<<<<< HEAD
 						<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
+=======
+						<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
+>>>>>>> chinhBy-master
 						退件原因:<font color="red">*</font>
 						<textarea name="remark" rows="2" style="width:300px;"></textarea>
 					</p>
@@ -500,7 +543,11 @@
 				<div class="content" style="height:100px;padding-top:15px;">
 					<p>
 						退回至哪一个岗:<font color="red">*</font>
+<<<<<<< HEAD
 						<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
+=======
+						<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
+>>>>>>> chinhBy-master
 						退件原因:<font color="red">*</font>
 						<textarea name="remark" rows="2" style="width:300px;"></textarea>
 					</p>
@@ -511,6 +558,7 @@
 				</div>
 			</form>
 		</div>
+		
       <div class="submit controlbtn">
 	      #if($!operate=="初审")
 	      	<a id="id_chushen_button" class="btn_g" >审批</a>
@@ -552,6 +600,7 @@
 					var formjson = $($formName).serialize();
 					 var url = $($formName).attr("action");
 		   	        	$.ajax({
+		   	        		timeout : 500,
 							url : url,
 							type : "get",
 							data : formjson,
@@ -576,6 +625,7 @@
 					#set ($formName = "'#checkForm'")
 					var formjson = $($formName).serialize();
 						 $.ajax({
+							    timeout : 500,
 								url : "${contextPath}/intopieces/intopiecesrecieve/checkDoNot.json",
 								type : "get",
 								data : formjson,
@@ -606,6 +656,7 @@
 					#set ($formName = "'#checkForm'")
 					var formjson = $($formName).serialize();
 					 $.ajax({
+						    timeout : 1000,
 							url : "${contextPath}/intopieces/intopiecesrecieve/reject.json",
 							type : "get",
 							data : formjson,
@@ -630,6 +681,7 @@
            	    function() {
 	              	var url = "${contextPath}/intopieces/intopiecesxingzheng1/save_apply.json?id=${appId}";
 	 	        	$.ajax({
+	 	            timeout : 500,
 					url : url,
 					type : "get",
 					success : function(data) {
@@ -653,6 +705,7 @@
 			    			#set ($formName = "'#checkForm1'")
 			    			var formjson = $($formName).serialize();
 		    				 $.ajax({
+		    					    timeout : 500,
 									url : "${contextPath}/intopieces/intopiecesxingzheng1/returnAppln.json",
 									type : "get",
 									data : formjson,
@@ -681,6 +734,7 @@
 	            Dialog.confirm("确定提交吗？", "提示",
 	            	    function() {
 			                $.ajax({
+			                	timeout : 500,
 								url : "${contextPath}/intopieces/intopiecesshouxin/pass.json?id=${appId}",
 								type : "get",
 								success : function(data) {
@@ -704,6 +758,7 @@
 					#set ($formName = "'#checkForm3'")
 					var formjson = $($formName).serialize();
 						 $.ajax({
+							 	timeout : 500,
 								url : "${contextPath}/intopieces/intopiecesshouxin/returnAppln.json",
 								type : "get",
 								data : formjson,
@@ -784,17 +839,18 @@
                 Dialog.confirm("确定提交吗？", "提示",
                 	    function() {
                				url="${contextPath}/intopieces/intopiecesxingzheng2/save_apply.json?id=${appId}";
-			                $.ajax({
+			                $.ajax({ 
+			                	timeout : 500,
 								url : url,
 								type : "get",
 								success : function(data) {
 									if (data.success) {
-										topWin.Dialog.message("审批成功!");	
+										topWin.Dialog.message(data.retMsg);	
 						            	var url = "${contextPath}${returnUrl}";
 						                parent.location.href = url;
 									}
 									else{
-										topWin.Dialog.message("审批失败！");
+										topWin.Dialog.message(data.retMsg);
 								    }
 									submitFlag = 0;
 								}
@@ -813,23 +869,28 @@
 					#set ($formName = "'#checkForm4'")
 					var formjson = $($formName).serialize();
 					 $.ajax({
+						 	timeout : 500,
 							url : "${contextPath}/intopieces/intopiecesxingzheng2/returnAppln.json",
 							type : "get",
 							data : formjson,
 							success : function(data) {
 								if (data.success) {
-									topWin.Dialog.message("保存成功!");	
+									topWin.Dialog.message("退回成功");	
 					            	var url = "${contextPath}${returnUrl}";
 					                parent.location.href = url;
 								}
 								else{
-									topWin.Dialog.message("保存失败！");
+									topWin.Dialog.message("退回失败");
 							    }
 							}
 					}); 
 			});
 		});
 		
+<<<<<<< HEAD
+=======
+		
+>>>>>>> chinhBy-master
 		//判断级联是否为null
 		if("$!circle.loanKind_2" == ""){
 			$("#loanKind_2").empty();

@@ -126,6 +126,11 @@
 	    <result property="clientName" column="CLIENT_NAME" />
 	    <result property="contractAmt" column="CONTRACT_AMT" />
 	    <result property="globalId" column="GLOBAL_ID" />
+	    
+	    <result property="retMsg" column="RET_MSG" />
+	    <result property="retCode" column="RET_CODE" />
+	    <result property="retContno" column="RET_CONTNO" />
+	    <result property="loanStatus" column="LOAN_STATUS" />
 	</resultMap>
 	
 	<select id="findCircle" resultMap="ResultMap">
@@ -213,4 +218,15 @@
 			AND GLOBAL_ID=#{globalId}
 		</if>
 	</select>
+<<<<<<< HEAD
+=======
+	
+	<select id="findCircleByClientNoAndContNo" resultMap="ResultMap">
+		select 
+		*
+		from QZ_IESB_FOR_CIRCLE
+		where client_no  = #{clientNo}
+		and ret_contno = #{retContNo}
+	</select>
+>>>>>>> chinhBy-master
 </mapper> 
