@@ -288,25 +288,6 @@ public class IntoPiecesShouxinControl extends BaseController {
 	public JRadReturnMap returnAppln(HttpServletRequest request) throws SQLException {
 		JRadReturnMap returnMap = new JRadReturnMap();
 		try {
-<<<<<<< HEAD
-			int nodeNo=0;//授信审核
-			String appId = request.getParameter("appId");
-			String operate = request.getParameter("operate");
-			String nodeName = request.getParameter("nodeName");
-			if("授信审批".equals(operate)){
-				nodeNo = 4;
-			}else{//中心复核
-				nodeNo = 5;
-			}
-			if(Integer.parseInt(nodeName) > nodeNo){
-				returnMap.put(JRadConstants.SUCCESS, false);
-				returnMap.put(JRadConstants.MESSAGE, "退回进件不能退回至当前节点的后面~！");
-			}
-			if("1".equals(nodeName)){
-				intoPiecesService.checkDoNotToManager(appId,request,Integer.parseInt(nodeName),nodeNo);
-			}else{
-				intoPiecesService.returnAppln(appId, request,Integer.parseInt(nodeName),nodeNo);
-=======
 			int nodeNo=0;//授信审核	
 			String appId = request.getParameter("appId");
 			String operate = request.getParameter("operate");
@@ -316,7 +297,6 @@ public class IntoPiecesShouxinControl extends BaseController {
 				intoPiecesService.checkDoNotToManager(appId,request);
 			}else{
 				intoPiecesService.returnAppln(appId, request,nodeName);
->>>>>>> chinhBy-master
 			}
 			returnMap.addGlobalMessage(CHANGE_SUCCESS);
 		} catch (Exception e) {

@@ -1720,11 +1720,6 @@
 	</dictionary>
 	
 	<dictionary name="REPAYMENT_TERM" title="还款期限">
-<<<<<<< HEAD
-	    <item name="3" title="3" />
-	    <item name="6" title="6" />
-	    <item name="9" title="9" />
-=======
 	    <item name="1" title="1" />
 	    <item name="2" title="2" />
 	    <item name="3" title="3" />
@@ -1732,25 +1727,10 @@
 	    <item name="8" title="8" />
 	    <item name="9" title="9" />
 	    <item name="10" title="10" />
->>>>>>> chinhBy-master
 	    <item name="12" title="12" />
 	    <item name="15" title="15" />
 
 	</dictionary>
-	
-<<<<<<< HEAD
-	<dictionary name="NODE_LIST" title="进件流程节点">
-	    <item name="1" title="客户经理" />
-	    <item name="2" title="初审" />
-	    <item name="3" title="内部审查" />
-	    <item name="4" title="授信审批" />
-	    <item name="5" title="中心复核" />
-	    <item name="6" title="填写合同信息" />
-
-	</dictionary>
-	
-=======
->>>>>>> chinhBy-master
 	<dictionary name="UNIT_TYPE" title="公司类型">
 	    <item name="1" title="国有" />
 	    <item name="2" title="外商独资" />
@@ -1762,9 +1742,6 @@
 		<item name="8" title="国内上市公司" />
 		<item name="9" title="其他" />
 	</dictionary>
-<<<<<<< HEAD
-=======
-	
 	<dictionary name="LOAN_STATUS" title="台账状态">
 	    <item name="0" title="出帐未确认" />
 	    <item name="1" title="正常" />
@@ -1815,5 +1792,4 @@
 	    <item name="10" title="冻结" />
 	    <item name="30" title="终止" />
 	</dictionary>
->>>>>>> chinhBy-master
 </dictionaries>

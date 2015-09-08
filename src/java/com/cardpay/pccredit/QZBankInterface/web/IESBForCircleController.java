@@ -135,10 +135,7 @@ public class IESBForCircleController extends BaseController{
 		mv.addObject("appId",appId);
 		mv.addObject("returnUrl",intoPiecesService.getReturnUrl(operate));
 		mv.addObject("ifHideUser", ifHideUser);
-<<<<<<< HEAD
-=======
 		mv.addObject("nodeId", process==null?"":process.getNextNodeId());
->>>>>>> chinhBy-master
 		return mv;
 	}
 	

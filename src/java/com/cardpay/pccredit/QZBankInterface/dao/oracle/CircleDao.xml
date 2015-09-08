@@ -218,8 +218,6 @@
 			AND GLOBAL_ID=#{globalId}
 		</if>
 	</select>
-<<<<<<< HEAD
-=======
 	
 	<select id="findCircleByClientNoAndContNo" resultMap="ResultMap">
 		select 
@@ -228,5 +226,4 @@
 		where client_no  = #{clientNo}
 		and ret_contno = #{retContNo}
 	</select>
->>>>>>> chinhBy-master
 </mapper> 

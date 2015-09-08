@@ -82,15 +82,9 @@
             #if($!operate =='中心终审')
             <tr>
             #elseif($!operate =='进件查询')
-<<<<<<< HEAD
             <tr>
             #elseif($!operate =='卡中心进件查询')
             <tr>
-=======
-            <tr>
-            #elseif($!operate =='卡中心进件查询')
-            <tr>
->>>>>>> chinhBy-master
             #else
             <tr style="display: none;">
             #end
@@ -102,15 +96,9 @@
             #if($!operate=='中心终审')
             <tr>
             #elseif($!operate =='进件查询')
-<<<<<<< HEAD
             <tr>
             #elseif($!operate =='卡中心进件查询')
             <tr>
-=======
-            <tr>
-            #elseif($!operate =='卡中心进件查询')
-            <tr>
->>>>>>> chinhBy-master
             #else
             <tr style="display: none;">
 			#end
@@ -134,16 +122,6 @@
             <tr style="display: ;">
             #if($!circle.startDate == $null)
 			  <td><label>授信起始日期:</label><font color="#ff0000">*</font></td>
-<<<<<<< HEAD
-              <td><input type="text" name="startDate" onmouseover="_calendar()" value="" disabled /></td>
-			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="endDate" onmouseover="_calendar()" value="" disabled /></td>
-              #else
-              <td><label>授信起始日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="startDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.startDate)" disabled /></td>
-			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
-              <td><input type="text" name="endDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.endDate)" disabled /></td>
-=======
               <td><input type="text" name="startDate" onmouseover="_calendar()" value="" readonly /></td>
 			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="endDate" onmouseover="_calendar()" value="" readonly /></td>
@@ -152,7 +130,6 @@
               <td><input type="text" name="startDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.startDate)" readonly /></td>
 			  <td><label>授信结束日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="endDate" onmouseover="_calendar()" value="$date.format('yyyy-MM-dd', $!circle.endDate)" readonly /></td>
->>>>>>> chinhBy-master
               #end
             </tr>
             <tr>
@@ -181,11 +158,7 @@
             </tr>
 			<tr>
               <td><label>顺延标志:</label></td>
-<<<<<<< HEAD
-              <td><select name="deferFlag" disabled>#dict("IS_DELAY", $!circle.deferFlag)</select></td>
-=======
               <td><select name="deferFlag" readonly>#dict("IS_DELAY", $!circle.deferFlag)</select></td>
->>>>>>> chinhBy-master
 			  <td><label>年执行利率(%):</label><font color="#ff0000">*</font></td>
               <td><input type="text" name="actIntRate" value="$!circle.actIntRate" readonly style="color:#000000" /></td>
             </tr>
@@ -244,11 +217,7 @@
             </tr>
 			<tr>
               <td><label>新兴产业贷款:</label></td>
-<<<<<<< HEAD
-              <td><select name="newPrdLoan" disabled>#dict("NEW_PRD_LOAN", $!circle.newPrdLoan)</select></td>
-=======
               <td><select name="newPrdLoan" readonly>#dict("NEW_PRD_LOAN", $!circle.newPrdLoan)</select></td>
->>>>>>> chinhBy-master
 			  <td><label>贷款投向:</label></td>
               <td>
               	1:<select readonly id="loanDirection_1" name="loanDirection_1" style="width:45%;margin:3px;" onchange="change_loanDirection_1(this.value);">#dict("LOAN_DIRECTION_LEVEL_1",$!circle.loanDirection_1)</select>
@@ -310,11 +279,7 @@
             </tr>
 			<tr>
               <td><label>长期证件标志:</label></td>
-<<<<<<< HEAD
-              <td><select id="longGlobalType" name="longGlobalType" disabled >#dict("IS_LONG_INDIV", $!circle.longGlobalType)</select></td>  
-=======
               <td><select id="longGlobalType" name="longGlobalType" readonly >#dict("IS_LONG_INDIV", $!circle.longGlobalType)</select></td>  
->>>>>>> chinhBy-master
 			  <td><label>签发日期:</label><font color="#ff0000">*</font></td>
               <td><input type="text" id="issDate" name="issDate" value="$date.format('yyyy-MM-dd', $!circle.issDate)" readonly onmouseover="_calendar()"/></td>
             </tr>
@@ -474,11 +439,7 @@
 			<div class="content" style="height:100px;padding-top:15px;">
 				<p>
 					退回至哪一个岗:<font color="red">*</font>
-<<<<<<< HEAD
-					<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
-=======
 					<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
->>>>>>> chinhBy-master
 					退件原因:<font color="red">*</font>
 					<textarea name="remark" rows="2" style="width: 300px;"></textarea>
 				</p>
@@ -517,11 +478,7 @@
 				<div class="content" style="height:100px;padding-top:15px;">
 					<p>
 						退回至哪一个岗:<font color="red">*</font>
-<<<<<<< HEAD
-						<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
-=======
 						<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
->>>>>>> chinhBy-master
 						退件原因:<font color="red">*</font>
 						<textarea name="remark" rows="2" style="width:300px;"></textarea>
 					</p>
@@ -543,11 +500,7 @@
 				<div class="content" style="height:100px;padding-top:15px;">
 					<p>
 						退回至哪一个岗:<font color="red">*</font>
-<<<<<<< HEAD
-						<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
-=======
 						<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false,$nodeId)</select><br>
->>>>>>> chinhBy-master
 						退件原因:<font color="red">*</font>
 						<textarea name="remark" rows="2" style="width:300px;"></textarea>
 					</p>
@@ -887,10 +840,6 @@
 			});
 		});
 		
-<<<<<<< HEAD
-=======
-		
->>>>>>> chinhBy-master
 		//判断级联是否为null
 		if("$!circle.loanKind_2" == ""){
 			$("#loanKind_2").empty();

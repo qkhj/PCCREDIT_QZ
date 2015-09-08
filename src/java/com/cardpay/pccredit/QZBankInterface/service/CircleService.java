@@ -136,14 +136,6 @@ public class CircleService {
 			commonDao.insertObject(acct_Info1);
 			commonDao.insertObject(acct_Info2);
 			//commonDao.insertObject(fee_Acct_Info);
-<<<<<<< HEAD
-			return true;
-		}
-		else{
-			return false;
-=======
-			
->>>>>>> chinhBy-master
 		}
 		return res;
 	}
@@ -178,12 +170,9 @@ public class CircleService {
 	public List<Circle> findCircleByCardNo(String cardno) {
 		return circleDao.findCircleByCardNo(cardno);
 	}
-<<<<<<< HEAD
-=======
 	
 	//按照客户号号和合同号查询贷款记录
 	public Circle findCircleByClientNoAndContNo(String clientNo,String retContNo){
 		return circleDao.findCircleByClientNoAndContNo(clientNo, retContNo);
 	}
->>>>>>> chinhBy-master
 }

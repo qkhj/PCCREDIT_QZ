@@ -107,14 +107,10 @@ public @interface JRadOperation {
 	
 	public static final long SCAN = 1099511627776L;//影像补扫 
 	
-<<<<<<< HEAD
-=======
 	public static final long FREEZE = 2199023255552L;
 	
 	public static final long THAW = 4398046511104L;
 	
 	public static final long CONTEND = 8796093022208L;
-	
->>>>>>> chinhBy-master
 	
 }

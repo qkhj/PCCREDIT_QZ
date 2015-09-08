@@ -360,12 +360,11 @@ public class IntoPiecesComdao {
 		sql.append("(SELECT * FROM WF_STATUS_QUEUE_RECORD WHERE EXAMINE_USER = #{userId}) wsqr ");
 		sql.append("LEFT JOIN ( SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status, T.SERIAL_NUMBER ,T.Created_Time ");
 		sql.append("FROM customer_application_info T inner JOIN basic_customer_information b ON T .customer_id = b. ID ");
-<<<<<<< HEAD
-=======
+
 		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
 		sql.append(") cai ");
 		sql.append("ON wsqr.CURRENT_PROCESS = CAI.SERIAL_NUMBER where 1=1 ");
->>>>>>> chinhBy-master
+		
 		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
 			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
 			    sql.append(" and (cai.card_id like '%"+cardId+"%' or cai.chinese_name like '%"+chineseName+"%' )");
@@ -379,13 +378,10 @@ public class IntoPiecesComdao {
 		}
 		sql.append("union ");
 		sql.append("SELECT T.ID, T.customer_id, b.chinese_name, T.product_id, b.card_id, circle.CONTRACT_AMT as apply_quota, T.status, T.Created_Time ");
-<<<<<<< HEAD
-		sql.append("FROM customer_application_info T LEFT JOIN basic_customer_information b ON T .customer_id = b. ID ");
-=======
 		sql.append("FROM customer_application_info T inner JOIN basic_customer_information b ON T .customer_id = b. ID ");
 		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
 		sql.append("where b.user_id = #{userId} ");
->>>>>>> chinhBy-master
+		sql.append("or b.user_id in (select t.child_id from manager_belong_map t left join account_manager_parameter amp on amp.id = t.child_id where amp.user_id = #{userId})");
 		if(StringUtils.trimToNull(cardId)!=null||StringUtils.trimToNull(chineseName)!=null){
 			if(StringUtils.trimToNull(cardId)!=null&&StringUtils.trimToNull(chineseName)!=null){
 			    sql.append(" and (b.card_id like '%"+cardId+"%' or b.chinese_name like '%"+chineseName+"%' )");
@@ -397,11 +393,6 @@ public class IntoPiecesComdao {
 				sql.append(" and b.chinese_name like '%'||#{chineseName}||'%' ");
 			}
 		}
-<<<<<<< HEAD
-		sql.append("LEFT JOIN QZ_IESB_FOR_CIRCLE circle on T.id = circle.application_id ");
-		sql.append("where b.user_id = #{userId} ");
-=======
->>>>>>> chinhBy-master
 		//sql.append("order by created_time desc");
 		return commonDao.queryBySqlInPagination(IntoPieces.class, sql.toString(), params,
 				filter.getStart(), filter.getLimit());

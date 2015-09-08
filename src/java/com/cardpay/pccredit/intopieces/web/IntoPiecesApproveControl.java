@@ -327,11 +327,6 @@ public class IntoPiecesApproveControl extends BaseController {
 	 * 提交申请，开始流程
 	 * @param customer_id
 	 */
-<<<<<<< HEAD
-	public void saveApply(String customer_id){
-		//先判断是否为其他岗位退件的客户，如果是，只需改变状态不需再次新增申请件
-		CustomerApplicationInfo info = intoPiecesService.ifReturnToApprove(customer_id);
-=======
 	public void saveApply(String customer_id, String application_id, String type){
 		//查找默认产品
 		ProductFilter filter = new ProductFilter();
@@ -339,18 +334,13 @@ public class IntoPiecesApproveControl extends BaseController {
 		ProductAttribute productAttribute = productService.findProductsByFilter(filter).getItems().get(0);
 		//先判断是否为其他岗位退件的客户，如果是，只需改变状态不需再次新增申请件
 		CustomerApplicationInfo info = intoPiecesService.ifReturnToApproveByappId(application_id);
->>>>>>> chinhBy-master
 		String appId = "";
 		if(info!=null && info.getProductId().equalsIgnoreCase(productAttribute.getId())){//未修改产品 走原来审批 流程 
 			info.setStatus(Constant.APPROVE_INTOPICES);
 			
 			commonDao.updateObject(info);
 			appId = info.getId();
-<<<<<<< HEAD
-			//新增修改不是初审退下来的进件，流程信息要改为初审，不然进件重新申请回直接到退回的岗位？
-=======
 			//新增修改不是初审退下来或者更换了 产品类型 的进件，流程信息要改为初审，不然进件新增一个申请
->>>>>>> chinhBy-master
 		}else{
 			//新申请没有开始流程状态为暂保存
 			CustomerApplicationInfo cusInfo = intoPiecesService.ifReturnToApproveByappIdForNew(application_id);
@@ -581,15 +571,9 @@ public class IntoPiecesApproveControl extends BaseController {
 		
 		JRadModelAndView mv = null;
 		if(qzApplnYwsqb != null){
-<<<<<<< HEAD
-			//获取产品类型，是贷生活就调整至page1ForLife_change
-			if(qzappln_za_ywsqb_r != null){
-				if("2".equals(qzappln_za_ywsqb_r.getProductType())){
-=======
 			//获取产品类型，是贷生活或者安居贷就调整至page1ForLife_change
 			if(qzappln_za_ywsqb_r != null){
 				if("2".equals(qzappln_za_ywsqb_r.getProductType()) || "3".equals(qzappln_za_ywsqb_r.getProductType())){
->>>>>>> chinhBy-master
 					//获取专案信息
 					QzApplnZa qzApplnZa = zaService.findZaById(qzappln_za_ywsqb_r.getZaId());
 					mv = new JRadModelAndView("/qzbankinterface/appIframeInfo/page1ForLife_change", request);
@@ -612,11 +596,7 @@ public class IntoPiecesApproveControl extends BaseController {
 		else{
 			//获取产品类型，是贷生活就调整至page1ForLife
 			if(qzappln_za_ywsqb_r != null){
-<<<<<<< HEAD
-				if("2".equals(qzappln_za_ywsqb_r.getProductType())){
-=======
 				if("2".equals(qzappln_za_ywsqb_r.getProductType()) || "3".equals(qzappln_za_ywsqb_r.getProductType())){
->>>>>>> chinhBy-master
 					//获取专案信息
 					QzApplnZa qzApplnZa = zaService.findZaById(qzappln_za_ywsqb_r.getZaId());
 					mv = new JRadModelAndView("/qzbankinterface/appIframeInfo/page1ForLife", request);
@@ -731,10 +711,7 @@ public class IntoPiecesApproveControl extends BaseController {
 		if (returnMap.isSuccess()) {
 			try {
 				String customerId = request.getParameter("customerId");
-<<<<<<< HEAD
-=======
 				String appId = request.getParameter("appId");
->>>>>>> chinhBy-master
 				String bussAddDedail = qzApplnYwsqbForm.getBussdisAddDetail();
 				String bussDistrictAdd = qzApplnYwsqbForm.getBussdistrictAddress();
 				qzApplnYwsqbForm.setBussdistrictAddress(bussDistrictAdd+bussAddDedail);
@@ -744,11 +721,8 @@ public class IntoPiecesApproveControl extends BaseController {
 				User user = (User) Beans.get(LoginManager.class).getLoggedInUser(request);
 				qzApplnYwsqb.setCreatedBy(user.getId());
 				qzApplnYwsqb.setCreatedTime(new Date());
-<<<<<<< HEAD
-=======
 				//关联申请id
 				qzApplnYwsqb.setApplicationId(appId);
->>>>>>> chinhBy-master
 				//未填申请时 关联客户id
 				qzApplnYwsqb.setCustomerId(customerId);
 					
@@ -1499,24 +1473,6 @@ public class IntoPiecesApproveControl extends BaseController {
 				
 				//把获取的客户号存在库中
 				Circle circle = commonDao.findObjectById(Circle.class, circleId);
-<<<<<<< HEAD
-				if(circle != null){
-					circle.setaClientNo(resClientNo);
-					circleService.updateCustomerInforCircle(circle);
-				}
-				
-				if(clientName.equals(iesbForCircleForm.getClientName()) && golbalType.equals(iesbForCircleForm.getGlobalType())
-						&& golbalId.equals(iesbForCircleForm.getGlobalId())){
-					returnMap.put(JRadConstants.SUCCESS, true);
-					returnMap.addGlobalMessage("获取成功");
-					returnMap.put("resClientNo", resClientNo);
-					return returnMap;
-				}
-				returnMap.put(JRadConstants.SUCCESS, false);
-				returnMap.put("resClientNo", resClientNo);
-				returnMap.put("message", "请检查客户身份信息和名称是否一致~!");
-				return returnMap;
-=======
 				//modified by nihc 201050814 先获取客户号人工去判断客户号是否与开户 一致 
 //				if(clientName.equals(iesbForCircleForm.getClientName()) && golbalType.equals(iesbForCircleForm.getGlobalType())
 //						&& golbalId.equals(iesbForCircleForm.getGlobalId())){
@@ -1534,7 +1490,6 @@ public class IntoPiecesApproveControl extends BaseController {
 //				returnMap.put("resClientNo", resClientNo);
 //				returnMap.put("message", "请检查客户身份信息和名称是否一致~!");
 //				return returnMap;
->>>>>>> chinhBy-master
 			}
 			returnMap.put("message", "客户信息不存在 ~！");
 			returnMap.put(JRadConstants.SUCCESS, false);
@@ -1545,8 +1500,6 @@ public class IntoPiecesApproveControl extends BaseController {
 		}
 		return returnMap;
 	}
-<<<<<<< HEAD
-=======
 	
 	//查找该客户经理下的所有客户
 		@ResponseBody
@@ -1744,6 +1697,4 @@ public class IntoPiecesApproveControl extends BaseController {
 			returnMap.addGlobalError(CustomerInforConstant.CREATEERROR);
 			return returnMap;
 		}
-		
->>>>>>> chinhBy-master
 }

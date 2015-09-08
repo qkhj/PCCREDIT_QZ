@@ -61,29 +61,17 @@ public class IESBForED {
 
         //客户号
         Field CLIENT_NO=new Field(new FieldAttr(FieldType.FIELD_STRING, 50));
-<<<<<<< HEAD
-        CLIENT_NO.setValue("0000001052240009");//todo:传入客户号
-=======
         CLIENT_NO.setValue(clientNo);//todo:传入客户号
->>>>>>> chinhBy-master
         body_struct.addField("CLIENT_NO", CLIENT_NO);
         
         //操作类型
         Field OPERATION_TYPE=new Field(new FieldAttr(FieldType.FIELD_STRING, 10));
-<<<<<<< HEAD
-        OPERATION_TYPE.setValue("30");//todo:操作类型
-=======
         OPERATION_TYPE.setValue(operateType);//todo:操作类型
->>>>>>> chinhBy-master
         body_struct.addField("OPERATION_TYPE", OPERATION_TYPE);
         
         //关联卡号
         Field LOAN_CARD_NO=new Field(new FieldAttr(FieldType.FIELD_STRING, 30));
-<<<<<<< HEAD
-        LOAN_CARD_NO.setValue("6223700300000006303");//todo:传入关联卡号
-=======
         LOAN_CARD_NO.setValue(cardNo);//todo:传入关联卡号
->>>>>>> chinhBy-master
         body_struct.addField("LOAN_CARD_NO", LOAN_CARD_NO);
 
         //新增字段
@@ -104,27 +92,6 @@ public class IESBForED {
      * 解析CompositeData报文
      * @param cd
      */
-<<<<<<< HEAD
-    public static String parseCoreResponse(CompositeData cd) {
-    	if(cd == null){
-    		return null;
-    	}
-        CompositeData sysHead = cd.getStruct("SYS_HEAD");
-
-        //根据数组名称去获取数组
-        Array array = sysHead.getArray("RET");
-        
-        String RET_MSG = "";//交易返回信息
-        String RET_CODE = "";//交易返回码
-        
-        if(null != array && array.size() > 0){
-            int m = array.size();
-            CompositeData array_element = null;
-            for (int i = 0; i < m; i++) {
-                //数组中的元素也是CompositeData，这是固定的写法。根据游标就可以获取到数组中的所有元素
-                array_element = array.getStruct(i);
-
-=======
     public  Map parseCoreResponse(CompositeData cd) {
     	if(cd == null){
     		return null;
@@ -144,19 +111,12 @@ public class IESBForED {
             for (int i = 0; i < m; i++) {
                 //数组中的元素也是CompositeData，这是固定的写法。根据游标就可以获取到数组中的所有元素
                 array_element = array.getStruct(i);
-
->>>>>>> chinhBy-master
                 RET_MSG=array_element.getField("RET_MSG").strValue();
                 RET_CODE=array_element.getField("RET_CODE").strValue();
             }
         }
-<<<<<<< HEAD
-        
-        return RET_CODE;
-=======
         result.put("RET_MSG", RET_MSG);
         result.put("RET_CODE", RET_CODE);
         return result;
->>>>>>> chinhBy-master
     }
 }

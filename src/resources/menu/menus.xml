@@ -4,11 +4,7 @@
 		<menu id="010000" name="home" title="系统首页" url="/home.page" img="images/icon_4.png" operations=""/>
 		<menu id="030000" name="intopieces" title="进件管理" url="" img="images/icon_sys.gif" operations="">
 			<menu id="030010" name="intopiecesquery" title="进件查询" url="/intopieces/intopiecesquery/browse.page" img="" operations="create|addbatch|change|display|import|approveloguser|approvelog|browse|scan"/>
-<<<<<<< HEAD
-			<menu id="030011" name="intopiecesqueryAll" title="进件查询(中心岗)" url="/intopieces/intopiecesqueryAll/browseAll.page" img="" operations="browse"/>
-=======
 			<menu id="030011" name="intopiecesqueryAll" title="进件查询(中心岗)" url="/intopieces/intopiecesqueryAll/browseAll.page" img="" operations="browse|scan"/>
->>>>>>> chinhBy-master
 			<!-- <menu id="030070" name="circle" title="申请循环贷款" url="/intopieces/circle/browse.page" img="" operations="create|display|browse"/> -->
 			<!-- <menu id="030080" name="credit" title="申请传统贷款" url="/intopieces/credit/create.page" img="" operations="create|browse"/> 传统贷不在本系统操作 -->
 			<!-- <menu id="030003" name="intopiecessearch" title="查询进件" url="/intopieces/intopiecessearch/search.page" img="" operations="browse"></menu> -->
@@ -112,15 +108,6 @@
 		</menu>
 		
 		<menu id="100000" name="report" title="报表统计" url="" img="images/icon_sys.gif" operations="">
-<<<<<<< HEAD
-		    <menu id="100001" name="jfreestatus" title="客户经理进件状态报表" url="/report/cardmanagerdimension/report.page" img="" operations="browse"/>
-		    <menu id="100002" name="jfreeapprove" title="进件流程报表" url="/report/cardmanagerdimension/reportTip.page" img="" operations="browse"/>
-			<menu id="100010" name="cardmanagerdimension" title="客户经理发卡情况统计" url="/report/cardmanagerdimension/browse.page" img="" operations="browse"/>
-			<menu id="100020" name="cardorgdimension" title="支行发卡情况统计" url="/report/cardorgdimension/browse.page" img="" operations="browse"/>
-			<menu id="100030" name="acctmanagerdimension" title="客户经理透支情况统计" url="/report/acctmanagerdimension/browse.page" img="" operations="browse"/>
-			<menu id="100040" name="acctorgdimension" title="支行透支情况统计" url="/report/acctorgdimension/browse.page" img="" operations="browse"/>
-			<menu id="100041" name="intelligentcustomerreport" title="客户信息智能报表" url="/report/intelligentcustomerreport/browse.page" img="" operations="create|change|delete|display|browse"/>
-=======
 		    <menu id="100001" name="circlebilllist" title="贷款借据清单" url="/report/afteraccloanlist/browse.page" img="" operations="browse"/>
 		    <menu id="100002" name="circlebilllistAll" title="贷款借据清单(卡中心)" url="/report/afteraccloanlist/browseAll.page" img="" operations="browse"/>
 			<menu id="100010" name="loanoverdue" title="客户逾期清单" url="/report/loanoverdue/browse.page" img="" operations="browse"/>
@@ -128,7 +115,6 @@
 			<menu id="100030" name="afterLoancollect" title="贷款汇总查询" url="/report/afterLoancollect/browse.page" img="" operations="browse"/>
 			<menu id="100040" name="afterLoancollectAll" title="贷款汇总查询(卡中心)" url="/report/afterLoancollect/browseAll.page" img="" operations="browse"/>
 			<!-- <menu id="100041" name="intelligentcustomerreport" title="客户信息智能报表" url="/report/intelligentcustomerreport/browse.page" img="" operations="create|change|delete|display|browse"/>
->>>>>>> chinhBy-master
 			<menu id="100042" name="intelligentaccountreport" title="客户账户智能报表" url="/report/intelligentaccountreport/browse.page" img="" operations="create|change|delete|display|browse"/>
 			<menu id="100043" name="postloanmanagementdata" title="贷后管理数据" url="/report/postloanmanagementdata/browse.page" img="" operations="create|change|delete|display|browse"/>
 			<menu id="100050" name="creditpaymentmanagerdim" title="客户经理用信还款情况统计" url="/report/creditpaymentmanagerdim/browse.page" img="" operations="browse"/>

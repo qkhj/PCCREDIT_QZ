@@ -13,8 +13,6 @@
 		.dialog1 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
 		.dialog1 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
 		.dialog1 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
-<<<<<<< HEAD
-=======
 		.dialog5{position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(229,229,229,0.5);display:none;}
 		.dialog5 .dialog-box{width:400px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;margin:0 auto;margin-top:100px;padding:3px;}
 		.dialog5 .dialog-box .top{height:35px;background:url(${contextPath}/images/box_head_bg.png) repeat-x;line-height:35px;font-size:14px;padding-left:15px;font-weight:bold;}
@@ -37,8 +35,6 @@
 		.dialog6 .dialog-box .bottom .btn:hover{background:url(${contextPath}/images/icon_button_qx_hover.png) repeat-x;}
 		.dialog6 .dialog-box .bottom .btn-submit{background:url("${contextPath}/images/icon_button_normal.png") repeat-x;border:1px solid #2e84bb;}
 		.dialog6 .dialog-box .bottom .btn-submit:hover{background:url("${contextPath}/images/icon_button_hover.png") repeat-x;}
-		
->>>>>>> chinhBy-master
 </style>
 </head>
 <body>
@@ -422,11 +418,7 @@
 			<div class="content" style="height:100px;padding-top:15px;">
 				<p>
 					退回至哪一个岗:<font color="red">*</font>
-<<<<<<< HEAD
-					<select id="nodeName" name="nodeName">#dict("NODE_LIST", $!operate)</select><br>
-=======
 					<select id="nodeName" name="nodeName">#dict("NODE_LIST","",false, $nodeId)</select><br>
->>>>>>> chinhBy-master
 					退件原因:<font color="red">*</font>
 					<textarea name="remark" rows="2" style="width: 300px;"></textarea>
 				</p>
@@ -437,8 +429,6 @@
 			</div>
 		</form>
 	</div>
-<<<<<<< HEAD
-=======
 	<div class="dialog5">
 			<form id="checkForm5" class="dialog-box" style="height:200px;" action="${contextPath}/intopieces/intopiecesonelevel/returnAppln.json">
 				<input type="hidden" name="appId" id="appId" value="$!appId" />
@@ -482,18 +472,11 @@
 				</div>
 			</form>
 		</div>
-		
->>>>>>> chinhBy-master
       <div class="submit controlbtn">
          <a id="id_save_button" class="btn_g" >保存</a>
          #if($!operate=="填写合同信息" && $!circle.acctNo1 != $null)
          <a class="btn_g" id="id_zx_in_button">审批通过</a>
          #end
-<<<<<<< HEAD
-         #if($!operate=="填写合同信息")
-         <a class="btn_g" id="id_zx_return_button">退件</a>
-         <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
-=======
          #if($!operate=="一级审核")
 	    	<a id="id_in5_button" class="btn_g" >审批通过</a>
 	     #end
@@ -509,7 +492,6 @@
          #elseif($!operate=="二级审核")
          <a id="id_return6_button" class="btn_g" >退件</a>
          <a class="btn_gr" onclick="parent.location.href='${contextPath}${returnUrl}'">返回</a>
->>>>>>> chinhBy-master
          #else
          <a class="btn_gr" onclick="parent.location.href='${contextPath}/intopieces/intopiecesapprove/approve.page'">返回</a>
          #end 
@@ -855,8 +837,6 @@
 					}); 
 			});
 		});
-<<<<<<< HEAD
-=======
 		
 		/*一级审核操作*/
 		//通过
@@ -973,7 +953,6 @@
 					}); 
 			});
 		});
->>>>>>> chinhBy-master
 	});
 	
 	//级联菜单

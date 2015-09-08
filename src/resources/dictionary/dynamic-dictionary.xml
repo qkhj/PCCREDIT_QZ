@@ -248,7 +248,6 @@
 		and
 		Dict_Type = 'CMMSCCOM-单位性质分值'
 	</dictionary>
-	
 
 	<dictionary name="CUSTOMERMANAGER" title="客户经理" timeout="10000">
 		SELECT
@@ -266,6 +265,7 @@ WHERE
 AND A.USER_TYPE = '1'
 AND A.IS_DELETED = '0'
 	</dictionary>
+	
 	<dictionary name="ALLMANAGER" title="所有客户经理" timeout="10000">
 		SELECT
 		A ."ID" AS NAME,

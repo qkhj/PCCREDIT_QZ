@@ -20,13 +20,8 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				<tr>
 					<tr>
 					<td class="table-label">机构名称：</td>
-<<<<<<< HEAD
-					<td><input type="text" value="$!qzApplnYwsqb.orgName" name="orgName" disabled><input type="hidden" name="orgId" value="$!qzApplnYwsqb.orgId"></select></td>
-					<td class="table-label">申请日期：</td>
-=======
 					<td><input type="text" value="$!qzApplnYwsqb.orgName" name="orgName" readonly><input type="hidden" name="orgId" value="$!qzApplnYwsqb.orgId"></select></td>
 					<td class="table-label">申请日期：<font color="#ff0000">*</font></td>
->>>>>>> chinhBy-master
 					<td><input type="text" name="applyTime" 
 					#if($!qzApplnYwsqb.applyTime != $null) value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.applyTime)" #end 
 					onmouseover="_calendar()" readonly/></td>					
@@ -54,11 +49,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				<tr>
 					<td class="table-label">姓名：<font color="#ff0000">*</font></td>
 					<td>
-<<<<<<< HEAD
-						<input type="text" value="$!qzApplnYwsqb.name" disabled />
-=======
 						<input type="text" value="$!qzApplnYwsqb.name" readonly />
->>>>>>> chinhBy-master
 						<input type="hidden" name="name" value="$!qzApplnYwsqb.name" /></td>
 					<td class="table-label">性别：<font color="#ff0000">*</font></td>
 					<td>
@@ -70,11 +61,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>
 				<tr>
 					<td class="table-label">证件号码：<font color="#ff0000">*</font></td>
-<<<<<<< HEAD
-					<td><input type="text" value="$!qzApplnYwsqb.globalId" disabled/><input type="hidden" name="globalId" value="$!qzApplnYwsqb.globalId" /></td>	
-=======
-					<td><input type="text" value="$!qzApplnYwsqb.globalId" readonly/><input type="hidden" name="globalId" value="$!qzApplnYwsqb.globalId" /></td>	
->>>>>>> chinhBy-master
+					<td><input type="text" value="$!qzApplnYwsqb.globalId" readonly/><input type="hidden" name="globalId" value="$!qzApplnYwsqb.globalId" /></td>
 					<td class="table-label">证件类型：<font color="#ff0000">*</font></td>
 					<td>
 						<select id="globalType" name="globalType" onchange="setSelect(this,'qtzjlx')">
@@ -162,19 +149,12 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					<td class="table-label">电子邮箱：</td>
 					<td colspan="3"><input type="text" name="email" value="$!qzApplnYwsqb.email" /></td>	
 				</tr>
-<<<<<<< HEAD
-				<tr>
-					<td class="table-label">所属的商圈地址：<font color="#ff0000">*</font></td>
-					<td colspan="3"><input type="text" name="bussdistrictAddress" value="$!qzApplnYwsqb.bussdistrictAddress"/>	
-				</tr>
-=======
 				#if($!{productType}=="2")
 				<tr>
 					<td class="table-label">所属的商圈地址：<font color="#ff0000">*</font></td>
 					<td colspan="3"><input type="text" style="width:300px; name="bussdistrictAddress" value="$!qzApplnYwsqb.bussdistrictAddress"/>	
 				</tr>
 				#end
->>>>>>> chinhBy-master
 			</table>
 		</div><!--/content-->
 	</div>
@@ -516,11 +496,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>						
 				<tr>
 					<td class="table-label">客户签名：<font color="#ff0000">*</font></td>
-<<<<<<< HEAD
-					<td><input type="text" value="$!qzApplnYwsqb.sign" disabled/><input type="hidden" name="sign" value="$!qzApplnYwsqb.sign"/></td>	
-=======
 					<td><input type="text" value="$!qzApplnYwsqb.sign" readonly/><input type="hidden" name="sign" value="$!qzApplnYwsqb.sign"/></td>	
->>>>>>> chinhBy-master
 					<td class="table-label">签名日期：<font color="#ff0000">*</font></td>	
 					<td><input type="text" name="signDate" 
 					#if($!qzApplnYwsqb.signDate != $null) value="$date.format('yyyy-MM-dd', $!qzApplnYwsqb.signDate)" #end
@@ -574,11 +550,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 				</tr>
 				<tr>
 					<td class="table-label">经办人：</td>
-<<<<<<< HEAD
-					<td><input type="text" value="$!qzApplnYwsqb.managerName" disabled/>
-=======
 					<td><input type="text" value="$!qzApplnYwsqb.managerName" readonly/>
->>>>>>> chinhBy-master
 						<input type="hidden" name="managerName" value="$!qzApplnYwsqb.managerName"/>
 						<input type="hidden" name="managerId" value="$!qzApplnYwsqb.managerId"/></td>	
 					<td class="table-label">日期：<font color="#ff0000">*</font></td>	
@@ -634,28 +606,16 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 	window.top.currentWindow.setLayout(layout);
 	
 	#set ($formName = "'#id_module_form'")
-<<<<<<< HEAD
-	#parse ("qzbankinterface/appIframeInfo/page1_validation.js")
-=======
 	#parse ("qzbankinterface/appIframeInfo/page1ForLife_validation.js")
->>>>>>> chinhBy-master
 	
 	$(document).ready(function() {	
 		//初始化
 		if("${type}"=="readonly"){
-<<<<<<< HEAD
-			$("input[type='text']").attr("disabled",true);
-			$("input[type='radio']").attr("disabled",true);
-			$("input[type='checkbox']").attr("disabled",true);
-			$("textarea").attr("disabled",true);
-			$("select").attr("disabled",true);
-=======
 			$("input[type='text']").attr("readonly",true);
 			$("input[type='radio']").attr("readonly",true);
 			$("input[type='checkbox']").attr("readonly",true);
 			$("textarea").attr("readonly",true);
 			$("select").attr("readonly",true);
->>>>>>> chinhBy-master
 		}
 		//保存
 		$("#id_save_button").click(function() {
@@ -666,11 +626,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 			submitFlag = 1;
 			if ($($formName).valid()) {
 				var formjson = $($formName).serialize();
-<<<<<<< HEAD
-				var url = "${contextPath}/intopieces/intopiecesapprove/update_page1ForLife.json?id=${qzApplnYwsqb.id}&customerId=${qzApplnYwsqb.customerId}";
-=======
 				var url = "${contextPath}/intopieces/intopiecesapprove/update_page1ForLife.json?id=${qzApplnYwsqb.id}&customerId=${qzApplnYwsqb.customerId}&appId=${appId}";
->>>>>>> chinhBy-master
 				$.ajax({
 					url : url,
 					type : "get",
@@ -678,11 +634,7 @@ var timestr = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth
 					success : function(data) {
 						if (data.success) {
 							topWin.Dialog.message("保存成功！");
-<<<<<<< HEAD
-							window.location.href = "${contextPath}/intopieces/intopiecesapprove/page1.page?id=${qzApplnYwsqb.customerId}";
-=======
 							window.location.href = "${contextPath}/intopieces/intopiecesapprove/page1.page?id=${qzApplnYwsqb.customerId}&appId=${appId}";
->>>>>>> chinhBy-master
 						}
 						else{
 							topWin.Dialog.message("保存失败！");

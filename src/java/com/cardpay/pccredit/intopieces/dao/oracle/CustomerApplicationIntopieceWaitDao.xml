@@ -420,8 +420,6 @@
 		AND N.ID=A.NEXT_NODE_ID
 		and A.NEXT_NODE_ID=p.NODE_ID and p.USER_ID=#{loginId}
 		and (b.status='audit' or b.status='RETURNAPPROVE') 
-<<<<<<< HEAD
-=======
 		<if test="cardId!=null and cardId!=''">
 			and U.card_id=#{cardId}
 		</if>
@@ -470,16 +468,12 @@
    		and so.orgno = circle.regist_org_no
 		and circle.application_id = a.APPLICATION_ID
 		and u.user_id = su.id
->>>>>>> chinhBy-master
 		<if test="cardId!=null and cardId!=''">
 			and U.card_id=#{cardId}
 		</if>
 		<if test="chineseName!=null and chineseName!=''">
 			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
 		</if>
-<<<<<<< HEAD
-		
-=======
 		<if test="nodeName!=null and nodeName!=''">
 			and N.node_name=#{nodeName}
 		</if>
@@ -517,7 +511,6 @@
 		<if test="chineseName!=null and chineseName!=''">
 			<![CDATA[ and U.chinese_name like '%'||#{chineseName}||'%' ]]>
 		</if>
->>>>>>> chinhBy-master
 		<if test="nodeName!=null and nodeName!=''">
 			and N.node_name=#{nodeName}
 		</if>

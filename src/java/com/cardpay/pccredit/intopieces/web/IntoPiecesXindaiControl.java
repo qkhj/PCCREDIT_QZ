@@ -226,22 +226,6 @@ public class IntoPiecesXindaiControl extends BaseController {
 			String nodeNo = "";
 			String appId = request.getParameter("appId");
 			String operate = request.getParameter("operate");//当前审批节点
-<<<<<<< HEAD
-			String nodeName = request.getParameter("nodeName");//退回目标节点（<item name="1" title="客户经理" />
-															    //<item name="2" title="初审" />
-															    //<item name="3" title="内部审查" />
-															    //<item name="4" title="授信审批" />
-															    //<item name="5" title="中心复核" />
-															    //<item name="6" title="填写合同信息" />）
-			if(operate.equals("填写合同信息")){
-				nodeNo = "6";
-			}
-			//退回客户经理和其他岗位不一致
-			if("1".equals(nodeName)){
-				intoPiecesService.checkDoNotToManager(appId,request,Integer.parseInt(nodeName),Integer.parseInt(nodeNo));
-			}else{
-				intoPiecesService.returnAppln(appId, request,Integer.parseInt(nodeName),Integer.parseInt(nodeNo));
-=======
 			String nodeName = request.getParameter("nodeName");//退回目标节点id
 			//退回客户经理和其他岗位不一致
 			if("1".equals(nodeName)){
@@ -249,7 +233,6 @@ public class IntoPiecesXindaiControl extends BaseController {
 				intoPiecesService.checkDoNotToManager(appId,request);
 			}else{
 				intoPiecesService.returnAppln(appId, request,nodeName);
->>>>>>> chinhBy-master
 			}
 			returnMap.addGlobalMessage(CHANGE_SUCCESS);
 		} catch (Exception e) {

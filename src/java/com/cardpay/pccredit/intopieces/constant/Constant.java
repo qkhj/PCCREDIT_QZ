@@ -104,11 +104,8 @@ public class Constant {
 	public static String htd_id="00002";//合同单默认ID
 	public static String status_buchong="补充上会";
 	public static String status_scan="影像补扫";
-<<<<<<< HEAD
-=======
 	public static String status_onelevel="一级审核";
 	public static String status_twolevel="二级审核";
->>>>>>> chinhBy-master
 	public static String status_cardquery="卡中心进件查询";
 	public static String status_query="进件查询";
 	/*审批结果*/
